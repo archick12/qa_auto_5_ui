@@ -7,7 +7,7 @@ import com.jayway.restassured.response.Response;
 
 public class IssueApi {
 
-    RequestSender requestSender;
+    public RequestSender requestSender;
 
     public Response secureCreateIssue(String body) {
         requestSender = new RequestSender();
