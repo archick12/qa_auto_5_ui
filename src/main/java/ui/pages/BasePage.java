@@ -8,11 +8,11 @@ import ui.utils.RemoteDriverManager;
 
 public class BasePage {
 
-    final static Logger logger = Logger.getLogger(BasePage.class);
+    final static Logger logger = Logger.getLogger(BasePage.class); // initialization of logger
 
     protected String baseURL = "http://soft.it-hillel.com.ua:8080";
     protected WebDriver driver;
-    private int timeOutInSeconds = 10;
+    private int defaultExplicitWaitInSeconds = 10;
     public static String defaultImplicitWaitInSeconds = "10";
 
     protected BasePage() {
@@ -21,13 +21,13 @@ public class BasePage {
 
     protected void waitToBePresent(By locator) {
         logger.info("WAIT ELEMENT TO BE PRESENT: " + locator);
-        (new WebDriverWait(driver, timeOutInSeconds))
+        (new WebDriverWait(driver, defaultExplicitWaitInSeconds))
                 .until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     protected boolean waitToBeMissing(By locator) {
         logger.info("WAIT ELEMENT TO BE MISSING: " + locator);
-        (new WebDriverWait(driver, timeOutInSeconds))
+        (new WebDriverWait(driver, defaultExplicitWaitInSeconds))
                 .until(ExpectedConditions.invisibilityOfElementLocated(locator));
 
         return true;
@@ -52,11 +52,11 @@ public class BasePage {
         WebElement element = null;
 
         try {
-            element = (new WebDriverWait(driver, timeOutInSeconds)).
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
             element.click();
         } catch (StaleElementReferenceException ignored) {
-            element = (new WebDriverWait(driver, timeOutInSeconds)).
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
             element.click();
         }
@@ -69,11 +69,11 @@ public class BasePage {
         WebElement element = null;
 
         try {
-            element = (new WebDriverWait(driver, timeOutInSeconds)).
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
             element.sendKeys(keys);
         } catch (StaleElementReferenceException ignored) {
-            element = (new WebDriverWait(driver, timeOutInSeconds)).
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
             element.sendKeys(keys);
         }
@@ -85,11 +85,11 @@ public class BasePage {
         WebElement element = null;
 
         try {
-            element = (new WebDriverWait(driver, timeOutInSeconds)).
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
             element.submit();
         } catch (StaleElementReferenceException ignored) {
-            element = (new WebDriverWait(driver, timeOutInSeconds)).
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
             element.submit();
         }
@@ -101,7 +101,7 @@ public class BasePage {
         WebElement element = null;
 
         try {
-            element = (new WebDriverWait(driver, timeOutInSeconds)).
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
 
             String result = element.getText();
@@ -115,7 +115,7 @@ public class BasePage {
             }
 
         } catch (StaleElementReferenceException ignored) {
-            element = (new WebDriverWait(driver, timeOutInSeconds)).
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
             String result = element.getText();
 

@@ -8,107 +8,82 @@ import static org.testng.Assert.assertEquals;
 
 public class SimpleIssueTest {
 
-    @BeforeGroups // (groups = {"functional"})
-    public void setUp() {
-        // code that will be invoked when this test is instantiated
+  LoginPage loginPage = new LoginPage();
+  NewIssuePage newIssuePage = new NewIssuePage();
+  HeaderPage headerPage = new HeaderPage();
+  DashBoardPage dashBoardPage = new DashBoardPage();
+  IssuePage issuePage = new IssuePage();
 
-        // TODO put login logic here
+  // code that will be invoked before each @Test
+  @BeforeGroups(groups = {"UI"})
+  public void setUp() {
+    loginPage.open();
+    assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
+    // otherwise we can click a wrong web element
 
-    }
+    loginPage.enterUsername();
+    loginPage.enterPassword();
+    loginPage.clickLogin();
 
-
-    @Test // (groups = {"functional"})
-    public void subTaskCRUD() throws InterruptedException {
-
-        String parentIssueId = "QAAUT-224";
-        String subTaskSummary = "Snizhanna test";
-        String subTaskNumber = "1";
-        String subTaskAssignee = "Unassigned";
-
-        //Login
-
-        LoginPage loginPage = new LoginPage();
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        DashBoardPage dashBoardPage = new DashBoardPage();
-        IssuePage issuePage = new IssuePage();
-
-        loginPage.open();
-        assertEquals(loginPage.isOnThePage(), true);
-
-        loginPage.enterUsername();
-        loginPage.enterPassword();
-        loginPage.clickLogin();
-
-        assertEquals(dashBoardPage.isOnThePage(), true);
-
-        //Create new sub-task
-
-        headerPage.search(parentIssueId);
-
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
-        issuePage.openNewSubTask();
-        newIssuePage.fillSummary(subTaskSummary);
-        newIssuePage.clickSubmitButton();
-
-        assertEquals(issuePage.isSubTaskSummaryPresent(subTaskSummary), true);
-        assertEquals(issuePage.isSubTaskNumberPresent(subTaskNumber), true);
-        assertEquals(issuePage.isSubTaskAssigneePresent(subTaskAssignee), true);
-        // TODO assert for sub-task status
+    assertEquals(dashBoardPage.isOnThePage(), true);
+  }
 
 
-        //Delete new sub-task
-        issuePage.openSubtask();
-        issuePage.shouldSeeSuccessPopUp();
-        issuePage.clickMoreButton();
-        issuePage.clickDeleteListItem();
-        issuePage.deleteSubTask();
-        // TODO check success popup appeared
+  @Test(groups = {"UI"})
+  public void subTaskCRUD() throws InterruptedException {
 
-        issuePage.openExistingIssue(parentIssueId);
-        assertEquals(issuePage.isSubTaskSummaryMissing(subTaskSummary), true);
+    String parentIssueId = "QAAUT-224";
+    String subTaskSummary = "Snizhanna test";
+    String subTaskNumber = "1";
+    String subTaskAssignee = "Unassigned";
 
-    }
+    // Navigate to a parent task
+    headerPage.search(parentIssueId);
+    assertEquals(issuePage.isOnThePage(parentIssueId), true);
 
-    @Test(groups = {"functional"})
-    public void subTaskCommentCRUD() throws InterruptedException {
+    //Create new sub-task
+    issuePage.openNewSubTask();
+    newIssuePage.fillSummary(subTaskSummary);
+    newIssuePage.clickSubmitButton();
 
+    assertEquals(issuePage.isSubTaskSummaryPresent(subTaskSummary), true);
+    assertEquals(issuePage.isSubTaskNumberPresent(subTaskNumber), true);
+    assertEquals(issuePage.isSubTaskAssigneePresent(subTaskAssignee), true);
+    // TODO assert for sub-task status
 
-        String subTaskId = "QAAUT-465";
-        // String subtaskIssueId = "QAAUT-224";
-        String commentText = "Test Comment";
+    //Delete new sub-task
+    issuePage.openSubtask();
+    issuePage.shouldSeeSuccessPopUp();
+    issuePage.clickMoreButton();
+    issuePage.clickDeleteListItem();
+    issuePage.deleteSubTask();
+    // TODO check success popup appeared
 
-        //Login
+    issuePage.openExistingIssue(parentIssueId);
+    assertEquals(issuePage.isSubTaskSummaryMissing(subTaskSummary), true);
 
-        LoginPage loginPage = new LoginPage();
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        DashBoardPage dashBoardPage = new DashBoardPage();
-        IssuePage issuePage = new IssuePage();
+  }
 
-        loginPage.open();
-        assertEquals(loginPage.isOnThePage(), true);
+  @Test(groups = {"UI"})
+  public void subTaskCommentCRUD() throws InterruptedException {
 
-        loginPage.enterUsername();
-        loginPage.enterPassword();
-        loginPage.clickLogin();
+    String subTaskId = "QAAUT-465";
+    String commentText = "Test Comment";
 
-        assertEquals(dashBoardPage.isOnThePage(), true);
-        issuePage.openExistingIssue(subTaskId);
-        assertEquals(issuePage.isOnThePage(subTaskId), true);
+    issuePage.openExistingIssue(subTaskId);
+    assertEquals(issuePage.isOnThePage(subTaskId), true);
 
+    issuePage.clickOnCommentBtn();
+    issuePage.enterComment(commentText);
+    issuePage.clickOnAddComment();
 
-        issuePage.clickOnCommentBtn();
-        issuePage.enterComment(commentText);
-        issuePage.clickOnAddComment();
+    // TODO assert that comment is present
+    assertEquals(issuePage.isCommentTextPresent(commentText), true);
 
-        // TODO assert that comment is present
-        assertEquals(issuePage.isCommentTextPresent(commentText), true);
+    issuePage.clickOnDeleteComment();
+    issuePage.confirmDeletionOfComment();
 
-        issuePage.clickOnDeleteComment();
-        issuePage.confirmDeletionOfComment();
+    assertEquals(issuePage.isCommentTextMissing(commentText), true);
 
-        assertEquals(issuePage.isCommentTextMissing(commentText), true);
-
-    }
+  }
 }
