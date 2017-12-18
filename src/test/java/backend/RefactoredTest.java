@@ -10,7 +10,7 @@ import utils.TestCase;
 import static com.jayway.restassured.RestAssured.given;
 import static org.testng.Assert.assertTrue;
 
-public class SimpleTest {
+public class RefactoredTest {
 
     String sessionId = "";
 

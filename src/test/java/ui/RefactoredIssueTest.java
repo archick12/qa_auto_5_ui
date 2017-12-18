@@ -6,7 +6,7 @@ import ui.pages.*;
 
 import static org.testng.Assert.assertEquals;
 
-public class SimpleTest {
+public class RefactoredIssueTest {
 
     @BeforeGroups // (groups = {"functional"})
     public void setUp() {
