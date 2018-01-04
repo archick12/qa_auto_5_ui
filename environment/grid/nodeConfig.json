@@ -5,9 +5,17 @@
       "maxInstances": 5,
       "marionette": true,
       "seleniumProtocol": "WebDriver"
+    },
+    {
+      "browserName": "chrome",
+      "maxInstances": 5,
+      "marionette": false,
+      "seleniumProtocol": "WebDriver"
     }
   ],
   "port": 5555,
+  "sessionTimeout": 30,
+  "cleanUpCycle": 3000,
   "hub": "http://localhost:4444",
   "hubHost": "localhost",
   "register": true,
