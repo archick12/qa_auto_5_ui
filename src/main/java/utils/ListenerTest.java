@@ -66,8 +66,10 @@ public class ListenerTest implements ITestListener {
         logger.error("TEST: " + iTestResult.getName() + " FAILED");
         logger.error(iTestResult.getThrowable().fillInStackTrace());
 
+        // TODO add option to enable / disable post of results
+
         String testCaseId = retrieveId(iTestResult);
-        updateTestRun(testCaseId, "5");
+        // updateTestRun(testCaseId, "5");
     }
 
     public void onTestSkipped(ITestResult iTestResult) {

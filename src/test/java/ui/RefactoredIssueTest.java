@@ -3,20 +3,36 @@ package ui;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 import ui.pages.*;
+import utils.TestCase;
 
 import static org.testng.Assert.assertEquals;
 
 public class RefactoredIssueTest {
 
-  LoginPage loginPage = new LoginPage();
-  NewIssuePage newIssuePage = new NewIssuePage();
-  HeaderPage headerPage = new HeaderPage();
-  DashBoardPage dashBoardPage = new DashBoardPage();
-  IssuePage issuePage = new IssuePage();
+  ;
 
   // code that will be invoked before each @Test
   @BeforeGroups(groups = {"UI"})
   public void setUp() {
+
+  }
+
+
+  @TestCase(id = "1") // annotation that holds number of test case in TestRail
+  @Test(groups = {"UI"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  public void subTaskCRUD() throws InterruptedException {
+
+    LoginPage loginPage = new LoginPage();
+    NewIssuePage newIssuePage = new NewIssuePage();
+    HeaderPage headerPage = new HeaderPage();
+    DashBoardPage dashBoardPage = new DashBoardPage();
+    IssuePage issuePage = new IssuePage();
+
+    String parentIssueId = "QAAUT-224";
+    String subTaskSummary = "Snizhanna test";
+    String subTaskNumber = "1";
+    String subTaskAssignee = "Unassigned";
+
     loginPage.open();
     assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
     // otherwise we can click a wrong web element
@@ -26,16 +42,6 @@ public class RefactoredIssueTest {
     loginPage.clickLogin();
 
     assertEquals(dashBoardPage.isOnThePage(), true);
-  }
-
-
-  @Test(groups = {"UI"})
-  public void subTaskCRUD() throws InterruptedException {
-
-    String parentIssueId = "QAAUT-224";
-    String subTaskSummary = "Snizhanna test";
-    String subTaskNumber = "1";
-    String subTaskAssignee = "Unassigned";
 
     // Navigate to a parent task
     headerPage.search(parentIssueId);
@@ -64,8 +70,15 @@ public class RefactoredIssueTest {
 
   }
 
-  @Test(groups = {"UI"})
+  @TestCase(id = "1") // TODO without this framework fails with NullPointer at String testCaseId = testerInfo.id();
+  @Test(groups = {"UI", "SKIPP"})
   public void subTaskCommentCRUD() throws InterruptedException {
+
+    LoginPage loginPage = new LoginPage();
+    NewIssuePage newIssuePage = new NewIssuePage();
+    HeaderPage headerPage = new HeaderPage();
+    DashBoardPage dashBoardPage = new DashBoardPage();
+    IssuePage issuePage = new IssuePage();
 
     String subTaskId = "QAAUT-465";
     String commentText = "Test Comment";

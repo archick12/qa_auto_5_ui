@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Parallel test suite">
+<suite name="Sample test suite">
 
     <listeners>
         <listener class-name="utils.ListenerTest"/>
@@ -10,10 +10,11 @@
     <parameter name="local" value="yes"/>
     <parameter name="implicitWaitInSeconds" value="30"/>
 
-    <test name="Test1">
+    <test name="UI Tests">
         <groups>
             <run>
                 <include name="UI"/>
+                <exclude name="SKIPP"/>
             </run>
         </groups>
         <classes>
