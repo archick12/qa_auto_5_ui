@@ -1,22 +1,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Parallel test suite" parallel="tests" thread-count="3">
+<suite name="Parallel test suite">
 
     <listeners>
         <listener class-name="utils.ListenerTest"/>
     </listeners>
 
     <parameter name="myParam" value="This is the value for a parameter"/>
-    <parameter name="browserName" value="chrome"/>
+    <parameter name="browserName" value="safari"/>
+    <parameter name="local" value="yes"/>
     <parameter name="implicitWaitInSeconds" value="30"/>
 
     <test name="Test1">
         <groups>
             <run>
-                <include name="backend"/>
+                <include name="UI"/>
             </run>
         </groups>
         <classes>
-            <class name="backend.SimpleIssueTest"/>
+            <class name="ui.RefactoredIssueTest"/>
         </classes>
     </test>
 

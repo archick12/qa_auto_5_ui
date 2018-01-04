@@ -24,133 +24,136 @@ import java.util.concurrent.TimeUnit;
  */
 public class ListenerTest implements ITestListener {
 
-  final static Logger logger = Logger.getLogger(ListenerTest.class);
+    final static Logger logger = Logger.getLogger(ListenerTest.class);
 
-  public void onTestStart(ITestResult iTestResult) {
-    String[] groups = iTestResult.getMethod().getGroups();
+    public void onTestStart(ITestResult iTestResult) {
+        String[] groups = iTestResult.getMethod().getGroups();
 
-    for (String group : groups) {
-      if (group.contains("ui")) {
-        String testCaseName = iTestResult.getName();
-        String browserName = iTestResult.getTestContext().getCurrentXmlTest().getParameter("browserName");
-        String implicitWaitInSeconds = iTestResult.getTestContext().getCurrentXmlTest().getParameter("implicitWaitInSeconds");
-        WebDriver driver = RemoteWebDriverFactory.createInstance(browserName);
+        for (String group : groups) {
+            if (group.contains("UI")) {
+                String testCaseName = iTestResult.getName();
+                String browserName = iTestResult.getTestContext().getCurrentXmlTest().getParameter("browserName");
+                String localTestRun = iTestResult.getTestContext().getCurrentXmlTest().getParameter("local");
+                String implicitWaitInSeconds = iTestResult.getTestContext().getCurrentXmlTest().getParameter("implicitWaitInSeconds");
 
-        RemoteDriverManager.setWebDriver(driver);
-        logger.info("TEST: " + testCaseName + " STARTED on browserName=" + browserName);
+                WebDriver driver = RemoteWebDriverFactory.createInstance(browserName);
 
-        changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds));
+                RemoteDriverManager.setWebDriver(driver);
+                logger.info("TEST: " + testCaseName + " STARTED on browserName=" + browserName);
 
-        // For slow internet and slow test suite, slower than rest of the tests
+                changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds));
 
-        if (group.contains("slow ")) {
-          changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds) + 50);
+                // For slow internet and slow test suite, slower than rest of the tests
+
+                if (group.contains("slow ")) {
+                    changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds) + 50);
+                }
+            }
         }
-      }
     }
-  }
 
-  public void onTestSuccess(ITestResult iTestResult) {
+    public void onTestSuccess(ITestResult iTestResult) {
 
-    String testCaseName = iTestResult.getName();
-    logger.info("TEST: " + testCaseName + " PASSED");
+        String testCaseName = iTestResult.getName();
+        logger.info("TEST: " + testCaseName + " PASSED");
 
-    String testCaseId = retrieveId(iTestResult);
-    updateTestRun(testCaseId, "1");
+        String testCaseId = retrieveId(iTestResult);
+        updateTestRun(testCaseId, "1");
 
-  }
+    }
 
-  public void onTestFailure(ITestResult iTestResult) {
-    logger.error("TEST: " + iTestResult.getName() + " FAILED");
-    logger.error(iTestResult.getThrowable().fillInStackTrace());
+    public void onTestFailure(ITestResult iTestResult) {
+        logger.error("TEST: " + iTestResult.getName() + " FAILED");
+        logger.error(iTestResult.getThrowable().fillInStackTrace());
 
-    String testCaseId = retrieveId(iTestResult);
-    updateTestRun(testCaseId, "5");
-  }
+        String testCaseId = retrieveId(iTestResult);
+        updateTestRun(testCaseId, "5");
+    }
 
-  public void onTestSkipped(ITestResult iTestResult) {
-    logger.info("TEST: " + iTestResult.getName() + " SKIPPED");
-  }
+    public void onTestSkipped(ITestResult iTestResult) {
+        logger.info("TEST: " + iTestResult.getName() + " SKIPPED");
+    }
 
-  public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
+    public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
 
-  }
+    }
 
-  public void onStart(ITestContext iTestContext) {
-    // Invoked after the test class is instantiated and before any configuration method is called.
-  }
+    public void onStart(ITestContext iTestContext) {
+        // Invoked after the test class is instantiated and before any configuration method is called.
+        int a = 0;
+    }
 
-  public void onFinish(ITestContext iTestContext) {
-    // Invoked after all the tests have run and all their Configuration methods have been called.
-    WebDriver driver = RemoteDriverManager.getDriver();
+    public void onFinish(ITestContext iTestContext) {
+        // Invoked after all the tests have run and all their Configuration methods have been called.
+        WebDriver driver = RemoteDriverManager.getDriver();
 
-    if (driver != null) {
-      changeImplicitWaitValue(driver, Integer.parseInt(BasePage.defaultImplicitWaitInSeconds));
-      logger.info("Closing browser window");
+        if (driver != null) {
+            changeImplicitWaitValue(driver, Integer.parseInt(BasePage.defaultImplicitWaitInSeconds));
+            logger.info("Closing browser window");
 //            RemoteDriverManager.closeDriver();
+        }
     }
-  }
 
-  private void changeImplicitWaitValue(WebDriver driver, int implicitWaitValueInSeconds) {
-    driver.manage().timeouts().implicitlyWait(implicitWaitValueInSeconds, TimeUnit.SECONDS);
-    logger.info("IMPLICIT WAIT WAS CHANGED TO: " + implicitWaitValueInSeconds);
-  }
-
-  private String retrieveId(ITestResult iTestResult) {
-
-    ITestNGMethod method = iTestResult.getMethod();
-
-    Class obj = method.getRealClass();
-    Annotation annotation = null;
-
-    try {
-      annotation = obj.getDeclaredMethod(method.getMethodName()).getAnnotation(TestCase.class);
-    } catch (NoSuchMethodException e) {
-      e.printStackTrace();
+    private void changeImplicitWaitValue(WebDriver driver, int implicitWaitValueInSeconds) {
+        driver.manage().timeouts().implicitlyWait(implicitWaitValueInSeconds, TimeUnit.SECONDS);
+        logger.info("IMPLICIT WAIT WAS CHANGED TO: " + implicitWaitValueInSeconds);
     }
-    TestCase testerInfo = (TestCase) annotation;
-    String testCaseId = testerInfo.id();
-    System.out.printf("ANNOTATION: " + testerInfo.id());
-    return testCaseId;
 
-  }
+    private String retrieveId(ITestResult iTestResult) {
 
+        ITestNGMethod method = iTestResult.getMethod();
 
-  private void updateTestRun(String testId, String statusId) {
+        Class obj = method.getRealClass();
+        Annotation annotation = null;
 
-    String testRunId = "";
-    String pathTrail = "";
-    String userTrail = "";
-    String passwordTrail = "";
+        try {
+            annotation = obj.getDeclaredMethod(method.getMethodName()).getAnnotation(TestCase.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        TestCase testerInfo = (TestCase) annotation;
+        String testCaseId = testerInfo.id();
+        System.out.printf("ANNOTATION: " + testerInfo.id());
+        return testCaseId;
 
-    PropertyReader propertyReader = new PropertyReader();
-    Map<String, String> map = propertyReader.readProperties("testrun.properties");
-
-    testRunId = map.get("test_run_id");
-    pathTrail = map.get("path_t");
-    userTrail = map.get("user_trail");
-    passwordTrail = map.get("password_trail");
-
-    TestRailAPIClient client = new TestRailAPIClient(pathTrail);
-    client.setUser(userTrail);
-    client.setPassword(passwordTrail);
-
-    JSONObject response = null;
-
-    JSONObject body = new JSONObject();
-    body.put("status_id", statusId);
-
-
-    try {
-      response = (JSONObject) client.sendPost("add_result_for_case/" + testRunId + "/" + testId, body);
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (TestRailAPIException e) {
-      e.printStackTrace();
     }
 
 
-  }
+    private void updateTestRun(String testId, String statusId) {
+
+        String testRunId = "";
+        String pathTrail = "";
+        String userTrail = "";
+        String passwordTrail = "";
+
+        PropertyReader propertyReader = new PropertyReader();
+        Map<String, String> map = propertyReader.readProperties("testrun.properties");
+
+        testRunId = map.get("test_run_id");
+        pathTrail = map.get("path_t");
+        userTrail = map.get("user_trail");
+        passwordTrail = map.get("password_trail");
+
+        TestRailAPIClient client = new TestRailAPIClient(pathTrail);
+        client.setUser(userTrail);
+        client.setPassword(passwordTrail);
+
+        JSONObject response = null;
+
+        JSONObject body = new JSONObject();
+        body.put("status_id", statusId);
+
+
+        try {
+            response = (JSONObject) client.sendPost("add_result_for_case/" + testRunId + "/" + testId, body);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TestRailAPIException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 }
 

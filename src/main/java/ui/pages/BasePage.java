@@ -10,7 +10,8 @@ public class BasePage {
 
     final static Logger logger = Logger.getLogger(BasePage.class); // initialization of logger
 
-    protected String baseURL = "http://soft.it-hillel.com.ua:8080";
+    // protected String baseURL = "http://soft.it-hillel.com.ua:8080";
+    protected String baseURL = "http://jira.hillel.it:8080";
     protected WebDriver driver;
     private int defaultExplicitWaitInSeconds = 10;
     public static String defaultImplicitWaitInSeconds = "10";
