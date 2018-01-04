@@ -9,8 +9,6 @@ import static org.testng.Assert.assertEquals;
 
 public class RefactoredIssueTest {
 
-  ;
-
   // code that will be invoked before each @Test
   @BeforeGroups(groups = {"UI"})
   public void setUp() {

@@ -1,9 +1,9 @@
 {
   "capabilities": [
     {
-      "browserName": "safari",
+      "browserName": "firefox",
       "maxInstances": 5,
-      "marionette": false,
+      "marionette": true,
       "seleniumProtocol": "WebDriver"
     }
   ],
