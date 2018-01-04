@@ -12,11 +12,11 @@
     <test name="Test1">
         <groups>
             <run>
-                <include name="backend"/>
+                <include name="UI"/>
             </run>
         </groups>
         <classes>
-            <class name="backend.SimpleIssueTest"/>
+            <class name="ui.RefactoredIssueTest"/>
         </classes>
     </test>
 
