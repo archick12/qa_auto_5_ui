@@ -12,23 +12,15 @@ public class RefactoredIssueTest {
   // code that will be invoked before each @Test
   @BeforeGroups(groups = {"UI"})
   public void setUp() {
-    LoginPage loginPage = new LoginPage();
-
-    loginPage.open();
-    assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
-    // otherwise we can click a wrong web element
-
-    loginPage.enterUsername();
-    loginPage.enterPassword();
-    loginPage.clickLogin();
 
   }
 
 
   @TestCase(id = "1") // annotation that holds number of test case in TestRail
-  @Test(groups = {"UI", "SKIPP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  @Test(groups = {"UI"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void subTaskCRUD() throws InterruptedException {
 
+    LoginPage loginPage = new LoginPage();
     NewIssuePage newIssuePage = new NewIssuePage();
     HeaderPage headerPage = new HeaderPage();
     DashBoardPage dashBoardPage = new DashBoardPage();
@@ -38,6 +30,14 @@ public class RefactoredIssueTest {
     String subTaskSummary = "Snizhanna test";
     String subTaskNumber = "1";
     String subTaskAssignee = "Unassigned";
+
+    loginPage.open();
+    assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
+    // otherwise we can click a wrong web element
+
+    loginPage.enterUsername();
+    loginPage.enterPassword();
+    loginPage.clickLogin();
 
     assertEquals(dashBoardPage.isOnThePage(), true);
 
@@ -69,16 +69,17 @@ public class RefactoredIssueTest {
   }
 
   @TestCase(id = "1") // TODO without this framework fails with NullPointer at String testCaseId = testerInfo.id();
-  @Test(groups = {"UI"})
+  @Test(groups = {"UI", "SKIPP"})
   public void subTaskCommentCRUD() throws InterruptedException {
 
+    LoginPage loginPage = new LoginPage();
+    NewIssuePage newIssuePage = new NewIssuePage();
+    HeaderPage headerPage = new HeaderPage();
     DashBoardPage dashBoardPage = new DashBoardPage();
     IssuePage issuePage = new IssuePage();
 
-    String subTaskId = "QAAUT-12";
-    String commentText = "The comment is added";
-
-    assertEquals(dashBoardPage.isOnThePage(), true);
+    String subTaskId = "QAAUT-465";
+    String commentText = "Test Comment";
 
     issuePage.openExistingIssue(subTaskId);
     assertEquals(issuePage.isOnThePage(subTaskId), true);
@@ -91,10 +92,7 @@ public class RefactoredIssueTest {
     assertEquals(issuePage.isCommentTextPresent(commentText), true);
 
     issuePage.clickOnDeleteComment();
-
-
     issuePage.confirmDeletionOfComment();
-
 
     assertEquals(issuePage.isCommentTextMissing(commentText), true);
 
