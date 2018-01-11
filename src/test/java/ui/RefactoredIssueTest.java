@@ -9,8 +9,6 @@ import static org.testng.Assert.assertEquals;
 
 public class RefactoredIssueTest {
 
-  ;
-
   // code that will be invoked before each @Test
   @BeforeGroups(groups = {"UI"})
   public void setUp() {
@@ -19,7 +17,7 @@ public class RefactoredIssueTest {
 
 
   @TestCase(id = "1") // annotation that holds number of test case in TestRail
-  @Test(groups = {"UI"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  @Test(groups = {"UI", "SKIPP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void subTaskCRUD() throws InterruptedException {
 
     LoginPage loginPage = new LoginPage();
@@ -71,7 +69,7 @@ public class RefactoredIssueTest {
   }
 
   @TestCase(id = "1") // TODO without this framework fails with NullPointer at String testCaseId = testerInfo.id();
-  @Test(groups = {"UI", "SKIPP"})
+  @Test(groups = {"UI"})
   public void subTaskCommentCRUD() throws InterruptedException {
 
     LoginPage loginPage = new LoginPage();
@@ -82,6 +80,16 @@ public class RefactoredIssueTest {
 
     String subTaskId = "QAAUT-465";
     String commentText = "Test Comment";
+
+    loginPage.open();
+    assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
+    // otherwise we can click a wrong web element
+
+    loginPage.enterUsername();
+    loginPage.enterPassword();
+    loginPage.clickLogin();
+
+    assertEquals(dashBoardPage.isOnThePage(), true);
 
     issuePage.openExistingIssue(subTaskId);
     assertEquals(issuePage.isOnThePage(subTaskId), true);
