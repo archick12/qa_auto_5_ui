@@ -1,0 +1,6 @@
+.idea
+target/
+*.iml
+environment/grid/**
+!/**/*.bat
+!/**/*.json
