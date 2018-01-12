@@ -153,9 +153,14 @@ public class BasePage {
 
 
     protected boolean isOnThePage(String expectedURL) {
+// added timer to wait for page loading.
+        boolean result;
+        result = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
+                    until(ExpectedConditions.urlToBe(expectedURL));
 
-        String currentURL = driver.getCurrentUrl();
-        boolean result = expectedURL.equals(currentURL);
+        // -- old realization
+//        String currentURL = driver.getCurrentUrl();
+//        boolean result = expectedURL.equals(currentURL);
         if (result == true) {
             logger.info("IS ON THE PAGE: " + expectedURL);
         } else {
