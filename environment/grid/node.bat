@@ -5,6 +5,6 @@ java ^
 -Dwebdriver.gecko.driver=.\drivers\geckodriver-v0.18.0-win64.exe ^
 -jar .\selenium-server-standalone-3.4.0.jar ^
 -role node ^
--nodeConfig nodeConfig.json
+-nodeConfig nodeConfig_windows.json
 
 
