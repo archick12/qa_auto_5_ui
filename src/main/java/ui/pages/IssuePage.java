@@ -31,7 +31,8 @@ public class IssuePage extends BasePage {
 
     // Comments sections
 
-    private By commentTextType = By.id("aui-uid-2");
+//    private By commentTextType = By.id("aui-uid-2");
+    private By commentTextType = By.id("comment");
 //    private By subTaskText = By.xpath("//*[contains(text(),'%s')]");
 
 

@@ -78,8 +78,8 @@ public class RefactoredIssueTest {
     DashBoardPage dashBoardPage = new DashBoardPage();
     IssuePage issuePage = new IssuePage();
 
-    String subTaskId = "QAAUT-465";
-    String commentText = "Test Comment";
+    String subTaskId = "QAAUT-3";
+    String commentText = "That is my comment";
 
     loginPage.open();
     assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
