@@ -12,7 +12,7 @@ public class IssuePage extends BasePage {
     private By newSubtaskButtonLocator = By.id("stqc_show");
     private By summaryLocator = By.id("summary");
     private By submitButtonLocator = By.id("create-issue-submit");
-    private By subtaskLocator = By.linkText("Snizhanna test");
+    private By subtaskLocator = By.linkText("subTaskCommentCRUD");
     private By moreButtonLocator = By.id("opsbar-operations_more");
     private By deleteListItemLocator = By.id("delete-issue");
     private By deleteButtonLocator = By.id("delete-issue-submit");
@@ -31,7 +31,7 @@ public class IssuePage extends BasePage {
 
     // Comments sections
 
-    private By commentTextType = By.id("aui-uid-2");
+    private By commentTextType = By.id("aui-uid-1");
 //    private By subTaskText = By.xpath("//*[contains(text(),'%s')]");
 
 

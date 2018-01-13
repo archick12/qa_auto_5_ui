@@ -10,7 +10,7 @@ public class NewIssuePage extends BasePage {
     private By newSubtaskButtonLocator = By.id("stqc_show");
     private By summaryLocator = By.id("summary");
     private By submitButtonLocator = By.id("create-issue-submit");
-    private By subtaskLocator = By.linkText("Snizhanna test");
+    private By subtaskLocator = By.linkText("Bobulan test");
     private By moreButtonLocator = By.id("opsbar-operations_more");
     private By deleteListItemLocator = By.id("delete-issue");
     private By deleteButtonLocator = By.id("delete-issue-submit");

@@ -26,8 +26,8 @@ public class RefactoredIssueTest {
     DashBoardPage dashBoardPage = new DashBoardPage();
     IssuePage issuePage = new IssuePage();
 
-    String parentIssueId = "QAAUT-224";
-    String subTaskSummary = "Snizhanna test";
+    String parentIssueId = "QAAUT-8";
+    String subTaskSummary = "subTaskCommentCRUD";
     String subTaskNumber = "1";
     String subTaskAssignee = "Unassigned";
 
@@ -78,7 +78,7 @@ public class RefactoredIssueTest {
     DashBoardPage dashBoardPage = new DashBoardPage();
     IssuePage issuePage = new IssuePage();
 
-    String subTaskId = "QAAUT-465";
+    String subTaskId = "QAAUT-8";
     String commentText = "Test Comment";
 
     loginPage.open();
@@ -89,6 +89,7 @@ public class RefactoredIssueTest {
     loginPage.enterPassword();
     loginPage.clickLogin();
 
+    Thread.sleep(5000);
     assertEquals(dashBoardPage.isOnThePage(), true);
 
     issuePage.openExistingIssue(subTaskId);

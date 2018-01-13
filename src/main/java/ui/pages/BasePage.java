@@ -88,11 +88,11 @@ public class BasePage {
         try {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
-            element.submit();
+            element.click();
         } catch (StaleElementReferenceException ignored) {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
-            element.submit();
+            element.click();
         }
 
     }
