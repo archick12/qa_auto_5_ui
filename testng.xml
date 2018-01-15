@@ -6,7 +6,7 @@
     </listeners>
 
     <parameter name="myParam" value="This is the value for a parameter"/>
-    <parameter name="browserName" value="firefox"/>
+    <parameter name="browserName" value="safari"/>
     <parameter name="local" value="yes"/>
     <parameter name="implicitWaitInSeconds" value="30"/>
 
