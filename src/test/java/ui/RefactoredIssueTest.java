@@ -12,6 +12,15 @@ public class RefactoredIssueTest {
   // code that will be invoked before each @Test
   @BeforeGroups(groups = {"UI"})
   public void setUp() {
+    LoginPage loginPage = new LoginPage();
+
+    loginPage.open();
+    assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
+    // otherwise we can click a wrong web element
+
+    loginPage.enterUsername();
+    loginPage.enterPassword();
+    loginPage.clickLogin();
 
   }
 
@@ -20,7 +29,6 @@ public class RefactoredIssueTest {
   @Test(groups = {"UI", "SKIPP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void subTaskCRUD() throws InterruptedException {
 
-    LoginPage loginPage = new LoginPage();
     NewIssuePage newIssuePage = new NewIssuePage();
     HeaderPage headerPage = new HeaderPage();
     DashBoardPage dashBoardPage = new DashBoardPage();
@@ -30,14 +38,6 @@ public class RefactoredIssueTest {
     String subTaskSummary = "Snizhanna test";
     String subTaskNumber = "1";
     String subTaskAssignee = "Unassigned";
-
-    loginPage.open();
-    assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
-    // otherwise we can click a wrong web element
-
-    loginPage.enterUsername();
-    loginPage.enterPassword();
-    loginPage.clickLogin();
 
     assertEquals(dashBoardPage.isOnThePage(), true);
 
@@ -72,22 +72,11 @@ public class RefactoredIssueTest {
   @Test(groups = {"UI"})
   public void subTaskCommentCRUD() throws InterruptedException {
 
-    LoginPage loginPage = new LoginPage();
-    NewIssuePage newIssuePage = new NewIssuePage();
-    HeaderPage headerPage = new HeaderPage();
     DashBoardPage dashBoardPage = new DashBoardPage();
     IssuePage issuePage = new IssuePage();
 
-    String subTaskId = "QAAUT-3";
-    String commentText = "That is my comment";
-
-    loginPage.open();
-    assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
-    // otherwise we can click a wrong web element
-
-    loginPage.enterUsername();
-    loginPage.enterPassword();
-    loginPage.clickLogin();
+    String subTaskId = "QAAUT-12";
+    String commentText = "The comment is added";
 
     assertEquals(dashBoardPage.isOnThePage(), true);
 
