@@ -26,8 +26,8 @@ public class RefactoredIssueTest {
     DashBoardPage dashBoardPage = new DashBoardPage();
     IssuePage issuePage = new IssuePage();
 
-    String parentIssueId = "QAAUT-224";
-    String subTaskSummary = "Snizhanna test";
+    String parentIssueId = "QAAUT-17";
+    String subTaskSummary = "Kate test";
     String subTaskNumber = "1";
     String subTaskAssignee = "Unassigned";
 
