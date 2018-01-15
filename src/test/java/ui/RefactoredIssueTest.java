@@ -89,6 +89,7 @@ public class RefactoredIssueTest {
     loginPage.enterPassword();
     loginPage.clickLogin();
 
+    Thread.sleep(5000);
     assertEquals(dashBoardPage.isOnThePage(), true);
 
     issuePage.openExistingIssue(subTaskId);
