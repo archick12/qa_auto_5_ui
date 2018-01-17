@@ -48,6 +48,7 @@ public class NewIssuePage extends BasePage {
 //*[@id='labels-multi-select']
 //*[@id='issuelinks-issues-multi-select']
 //a[@class='issue-picker-popup']
+// *[@class='issue-drop-zone__text']//*[@class='issue-drop-zone__button']
 
 
    //Locators for IssueSelector
