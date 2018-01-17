@@ -71,7 +71,7 @@ public class NewIssuePage extends BasePage {
     private By labelsSelect = By.xpath("//*[@id='labels-multi-select']");
     private By IssuelinksSelect = By.xpath("//*[@id='issuelinks-issues-multi-select']");
     private By IssuePopup = By.xpath("//a[@class='issue-picker-popup']");
-    private By browseButton = By.xpath("// *[@class='issue-drop-zone__text']//*[@class='issue-drop-zone__button']");
+    private By browseButton = By.xpath("//*[@class='form-body']//*[@class='issue-drop-zone__button']");
 
 
    //Locators for IssueSelector
