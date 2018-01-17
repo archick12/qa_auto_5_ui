@@ -9,6 +9,15 @@ public class IssuePage extends BasePage {
 
     private HeaderPage headerPage;
 
+    // page header buttons
+    private By editIssueButton = By.id("edit-issue");
+    private By commentIssueButton = By.id("comment-issue");
+    private By assignIssueButton = By.id("assign-issue");
+    private By moreButton = By.id("opsbar-operations_more");
+    private By workflowButton = By.id("opsbar-transitions_more");
+    private By backlogButton = By.xpath("//*[@id='action_id_11']/span[@class='trigger-label']");
+    private By selectedForDevButton = By.xpath("//*[@id='action_id_21']/span[@class='trigger-label']");
+
     private By newSubtaskButtonLocator = By.id("stqc_show");
     private By summaryLocator = By.id("summary");
     private By submitButtonLocator = By.id("create-issue-submit");
