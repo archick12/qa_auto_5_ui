@@ -55,35 +55,33 @@ public class NewIssuePage extends BasePage {
 
 
     // Locators for CreateIssue
-
-//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]
-//*[@id='priority-field']
-//*[@id='priority-single-select']//a[text()='Highest']
-//*[@id='priority-single-select']//a[text()='High']
-//*[@id='priority-single-select']//a[text()='Low']
-//*[@id='priority-single-select']//a[text()='Lowest']
-//*[@id='issuelinks-linktype']
-//*[@id='issuelinks-linktype'] //*[@value='is blocked by']
-//*[@id='issuelinks-linktype'] //*[@value='clones']
-//*[@id='issuelinks-linktype'] //*[@value='is cloned by']
-//*[@id='issuelinks-linktype'] //*[@value='duplicates']
-//*[@id='issuelinks-linktype'] //*[@value='is duplicated by']
-//*[@id='issuelinks-linktype'] //*[@value='relates to']
-//*[@id='labels-multi-select']
-//*[@id='issuelinks-issues-multi-select']
-//a[@class='issue-picker-popup']
-// *[@class='issue-drop-zone__text']//*[@class='issue-drop-zone__button']
+    private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
+    private By priorityFieldDefault = By.xpath("//*[@id='priority-field']");
+    private By prioritySelectHighest = By.xpath("//*[@id='priority-single-select']//a[text()='Highest']");
+    private By prioritySelectHigh = By.xpath("//*[@id='priority-single-select']//a[text()='High']");
+    private By prioritySelectLow = By.xpath("//*[@id='priority-single-select']//a[text()='Low']");
+    private By prioritySelectLowest = By.xpath("//*[@id='priority-single-select']//a[text()='Lowest']");
+    private By linkedIssuesDefault = By.xpath("//*[@id='issuelinks-linktype']");
+    private By linkedIssuesIsBlockedBy = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='is blocked by']");
+    private By linkedIssuesIsClones = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='clones']");
+    private By linkedIssuesIsClonedBy = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='is cloned by']");
+    private By linkedIssuesDuplicates = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='duplicates']");
+    private By linkedIssuesIsDuplicatedBy = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='is duplicated by']");
+    private By linkedIssuesRelatesTo = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='relates to']");
+    private By labelsSelect = By.xpath("//*[@id='labels-multi-select']");
+    private By IssuelinksSelect = By.xpath("//*[@id='issuelinks-issues-multi-select']");
+    private By IssuePopup = By.xpath("//a[@class='issue-picker-popup']");
+    private By browseButton = By.xpath("// *[@class='issue-drop-zone__text']//*[@class='issue-drop-zone__button']");
 
 
    //Locators for IssueSelector
-
-//*[@class='aui-page-header-main']
-//*[@class='aui-button']
-//*[@id='issue-source-recent']
-//*[@id='issue-source-search']
-//*[@id='searchRequestId']
-//*[text()='Issues you have recently viewed']
-//*[text()='First 50 issues from your current search']
+    private By pageHeader = By.xpath("//*[@class='aui-page-header-main']");
+    private By selectButton = By.xpath("//*[@class='aui-button']");
+    private By sourceRecent = By.xpath("//*[@id='issue-source-recent']");
+    private By sourceSearch = By.xpath("//*[@id='issue-source-search']");
+    private By searchField = By.xpath("//*[@id='searchRequestId']");
+    private By viewedIssues = By.xpath("//*[text()='Issues you have recently viewed']");
+    private By first50Issues = By.xpath("//*[text()='First 50 issues from your current search']");
 
 
     public NewIssuePage() {
