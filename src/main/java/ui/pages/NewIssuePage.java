@@ -30,6 +30,37 @@ public class NewIssuePage extends BasePage {
     private By successPopUp = By.xpath("//*[contains(@class,'aui-message-success')]");
 
 
+    // Locators for CreateIssue
+
+//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]
+//*[@id='priority-field']
+//*[@id='priority-single-select']//a[text()='Highest']
+//*[@id='priority-single-select']//a[text()='High']
+//*[@id='priority-single-select']//a[text()='Low']
+//*[@id='priority-single-select']//a[text()='Lowest']
+//*[@id='issuelinks-linktype']
+//*[@id='issuelinks-linktype'] //*[@value='is blocked by']
+//*[@id='issuelinks-linktype'] //*[@value='clones']
+//*[@id='issuelinks-linktype'] //*[@value='is cloned by']
+//*[@id='issuelinks-linktype'] //*[@value='duplicates']
+//*[@id='issuelinks-linktype'] //*[@value='is duplicated by']
+//*[@id='issuelinks-linktype'] //*[@value='relates to']
+//*[@id='labels-multi-select']
+//*[@id='issuelinks-issues-multi-select']
+//a[@class='issue-picker-popup']
+
+
+   //Locators for IssueSelector
+
+//*[@class='aui-page-header-main']
+//*[@class='aui-button']
+//*[@id='issue-source-recent']
+//*[@id='issue-source-search']
+//*[@id='searchRequestId']
+//*[text()='Issues you have recently viewed']
+//*[text()='First 50 issues from your current search']
+
+
     public NewIssuePage() {
 
         this.driver = RemoteDriverManager.getDriver();
