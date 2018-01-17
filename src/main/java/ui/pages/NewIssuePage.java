@@ -29,7 +29,7 @@ public class NewIssuePage extends BasePage {
     private By assigneeFieldLocator = By.xpath("//*[@id='assignee-field']");
     private By assignToMeButtonLocator = By.xpath("(//*[@id='assign-to-me-trigger']");
     private By createButtonLocator = By.xpath("//*[@id='create-issue-submit']");
-    private By getAnotherCreateButtonLocator = By.xpath("//*[@id='qf-create-another']");
+    private By createAnotherButtonLocator = By.xpath("//*[@id='qf-create-another']");
     private By linktoEpicFieldLocator = By.xpath("//*[@id='customfield_10000-field']");
     private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
     private By dropAssigneeFieldLocator = By.xpath("//*[@id='assignee-field']//a[text()='unassigned-2']");
