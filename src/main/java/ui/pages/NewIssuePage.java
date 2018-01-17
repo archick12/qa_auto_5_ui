@@ -20,6 +20,14 @@ public class NewIssuePage extends BasePage {
     private By selectPriorityLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Priority']");
     private By selectLinkToEpicLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Ссылка на эпик']");
 
+    //Locators for create Issue
+    private By fieldProjectLocator = By.xpath("//*[@id='project-field']");
+    private By issueTypeLocator = By.xpath("//*[@id='issuetype-field']");
+    private By nameEpicLocator = By.xpath("//*[@id='customfield_10002']");
+    private By summaryFieldLocator = By.xpath("//*[@id='summary']");
+
+
+
     private By newSubtaskButtonLocator = By.id("stqc_show");
     private By summaryLocator = By.id("summary");
     private By submitButtonLocator = By.id("create-issue-submit");
