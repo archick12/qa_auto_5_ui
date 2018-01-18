@@ -17,6 +17,8 @@ public class IssuePage extends BasePage {
     private By workflowButton = By.id("opsbar-transitions_more");
     private By backlogButton = By.xpath("//*[@id='action_id_11']/span[@class='trigger-label']");
     private By selectedForDevButton = By.xpath("//*[@id='action_id_21']/span[@class='trigger-label']");
+    private By shareBtnLocator = By.id("jira-share-trigger");
+    private By exportBtnLocator = By.id("viewissue-export");
 
     private By newSubtaskButtonLocator = By.id("stqc_show");
     private By summaryLocator = By.id("summary");
