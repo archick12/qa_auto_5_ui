@@ -39,21 +39,21 @@ public class NewIssuePage extends BasePage {
     //Description
     private By menuStyle = By.xpath("//*[@field-id='description']//*[text()='Style']");
     private By iconBold = By.xpath("//*[@field-id='description']//*[@data-operation='bold']");
-    private By iconItalic =By.xpath("//*[@field-id='description']//*[@data-operation='italic']");
+    private By iconItalic = By.xpath("//*[@field-id='description']//*[@data-operation='italic']");
     private By iconUnderline = By.xpath("//*[@field-id='description']//*[@data-operation='underline']");
     private By iconTextColor = By.xpath("//*[@field-id='description']//*[@original-title='Text color']");
     private By moreColors = By.xpath("//*[@field-id='description']//*[@data-operation='color-parameter']");
-    private By menuMore = By.xpath( "//*[@field-id='description']//*[@original-title='More']");
+    private By menuMore = By.xpath("//*[@field-id='description']//*[@original-title='More']");
     private By menuLink = By.xpath("//*[@field-id='description']//*[@original-title='Link (Ctrl+K)']");
     private By menuAttachment = By.xpath("//*[@field-id='description']//*[@original-title='Attachment']");
-    private By iconBulletList= By.xpath("//*[@field-id='description']//*[@original-title='Bullet list (Ctrl+Shift+B)']");
+    private By iconBulletList = By.xpath("//*[@field-id='description']//*[@original-title='Bullet list (Ctrl+Shift+B)']");
     private By iconNumberedList = By.xpath("//*[@field-id='description']//*[@original-title='Numbered list (Ctrl+Shift+N)']");
     private By menuIcons = By.xpath("//*[@field-id='description']//*[@original-title='Icons']");
     private By menuOther = By.xpath("//*[@field-id='description']//*[@original-title='Other']");
     private By iconCollapseExpand = By.xpath("//*[@field-id='description']//*[@original-title='Toggle visibility']");
     private By editDescription = By.id("description-wiki-edit");
-    private By tabVisual= By.xpath("//*[@data-mode='wysiwyg']");
-    private By tabText= By.xpath("//*[@data-mode='source']");
+    private By tabVisual = By.xpath("//*[@data-mode='wysiwyg']");
+    private By tabText = By.xpath("//*[@data-mode='source']");
     private By iconUndo = By.xpath("//*[@title='Undo']");
     private By iconRedo = By.xpath("//*[@title='Redo']");
     // Priority
@@ -89,7 +89,7 @@ public class NewIssuePage extends BasePage {
     //Assignee
     private By assigneeFieldLocator = By.xpath("//*[@id='assignee-field']");
     //Assign to me
-    private By assignToMeButtonLocator = By.xpath("(//*[@id='assign-to-me-trigger']");
+    private By assignToMeButtonLocator = By.xpath("//*[@id='assign-to-me-trigger']");
     //Create
     private By submitButtonLocator = By.id("create-issue-submit");
     //Create another
@@ -98,7 +98,7 @@ public class NewIssuePage extends BasePage {
     private By linktoEpicFieldLocator = By.xpath("//*[@id='customfield_10000-field']");
     //Cancel
     private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
-
+    private By descriptionFieldLocator = By.xpath("//*[@id='description']");
 
 
     public NewIssuePage() {
@@ -117,13 +117,77 @@ public class NewIssuePage extends BasePage {
     }
 
     public NewIssuePage clickSubmitButton() {
-
         driver.findElement(submitButtonLocator).click();
-
         return this;
     }
 
 
+    public NewIssuePage clickAssignToMeButton() {
+        driver.findElement(assignToMeButtonLocator).click();
+        return this;
+    }
+
+    public NewIssuePage selectHighestPriority() {
+        driver.findElement(priorityFieldDefault).clear();
+        driver.findElement(priorityFieldDefault).sendKeys("Highest");
+        driver.findElement(priorityFieldDefault).click();
+        driver.findElement(labelsSelect).click();
+        return this;
+    }
+
+    public NewIssuePage selectHighPriority() {
+        driver.findElement(priorityFieldDefault).clear();
+        driver.findElement(priorityFieldDefault).sendKeys("High");
+        driver.findElement(priorityFieldDefault).click();
+        driver.findElement(labelsSelect).click();
+        return this;
+    }
+
+    public NewIssuePage selectLowPriority() {
+        driver.findElement(priorityFieldDefault).clear();
+        driver.findElement(priorityFieldDefault).sendKeys("Low");
+        driver.findElement(priorityFieldDefault).click();
+        driver.findElement(labelsSelect).click();
+        return this;
+    }
+
+    public NewIssuePage selectLowestPriority() {
+        driver.findElement(priorityFieldDefault).clear();
+        driver.findElement(priorityFieldDefault).sendKeys("Lowest");
+        driver.findElement(priorityFieldDefault).click();
+        driver.findElement(labelsSelect).click();
+        return this;
+    }
+
+    public NewIssuePage fillSummary() {
+        driver.findElement(summaryLocator).sendKeys("A huge bug found");
+        return this;
+    }
+
+    public NewIssuePage fillDescription() {
+        driver.findElement(descriptionFieldLocator).sendKeys("Important text");
+        return this;
+    }
+
+    public NewIssuePage createIssue() {
+        driver.findElement(submitButtonLocator).click();
+        return this;
+    }
+
+    public NewIssuePage createAnotherIssue() {
+        driver.findElement(createAnotherButtonLocator).click();
+        driver.findElement(submitButtonLocator).click();
+        return this;
+    }
+
+    public NewIssuePage pressCancelButton() {
+        driver.findElement(cancelButtonLocator).click();
+        return this;
+    }
 
 }
+
+
+
+
 
