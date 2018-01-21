@@ -34,6 +34,8 @@ public class NewIssuePage extends BasePage {
     private By issueTypeLocator = By.xpath("//*[@id='issuetype-field']");
     //Epic Name
     private By nameEpicLocator = By.xpath("//*[@id='customfield_10002']");
+    //Issue Select
+    private By issueSelectLocator = By.xpath("//*[@id='issuetype-suggestions']");
     //Summary
     private By summaryLocator = By.id("summary");
     //Description
@@ -184,6 +186,73 @@ public class NewIssuePage extends BasePage {
         driver.findElement(cancelButtonLocator).click();
         return this;
     }
+
+    public NewIssuePage selectTypeStoryLocator(){
+        driver.findElement(issueTypeLocator).clear();
+        driver.findElement(issueTypeLocator).sendKeys("Story");
+        driver.findElement(issueSelectLocator).click();
+        return this;
+    }
+
+    public NewIssuePage selectTypeBugLocator(){
+        driver.findElement(issueTypeLocator).click();
+        driver.findElement(issueTypeLocator).sendKeys("Bug");
+        driver.findElement(issueSelectLocator).click();
+        return this;
+    }
+
+    public NewIssuePage selectTypeEpicLocator() {
+        driver.findElement(issueTypeLocator).click();
+        driver.findElement(issueTypeLocator).sendKeys("Epic");
+        driver.findElement(issueSelectLocator).click();
+        return this;
+    }
+
+    public NewIssuePage selectTypeTaskLocator() {
+        driver.findElement(issueTypeLocator).click();
+        driver.findElement(issueTypeLocator).sendKeys("Task");
+        driver.findElement(issueSelectLocator).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssuesLocator(){
+        driver.findElement(linkedIssuesDefault).click();
+        return this;
+
+    }
+
+    public NewIssuePage selectLinkedIssueIsBlockedBy(){
+        driver.findElement(linkedIssuesIsBlockedBy).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssuesClones(){
+        driver.findElement(linkedIssuesIsClones).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssueIsClonedBy(){
+        driver.findElement(linkedIssuesIsClonedBy).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssuesDuplicates(){
+        driver.findElement(linkedIssuesDuplicates).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssuesIsDuplicatedBy(){
+        driver.findElement(linkedIssuesIsDuplicatedBy).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssuesRelatesTo(){
+        driver.findElement(linkedIssuesRelatesTo).click();
+        return this;
+    }
+
+
+
 
 }
 
