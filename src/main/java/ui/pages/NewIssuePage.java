@@ -3,6 +3,8 @@ package ui.pages;
 import org.openqa.selenium.By;
 import ui.utils.RemoteDriverManager;
 
+import static org.openqa.selenium.Keys.ENTER;
+
 public class NewIssuePage extends BasePage {
 
     private HeaderPage headerPage;
@@ -18,8 +20,8 @@ public class NewIssuePage extends BasePage {
     private By createLocator = By.id("create_link");
     //Configure Fields
     private By configureFiedlsLocator = By.id("qf-field-picker-trigger");
-    private By showFieldsAllLocator = By.xpath("//*[contains(@class,'qf-unconfigurable')]//a[.='All']");
-    private By showFieldsCustomLocator = By.xpath("//*[contains(@class,'qf-unconfigurable')]//a[.='Custom']");
+    private By showFieldsAllLocator = By.xpath("//*[contains(@class,'qf-unconfigurable')]");
+    private By showFieldsCustomLocator = By.xpath("//*[contains(@class,'qf-configurable')]");
     private By selectAssigneeLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Assignee']");
     private By selectAttachmentLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Attachment']");
     private By selectComponentsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Component/s']");
@@ -31,6 +33,7 @@ public class NewIssuePage extends BasePage {
     private By selectLinkToEpicLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Ссылка на эпик']");
     //Project
     private By fieldProjectLocator = By.xpath("//*[@id='project-field']");
+    private By projectSelectLocator = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']");
     //Issue Type
     private By issueTypeLocator = By.xpath("//*[@id='issuetype-field']");
     //Epic Name
@@ -275,6 +278,7 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
+
     public NewIssuePage IssuePopup() {
         driver.findElement(IssuePopup).click();
         return this;
@@ -300,6 +304,42 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
+    public NewIssuePage clickCreateIssueButton(){
+        waitToBePresentAndClick(createLocator);
+        return this;
+    }
+
+    public NewIssuePage clickConfigureFieldsButton(){
+        waitToBePresentAndClick(configureFiedlsLocator);
+        return this;
+    }
+
+    public NewIssuePage clickCustomLink(){
+        waitToBePresentAndClick(showFieldsCustomLocator);
+        return this;
+    }
+
+    public NewIssuePage clickAllLink(){
+        waitToBePresentAndClick(showFieldsAllLocator);
+        return this;
+    }
+
+    String projectId = "QAAuto5 (QAAUT)";
+    public NewIssuePage enterProject(String projectId){
+        driver.findElement(fieldProjectLocator).clear();
+        driver.findElement(fieldProjectLocator).sendKeys(projectId);
+        driver.findElement(projectSelectLocator).click();
+        return this;
+    }
+
+    String issueType = "Epic"; //Bug,Task or Story
+    public NewIssuePage enterIssueType(String issueType) {
+        driver.findElement(issueTypeLocator).clear();
+        driver.findElement(issueTypeLocator).sendKeys(issueType);
+        driver.findElement(issueSelectLocator).click();
+        return this;
+
+    }
 
     public NewIssuePage sourceSearch() {
         driver.findElement(sourceSearch).click();
