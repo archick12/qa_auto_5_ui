@@ -1,0 +1,17 @@
+{
+  "capabilities": [
+    {
+      "browserName": "chrome",
+      "maxInstances": 5,
+      "marionette": false,
+      "seleniumProtocol": "WebDriver"
+    }
+  ],
+  "port": 5555,
+  "hub": "http://localhost:4444",
+  "hubHost": "localhost",
+  "register": true,
+  "maxSession": 5,
+  "Dwebdriver.gecko.driver=/Users/macbook/Downloads/qa_auto_5_initial/environment/grid/geckodriver_0_19_0": "",
+  "Dwebdriver.chrome.driver=/Users/macbook/Downloads/qa_auto_5_initial/environment/grid/chromedriver_2_29": ""
+}
