@@ -275,7 +275,52 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
+    public NewIssuePage IssuePopup() {
+        driver.findElement(IssuePopup).click();
+        return this;
+    }
 
+    public NewIssuePage browseButton() {
+        driver.findElement(browseButton).click();
+        return this;
+    }
+
+    public NewIssuePage pageHeader() {
+        driver.findElement(pageHeader).click();
+        return this;
+    }
+
+    public NewIssuePage selectButton() {
+        driver.findElement(selectButton).click();
+        return this;
+    }
+
+    public NewIssuePage sourceRecent() {
+        driver.findElement(sourceRecent).click();
+        return this;
+    }
+
+
+    public NewIssuePage sourceSearch() {
+        driver.findElement(sourceSearch).click();
+        return this;
+    }
+
+    public NewIssuePage searchField() {
+        driver.findElement(sourceSearch).click();
+        driver.findElement(searchField).click();
+        return this;
+    }
+
+    public NewIssuePage viewedIssues() {
+        driver.findElement(viewedIssues).click();
+        return this;
+    }
+
+    public NewIssuePage first50Issues() {
+        driver.findElement(first50Issues).click();
+        return this;
+    }
 
 
 }
