@@ -24,12 +24,12 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage enterUsername() {
-        waitToBePresentAndSendKeys(usernameLocator, "adikalova");
+        waitToBePresentAndSendKeys(usernameLocator, username);
         return this;
     }
 
     public LoginPage enterPassword() {
-        waitToBePresentAndSendKeys(passwordLocator, "123456");
+        waitToBePresentAndSendKeys(passwordLocator, password);
         return this;
     }
 

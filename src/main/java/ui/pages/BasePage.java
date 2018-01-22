@@ -5,6 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.utils.RemoteDriverManager;
+import utils.ListenerTest;
 
 public class BasePage {
 
@@ -12,9 +13,11 @@ public class BasePage {
 
     // protected String baseURL = "http://soft.it-hillel.com.ua:8080";
     protected String baseURL = "http://jira.hillel.it:8080";
+    protected String username = ListenerTest.properties.get("username");
+    protected String password = ListenerTest.properties.get("password");
     protected WebDriver driver;
     private int defaultExplicitWaitInSeconds = 10;
-    public static String defaultImplicitWaitInSeconds = "10";
+    public static int defaultImplicitWaitInSeconds = 10;
 
     protected BasePage() {
         this.driver = RemoteDriverManager.getDriver();
@@ -88,11 +91,11 @@ public class BasePage {
         try {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
-            element.submit();
+            element.click();
         } catch (StaleElementReferenceException ignored) {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
-            element.submit();
+            element.click();
         }
 
     }

@@ -26,6 +26,9 @@ public class ListenerTest implements ITestListener {
 
     final static Logger logger = Logger.getLogger(ListenerTest.class);
 
+    final static PropertyReader propertyReader = new PropertyReader();
+    public static Map<String, String> properties = propertyReader.readProperties("testrun.properties");
+
     public void onTestStart(ITestResult iTestResult) {
         String testCaseName = iTestResult.getName();
         logger.info("TEST: " + testCaseName + " STARTED");
@@ -75,9 +78,9 @@ public class ListenerTest implements ITestListener {
                 // For slow internet and slow test suite, slower than rest of the tests
                  if (group.contains("slow ")) {
                      changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds) + 50);
-                  }
-                }
+                 }
             }
+        }
     }
 
     public void onFinish(ITestContext iTestContext) {
@@ -85,7 +88,7 @@ public class ListenerTest implements ITestListener {
         WebDriver driver = RemoteDriverManager.getDriver();
 
         if (driver != null) {
-            changeImplicitWaitValue(driver, Integer.parseInt(BasePage.defaultImplicitWaitInSeconds));
+            changeImplicitWaitValue(driver, BasePage.defaultImplicitWaitInSeconds);
             logger.info("Closing browser window");
 //            RemoteDriverManager.closeDriver();
         }
