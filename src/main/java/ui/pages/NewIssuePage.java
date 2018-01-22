@@ -8,17 +8,17 @@ import static org.openqa.selenium.Keys.ENTER;
 public class NewIssuePage extends BasePage {
 
     private HeaderPage headerPage;
-    //Old Locators
-    //Creating Sub-Task inside ticket
+    //---Old Locators
+    //---Creating Sub-Task inside ticket
     //private By newSubtaskButtonLocator = By.id("stqc_show");
     //private By subtaskLocator = By.linkText("Snizhanna test"); - should be changed for a specific test
     //private By moreButtonLocator = By.id("opsbar-operations_more");
     //private By deleteListItemLocator = By.id("delete-issue"); - not found
     //private By deleteButtonLocator = By.id("delete-issue-submit"); - not found
     //private By successPopUp = By.xpath("//*[contains(@class,'aui-message-success')]");
-    //Create a New Issue Button
+    //---Create a New Issue Button
     private By createLocator = By.id("create_link");
-    //Configure Fields
+    //---Configure Fields
     private By configureFiedlsLocator = By.id("qf-field-picker-trigger");
     private By showFieldsAllLocator = By.xpath("//*[contains(@class,'qf-unconfigurable')]");
     private By showFieldsCustomLocator = By.xpath("//*[contains(@class,'qf-configurable')]");
@@ -31,18 +31,18 @@ public class NewIssuePage extends BasePage {
     private By selectLinkedIssueLocator = By.xpath("//*[@data-field-id='issuelinks']");
     private By selectPriorityLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Priority']");
     private By selectLinkToEpicLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Ссылка на эпик']");
-    //Project
+    //---Project
     private By fieldProjectLocator = By.xpath("//*[@id='project-field']");
     private By projectSelectLocator = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']");
-    //Issue Type
+    //---Issue Type
     private By issueTypeLocator = By.xpath("//*[@id='issuetype-field']");
-    //Epic Name
+    //---Epic Name
     private By nameEpicLocator = By.xpath("//*[@id='customfield_10002']");
-    //Issue Select
+    //---Issue Select
     private By issueSelectLocator = By.xpath("//*[@id='issuetype-suggestions']");
-    //Summary
+    //---Summary
     private By summaryLocator = By.id("summary");
-    //Description
+    //---Description
     private By menuStyle = By.xpath("//*[@field-id='description']//*[text()='Style']");
     private By iconBold = By.xpath("//*[@field-id='description']//*[@data-operation='bold']");
     private By iconItalic = By.xpath("//*[@field-id='description']//*[@data-operation='italic']");
@@ -62,14 +62,14 @@ public class NewIssuePage extends BasePage {
     private By tabText = By.xpath("//*[@data-mode='source']");
     private By iconUndo = By.xpath("//*[@title='Undo']");
     private By iconRedo = By.xpath("//*[@title='Redo']");
-    // Priority
+    //---Priority
     private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
     private By priorityFieldDefault = By.xpath("//*[@id='priority-field']");
     private By prioritySelectHighest = By.xpath("//*[@id='priority-single-select']//a[text()='Highest']");
     private By prioritySelectHigh = By.xpath("//*[@id='priority-single-select']//a[text()='High']");
     private By prioritySelectLow = By.xpath("//*[@id='priority-single-select']//a[text()='Low']");
     private By prioritySelectLowest = By.xpath("//*[@id='priority-single-select']//a[text()='Lowest']");
-    //Linked Issue
+    //---Linked Issue
     private By linkedIssuesDefault = By.xpath("//*[@id='issuelinks-linktype']");
     private By linkedIssuesIsBlockedBy = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='is blocked by']");
     private By linkedIssuesIsClones = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='clones']");
@@ -77,14 +77,14 @@ public class NewIssuePage extends BasePage {
     private By linkedIssuesDuplicates = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='duplicates']");
     private By linkedIssuesIsDuplicatedBy = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='is duplicated by']");
     private By linkedIssuesRelatesTo = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='relates to']");
-    //Labels
+    //---Labels
     private By labelsSelect = By.xpath("//*[@id='labels-multi-select']");
-    //Issue
+    //---Issue
     private By IssuelinksSelect = By.xpath("//*[@id='issuelinks-issues-multi-select']");
     private By IssuePopup = By.xpath("//a[@class='issue-picker-popup']");
-    //Attachment
+    //---Attachment
     private By browseButton = By.xpath("//*[@class='form-body']//*[@class='issue-drop-zone__button']");
-    //Locators for IssueSelector Pop-up
+    //---Locators for IssueSelector Pop-up
     private By pageHeader = By.xpath("//*[@class='aui-page-header-main']");
     private By selectButton = By.xpath("//*[@class='aui-button']");
     private By sourceRecent = By.xpath("//*[@id='issue-source-recent']");
@@ -92,23 +92,23 @@ public class NewIssuePage extends BasePage {
     private By searchField = By.xpath("//*[@id='searchRequestId']");
     private By viewedIssues = By.xpath("//*[text()='Issues you have recently viewed']");
     private By first50Issues = By.xpath("//*[text()='First 50 issues from your current search']");
-    //Assignee
+    //---Assignee
     private By assigneeFieldLocator = By.xpath("//*[@id='assignee-field']");
     private By assigneeSuggestions = By.xpath("//[@id='assignee-suggestions']");
-    //Assign to me
+    //---Assign to me
     private By assignToMeButtonLocator = By.xpath("//*[@id='assign-to-me-trigger']");
-    //Create
+    //---Create
     private By submitButtonLocator = By.id("create-issue-submit");
-    //Create another
+    //---Create another
     private By createAnotherButtonLocator = By.xpath("//*[@id='qf-create-another']");
-    //Epic Link
+    //---Epic Link
     private By linktoEpicFieldLocator = By.xpath("//*[@id='customfield_10000-field']");
     private By epicLinkSuggestions = By.xpath("//[@id='customfield_10000-suggestions']");
-    //Cancel
+    //---Cancel
     private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
     private By descriptionFieldLocator = By.xpath("//*[@id='description']");
 
-
+    //---Create New Issue
     public NewIssuePage() {
 
         this.driver = RemoteDriverManager.getDriver();
@@ -116,6 +116,87 @@ public class NewIssuePage extends BasePage {
 
     }
 
+    public NewIssuePage clickCreateIssueButton(){
+
+        waitToBePresentAndClick(createLocator);
+        return this;
+    }
+
+
+    //---Configure Fields
+    public NewIssuePage clickConfigureFieldsButton(){
+
+        waitToBePresentAndClick(configureFiedlsLocator);
+        return this;
+    }
+
+    public NewIssuePage clickCustomLink(){
+
+        waitToBePresentAndClick(showFieldsCustomLocator);
+        return this;
+    }
+
+    public NewIssuePage clickAllLink(){
+
+        waitToBePresentAndClick(showFieldsAllLocator);
+        return this;
+    }
+
+    //---Select Project
+    String projectId = "QAAuto5 (QAAUT)";
+    public NewIssuePage enterProject(String projectId){
+
+        driver.findElement(fieldProjectLocator).clear();
+        driver.findElement(fieldProjectLocator).sendKeys(projectId);
+        driver.findElement(projectSelectLocator).click();
+        return this;
+    }
+
+    //---Select IssueType
+    String issueType = "Epic";
+    //---Bug,Task or Story
+    public NewIssuePage enterIssueType(String issueType) {
+
+        driver.findElement(issueTypeLocator).clear();
+        driver.findElement(issueTypeLocator).sendKeys(issueType);
+        driver.findElement(issueSelectLocator).click();
+        return this;
+
+    }
+    //---Methods for each Issue Type
+    public NewIssuePage selectTypeStoryLocator(){
+
+        driver.findElement(issueTypeLocator).clear();
+        driver.findElement(issueTypeLocator).sendKeys("Story");
+        driver.findElement(issueSelectLocator).click();
+        return this;
+    }
+
+    public NewIssuePage selectTypeBugLocator(){
+
+        driver.findElement(issueTypeLocator).click();
+        driver.findElement(issueTypeLocator).sendKeys("Bug");
+        driver.findElement(issueSelectLocator).click();
+        return this;
+    }
+
+    public NewIssuePage selectTypeEpicLocator() {
+
+        driver.findElement(issueTypeLocator).click();
+        driver.findElement(issueTypeLocator).sendKeys("Epic");
+        driver.findElement(issueSelectLocator).click();
+        return this;
+    }
+
+    public NewIssuePage selectTypeTaskLocator() {
+
+        driver.findElement(issueTypeLocator).click();
+        driver.findElement(issueTypeLocator).sendKeys("Task");
+        driver.findElement(issueSelectLocator).click();
+        return this;
+    }
+
+    //---Fill Summury
     public NewIssuePage fillSummary(String summary) {
 
         waitToBePresent(summaryLocator);
@@ -124,18 +205,16 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-    public NewIssuePage clickSubmitButton() {
-        driver.findElement(submitButtonLocator).click();
+    //---Add Description
+    public NewIssuePage fillDescription() {
+
+        driver.findElement(descriptionFieldLocator).sendKeys("Important text");
         return this;
     }
 
-
-    public NewIssuePage clickAssignToMeButton() {
-        driver.findElement(assignToMeButtonLocator).click();
-        return this;
-    }
-
+    //Select Priority
     public NewIssuePage selectHighestPriority() {
+
         driver.findElement(priorityFieldDefault).clear();
         driver.findElement(priorityFieldDefault).sendKeys("Highest");
         driver.findElement(priorityFieldDefault).click();
@@ -144,6 +223,7 @@ public class NewIssuePage extends BasePage {
     }
 
     public NewIssuePage selectHighPriority() {
+
         driver.findElement(priorityFieldDefault).clear();
         driver.findElement(priorityFieldDefault).sendKeys("High");
         driver.findElement(priorityFieldDefault).click();
@@ -152,6 +232,7 @@ public class NewIssuePage extends BasePage {
     }
 
     public NewIssuePage selectLowPriority() {
+
         driver.findElement(priorityFieldDefault).clear();
         driver.findElement(priorityFieldDefault).sendKeys("Low");
         driver.findElement(priorityFieldDefault).click();
@@ -160,6 +241,7 @@ public class NewIssuePage extends BasePage {
     }
 
     public NewIssuePage selectLowestPriority() {
+
         driver.findElement(priorityFieldDefault).clear();
         driver.findElement(priorityFieldDefault).sendKeys("Lowest");
         driver.findElement(priorityFieldDefault).click();
@@ -167,21 +249,116 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-    public NewIssuePage fillSummary() {
-        driver.findElement(summaryLocator).sendKeys("A huge bug found");
-        return this;
-    }
 
-    public NewIssuePage fillDescription() {
-        driver.findElement(descriptionFieldLocator).sendKeys("Important text");
-        return this;
-    }
-
+    //---Add Labels
     public NewIssuePage addLabel(){
+
         driver.findElement(labelsSelect).sendKeys("my_label");
         return this;
     }
 
+    //---Select Linked Issues
+    public NewIssuePage selectLinkedIssuesLocator(){
+
+        driver.findElement(linkedIssuesDefault).click();
+        return this;
+
+    }
+
+    public NewIssuePage selectLinkedIssueIsBlockedBy(){
+
+        driver.findElement(linkedIssuesIsBlockedBy).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssuesClones(){
+
+        driver.findElement(linkedIssuesIsClones).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssueIsClonedBy(){
+
+        driver.findElement(linkedIssuesIsClonedBy).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssuesDuplicates(){
+
+        driver.findElement(linkedIssuesDuplicates).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssuesIsDuplicatedBy(){
+
+        driver.findElement(linkedIssuesIsDuplicatedBy).click();
+        return this;
+    }
+
+    public NewIssuePage selectLinkedIssuesRelatesTo(){
+
+        driver.findElement(linkedIssuesRelatesTo).click();
+        return this;
+    }
+
+    //---Add Attachment
+    public NewIssuePage browseButton() {
+
+        driver.findElement(browseButton).click();
+        return this;
+    }
+
+    //---Add Issue (Pop up)
+    public NewIssuePage IssuePopup() {
+
+        driver.findElement(IssuePopup).click();
+        return this;
+    }
+
+    public NewIssuePage pageHeader() {
+
+        driver.findElement(pageHeader).click();
+        return this;
+    }
+
+    public NewIssuePage selectButton() {
+
+        driver.findElement(selectButton).click();
+        return this;
+    }
+
+    public NewIssuePage sourceRecent() {
+
+        driver.findElement(sourceRecent).click();
+        return this;
+    }
+
+    public NewIssuePage sourceSearch() {
+
+        driver.findElement(sourceSearch).click();
+        return this;
+    }
+
+    public NewIssuePage searchField() {
+
+        driver.findElement(sourceSearch).click();
+        driver.findElement(searchField).click();
+        return this;
+    }
+
+    public NewIssuePage viewedIssues() {
+
+        driver.findElement(viewedIssues).click();
+        return this;
+    }
+
+    public NewIssuePage first50Issues() {
+
+        driver.findElement(first50Issues).click();
+        return this;
+    }
+
+    //---Assignee User
     public NewIssuePage assigneeUser(){
 
         driver.findElement(assigneeFieldLocator).clear();
@@ -190,6 +367,14 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
+    //---Assign to me
+    public NewIssuePage clickAssignToMeButton() {
+
+        driver.findElement(assignToMeButtonLocator).click();
+        return this;
+    }
+
+    //---Add Epic Link
     public NewIssuePage addEpicLink(){
 
         driver.findElement(linktoEpicFieldLocator).clear();
@@ -198,171 +383,27 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-    public NewIssuePage createIssue() {
+    //---Create Issue
+    public NewIssuePage clickSubmitButton() {
+
         driver.findElement(submitButtonLocator).click();
         return this;
     }
 
+    //---Create another Issue
     public NewIssuePage createAnotherIssue() {
+
         driver.findElement(createAnotherButtonLocator).click();
         driver.findElement(submitButtonLocator).click();
         return this;
     }
 
+    //---Cancel creation
     public NewIssuePage pressCancelButton() {
+
         driver.findElement(cancelButtonLocator).click();
         return this;
     }
-
-    public NewIssuePage selectTypeStoryLocator(){
-        driver.findElement(issueTypeLocator).clear();
-        driver.findElement(issueTypeLocator).sendKeys("Story");
-        driver.findElement(issueSelectLocator).click();
-        return this;
-    }
-
-    public NewIssuePage selectTypeBugLocator(){
-        driver.findElement(issueTypeLocator).click();
-        driver.findElement(issueTypeLocator).sendKeys("Bug");
-        driver.findElement(issueSelectLocator).click();
-        return this;
-    }
-
-    public NewIssuePage selectTypeEpicLocator() {
-        driver.findElement(issueTypeLocator).click();
-        driver.findElement(issueTypeLocator).sendKeys("Epic");
-        driver.findElement(issueSelectLocator).click();
-        return this;
-    }
-
-    public NewIssuePage selectTypeTaskLocator() {
-        driver.findElement(issueTypeLocator).click();
-        driver.findElement(issueTypeLocator).sendKeys("Task");
-        driver.findElement(issueSelectLocator).click();
-        return this;
-    }
-
-    public NewIssuePage selectLinkedIssuesLocator(){
-        driver.findElement(linkedIssuesDefault).click();
-        return this;
-
-    }
-
-    public NewIssuePage selectLinkedIssueIsBlockedBy(){
-        driver.findElement(linkedIssuesIsBlockedBy).click();
-        return this;
-    }
-
-    public NewIssuePage selectLinkedIssuesClones(){
-        driver.findElement(linkedIssuesIsClones).click();
-        return this;
-    }
-
-    public NewIssuePage selectLinkedIssueIsClonedBy(){
-        driver.findElement(linkedIssuesIsClonedBy).click();
-        return this;
-    }
-
-    public NewIssuePage selectLinkedIssuesDuplicates(){
-        driver.findElement(linkedIssuesDuplicates).click();
-        return this;
-    }
-
-    public NewIssuePage selectLinkedIssuesIsDuplicatedBy(){
-        driver.findElement(linkedIssuesIsDuplicatedBy).click();
-        return this;
-    }
-
-    public NewIssuePage selectLinkedIssuesRelatesTo(){
-        driver.findElement(linkedIssuesRelatesTo).click();
-        return this;
-    }
-
-
-    public NewIssuePage IssuePopup() {
-        driver.findElement(IssuePopup).click();
-        return this;
-    }
-
-    public NewIssuePage browseButton() {
-        driver.findElement(browseButton).click();
-        return this;
-    }
-
-    public NewIssuePage pageHeader() {
-        driver.findElement(pageHeader).click();
-        return this;
-    }
-
-    public NewIssuePage selectButton() {
-        driver.findElement(selectButton).click();
-        return this;
-    }
-
-    public NewIssuePage sourceRecent() {
-        driver.findElement(sourceRecent).click();
-        return this;
-    }
-
-    public NewIssuePage clickCreateIssueButton(){
-        waitToBePresentAndClick(createLocator);
-        return this;
-    }
-
-    public NewIssuePage clickConfigureFieldsButton(){
-        waitToBePresentAndClick(configureFiedlsLocator);
-        return this;
-    }
-
-    public NewIssuePage clickCustomLink(){
-        waitToBePresentAndClick(showFieldsCustomLocator);
-        return this;
-    }
-
-    public NewIssuePage clickAllLink(){
-        waitToBePresentAndClick(showFieldsAllLocator);
-        return this;
-    }
-
-    String projectId = "QAAuto5 (QAAUT)";
-    public NewIssuePage enterProject(String projectId){
-        driver.findElement(fieldProjectLocator).clear();
-        driver.findElement(fieldProjectLocator).sendKeys(projectId);
-        driver.findElement(projectSelectLocator).click();
-        return this;
-    }
-
-    String issueType = "Epic"; //Bug,Task or Story
-    public NewIssuePage enterIssueType(String issueType) {
-        driver.findElement(issueTypeLocator).clear();
-        driver.findElement(issueTypeLocator).sendKeys(issueType);
-        driver.findElement(issueSelectLocator).click();
-        return this;
-
-    }
-
-    public NewIssuePage sourceSearch() {
-        driver.findElement(sourceSearch).click();
-        return this;
-    }
-
-    public NewIssuePage searchField() {
-        driver.findElement(sourceSearch).click();
-        driver.findElement(searchField).click();
-        return this;
-    }
-
-    public NewIssuePage viewedIssues() {
-        driver.findElement(viewedIssues).click();
-        return this;
-    }
-
-    public NewIssuePage first50Issues() {
-        driver.findElement(first50Issues).click();
-        return this;
-    }
-
-
 }
 
 
