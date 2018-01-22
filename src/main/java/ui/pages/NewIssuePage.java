@@ -26,6 +26,7 @@ public class NewIssuePage extends BasePage {
     private By selectDescriptionLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Description']");
     private By selectFixVersionsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Fix Version/s']");
     private By selectLabelsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Labels']");
+    private By selectLinkedIssueLocator = By.xpath("//*[@data-field-id='issuelinks']");
     private By selectPriorityLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Priority']");
     private By selectLinkToEpicLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Ссылка на эпик']");
     //Project
@@ -90,6 +91,7 @@ public class NewIssuePage extends BasePage {
     private By first50Issues = By.xpath("//*[text()='First 50 issues from your current search']");
     //Assignee
     private By assigneeFieldLocator = By.xpath("//*[@id='assignee-field']");
+    private By assigneeSuggestions = By.xpath("//[@id='assignee-suggestions']");
     //Assign to me
     private By assignToMeButtonLocator = By.xpath("//*[@id='assign-to-me-trigger']");
     //Create
@@ -98,6 +100,7 @@ public class NewIssuePage extends BasePage {
     private By createAnotherButtonLocator = By.xpath("//*[@id='qf-create-another']");
     //Epic Link
     private By linktoEpicFieldLocator = By.xpath("//*[@id='customfield_10000-field']");
+    private By epicLinkSuggestions = By.xpath("//[@id='customfield_10000-suggestions']");
     //Cancel
     private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
     private By descriptionFieldLocator = By.xpath("//*[@id='description']");
@@ -168,6 +171,27 @@ public class NewIssuePage extends BasePage {
 
     public NewIssuePage fillDescription() {
         driver.findElement(descriptionFieldLocator).sendKeys("Important text");
+        return this;
+    }
+
+    public NewIssuePage addLabel(){
+        driver.findElement(labelsSelect).sendKeys("my_label");
+        return this;
+    }
+
+    public NewIssuePage assigneeUser(){
+
+        driver.findElement(assigneeFieldLocator).clear();
+        driver.findElement(assigneeFieldLocator).sendKeys("Marina Kuzmina");
+        driver.findElement(assigneeSuggestions).click();
+        return this;
+    }
+
+    public NewIssuePage addEpicLink(){
+
+        driver.findElement(linktoEpicFieldLocator).clear();
+        driver.findElement(linktoEpicFieldLocator).sendKeys("Epic_AQA_5_MMazur");
+        driver.findElement(epicLinkSuggestions).click();
         return this;
     }
 
