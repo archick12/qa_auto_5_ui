@@ -96,10 +96,361 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
+//____________________________________________________________________Logo
+    public HeaderPage jiraLogo(){
+        waitToBePresentAndClick(jiraLogo);
+        return this;
+    }
+    //_________________________________________________________________Dashboard section
+    public HeaderPage dashbourd(){
+        waitToBePresentAndClick(dashboardLocator);
+        return this;
+    }
+
+    public HeaderPage dashbourdViewSystemDashboard(){
+        waitToBePresentAndClick(dashboardLocator);
+        waitToBePresentAndClick(viewSystemDashboardLocator);
+        return this;
+    }
+
+    public HeaderPage dashbourdManageDashboards(){
+        waitToBePresentAndClick(dashboardLocator);
+        waitToBePresentAndClick(manageDashboardsLocator);
+        return this;
+    }
+    //____________________________________________________________________ Project section
+    public HeaderPage projects(){
+        waitToBePresentAndClick(projectsLocator);
+        return this;
+    }
+
+    public HeaderPage projectsCurrentProject(){
+        waitToBePresentAndClick(projectsLocator);
+        waitToBePresentAndClick(currentProjectLocator);
+        return this;
+    }
+
+    public HeaderPage projectsCurrent1Project() {
+        waitToBePresentAndClick(projectsLocator);
+        waitToBePresentAndClick(recentProject1Locator);
+        return this;
+    }
+
+    public HeaderPage projectsCurrent2Project() {
+        waitToBePresentAndClick(projectsLocator);
+        waitToBePresentAndClick(recentProject2Locator);
+        return this;
+    }
+
+    public HeaderPage projectsCurrent3Project() {
+        waitToBePresentAndClick(projectsLocator);
+        waitToBePresentAndClick(recentProject3Locator);
+        return this;
+    }
+
+    public HeaderPage projectsSoftware() {
+        waitToBePresentAndClick(projectsLocator);
+        waitToBePresentAndClick(softwareLocator);
+        return this;
+    }
+
+    public HeaderPage projectsBusiness() {
+        waitToBePresentAndClick(projectsLocator);
+        waitToBePresentAndClick(businessLocator);
+        return this;
+    }
+
+    public HeaderPage projectsViewAllProjects() {
+        waitToBePresentAndClick(projectsLocator);
+        waitToBePresentAndClick(viewAllProjectsLocator);
+        return this;
+    }
+    //____________________________________________________________Issues section
+    public HeaderPage issues() {
+        waitToBePresentAndClick(issuesLocator);
+        return this;
+    }
+
+    public HeaderPage issuesCurentSearch() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(currentSearchLocator);
+        return this;
+    }
+
+    public HeaderPage issuesSearchForIssues() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(searchForIssuesLocator);
+        return this;
+    }
+
+    public HeaderPage issuesRecentIissue1() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(recentIissue1Locator);
+        return this;
+    }
+
+    public HeaderPage issuesRecentIissue2() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(recentIissue2Locator);
+        return this;
+    }
+
+    public HeaderPage issuesRecentIissue3() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(recentIissue3Locator);
+        return this;
+    }
+
+    public HeaderPage issuesRecentIissue4() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(recentIissue4Locator);
+        return this;
+    }
+
+    public HeaderPage issuesRecentIissue5() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(recentIissue5Locator);
+        return this;
+    }
+
+    public HeaderPage issuesImportIssuesFromCSV() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(importIssuesFromCSVLocator);
+        return this;
+    }
+
+    public HeaderPage issuesFilterMyOpenIssues() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(filterMyOpenIssuesLocator);
+        return this;
+    }
+
+    public HeaderPage issuesFilterReportedByMe() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(filterReportedByMeLocator);
+        return this;
+    }
+
+    public HeaderPage issuesManageFilters() {
+        waitToBePresentAndClick(issuesLocator);
+        waitToBePresentAndClick(manageFiltersLocator);
+        return this;
+    }
+    //____________________________________________________________Boards section
+    public HeaderPage boards() {
+        waitToBePresentAndClick(boardsLocator);
+        return this;
+    }
+
+    public HeaderPage boardsRecentBoard1() {
+        waitToBePresentAndClick(boardsLocator);
+        waitToBePresentAndClick(recentBoard1Locator);
+        return this;
+    }
+
+    public HeaderPage boardsRecentBoard2() {
+        waitToBePresentAndClick(boardsLocator);
+        waitToBePresentAndClick(recentBoard2Locator);
+        return this;
+    }
+
+    public HeaderPage boardsRecentBoard3() {
+        waitToBePresentAndClick(boardsLocator);
+        waitToBePresentAndClick(recentBoard3Locator);
+        return this;
+    }
+
+    public HeaderPage boardsRecentBoard4() {
+        waitToBePresentAndClick(boardsLocator);
+        waitToBePresentAndClick(recentBoard4Locator);
+        return this;
+    }
+
+    public HeaderPage boardsViewAllBoards() {
+        waitToBePresentAndClick(boardsLocator);
+        waitToBePresentAndClick(viewAllBoardsLocator);
+        return this;
+    }
+//____________________________________________________________Tests section
+
+    public HeaderPage tests() {
+        waitToBePresentAndClick(testsLocator);
+        return this;
+    }
+
+    public HeaderPage testsSearchTests() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(searchTestsLocator);
+        return this;
+    }
+
+    public HeaderPage testsCreateATest() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(createATestLocator);
+        return this;
+    }
+
+    public HeaderPage testsPlanTestCycle() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(planTestCycleLocator);
+        return this;
+    }
+
+    public HeaderPage testsSearchTestExecutions() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(searchTestExecutionsLocator);
+        return this;
+    }
+
+
+    public HeaderPage testsManageExecutionFilters() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(manageExecutionFiltersLocator);
+        return this;
+    }
+
+
+    public HeaderPage testsExecuteTests() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(executeTestsLocator);
+        return this;
+    }
+
+    public HeaderPage testsTestSummary() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(testSummaryLocator);
+        return this;
+    }
+
+    public HeaderPage testsTestMetrics() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(testMetricsLocator);
+        return this;
+    }
+
+    public HeaderPage testsTraceability() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(traceabilityLocator);
+        return this;
+    }
+
+    public HeaderPage testsWelcome() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(welcomeLocator);
+        return this;
+    }
+
+    public HeaderPage testsZephyrHelp() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(zephyrHelpLocator);
+        return this;
+    }
+
+    public HeaderPage testsZephyrSupport() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(zephyrSupportLocator);
+        return this;
+    }
+
+    public HeaderPage testsAboutZephyr() {
+        waitToBePresentAndClick(testsLocator);
+        waitToBePresentAndClick(aboutZephyrLocator);
+        return this;
+    }
+    //____________________________________________________________Create button
+    public HeaderPage createButton() {
+        waitToBePresentAndClick(createLocator);
+        return this;
+    }
+//____________________________________________________________Improve Jira section
+
+
+    public HeaderPage helpUsButton() {
+        waitToBePresentAndClick(helpUsButtonLocator);
+        return this;
+    }
+
+    //____________________________________________________________Help section
+    public HeaderPage jiraInfo() {
+        waitToBePresentAndClick(jiraInfoLocator);
+        return this;
+    }
+
+    public HeaderPage jiraInfoJiraSoftwareHelp() {
+        waitToBePresentAndClick(jiraInfoLocator);
+        waitToBePresentAndClick(jiraSoftwareHelpLocator);
+        return this;
+    }
+
+    public HeaderPage jiraInfoJiraCoreHelp() {
+        waitToBePresentAndClick(jiraInfoLocator);
+        waitToBePresentAndClick(jiraCoreHelpLocator);
+        return this;
+    }
+
+    public HeaderPage jiraInfoKeyboardShortcuts() {
+        waitToBePresentAndClick(jiraInfoLocator);
+        waitToBePresentAndClick(keyboardShortcutsLocator);
+        return this;
+    }
+
+    public HeaderPage jiraInfoAbout() {
+        waitToBePresentAndClick(jiraInfoLocator);
+        waitToBePresentAndClick(aboutLocator);
+        return this;
+    }
+
+
+    public HeaderPage jiraInfoCredits() {
+        waitToBePresentAndClick(jiraInfoLocator);
+        waitToBePresentAndClick(creditsLocator);
+        return this;
+    }
+//____________________________________________________________User section
+
+    public HeaderPage userOptions() {
+        waitToBePresentAndClick(userOptionsLocator);
+        return this;
+    }
+
+    public HeaderPage userOptionsViewProfile() {
+        waitToBePresentAndClick(userOptionsLocator);
+        waitToBePresentAndClick(viewProfileLocator);
+        return this;
+    }
+
+    public HeaderPage userOptionsAtlassianMarketplace() {
+        waitToBePresentAndClick(userOptionsLocator);
+        waitToBePresentAndClick(atlassianMarketplaceLocator);
+        return this;
+    }
+
+    public HeaderPage userOptionsSetHomeDashboard() {
+        waitToBePresentAndClick(userOptionsLocator);
+        waitToBePresentAndClick(setHomeDashboardLocator);
+        return this;
+    }
+
+    public HeaderPage userOptionssetHomeBoards() {
+        waitToBePresentAndClick(userOptionsLocator);
+        waitToBePresentAndClick(setHomeBoardsLocator);
+        return this;
+    }
+
+    public HeaderPage userOptionsSetHomeIssues() {
+        waitToBePresentAndClick(userOptionsLocator);
+        waitToBePresentAndClick(setHomeIssuesLocator);
+        return this;
+    }
+
+    public HeaderPage userOptionslogOut() {
+        waitToBePresentAndClick(userOptionsLocator);
+        waitToBePresentAndClick(logOutLocator);
+        return this;
+    }
+  
     public HeaderPage clickCreateButton() {
-
         driver.findElement(createLocator).click();
-
         return this;
     }
 
