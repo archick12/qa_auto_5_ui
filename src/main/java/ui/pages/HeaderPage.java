@@ -96,6 +96,7 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
+
 //____________________________________________________________________Logo
     public HeaderPage jiraLogo(){
         waitToBePresentAndClick(jiraLogo);
@@ -108,61 +109,52 @@ public class HeaderPage extends BasePage {
     }
 
     public HeaderPage dashbourdViewSystemDashboard(){
-        waitToBePresentAndClick(dashboardLocator);
-        waitToBePresentAndClick(viewSystemDashboardLocator);
+        SelectDropDownItem(dashboardLocator,viewSystemDashboardLocator);
         return this;
     }
 
     public HeaderPage dashbourdManageDashboards(){
-        waitToBePresentAndClick(dashboardLocator);
-        waitToBePresentAndClick(manageDashboardsLocator);
+        SelectDropDownItem(dashboardLocator,manageDashboardsLocator);
         return this;
     }
     //____________________________________________________________________ Project section
-    public HeaderPage projects(){
-        waitToBePresentAndClick(projectsLocator);
-        return this;
-    }
+//    public HeaderPage projects(){
+//        waitToBePresentAndClick(projectsLocator);
+//        return this;
+//    }
 
     public HeaderPage projectsCurrentProject(){
-        waitToBePresentAndClick(projectsLocator);
-        waitToBePresentAndClick(currentProjectLocator);
+        SelectDropDownItem(projectsLocator,currentProjectLocator);
         return this;
     }
 
     public HeaderPage projectsCurrent1Project() {
-        waitToBePresentAndClick(projectsLocator);
-        waitToBePresentAndClick(recentProject1Locator);
+        SelectDropDownItem(projectsLocator,recentProject1Locator);
         return this;
     }
 
     public HeaderPage projectsCurrent2Project() {
-        waitToBePresentAndClick(projectsLocator);
-        waitToBePresentAndClick(recentProject2Locator);
+        SelectDropDownItem(projectsLocator,recentProject2Locator);
         return this;
     }
 
     public HeaderPage projectsCurrent3Project() {
-        waitToBePresentAndClick(projectsLocator);
-        waitToBePresentAndClick(recentProject3Locator);
+        SelectDropDownItem(projectsLocator,recentProject3Locator);
         return this;
     }
 
     public HeaderPage projectsSoftware() {
-        waitToBePresentAndClick(projectsLocator);
-        waitToBePresentAndClick(softwareLocator);
+        SelectDropDownItem(projectsLocator,softwareLocator);
         return this;
     }
 
     public HeaderPage projectsBusiness() {
-        waitToBePresentAndClick(projectsLocator);
-        waitToBePresentAndClick(businessLocator);
+        SelectDropDownItem(projectsLocator,businessLocator);
         return this;
     }
 
     public HeaderPage projectsViewAllProjects() {
-        waitToBePresentAndClick(projectsLocator);
-        waitToBePresentAndClick(viewAllProjectsLocator);
+        SelectDropDownItem(projectsLocator,viewAllProjectsLocator);
         return this;
     }
     //____________________________________________________________Issues section
@@ -172,189 +164,160 @@ public class HeaderPage extends BasePage {
     }
 
     public HeaderPage issuesCurentSearch() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(currentSearchLocator);
+        SelectDropDownItem(issuesLocator,currentSearchLocator);
         return this;
     }
 
     public HeaderPage issuesSearchForIssues() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(searchForIssuesLocator);
+        SelectDropDownItem(issuesLocator,searchForIssuesLocator);
         return this;
     }
 
     public HeaderPage issuesRecentIissue1() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(recentIissue1Locator);
+        SelectDropDownItem(issuesLocator,recentIissue1Locator);
         return this;
     }
 
     public HeaderPage issuesRecentIissue2() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(recentIissue2Locator);
+        SelectDropDownItem(issuesLocator,recentIissue2Locator);
         return this;
     }
 
     public HeaderPage issuesRecentIissue3() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(recentIissue3Locator);
+        SelectDropDownItem(issuesLocator,recentIissue3Locator);
         return this;
     }
 
     public HeaderPage issuesRecentIissue4() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(recentIissue4Locator);
+        SelectDropDownItem(issuesLocator,recentIissue4Locator);
         return this;
     }
 
     public HeaderPage issuesRecentIissue5() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(recentIissue5Locator);
+        SelectDropDownItem(issuesLocator,recentIissue5Locator);
         return this;
     }
 
     public HeaderPage issuesImportIssuesFromCSV() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(importIssuesFromCSVLocator);
+        SelectDropDownItem(issuesLocator,importIssuesFromCSVLocator);
         return this;
     }
 
     public HeaderPage issuesFilterMyOpenIssues() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(filterMyOpenIssuesLocator);
+        SelectDropDownItem(issuesLocator,filterMyOpenIssuesLocator);
         return this;
     }
 
     public HeaderPage issuesFilterReportedByMe() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(filterReportedByMeLocator);
+        SelectDropDownItem(issuesLocator,filterReportedByMeLocator);
         return this;
     }
 
     public HeaderPage issuesManageFilters() {
-        waitToBePresentAndClick(issuesLocator);
-        waitToBePresentAndClick(manageFiltersLocator);
+        SelectDropDownItem(issuesLocator,manageFiltersLocator);
         return this;
     }
     //____________________________________________________________Boards section
-    public HeaderPage boards() {
-        waitToBePresentAndClick(boardsLocator);
-        return this;
-    }
+//    public HeaderPage boards() {
+//        waitToBePresentAndClick(boardsLocator);
+//        return this;
+//    }
 
     public HeaderPage boardsRecentBoard1() {
-        waitToBePresentAndClick(boardsLocator);
-        waitToBePresentAndClick(recentBoard1Locator);
+        SelectDropDownItem(boardsLocator,recentBoard1Locator);
         return this;
     }
 
     public HeaderPage boardsRecentBoard2() {
-        waitToBePresentAndClick(boardsLocator);
-        waitToBePresentAndClick(recentBoard2Locator);
+        SelectDropDownItem(boardsLocator,recentBoard2Locator);
         return this;
     }
 
     public HeaderPage boardsRecentBoard3() {
-        waitToBePresentAndClick(boardsLocator);
-        waitToBePresentAndClick(recentBoard3Locator);
+        SelectDropDownItem(boardsLocator,recentBoard3Locator);
         return this;
     }
 
     public HeaderPage boardsRecentBoard4() {
-        waitToBePresentAndClick(boardsLocator);
-        waitToBePresentAndClick(recentBoard4Locator);
+        SelectDropDownItem(boardsLocator,recentBoard4Locator);
         return this;
     }
 
     public HeaderPage boardsViewAllBoards() {
-        waitToBePresentAndClick(boardsLocator);
-        waitToBePresentAndClick(viewAllBoardsLocator);
+        SelectDropDownItem(boardsLocator,viewAllBoardsLocator);
         return this;
     }
 //____________________________________________________________Tests section
 
-    public HeaderPage tests() {
-        waitToBePresentAndClick(testsLocator);
-        return this;
-    }
+//    public HeaderPage tests() {
+//        waitToBePresentAndClick(testsLocator);
+//        return this;
+//    }
 
     public HeaderPage testsSearchTests() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(searchTestsLocator);
+        SelectDropDownItem(testsLocator,searchTestsLocator);
         return this;
     }
 
     public HeaderPage testsCreateATest() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(createATestLocator);
+        SelectDropDownItem(testsLocator,createATestLocator);
         return this;
     }
 
     public HeaderPage testsPlanTestCycle() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(planTestCycleLocator);
+        SelectDropDownItem(testsLocator,planTestCycleLocator);
         return this;
     }
 
     public HeaderPage testsSearchTestExecutions() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(searchTestExecutionsLocator);
+        SelectDropDownItem(testsLocator,searchTestExecutionsLocator);
         return this;
     }
 
 
     public HeaderPage testsManageExecutionFilters() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(manageExecutionFiltersLocator);
+        SelectDropDownItem(testsLocator,manageExecutionFiltersLocator);
         return this;
     }
 
 
     public HeaderPage testsExecuteTests() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(executeTestsLocator);
+        SelectDropDownItem(testsLocator,executeTestsLocator);
         return this;
     }
 
     public HeaderPage testsTestSummary() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(testSummaryLocator);
+        SelectDropDownItem(testsLocator,testSummaryLocator);
         return this;
     }
 
     public HeaderPage testsTestMetrics() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(testMetricsLocator);
+        SelectDropDownItem(testsLocator,testMetricsLocator);
         return this;
     }
 
     public HeaderPage testsTraceability() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(traceabilityLocator);
+        SelectDropDownItem(testsLocator,traceabilityLocator);
         return this;
     }
 
     public HeaderPage testsWelcome() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(welcomeLocator);
+        SelectDropDownItem(testsLocator,welcomeLocator);
         return this;
     }
 
     public HeaderPage testsZephyrHelp() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(zephyrHelpLocator);
+        SelectDropDownItem(testsLocator,zephyrHelpLocator);
         return this;
     }
 
     public HeaderPage testsZephyrSupport() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(zephyrSupportLocator);
+        SelectDropDownItem(testsLocator,zephyrSupportLocator);
         return this;
     }
 
     public HeaderPage testsAboutZephyr() {
-        waitToBePresentAndClick(testsLocator);
-        waitToBePresentAndClick(aboutZephyrLocator);
+        SelectDropDownItem(testsLocator,aboutZephyrLocator);
         return this;
     }
     //____________________________________________________________Create button
@@ -371,81 +334,70 @@ public class HeaderPage extends BasePage {
     }
 
     //____________________________________________________________Help section
-    public HeaderPage jiraInfo() {
-        waitToBePresentAndClick(jiraInfoLocator);
-        return this;
-    }
+//    public HeaderPage jiraInfo() {
+//        waitToBePresentAndClick(jiraInfoLocator);
+//        return this;
+//    }
 
     public HeaderPage jiraInfoJiraSoftwareHelp() {
-        waitToBePresentAndClick(jiraInfoLocator);
-        waitToBePresentAndClick(jiraSoftwareHelpLocator);
+        SelectDropDownItem(jiraInfoLocator,jiraSoftwareHelpLocator);
         return this;
     }
 
     public HeaderPage jiraInfoJiraCoreHelp() {
-        waitToBePresentAndClick(jiraInfoLocator);
-        waitToBePresentAndClick(jiraCoreHelpLocator);
+        SelectDropDownItem(jiraInfoLocator,jiraCoreHelpLocator);
         return this;
     }
 
     public HeaderPage jiraInfoKeyboardShortcuts() {
-        waitToBePresentAndClick(jiraInfoLocator);
-        waitToBePresentAndClick(keyboardShortcutsLocator);
+        SelectDropDownItem(jiraInfoLocator,keyboardShortcutsLocator);
         return this;
     }
 
     public HeaderPage jiraInfoAbout() {
-        waitToBePresentAndClick(jiraInfoLocator);
-        waitToBePresentAndClick(aboutLocator);
+        SelectDropDownItem(jiraInfoLocator,aboutLocator);
         return this;
     }
 
 
     public HeaderPage jiraInfoCredits() {
-        waitToBePresentAndClick(jiraInfoLocator);
-        waitToBePresentAndClick(creditsLocator);
+        SelectDropDownItem(jiraInfoLocator,creditsLocator);
         return this;
     }
 //____________________________________________________________User section
 
-    public HeaderPage userOptions() {
-        waitToBePresentAndClick(userOptionsLocator);
-        return this;
-    }
+//    public HeaderPage userOptions() {
+//        waitToBePresentAndClick(userOptionsLocator);
+//        return this;
+//    }
 
     public HeaderPage userOptionsViewProfile() {
-        waitToBePresentAndClick(userOptionsLocator);
-        waitToBePresentAndClick(viewProfileLocator);
+        SelectDropDownItem(userOptionsLocator,viewProfileLocator);
         return this;
     }
 
     public HeaderPage userOptionsAtlassianMarketplace() {
-        waitToBePresentAndClick(userOptionsLocator);
-        waitToBePresentAndClick(atlassianMarketplaceLocator);
+        SelectDropDownItem(userOptionsLocator,atlassianMarketplaceLocator);
         return this;
     }
 
     public HeaderPage userOptionsSetHomeDashboard() {
-        waitToBePresentAndClick(userOptionsLocator);
-        waitToBePresentAndClick(setHomeDashboardLocator);
+        SelectDropDownItem(userOptionsLocator,setHomeDashboardLocator);
         return this;
     }
 
     public HeaderPage userOptionssetHomeBoards() {
-        waitToBePresentAndClick(userOptionsLocator);
-        waitToBePresentAndClick(setHomeBoardsLocator);
+        SelectDropDownItem(userOptionsLocator,setHomeBoardsLocator);
         return this;
     }
 
     public HeaderPage userOptionsSetHomeIssues() {
-        waitToBePresentAndClick(userOptionsLocator);
-        waitToBePresentAndClick(setHomeIssuesLocator);
+        SelectDropDownItem(userOptionsLocator,setHomeIssuesLocator);
         return this;
     }
 
     public HeaderPage userOptionslogOut() {
-        waitToBePresentAndClick(userOptionsLocator);
-        waitToBePresentAndClick(logOutLocator);
+        SelectDropDownItem(userOptionsLocator,logOutLocator);
         return this;
     }
 

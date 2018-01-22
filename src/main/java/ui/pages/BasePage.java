@@ -173,6 +173,10 @@ public class BasePage {
         return result;
 
     }
+    protected void SelectDropDownItem(By dropDownSelector, By itemSelector){
+        waitToBePresentAndClick(dropDownSelector);
+        waitToBePresentAndClick(itemSelector);
+    }
 
     protected void openExistingIssue(String url){
         driver.get(url);
