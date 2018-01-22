@@ -8,7 +8,7 @@ public class HeaderPage extends BasePage {
 
 /* old locators
     private By systemDashboardLocator = By.cssSelector("div.aui-page-header-main>h1");
-    private By createLocator = By.id("create-menu");
+    private By createLocator = By.id("create_link");
     private By searchLocator = By.id("quickSearchInput");
 */
     //-- Logo
@@ -446,6 +446,11 @@ public class HeaderPage extends BasePage {
     public HeaderPage userOptionslogOut() {
         waitToBePresentAndClick(userOptionsLocator);
         waitToBePresentAndClick(logOutLocator);
+        return this;
+    }
+  
+    public HeaderPage clickCreateButton() {
+        driver.findElement(createLocator).click();
         return this;
     }
 
