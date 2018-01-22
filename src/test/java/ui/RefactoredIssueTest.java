@@ -91,7 +91,10 @@ public class RefactoredIssueTest {
     assertEquals(issuePage.isCommentTextPresent(commentText), true);
 
     issuePage.clickOnDeleteComment();
+
+
     issuePage.confirmDeletionOfComment();
+
 
     assertEquals(issuePage.isCommentTextMissing(commentText), true);
 

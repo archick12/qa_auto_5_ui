@@ -10,6 +10,8 @@ public class DashBoardPage extends BasePage {
     private By systemDashboardLocator = By.cssSelector("div.aui-page-header-main>h1");
 
 
+
+
     public DashBoardPage() {
         this.driver = RemoteDriverManager.getDriver();
     }
