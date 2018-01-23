@@ -44,12 +44,12 @@ public class NewIssuePage extends BasePage {
     private By summaryLocator = By.id("summary");
     //---Description
     private By menuStyle = By.xpath("//*[@field-id='description']//*[text()='Style']");
-    private By iconBold = By.xpath("//*[@field-id='description']//*[@data-operation='bold']");
-    private By iconItalic = By.xpath("//*[@field-id='description']//*[@data-operation='italic']");
-    private By iconUnderline = By.xpath("//*[@field-id='description']//*[@data-operation='underline']");
+    private By iconBold = By.xpath("//*[@field-id='description']//ancestor::*[@data-operation='bold']");
+    private By iconItalic = By.xpath("//*[@field-id='description']//following::*[@data-operation='italic']");
+    private By iconUnderline = By.xpath("//*[@field-id='description']//child::*[@data-operation='underline']");
     private By iconTextColor = By.xpath("//*[@field-id='description']//*[@original-title='Text color']");
-    private By moreColors = By.xpath("//*[@field-id='description']//*[@data-operation='color-parameter']");
-    private By menuMore = By.xpath("//*[@field-id='description']//*[@original-title='More']");
+    private By moreColors = By.xpath("//*[@field-id='description']//descendant::*[@data-operation='color-parameter']");
+    private By menuMore = By.xpath("//*[@field-id='description']//parent::*[@original-title='More' ]");
     private By menuLink = By.xpath("//*[@field-id='description']//*[@original-title='Link (Ctrl+K)']");
     private By menuAttachment = By.xpath("//*[@field-id='description']//*[@original-title='Attachment']");
     private By iconBulletList = By.xpath("//*[@field-id='description']//*[@original-title='Bullet list (Ctrl+Shift+B)']");
@@ -70,7 +70,7 @@ public class NewIssuePage extends BasePage {
     private By prioritySelectLow = By.xpath("//*[@id='priority-single-select']//a[text()='Low']");
     private By prioritySelectLowest = By.xpath("//*[@id='priority-single-select']//a[text()='Lowest']");
     //---Linked Issue
-    private By linkedIssuesDefault = By.xpath("//*[@id='issuelinks-linktype']");
+    private By linkedIssuesDefault = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='blocks']");
     private By linkedIssuesIsBlockedBy = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='is blocked by']");
     private By linkedIssuesIsClones = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='clones']");
     private By linkedIssuesIsClonedBy = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='is cloned by']");
@@ -83,7 +83,7 @@ public class NewIssuePage extends BasePage {
     private By IssuelinksSelect = By.xpath("//*[@id='issuelinks-issues-multi-select']");
     private By IssuePopup = By.xpath("//a[@class='issue-picker-popup']");
     //---Attachment
-    private By browseButton = By.xpath("//*[@class='form-body']//*[@class='issue-drop-zone__button']");
+    private By browseButton = By.xpath("//*[@class='form-body']//child::*[@class='issue-drop-zone__button']");
     //---Locators for IssueSelector Pop-up
     private By pageHeader = By.xpath("//*[@class='aui-page-header-main']");
     private By selectButton = By.xpath("//*[@class='aui-button']");
