@@ -50,13 +50,13 @@ public class NewIssuePage extends BasePage {
     private By iconTextColor = By.xpath("//*[@field-id='description']//*[@original-title='Text color']");
     private By moreColors = By.xpath("//*[@field-id='description']//descendant::*[@data-operation='color-parameter']");
     private By menuMore = By.xpath("//*[@field-id='description']//parent::*[@original-title='More' ]");
-    private By menuLink = By.xpath("//*[@field-id='description']//*[@original-title='Link (Ctrl+K)']");
+    private By menuLink = By.xpath("//*[@field-id='description']//following::*[@original-title='Link (Ctrl+K)']");
     private By menuAttachment = By.xpath("//*[@field-id='description']//*[@original-title='Attachment']");
     private By iconBulletList = By.xpath("//*[@field-id='description']//*[@original-title='Bullet list (Ctrl+Shift+B)']");
-    private By iconNumberedList = By.xpath("//*[@field-id='description']//*[@original-title='Numbered list (Ctrl+Shift+N)']");
-    private By menuIcons = By.xpath("//*[@field-id='description']//*[@original-title='Icons']");
-    private By menuOther = By.xpath("//*[@field-id='description']//*[@original-title='Other']");
-    private By iconCollapseExpand = By.xpath("//*[@field-id='description']//*[@original-title='Toggle visibility']");
+    private By iconNumberedList = By.xpath("//*[@field-id='description']//following::*[@original-title='Numbered list (Ctrl+Shift+N)']");
+    private By menuIcons = By.xpath("//*[@field-id='description']//following::*[@original-title='Icons']");
+    private By menuOther = By.xpath("//*[@field-id='description']//following::*[@original-title='Other']");
+    private By iconCollapseExpand = By.xpath("//*[@field-id='description']//following::*[@original-title='Toggle visibility']");
     private By editDescription = By.id("description-wiki-edit");
     private By tabVisual = By.xpath("//*[@data-mode='wysiwyg']");
     private By tabText = By.xpath("//*[@data-mode='source']");
