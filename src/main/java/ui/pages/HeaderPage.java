@@ -2,6 +2,7 @@ package ui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ui.utils.RemoteDriverManager;
 
 public class HeaderPage extends BasePage {
@@ -30,11 +31,11 @@ public class HeaderPage extends BasePage {
     private By issuesLocator = By.id("find_link");
     private By currentSearchLocator = By.id("jira.top.navigation.bar:issues_drop_current_lnk");
     private By searchForIssuesLocator = By.id("issues_new_search_link_lnk");
-    private By recentIissue1Locator = By.xpath("(//*[contains(@id,'issue_lnk_')][contains(@class,'issue-link')])[1]");
-    private By recentIissue2Locator = By.xpath("(//*[contains(@id,'issue_lnk_')][contains(@class,'issue-link')])[2]");
-    private By recentIissue3Locator = By.xpath("(//*[contains(@id,'issue_lnk_')][contains(@class,'issue-link')])[3]");
-    private By recentIissue4Locator = By.xpath("(//*[contains(@id,'issue_lnk_')][contains(@class,'issue-link')])[4]");
-    private By recentIissue5Locator = By.xpath("(//*[contains(@id,'issue_lnk_')][contains(@class,'issue-link')])[5]");
+    private By recentIssue1Locator = By.xpath("(//*[contains(@id,'issue_lnk_')][contains(@class,'issue-link')])[1]");
+    private By recentIssue2Locator = By.xpath("(//*[contains(@id,'issue_lnk_')][contains(@class,'issue-link')])[2]");
+    private By recentIssue3Locator = By.xpath("(//*[contains(@id,'issue_lnk_')][contains(@class,'issue-link')])[3]");
+    private By recentIssue4Locator = By.xpath("(//*[contains(@id,'issue_lnk_')][contains(@class,'issue-link')])[4]");
+    private By recentIssue5Locator = By.xpath("(//*[contains(@id,'issue_lnk_')][contains(@class,'issue-link')])[5]");
     private By importIssuesFromCSVLocator = By.id("bulk_create_dd_link_lnk");
     private By filterMyOpenIssuesLocator = By.id("filter_lnk_my_lnk");
     private By filterReportedByMeLocator = By.id("filter_lnk_reported_lnk");
@@ -66,7 +67,14 @@ public class HeaderPage extends BasePage {
     //-- Search field
     private By searchFieldLocator = By.id("quickSearchInput");
     //-- Improve Jira section
-    private By helpUsButtonLocator = By.id("jira-header-feedback-link");
+    private By feedbackButtonLocator = By.id("jira-header-feedback-link");
+    private By feedbackSummaryLocator = By.xpath("//*[@id='jic-collector-form']//child::input[@id='summary']");
+    private By feedbackDescriptionLocator = By.xpath("//*[@id='jic-collector-form']//child::textarea[@id='description']");
+    private By feedbackAboutSelectorLocator = By.xpath("//*[@id='jic-collector-form']//child::select");
+    private By feedbackNameLocator = By.xpath("//*[@id='jic-collector-form']//child::input[@id='fullname']");
+    private By feedbackEmailLocator = By.xpath("//*[@id='jic-collector-form']//child::input[@id='email']");
+    private By feedbackSubmitLocator = By.xpath("//*[@id='jic-collector-form']//child::input[@type='submit']");
+    private By feedbackCloseLocator = By.xpath("//*[@id='jic-collector-form']//child::a[@class='cancel']");
     //-- Help section
     private By jiraInfoLocator = By.id("help_menu");
     private By jiraSoftwareHelpLocator = By.id("gh_view_help");
@@ -103,17 +111,17 @@ public class HeaderPage extends BasePage {
         return this;
     }
     //_________________________________________________________________Dashboard section
-    public HeaderPage dashbourd(){
+    public HeaderPage dashboard(){
         waitToBePresentAndClick(dashboardLocator);
         return this;
     }
 
-    public HeaderPage dashbourdViewSystemDashboard(){
+    public HeaderPage dashboardViewSystemDashboard(){
         SelectDropDownItem(dashboardLocator,viewSystemDashboardLocator);
         return this;
     }
 
-    public HeaderPage dashbourdManageDashboards(){
+    public HeaderPage dashboardManageDashboards(){
         SelectDropDownItem(dashboardLocator,manageDashboardsLocator);
         return this;
     }
@@ -173,28 +181,28 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
-    public HeaderPage issuesRecentIissue1() {
-        SelectDropDownItem(issuesLocator,recentIissue1Locator);
+    public HeaderPage issuesRecentIssue1() {
+        SelectDropDownItem(issuesLocator, recentIssue1Locator);
         return this;
     }
 
-    public HeaderPage issuesRecentIissue2() {
-        SelectDropDownItem(issuesLocator,recentIissue2Locator);
+    public HeaderPage issuesRecentIssue2() {
+        SelectDropDownItem(issuesLocator, recentIssue2Locator);
         return this;
     }
 
-    public HeaderPage issuesRecentIissue3() {
-        SelectDropDownItem(issuesLocator,recentIissue3Locator);
+    public HeaderPage issuesRecentIssue3() {
+        SelectDropDownItem(issuesLocator, recentIssue3Locator);
         return this;
     }
 
-    public HeaderPage issuesRecentIissue4() {
-        SelectDropDownItem(issuesLocator,recentIissue4Locator);
+    public HeaderPage issuesRecentIssue4() {
+        SelectDropDownItem(issuesLocator, recentIssue4Locator);
         return this;
     }
 
-    public HeaderPage issuesRecentIissue5() {
-        SelectDropDownItem(issuesLocator,recentIissue5Locator);
+    public HeaderPage issuesRecentIssue5() {
+        SelectDropDownItem(issuesLocator, recentIssue5Locator);
         return this;
     }
 
@@ -325,11 +333,47 @@ public class HeaderPage extends BasePage {
         waitToBePresentAndClick(createLocator);
         return this;
     }
-//____________________________________________________________Improve Jira section
+//____________________________________________________________Improve Jira (Feedback) section
 
 
-    public HeaderPage helpUsButton() {
-        waitToBePresentAndClick(helpUsButtonLocator);
+    public HeaderPage feedbackButton() {
+        waitToBePresentAndClick(feedbackButtonLocator);
+        return this;
+    }
+
+    public HeaderPage feelFeedbackSummary(String summary) {
+        waitToBePresentAndSendKeys(feedbackSummaryLocator, summary);
+        return this;
+    }
+
+    public HeaderPage feelFeedbackDescription(String description) {
+        waitToBePresentAndSendKeys(feedbackDescriptionLocator, description);
+        return this;
+    }
+
+    public HeaderPage selectFeedbackAbout(String optionText) {
+        waitToBePresent(feedbackAboutSelectorLocator);
+        new Select(driver.findElement(feedbackAboutSelectorLocator)).selectByVisibleText(optionText);
+        return this;
+    }
+
+    public HeaderPage feelFeedbackName(String name) {
+        waitToBePresentAndSendKeys(feedbackNameLocator, name);
+        return this;
+    }
+
+    public HeaderPage feelFeedbackEmail(String email) {
+        waitToBePresentAndSendKeys(feedbackEmailLocator, email);
+        return this;
+    }
+
+    public HeaderPage submitFeedback() {
+        waitToBePresentAndClick(feedbackSubmitLocator);
+        return this;
+    }
+
+    public HeaderPage closeFeedbackForm() {
+        waitToBePresentAndClick(feedbackCloseLocator);
         return this;
     }
 
