@@ -71,11 +71,11 @@ public class NewIssuePage extends BasePage {
     private By prioritySelectLowest = By.xpath("//*[@id='priority-single-select']//a[text()='Lowest']");
     //---Linked Issue
     private By linkedIssuesDefault = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='blocks']");
-    private By linkedIssuesIsBlockedBy = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='is blocked by']");
-    private By linkedIssuesIsClones = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='clones']");
-    private By linkedIssuesIsClonedBy = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='is cloned by']");
-    private By linkedIssuesDuplicates = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='duplicates']");
-    private By linkedIssuesIsDuplicatedBy = By.xpath("//*[@id='issuelinks-linktype'] //*[@value='is duplicated by']");
+    private By linkedIssuesIsBlockedBy = By.xpath("/*[@id='issuelinks-linktype'] //child::*[@value='is blocked by']");
+    private By linkedIssuesIsClones = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='clones']");
+    private By linkedIssuesIsClonedBy = By.xpath("//*[@id='issuelinks-linktype'] //descendant::*[@value='is cloned by']");
+    private By linkedIssuesDuplicates = By.xpath("//*[@id='issuelinks-linktype'] //descendant-or-self::*[@value='duplicates']");
+    private By linkedIssuesIsDuplicatedBy = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='is duplicated by']");
     private By linkedIssuesRelatesTo = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='relates to']");
     //---Labels
     private By labelsSelect = By.xpath("//*[@id='labels-multi-select']");
