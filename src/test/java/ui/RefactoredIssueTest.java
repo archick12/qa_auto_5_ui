@@ -12,24 +12,7 @@ public class RefactoredIssueTest {
   // code that will be invoked before each @Test
   @BeforeGroups(groups = {"UI"})
   public void setUp() {
-
-  }
-
-
-  @TestCase(id = "1") // annotation that holds number of test case in TestRail
-  @Test(groups = {"UI", "SKIPP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
-  public void subTaskCRUD() throws InterruptedException {
-
     LoginPage loginPage = new LoginPage();
-    NewIssuePage newIssuePage = new NewIssuePage();
-    HeaderPage headerPage = new HeaderPage();
-    DashBoardPage dashBoardPage = new DashBoardPage();
-    IssuePage issuePage = new IssuePage();
-
-    String parentIssueId = "QAAUT-8";
-    String subTaskSummary = "subTaskCommentCRUD";
-    String subTaskNumber = "1";
-    String subTaskAssignee = "Unassigned";
 
     loginPage.open();
     assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
@@ -38,6 +21,23 @@ public class RefactoredIssueTest {
     loginPage.enterUsername();
     loginPage.enterPassword();
     loginPage.clickLogin();
+
+  }
+
+
+  @TestCase(id = "1") // annotation that holds number of test case in TestRail
+  @Test(groups = {"UI", "SKIPP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  public void subTaskCRUD() throws InterruptedException {
+
+    NewIssuePage newIssuePage = new NewIssuePage();
+    HeaderPage headerPage = new HeaderPage();
+    DashBoardPage dashBoardPage = new DashBoardPage();
+    IssuePage issuePage = new IssuePage();
+
+    String parentIssueId = "QAAUT-224";
+    String subTaskSummary = "Snizhanna test";
+    String subTaskNumber = "1";
+    String subTaskAssignee = "Unassigned";
 
     assertEquals(dashBoardPage.isOnThePage(), true);
 
@@ -72,24 +72,12 @@ public class RefactoredIssueTest {
   @Test(groups = {"UI"})
   public void subTaskCommentCRUD() throws InterruptedException {
 
-    LoginPage loginPage = new LoginPage();
-    NewIssuePage newIssuePage = new NewIssuePage();
-    HeaderPage headerPage = new HeaderPage();
     DashBoardPage dashBoardPage = new DashBoardPage();
     IssuePage issuePage = new IssuePage();
 
-    String subTaskId = "QAAUT-8";
-    String commentText = "Test Comment";
+    String subTaskId = "QAAUT-12";
+    String commentText = "The comment is added";
 
-    loginPage.open();
-    assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
-    // otherwise we can click a wrong web element
-
-    loginPage.enterUsername();
-    loginPage.enterPassword();
-    loginPage.clickLogin();
-
-    Thread.sleep(5000);
     assertEquals(dashBoardPage.isOnThePage(), true);
 
     issuePage.openExistingIssue(subTaskId);
@@ -103,7 +91,10 @@ public class RefactoredIssueTest {
     assertEquals(issuePage.isCommentTextPresent(commentText), true);
 
     issuePage.clickOnDeleteComment();
+
+
     issuePage.confirmDeletionOfComment();
+
 
     assertEquals(issuePage.isCommentTextMissing(commentText), true);
 

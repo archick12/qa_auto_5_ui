@@ -35,6 +35,8 @@ public class PropertyReader {
             result.put("path_t", propertyFileValues.getProperty("path_t"));
             result.put("user_trail", propertyFileValues.getProperty("user_trail"));
             result.put("password_trail", propertyFileValues.getProperty("password_trail"));
+            result.put("username", propertyFileValues.getProperty("username"));
+            result.put("password", propertyFileValues.getProperty("password"));
 
             // TODO get configuration name if not empty
 

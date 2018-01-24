@@ -5,6 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.utils.RemoteDriverManager;
+import utils.ListenerTest;
 
 public class BasePage {
 
@@ -12,9 +13,11 @@ public class BasePage {
 
     // protected String baseURL = "http://soft.it-hillel.com.ua:8080";
     protected String baseURL = "http://jira.hillel.it:8080";
+    protected String username = ListenerTest.properties.get("username");
+    protected String password = ListenerTest.properties.get("password");
     protected WebDriver driver;
     private int defaultExplicitWaitInSeconds = 10;
-    public static String defaultImplicitWaitInSeconds = "10";
+    public static int defaultImplicitWaitInSeconds = 10;
 
     protected BasePage() {
         this.driver = RemoteDriverManager.getDriver();
@@ -153,9 +156,14 @@ public class BasePage {
 
 
     protected boolean isOnThePage(String expectedURL) {
+// added timer to wait for page loading.
+        boolean result;
+        result = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
+                    until(ExpectedConditions.urlToBe(expectedURL));
 
-        String currentURL = driver.getCurrentUrl();
-        boolean result = expectedURL.equals(currentURL);
+        // -- old realization
+//        String currentURL = driver.getCurrentUrl();
+//        boolean result = expectedURL.equals(currentURL);
         if (result == true) {
             logger.info("IS ON THE PAGE: " + expectedURL);
         } else {

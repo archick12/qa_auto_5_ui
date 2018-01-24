@@ -1,3 +1,6 @@
-.idea/
+.idea
 target/
-*.swp
+*.iml
+environment/grid/**
+!/**/*.bat
+!/**/*.json
