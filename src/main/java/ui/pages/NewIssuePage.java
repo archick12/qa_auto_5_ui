@@ -1,6 +1,7 @@
 package ui.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import ui.utils.RemoteDriverManager;
 
 import static org.openqa.selenium.Keys.ENTER;
@@ -20,8 +21,8 @@ public class NewIssuePage extends BasePage {
     private By createLocator = By.id("create_link");
     //---Configure Fields
     private By configureFiedlsLocator = By.id("qf-field-picker-trigger");
-    private By showFieldsAllLocator = By.xpath("//*[contains(@class,'qf-unconfigurable')]");
-    private By showFieldsCustomLocator = By.xpath("//*[contains(@class,'qf-configurable')]");
+    private By showFieldsAllLocator = By.xpath("//a[@class='qf-unconfigurable']");
+    private By showFieldsCustomLocator = By.xpath("//a[@class='qf-configurable']");
     private By selectAssigneeLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Assignee']");
     private By selectAttachmentLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Attachment']");
     private By selectComponentsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Component/s']");
@@ -43,7 +44,7 @@ public class NewIssuePage extends BasePage {
     //---Summary
     private By summaryLocator = By.id("summary");
     //---Description
-    private By menuStyle = By.xpath("//*[@field-id='description']//*[text()='Style']");
+    private By menuStyle = By.xpath("//*[@field-id='description']//child::*[text()='Style']");
     private By iconBold = By.xpath("//*[@field-id='description']//*[@data-operation='bold']");
     private By iconItalic = By.xpath("//*[@field-id='description']//*[@data-operation='italic']");
     private By iconUnderline = By.xpath("//*[@field-id='description']//*[@data-operation='underline']");
@@ -52,15 +53,15 @@ public class NewIssuePage extends BasePage {
     private By menuMore = By.xpath("//*[@field-id='description']//*[@original-title='More']");
     private By menuLink = By.xpath("//*[@field-id='description']//*[@original-title='Link (Ctrl+K)']");
     private By menuAttachment = By.xpath("//*[@field-id='description']//*[@original-title='Attachment']");
-    private By iconBulletList = By.xpath("//*[@field-id='description']//*[@original-title='Bullet list (Ctrl+Shift+B)']");
+    private By iconBulletList = By.xpath("//*[@field-id='description']//following::*[@original-title='Bullet list (Ctrl+Shift+B)']");
     private By iconNumberedList = By.xpath("//*[@field-id='description']//*[@original-title='Numbered list (Ctrl+Shift+N)']");
     private By menuIcons = By.xpath("//*[@field-id='description']//*[@original-title='Icons']");
     private By menuOther = By.xpath("//*[@field-id='description']//*[@original-title='Other']");
     private By iconCollapseExpand = By.xpath("//*[@field-id='description']//*[@original-title='Toggle visibility']");
     private By editDescription = By.id("description-wiki-edit");
-    private By tabVisual = By.xpath("//*[@data-mode='wysiwyg']");
+    private By tabVisual = By.xpath("//*[@data-mode='wysiwyg']//child::*[@id='aui-uid-0']");
     private By tabText = By.xpath("//*[@data-mode='source']");
-    private By iconUndo = By.xpath("//*[@title='Undo']");
+    private By iconUndo = By.xpath("//*[@title='Undo']//child::span[@class='aui-icon aui-icon-small aui-iconfont-undo']");
     private By iconRedo = By.xpath("//*[@title='Redo']");
     //---Priority
     private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
@@ -402,6 +403,24 @@ public class NewIssuePage extends BasePage {
     public NewIssuePage pressCancelButton() {
 
         driver.findElement(cancelButtonLocator).click();
+        return this;
+    }
+
+    public boolean isElementActive(By selector) {
+        try {
+            driver.findElement(selector);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public NewIssuePage clickAllOrCustom(){
+        if (isElementActive(showFieldsCustomLocator)==true){
+            driver.findElement(showFieldsCustomLocator).click(); }
+        else {
+            driver.findElement(showFieldsAllLocator).click();
+        }
         return this;
     }
 }
