@@ -14,11 +14,11 @@
         <groups>
             <run>
                 <include name="UI"/>
-                <exclude name="SKIPP"/>
+                <exclude name="SKIP"/>
             </run>
         </groups>
         <classes>
-            <class name="ui.RefactoredIssueTest"/>
+            <class name="ui.SearchIssueTest"/>
         </classes>
     </test>
 

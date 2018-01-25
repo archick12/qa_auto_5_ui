@@ -90,23 +90,17 @@ public class IssuePage extends BasePage {
     }
 
     public IssuePage clickDeleteListItem() {
-
         waitToBePresentAndClick(deleteListItemLocator);
-
         return this;
     }
 
     public IssuePage deleteSubTask() {
-
         waitToBePresentAndClick(deleteButtonLocator);
-
         return this;
     }
 
     public IssuePage clickOnCommentBtn() {
-
         waitToBePresentAndClick(commentBtnLocator);
-
         return this;
     }
 
