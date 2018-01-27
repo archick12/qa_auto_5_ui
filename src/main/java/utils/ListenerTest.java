@@ -12,6 +12,7 @@ import org.testng.ITestResult;
 import ui.pages.BasePage;
 import ui.utils.RemoteDriverManager;
 import ui.utils.RemoteWebDriverFactory;
+import ui.utils.LocalWebDriverFactory;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -70,7 +71,14 @@ public class ListenerTest implements ITestListener {
             if (group.contains("UI")) {
                 String browserName = iTestContext.getCurrentXmlTest().getParameter("browserName");
                 String implicitWaitInSeconds = iTestContext.getCurrentXmlTest().getParameter("implicitWaitInSeconds");
-                WebDriver driver = RemoteWebDriverFactory.createInstance(browserName);
+                String local = iTestContext.getCurrentXmlTest().getParameter("local");
+                WebDriver driver = null;
+                if (local.contains("yes")){
+                    driver = LocalWebDriverFactory.createInstance(browserName);
+                }
+                else {
+                    driver = RemoteWebDriverFactory.createInstance(browserName);
+                }
                 RemoteDriverManager.setWebDriver(driver);
                 logger.info("STARTED on browserName=" + browserName);
                 changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds));
