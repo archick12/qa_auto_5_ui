@@ -426,5 +426,27 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
+    private By workflowLocator = By.id("opsbar-transitions_more");
+    private By inProgressLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='In Progress']");
+    private By doneLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='Done']");
 
-}
+    public NewIssuePage clickWorkflowButton() {
+        driver.findElement(workflowLocator).click();
+        return this;
+    }
+
+
+    public NewIssuePage selectInProgressButton(){
+        waitToBePresentAndClick(inProgressLocator);
+
+        return this;
+    }
+    public NewIssuePage selectDoneButton(){
+        waitToBePresentAndClick(doneLocator);
+        return this;
+    }
+
+
+
+
+    }
