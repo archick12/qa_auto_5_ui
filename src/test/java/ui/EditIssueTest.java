@@ -324,18 +324,32 @@ public class EditIssueTest {
 
 
 
-    //    @TestCase(id = "1")--------------------------------------------------Настя
-//    @Test(groups = {"UI"})
-//    // public void .........(){
-//    NewIssuePage newIssuePage = new NewIssuePage();
-//    HeaderPage headerPage = new HeaderPage();
-//    DashBoardPage dashBoardPage = new DashBoardPage();
-//    IssuePage issuePage = new IssuePage();
-//
-//    String parentIssueId = "Your Issue";
+    //    --------------------------------------------------Настя
+    @TestCase(id = "4")
+    @Test(groups = {"UI"})
 
-    // TO DO steps and asserts
-    //}
+    public void AddComment() {
+        NewIssuePage newIssuePage = new NewIssuePage();
+        HeaderPage headerPage = new HeaderPage();
+        DashBoardPage dashBoardPage = new DashBoardPage();
+        IssuePage issuePage = new IssuePage();
+        String parentIssueId = "QAAUT-10";
+        String commentText = "Very useful comment";
+
+        // TO DO steps and asserts
+
+        issuePage.openExistingIssue(parentIssueId);
+        assertEquals(issuePage.isOnThePage(parentIssueId), true);
+        issuePage.clickOnCommentBtn();
+        issuePage.enterComment(commentText);
+        issuePage.clickOnAddComment();
+
+        assertEquals(issuePage.isCommentTextPresent(commentText),true);
+        issuePage.clickOnDeleteComment();
+        issuePage.confirmDeletionOfComment();
+        assertEquals(issuePage.isCommentTextMissing(commentText), true);
+
+    }
 
 
 
