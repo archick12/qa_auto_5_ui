@@ -116,12 +116,12 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
-    public HeaderPage dashboardViewSystemDashboard(){
+    public HeaderPage selectDashboardViewSystemDashboard(){
         SelectDropDownItem(dashboardLocator,viewSystemDashboardLocator);
         return this;
     }
 
-    public HeaderPage dashboardManageDashboards(){
+    public HeaderPage selectDashboardManageDashboards(){
         SelectDropDownItem(dashboardLocator,manageDashboardsLocator);
         return this;
     }
