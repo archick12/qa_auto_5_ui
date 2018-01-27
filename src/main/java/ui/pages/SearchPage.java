@@ -9,7 +9,7 @@ public class SearchPage extends BasePage {
 
   // TODO add selectors and methods
   private By layoutSwitcherButton = By.id("layout-switcher-button");
-  private By listViewItem = By.id("AJS_DROPDOWN_LISTITEM__33");
+  private By listViewItem = By.xpath("(//*[contains(@id,'AJS_DROPDOWN_LISTITEM_')]");
   private By recentProject1Locator = By
       .xpath("(//*[contains(@id,'proj_lnk_')][@class='aui-icon-container'])[1]");
   private By feedbackSubmitLocator = By
