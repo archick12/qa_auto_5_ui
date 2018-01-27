@@ -106,12 +106,12 @@ public class HeaderPage extends BasePage {
 
 
 //____________________________________________________________________Logo
-    public HeaderPage jiraLogo(){
+    public HeaderPage clickjiraLogo(){
         waitToBePresentAndClick(jiraLogo);
         return this;
     }
     //_________________________________________________________________Dashboard section
-    public HeaderPage dashboard(){
+    public HeaderPage clickdashboard(){
         waitToBePresentAndClick(dashboardLocator);
         return this;
     }
@@ -329,14 +329,14 @@ public class HeaderPage extends BasePage {
         return this;
     }
     //____________________________________________________________Create button
-    public HeaderPage createButton() {
+    public HeaderPage clickcreateButton() {
         waitToBePresentAndClick(createLocator);
         return this;
     }
 //____________________________________________________________Improve Jira (Feedback) section
 
 
-    public HeaderPage feedbackButton() {
+    public HeaderPage clickfeedbackButton() {
         waitToBePresentAndClick(feedbackButtonLocator);
         return this;
     }
@@ -367,12 +367,12 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
-    public HeaderPage submitFeedback() {
+    public HeaderPage clicksubmitFeedback() {
         waitToBePresentAndClick(feedbackSubmitLocator);
         return this;
     }
 
-    public HeaderPage closeFeedbackForm() {
+    public HeaderPage clickcloseFeedbackForm() {
         waitToBePresentAndClick(feedbackCloseLocator);
         return this;
     }
