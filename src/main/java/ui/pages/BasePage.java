@@ -13,8 +13,6 @@ public class BasePage {
 
     // protected String baseURL = "http://soft.it-hillel.com.ua:8080";
     protected String baseURL = "http://jira.hillel.it:8080";
-    protected String username = ListenerTest.properties.get("username");
-    protected String password = ListenerTest.properties.get("password");
     protected WebDriver driver;
     private int defaultExplicitWaitInSeconds = 10;
     public static int defaultImplicitWaitInSeconds = 10;
@@ -80,6 +78,23 @@ public class BasePage {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
             element.sendKeys(keys);
+        }
+
+    }
+
+    protected void waitToBePresentAndSendKeysTab(By locator) {
+        logger.info("WAIT ELEMENT TO BE PRESENT AND SEND KEYS - TAB: " + locator);
+
+        WebElement element = null;
+
+        try {
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
+                    until(ExpectedConditions.presenceOfElementLocated(locator));
+            element.sendKeys(Keys.TAB);
+        } catch (StaleElementReferenceException ignored) {
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
+                    until(ExpectedConditions.presenceOfElementLocated(locator));
+            element.sendKeys(Keys.TAB);
         }
 
     }

@@ -2,10 +2,13 @@ package ui.pages;
 
 import org.openqa.selenium.By;
 import ui.utils.RemoteDriverManager;
+import utils.ListenerTest;
 
 public class LoginPage extends BasePage {
 
     private String pageURL = baseURL + "/login.jsp";
+    protected String username = ListenerTest.properties.get("username");
+    protected String password = ListenerTest.properties.get("password");
 
     private By usernameLocator = By.id("login-form-username");
     private By passwordLocator = By.id("login-form-password");

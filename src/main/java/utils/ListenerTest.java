@@ -67,7 +67,6 @@ public class ListenerTest implements ITestListener {
         // Invoked after the test class is instantiated and before any configuration method is called.
         String[] groups = iTestContext.getIncludedGroups();
         for (String group : groups) {
-            if (group.contains("UI")) {
                 String browserName = iTestContext.getCurrentXmlTest().getParameter("browserName");
                 String implicitWaitInSeconds = iTestContext.getCurrentXmlTest().getParameter("implicitWaitInSeconds");
                 WebDriver driver = RemoteWebDriverFactory.createInstance(browserName);
@@ -79,7 +78,6 @@ public class ListenerTest implements ITestListener {
                  if (group.contains("slow ")) {
                      changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds) + 50);
                  }
-            }
         }
     }
 

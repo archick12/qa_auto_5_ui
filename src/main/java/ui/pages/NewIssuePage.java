@@ -1,6 +1,7 @@
 package ui.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import ui.utils.RemoteDriverManager;
 
@@ -9,16 +10,12 @@ import static org.openqa.selenium.Keys.ENTER;
 public class NewIssuePage extends BasePage {
 
     private HeaderPage headerPage;
-    //---Old Locators
-    //---Creating Sub-Task inside ticket
-    //private By newSubtaskButtonLocator = By.id("stqc_show");
-    //private By subtaskLocator = By.linkText("Snizhanna test"); - should be changed for a specific test
-    //private By moreButtonLocator = By.id("opsbar-operations_more");
-    //private By deleteListItemLocator = By.id("delete-issue"); - not found
-    //private By deleteButtonLocator = By.id("delete-issue-submit"); - not found
-    //private By successPopUp = By.xpath("//*[contains(@class,'aui-message-success')]");
-    //---Create a New Issue Button
+
+    //---Create a New Issue Button and dialog
     private By createLocator = By.id("create_link");
+    private By createIssueDialog = By.id("create-issue-dialog");
+    private By newIssueLinkOnSuccessPopup = By.xpath("//a[@class='issue-created-key issue-link']");
+
     //---Configure Fields
     private By configureFiedlsLocator = By.id("qf-field-picker-trigger");
     private By showFieldsAllLocator = By.xpath("//a[@class='qf-unconfigurable']");
@@ -32,17 +29,23 @@ public class NewIssuePage extends BasePage {
     private By selectLinkedIssueLocator = By.xpath("//*[@data-field-id='issuelinks']");
     private By selectPriorityLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Priority']");
     private By selectLinkToEpicLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Ссылка на эпик']");
+
     //---Project
-    private By fieldProjectLocator = By.xpath("//*[@id='project-field']");
+    private By fieldProjectLocator = By.id("project-field");
     private By projectSelectLocator = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']");
+
     //---Issue Type
-    private By issueTypeLocator = By.xpath("//*[@id='issuetype-field']");
+    private By issueTypeLocator = By.id("issuetype-field");
+
     //---Epic Name
     private By nameEpicLocator = By.xpath("//*[@id='customfield_10002']");
+
     //---Issue Select
     private By issueSelectLocator = By.xpath("//*[@id='issuetype-suggestions']");
+
     //---Summary
     private By summaryLocator = By.id("summary");
+
     //---Description
     private By menuStyle = By.xpath("//*[@field-id='description']//child::*[text()='Style']");
     private By iconBold = By.xpath("//*[@field-id='description']//ancestor::*[@data-operation='bold']");
@@ -63,13 +66,15 @@ public class NewIssuePage extends BasePage {
     private By tabText = By.xpath("//*[@data-mode='source']");
     private By iconUndo = By.xpath("//*[@title='Undo']//child::span[@class='aui-icon aui-icon-small aui-iconfont-undo']");
     private By iconRedo = By.xpath("//*[@title='Redo']");
+
     //---Priority
     private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
-    private By priorityFieldDefault = By.xpath("//*[@id='priority-field']");
+    private By priorityFieldDefault = By.id("priority-field");
     private By prioritySelectHighest = By.xpath("//*[@id='priority-single-select']//following::*[a[text()='Highest']]");
     private By prioritySelectHigh = By.xpath("//*[@id='priority-single-select']//a[text()='High']");
     private By prioritySelectLow = By.xpath("//*[@id='priority-single-select']//a[text()='Low']");
     private By prioritySelectLowest = By.xpath("//*[@id='priority-single-select']//a[text()='Lowest']");
+
     //---Linked Issue
     private By linkedIssuesDefault = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='blocks']");
     private By linkedIssuesIsBlockedBy = By.xpath("/*[@id='issuelinks-linktype'] //child::*[@value='is blocked by']");
@@ -78,13 +83,17 @@ public class NewIssuePage extends BasePage {
     private By linkedIssuesDuplicates = By.xpath("//*[@id='issuelinks-linktype'] //descendant-or-self::*[@value='duplicates']");
     private By linkedIssuesIsDuplicatedBy = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='is duplicated by']");
     private By linkedIssuesRelatesTo = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='relates to']");
+
     //---Labels
-    private By labelsSelect = By.xpath("//*[@id='labels-multi-select']");
+    private By labelsSelect = By.id("labels-multi-select");
+
     //---Issue
     private By IssuelinksSelect = By.xpath("//*[@id='issuelinks-issues-multi-select']");
     private By IssuePopup = By.xpath("//a[@class='issue-picker-popup']");
+
     //---Attachment
     private By browseButton = By.xpath("//*[@class='form-body']//child::*[@class='issue-drop-zone__button']");
+
     //---Locators for IssueSelector Pop-up
     private By pageHeader = By.xpath("//*[@class='aui-page-header-main']");
     private By selectButton = By.xpath("//*[@class='aui-button']");
@@ -93,21 +102,27 @@ public class NewIssuePage extends BasePage {
     private By searchField = By.xpath("//*[@id='searchRequestId']");
     private By viewedIssues = By.xpath("//*[text()='Issues you have recently viewed']");
     private By first50Issues = By.xpath("//*[text()='First 50 issues from your current search']");
+
     //---Assignee
     private By assigneeFieldLocator = By.xpath("//*//child::*[@id='assignee-field']");
     private By assigneeSuggestions = By.xpath("//[@id='assignee-suggestions']");
+
     //---Assign to me
     private By assignToMeButtonLocator = By.xpath("//*[@id='assign-to-me-trigger']");
+
     //---Create
     private By submitButtonLocator = By.id("create-issue-submit");
+
     //---Create another
     private By createAnotherButtonLocator = By.xpath("//*[@id='qf-create-another']");
+
     //---Epic Link
     private By linktoEpicFieldLocator = By.xpath("//*[@id='customfield_10000-field']");
     private By epicLinkSuggestions = By.xpath("//[@id='customfield_10000-suggestions']");
+
     //---Cancel
     private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
-    private By descriptionFieldLocator = By.xpath("//*[@id='description']");
+    private By descriptionFieldLocator = By.id("description");
 
     //---Create New Issue
     public NewIssuePage() {
@@ -115,26 +130,30 @@ public class NewIssuePage extends BasePage {
         headerPage = new HeaderPage();
     }
 
-    public NewIssuePage clickCreateIssueButton(){
+    public void clickCreateIssueButton(){
         waitToBePresentAndClick(createLocator);
-        return this;
+    }
+
+    public void waitForCreateIssueDialog(){
+        waitToBePresent(createIssueDialog);
+    }
+
+    public void clickNewIssueLinkOnSuccessPopup(){
+        waitToBePresentAndClick(newIssueLinkOnSuccessPopup);
     }
 
 
     //---Configure Fields
-    public NewIssuePage clickConfigureFieldsButton(){
+    public void clickConfigureFieldsButton(){
         waitToBePresentAndClick(configureFiedlsLocator);
-        return this;
     }
 
-    public NewIssuePage clickCustomLink() {
+    public void clickCustomLink() {
         waitToBePresentAndClick(showFieldsCustomLocator);
-        return this;
     }
 
-    public NewIssuePage clickAllLink(){
+    public void clickAllLink(){
         waitToBePresentAndClick(showFieldsAllLocator);
-        return this;
     }
 
     public boolean isElementActive(By selector) {
@@ -146,284 +165,187 @@ public class NewIssuePage extends BasePage {
         }
     }
 
-    public NewIssuePage clickAllOrCustom(){
+    public void clickAllOrCustom(){
         if (isElementActive(showFieldsCustomLocator)==true){
             driver.findElement(showFieldsCustomLocator).click(); }
         else {
             driver.findElement(showFieldsAllLocator).click();
         }
-        return this;
     }
 
-    public NewIssuePage selectAssignee(){
+    public void selectAssignee(){
         driver.findElement(selectAssigneeLocator).click();
-        return this;
     }
 
-    public NewIssuePage selectAttachment(){
+    public void selectAttachment(){
         driver.findElement(selectAttachmentLocator).click();
-        return this;
     }
 
-    public NewIssuePage selectComponents(){
+    public void selectComponents(){
         driver.findElement(selectComponentsLocator).click();
-        return this;
     }
 
-    public NewIssuePage selectDescription(){
+    public void selectDescription(){
         driver.findElement(selectDescriptionLocator).click();
-        return this;
     }
 
-    public NewIssuePage selectFixVersion(){
+    public void selectFixVersion(){
         driver.findElement(selectFixVersionsLocator).click();
-        return this;
     }
 
-    public NewIssuePage selectLabels(){
+    public void selectLabels(){
         driver.findElement(selectLabelsLocator).click();
-        return this;
     }
 
-    public NewIssuePage selectLinkedIssue(){
+    public void selectLinkedIssue(){
         driver.findElement(selectLinkedIssueLocator).click();
-        return this;
     }
 
-    public NewIssuePage selectPriority(){
-        driver.findElement(selectPriorityLocator).click();
-        return this;
-    }
-
-    public NewIssuePage selectEpicLink(){
+    public void selectEpicLink(){
         driver.findElement(selectLinkToEpicLocator).click();
-        return this;
     }
 
     //---Select Project
-    String projectId = "QAAuto5 (QAAUT)";
-    public NewIssuePage enterProject(String projectId){
+    public void enterProject(String projectId){
         driver.findElement(fieldProjectLocator).clear();
-        driver.findElement(fieldProjectLocator).sendKeys(projectId);
-        driver.findElement(projectSelectLocator).click();
-        return this;
+        waitToBePresentAndSendKeys(fieldProjectLocator, projectId);
+        waitToBePresentAndSendKeysTab(fieldProjectLocator);
     }
 
     //---Select IssueType
-    String issueType = "Epic";
-    //---Bug,Task or Story
-    public NewIssuePage enterIssueType(String issueType) {
+    public void enterIssueType(String issueType) {
         driver.findElement(issueTypeLocator).clear();
-        driver.findElement(issueTypeLocator).sendKeys(issueType);
-        driver.findElement(issueSelectLocator).click();
-        return this;
-    }
-    //---Methods for each Issue Type
-    public NewIssuePage selectTypeStoryLocator(){
-        driver.findElement(issueTypeLocator).clear();
-        driver.findElement(issueTypeLocator).sendKeys("Story");
-        driver.findElement(issueSelectLocator).click();
-        return this;
+        waitToBePresentAndSendKeys(issueTypeLocator, issueType);
+        waitToBePresentAndSendKeysTab(issueTypeLocator);
     }
 
-    public NewIssuePage selectTypeBugLocator(){
-        driver.findElement(issueTypeLocator).click();
-        driver.findElement(issueTypeLocator).sendKeys("Bug");
-        driver.findElement(issueSelectLocator).click();
-        return this;
-    }
-
-    public NewIssuePage selectTypeEpicLocator() {
-        driver.findElement(issueTypeLocator).click();
-        driver.findElement(issueTypeLocator).sendKeys("Epic");
-        driver.findElement(issueSelectLocator).click();
-        return this;
-    }
-
-    public NewIssuePage selectTypeTaskLocator() {
-        driver.findElement(issueTypeLocator).click();
-        driver.findElement(issueTypeLocator).sendKeys("Task");
-        driver.findElement(issueSelectLocator).click();
-        return this;
-    }
-
-    //---Fill Summury
-    public NewIssuePage fillSummary(String summary) {
-        waitToBePresent(summaryLocator);
-        driver.findElement(summaryLocator).sendKeys(summary);
-        return this;
+    //---Fill Summary
+    public void fillSummary(String summary) {
+        waitToBePresentAndClick(summaryLocator);
+        waitToBePresentAndSendKeys(summaryLocator, summary);
     }
 
     //---Add Description
-    public NewIssuePage fillDescription() {
-        driver.findElement(descriptionFieldLocator).sendKeys("Important text");
-        return this;
+    public void fillDescription(String issueDescription) {
+        waitToBePresentAndClick(descriptionFieldLocator);
+        waitToBePresentAndSendKeys(descriptionFieldLocator, issueDescription);
     }
 
     //Select Priority
-    public NewIssuePage selectHighestPriority() {
+    public void selectPriority(String priority) {
         driver.findElement(priorityFieldDefault).clear();
-        driver.findElement(priorityFieldDefault).sendKeys("Highest");
-        driver.findElement(priorityFieldDefault).click();
-        driver.findElement(labelsSelect).click();
-        return this;
+        waitToBePresentAndSendKeys(priorityFieldDefault, priority);
+        waitToBePresentAndSendKeysTab(priorityFieldDefault);
     }
-
-    public NewIssuePage selectHighPriority() {
-        driver.findElement(priorityFieldDefault).clear();
-        driver.findElement(priorityFieldDefault).sendKeys("High");
-        driver.findElement(priorityFieldDefault).click();
-        driver.findElement(labelsSelect).click();
-        return this;
-    }
-
-    public NewIssuePage selectLowPriority() {
-        driver.findElement(priorityFieldDefault).clear();
-        driver.findElement(priorityFieldDefault).sendKeys("Low");
-        driver.findElement(priorityFieldDefault).click();
-        driver.findElement(labelsSelect).click();
-        return this;
-    }
-
-    public NewIssuePage selectLowestPriority() {
-        driver.findElement(priorityFieldDefault).clear();
-        driver.findElement(priorityFieldDefault).sendKeys("Lowest");
-        driver.findElement(priorityFieldDefault).click();
-        driver.findElement(labelsSelect).click();
-        return this;
-    }
-
 
     //---Add Labels
-    public NewIssuePage addLabel(){
-        driver.findElement(labelsSelect).sendKeys("my_label");
-        return this;
+    public void addLabel(String issueLabel){
+        waitToBePresentAndSendKeys(labelsSelect, issueLabel);
+        waitToBePresentAndSendKeysTab(labelsSelect);
     }
 
     //---Select Linked Issues
-    public NewIssuePage selectLinkedIssuesLocator(){
+    public void selectLinkedIssuesLocator(){
         driver.findElement(linkedIssuesDefault).click();
-        return this;
 
     }
 
-    public NewIssuePage selectLinkedIssueIsBlockedBy(){
+    public void selectLinkedIssueIsBlockedBy(){
         driver.findElement(linkedIssuesIsBlockedBy).click();
-        return this;
     }
 
-    public NewIssuePage selectLinkedIssuesClones(){
+    public void selectLinkedIssuesClones(){
         driver.findElement(linkedIssuesIsClones).click();
-        return this;
     }
 
-    public NewIssuePage selectLinkedIssueIsClonedBy(){
+    public void selectLinkedIssueIsClonedBy(){
         driver.findElement(linkedIssuesIsClonedBy).click();
-        return this;
     }
 
-    public NewIssuePage selectLinkedIssuesDuplicates(){
+    public void selectLinkedIssuesDuplicates(){
         driver.findElement(linkedIssuesDuplicates).click();
-        return this;
     }
 
-    public NewIssuePage selectLinkedIssuesIsDuplicatedBy(){
+    public void selectLinkedIssuesIsDuplicatedBy(){
         driver.findElement(linkedIssuesIsDuplicatedBy).click();
-        return this;
     }
 
-    public NewIssuePage selectLinkedIssuesRelatesTo(){
+    public void selectLinkedIssuesRelatesTo(){
         driver.findElement(linkedIssuesRelatesTo).click();
-        return this;
     }
 
     //---Add Attachment
-    public NewIssuePage browseButton() {
+    public void browseButton() {
         driver.findElement(browseButton).click();
-        return this;
     }
 
     //---Add Issue (Pop up)
-    public NewIssuePage IssuePopup() {
+    public void IssuePopup() {
         driver.findElement(IssuePopup).click();
-        return this;
     }
 
-    public NewIssuePage pageHeader() {
+    public void pageHeader() {
         driver.findElement(pageHeader).click();
-        return this;
     }
 
-    public NewIssuePage selectButton() {
+    public void selectButton() {
         driver.findElement(selectButton).click();
-        return this;
     }
 
-    public NewIssuePage sourceRecent() {
+    public void sourceRecent() {
         driver.findElement(sourceRecent).click();
-        return this;
     }
 
-    public NewIssuePage sourceSearch() {
+    public void sourceSearch() {
         driver.findElement(sourceSearch).click();
-        return this;
     }
 
-    public NewIssuePage searchField() {
+    public void searchField() {
         driver.findElement(sourceSearch).click();
         driver.findElement(searchField).click();
-        return this;
     }
 
-    public NewIssuePage viewedIssues() {
+    public void viewedIssues() {
         driver.findElement(viewedIssues).click();
-        return this;
     }
 
-    public NewIssuePage first50Issues() {
+    public void first50Issues() {
         driver.findElement(first50Issues).click();
-        return this;
     }
 
     //---Assignee User
-    public NewIssuePage assigneeUser(){
+    public void assigneeUser(String assignee){
         driver.findElement(assigneeFieldLocator).clear();
-        driver.findElement(assigneeFieldLocator).sendKeys("Marina Kuzmina");
+        driver.findElement(assigneeFieldLocator).sendKeys(assignee);
         driver.findElement(assigneeSuggestions).click();
-        return this;
     }
 
     //---Assign to me
-    public NewIssuePage clickAssignToMeButton() {
+    public void clickAssignToMeButton() {
         driver.findElement(assignToMeButtonLocator).click();
-        return this;
     }
 
     //---Add Epic Link
-    public NewIssuePage addEpicLink(){
+    public void addEpicLink(){
         driver.findElement(linktoEpicFieldLocator).clear();
         driver.findElement(linktoEpicFieldLocator).sendKeys("Epic_AQA_5_MMazur");
         driver.findElement(epicLinkSuggestions).click();
-        return this;
     }
 
     //---Create Issue
-    public NewIssuePage clickSubmitButton() {
+    public void clickSubmitButton() {
         driver.findElement(submitButtonLocator).click();
-        return this;
     }
 
     //---Create another Issue
-    public NewIssuePage createAnotherIssue() {
+    public void createAnotherIssue() {
         driver.findElement(createAnotherButtonLocator).click();
         driver.findElement(submitButtonLocator).click();
-        return this;
     }
 
     //---Cancel creation
-    public NewIssuePage pressCancelButton() {
+    public void pressCancelButton() {
         driver.findElement(cancelButtonLocator).click();
-        return this;
     }
 
 
