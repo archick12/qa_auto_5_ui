@@ -29,21 +29,25 @@ public class SearchIssueTest {
     dashBoardPage = new DashBoardPage();
     searchPage = new SearchPage();
 
+    loginPage.open();
+    assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
+    // otherwise we can click a wrong web element
+    loginPage.enterUsername();
+    loginPage.enterPassword();
+    loginPage.clickLogin();
+
   }
 
   @TestCase(id = "1")
   @Test(groups = {"UI"})
   public void searchByAssignee() throws InterruptedException {
-    loginPage.open();
-    loginPage.enterUsername();
-    loginPage.enterPassword();
-    loginPage.clickLogin();
-    assertEquals(true, dashBoardPage.isOnThePage());
+//    assertEquals(true, dashBoardPage.isOnThePage()); //not really necessary because homepage can vary
 
     headerPage.issuesSearchForIssues();
     // TODO check that basic view is on
     searchPage.clickOnLayoutSwitcherButton();
     searchPage.clickListViewItem();
+    searchPage.clickAssigneeButton();
     int a = 0;
   }
 }
