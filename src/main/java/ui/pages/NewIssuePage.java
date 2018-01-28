@@ -32,7 +32,7 @@ public class NewIssuePage extends BasePage {
 
     //---Project
     private By fieldProjectLocator = By.id("project-field");
-    private By projectSelectLocator = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']");
+    private By projectSelectLocator = By.id("project-suggestions");
 
     //---Issue Type
     private By issueTypeLocator = By.id("issuetype-field");
@@ -70,6 +70,7 @@ public class NewIssuePage extends BasePage {
     //---Priority
     private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
     private By priorityFieldDefault = By.id("priority-field");
+    private By priorityFieldSelect = By.id("priority-suggestions");
     private By prioritySelectHighest = By.xpath("//*[@id='priority-single-select']//following::*[a[text()='Highest']]");
     private By prioritySelectHigh = By.xpath("//*[@id='priority-single-select']//a[text()='High']");
     private By prioritySelectLow = By.xpath("//*[@id='priority-single-select']//a[text()='Low']");
@@ -85,7 +86,7 @@ public class NewIssuePage extends BasePage {
     private By linkedIssuesRelatesTo = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='relates to']");
 
     //---Labels
-    private By labelsSelect = By.id("labels-multi-select");
+    private By labelsSelect = By.id("labels-textarea");
 
     //---Issue
     private By IssuelinksSelect = By.xpath("//*[@id='issuelinks-issues-multi-select']");
@@ -104,11 +105,11 @@ public class NewIssuePage extends BasePage {
     private By first50Issues = By.xpath("//*[text()='First 50 issues from your current search']");
 
     //---Assignee
-    private By assigneeFieldLocator = By.xpath("//*//child::*[@id='assignee-field']");
+    private By assigneeFieldLocator = By.id("assignee-field");
     private By assigneeSuggestions = By.xpath("//[@id='assignee-suggestions']");
 
     //---Assign to me
-    private By assignToMeButtonLocator = By.xpath("//*[@id='assign-to-me-trigger']");
+    private By assignToMeButtonLocator = By.id("assign-to-me-trigger");
 
     //---Create
     private By submitButtonLocator = By.id("create-issue-submit");
@@ -207,41 +208,43 @@ public class NewIssuePage extends BasePage {
 
     //---Select Project
     public void enterProject(String projectId){
+        waitTillBeAbleToClick(fieldProjectLocator);
         driver.findElement(fieldProjectLocator).clear();
         waitToBePresentAndSendKeys(fieldProjectLocator, projectId);
-        waitToBePresentAndSendKeysTab(fieldProjectLocator);
+        driver.findElement(fieldProjectLocator).sendKeys(Keys.TAB);
     }
 
     //---Select IssueType
     public void enterIssueType(String issueType) {
+        waitTillBeAbleToClick(issueTypeLocator);
         driver.findElement(issueTypeLocator).clear();
         waitToBePresentAndSendKeys(issueTypeLocator, issueType);
-        waitToBePresentAndSendKeysTab(issueTypeLocator);
+        driver.findElement(issueTypeLocator).sendKeys(Keys.TAB);
     }
 
     //---Fill Summary
     public void fillSummary(String summary) {
-        waitToBePresentAndClick(summaryLocator);
+        waitTillBeAbleToClick(summaryLocator);
         waitToBePresentAndSendKeys(summaryLocator, summary);
     }
 
     //---Add Description
     public void fillDescription(String issueDescription) {
-        waitToBePresentAndClick(descriptionFieldLocator);
         waitToBePresentAndSendKeys(descriptionFieldLocator, issueDescription);
     }
 
     //Select Priority
     public void selectPriority(String priority) {
+        waitTillBeAbleToClick(priorityFieldDefault);
         driver.findElement(priorityFieldDefault).clear();
         waitToBePresentAndSendKeys(priorityFieldDefault, priority);
-        waitToBePresentAndSendKeysTab(priorityFieldDefault);
+        driver.findElement(priorityFieldDefault).sendKeys(Keys.TAB);
     }
 
     //---Add Labels
     public void addLabel(String issueLabel){
         waitToBePresentAndSendKeys(labelsSelect, issueLabel);
-        waitToBePresentAndSendKeysTab(labelsSelect);
+        driver.findElement(labelsSelect).sendKeys(Keys.TAB);
     }
 
     //---Select Linked Issues
@@ -313,16 +316,16 @@ public class NewIssuePage extends BasePage {
         driver.findElement(first50Issues).click();
     }
 
-    //---Assignee User
-    public void assigneeUser(String assignee){
+    //---Assign User
+    public void assignUser(){
         driver.findElement(assigneeFieldLocator).clear();
-        driver.findElement(assigneeFieldLocator).sendKeys(assignee);
-        driver.findElement(assigneeSuggestions).click();
+        waitToBePresentAndSendKeys(assigneeFieldLocator, username);
+        driver.findElement(assigneeFieldLocator).sendKeys(Keys.TAB);
     }
 
     //---Assign to me
     public void clickAssignToMeButton() {
-        driver.findElement(assignToMeButtonLocator).click();
+        waitToBePresentAndClick(assignToMeButtonLocator);
     }
 
     //---Add Epic Link
@@ -334,7 +337,7 @@ public class NewIssuePage extends BasePage {
 
     //---Create Issue
     public void clickSubmitButton() {
-        driver.findElement(submitButtonLocator).click();
+        waitToBePresentAndClick(submitButtonLocator);
     }
 
     //---Create another Issue

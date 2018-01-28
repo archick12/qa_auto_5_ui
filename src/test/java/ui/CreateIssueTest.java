@@ -23,9 +23,6 @@ public class CreateIssueTest {
     loginPage.enterPassword();
     loginPage.clickLogin();
 
-    DashBoardPage dashBoardPage = new DashBoardPage();
-    assertEquals(dashBoardPage.isOnThePage(), true);
-
     NewIssuePage newIssuePage = new NewIssuePage();
     newIssuePage.clickCreateIssueButton();
     newIssuePage.waitForCreateIssueDialog();
@@ -36,7 +33,7 @@ public class CreateIssueTest {
   @AfterTest
   public void cleanUp() {
     IssuePage issuePage = new IssuePage();
-    // need to delete each ticket after test
+    // TODO need to delete each ticket after test
   }
 
 
@@ -47,11 +44,11 @@ public class CreateIssueTest {
     NewIssuePage newIssuePage = new NewIssuePage();
     IssuePage issuePage = new IssuePage();
 
-    String projectId = "QAAuto5 (QAAUT)";
+    String projectId = "QAAuto5";
     String issueType = "Story";
-    String storySummary = "Team 2 story summary";
-    String storyDescription = "Team 2 story description";
-    String issuePriority = "High";
+    String storySummary = "Team 2 Story summary";
+    String storyDescription = "Team 2 Story description";
+    String issuePriority = "Lowest";
     String issueLabel = "QAAuto5";
 
     // create new issue
@@ -61,11 +58,17 @@ public class CreateIssueTest {
     newIssuePage.fillDescription(storyDescription);
     newIssuePage.selectPriority(issuePriority);
     newIssuePage.addLabel(issueLabel);
-    newIssuePage.clickAssignToMeButton();
+    newIssuePage.assignUser();
     newIssuePage.clickSubmitButton();
 
     // check that new issue is created successfully
-//    issuePage.shouldSeeSuccessPopUp();
     newIssuePage.clickNewIssueLinkOnSuccessPopup();
+    assertEquals(true, issuePage.isProjectIdCorrect(projectId));
+    assertEquals(true, issuePage.isIssueSummaryCorrect(storySummary));
+    assertEquals(true, issuePage.isIssueTypeCorrect(issueType));
+    assertEquals(true, issuePage.isIssuePriorityCorrect(issuePriority));
+    assertEquals(true, issuePage.isIssueLabelCorrect(issueLabel));
+    assertEquals(true, issuePage.isIssueDescriptionCorrect(storyDescription));
+    assertEquals(true, issuePage.isIssueAssigneeCorrect());
   }
 }
