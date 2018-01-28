@@ -16,6 +16,8 @@ public class BasePage {
     protected WebDriver driver;
     private int defaultExplicitWaitInSeconds = 10;
     public static int defaultImplicitWaitInSeconds = 10;
+    protected String username = ListenerTest.properties.get("username");
+    protected String password = ListenerTest.properties.get("password");
 
     protected BasePage() {
         this.driver = RemoteDriverManager.getDriver();
@@ -82,19 +84,19 @@ public class BasePage {
 
     }
 
-    protected void waitToBePresentAndSendKeysTab(By locator) {
-        logger.info("WAIT ELEMENT TO BE PRESENT AND SEND KEYS - TAB: " + locator);
+    protected void waitTillBeAbleToClick(By locator) {
+        logger.info("WAIT ELEMENT TO BE CLICKABLE: " + locator);
 
         WebElement element = null;
 
         try {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
-                    until(ExpectedConditions.presenceOfElementLocated(locator));
-            element.sendKeys(Keys.TAB);
+                    until(ExpectedConditions.elementToBeClickable(locator));
+            element.click();
         } catch (StaleElementReferenceException ignored) {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
-                    until(ExpectedConditions.presenceOfElementLocated(locator));
-            element.sendKeys(Keys.TAB);
+                    until(ExpectedConditions.elementToBeClickable(locator));
+            element.click();
         }
 
     }
@@ -130,6 +132,7 @@ public class BasePage {
             if (result.contains(text)) {
                 return true;
             } else {
+                logger.info("!---FAILED---! THE ELEMENT DOESN'T CONTAIN TEXT: " + locator);
                 return false;
             }
 
@@ -141,6 +144,7 @@ public class BasePage {
             if (result.contains(text)) {
                 return true;
             } else {
+                logger.info("!---FAILED---! THE ELEMENT DOESN'T CONTAIN TEXT: " + locator);
                 return false;
             }
         }

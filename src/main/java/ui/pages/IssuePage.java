@@ -20,6 +20,15 @@ public class IssuePage extends BasePage {
     private By shareBtnLocator = By.id("jira-share-trigger");
     private By exportBtnLocator = By.id("viewissue-export");
 
+    // issue details
+    private By projectIdLocator = By.id("project-name-val");
+    private By issueSummaryLocator = By.id("summary-val");
+    private By issueTypeField = By.id("type-val");
+    private By issuePriorityField = By.id("priority-val");
+    private By issueLabelsField = By.xpath("//a[@class='lozenge']/span");
+    private By issueAssigneeField = By.id("issue_summary_assignee_" + username);
+    private By issueDescriptionLocator = By.id("description-val");
+
     private By newSubtaskButtonLocator = By.id("stqc_show");
     private By summaryLocator = By.id("summary");
     private By submitButtonLocator = By.id("create-issue-submit");
@@ -48,89 +57,58 @@ public class IssuePage extends BasePage {
 
 
     public IssuePage() {
-
         this.driver = RemoteDriverManager.getDriver();
         headerPage = new HeaderPage();
-
     }
 
     public void openExistingIssue(String issueId) {
-
         String url = String.format(pageURL, issueId);
         super.openExistingIssue(url);
-
     }
 
-    public IssuePage openNewSubTask() throws InterruptedException {
-
+    public void openNewSubTask() throws InterruptedException {
         waitToBePresentAndClick(newSubtaskButtonLocator);
-
-        return this;
     }
 
-    public IssuePage shouldSeeSuccessPopUp() {
-
+    public void shouldSeeSuccessPopUp() {
         waitToBePresent(successPopUp);
-
-        return this;
     }
 
-    public IssuePage openSubtask() throws InterruptedException {
-
+    public void openSubtask() throws InterruptedException {
         waitToBePresentAndClick(subtaskLocator);
-
-        return this;
     }
 
-    public IssuePage clickMoreButton() {
-
+    public void clickMoreButton() {
         waitToBePresentAndClick(moreButtonLocator);
-
-        return this;
     }
 
-    public IssuePage clickDeleteListItem() {
+    public void clickDeleteListItem() {
         waitToBePresentAndClick(deleteListItemLocator);
-        return this;
     }
 
-    public IssuePage deleteSubTask() {
+    public void deleteSubTask() {
         waitToBePresentAndClick(deleteButtonLocator);
-        return this;
     }
 
-    public IssuePage clickOnCommentBtn() {
+    public void clickOnCommentBtn() {
         waitToBePresentAndClick(commentBtnLocator);
-        return this;
     }
 
-    public IssuePage enterComment(String comment) {
-
+    public void enterComment(String comment) {
         waitToBePresentAndClick(commentTextType);
         waitToBePresentAndSendKeys(commentAreaLocator, comment);
-
-        return this;
     }
 
-    public IssuePage clickOnAddComment() {
-
+    public void clickOnAddComment() {
         waitToBePresentAndClick(commentAddBtnLocator);
-
-        return this;
     }
 
-    public IssuePage clickOnDeleteComment() {
-
+    public void clickOnDeleteComment() {
         waitToBePresentAndClick(commentDeleteBtnLocator);
-
-        return this;
     }
 
-    public IssuePage confirmDeletionOfComment() {
-
+    public void confirmDeletionOfComment() {
         waitToBePresentAndClick(commentDeletePopUpBtnLocator);
-
-        return this;
     }
 
     // Checks
@@ -143,45 +121,62 @@ public class IssuePage extends BasePage {
     }
 
     public boolean isSubTaskSummaryPresent(String title) {
-
         String selector = String.format(subTaskSummary, title);
         return waitToBePresentAndContainsText(By.xpath(selector), title);
-
     }
 
     public boolean isSubTaskSummaryMissing(String title) {
-
         String selector = String.format(subTaskSummary, title);
         return waitToBeMissing(By.xpath(selector));
-
     }
 
     public boolean isSubTaskNumberPresent(String name) {
-
         String selector = String.format(subTaskNumber, name);
         return waitToBePresentAndContainsText(By.xpath(selector), name);
-
     }
 
     public boolean isSubTaskAssigneePresent(String name) {
-
         String selector = String.format(subTaskAssignee, name);
         return waitToBePresentAndContainsText(By.xpath(selector), name);
-
     }
 
     public boolean isCommentTextPresent(String text) {
-
         String selector = String.format(commentText, text);
         return waitToBePresentAndContainsText(By.xpath(selector), text);
-
     }
 
     public boolean isCommentTextMissing(String text) {
-
         String selector = String.format(commentText, text);
         return waitToBeMissing(By.xpath(selector));
+    }
 
+    public boolean isProjectIdCorrect(String projectId) {
+        return waitToBePresentAndContainsText(projectIdLocator, projectId);
+    }
+
+    public boolean isIssueSummaryCorrect(String summary) {
+        return waitToBePresentAndContainsText(issueSummaryLocator, summary);
+    }
+
+    public boolean isIssueTypeCorrect(String issueType) {
+        return waitToBePresentAndContainsText(issueTypeField, issueType);
+    }
+
+    public boolean isIssuePriorityCorrect(String priority) {
+        return waitToBePresentAndContainsText(issuePriorityField, priority);
+    }
+
+    public boolean isIssueLabelCorrect(String label) {
+        return waitToBePresentAndContainsText(issueLabelsField, label);
+    }
+
+    public boolean isIssueDescriptionCorrect(String description) {
+        return waitToBePresentAndContainsText(issueDescriptionLocator, description);
+    }
+
+    public boolean isIssueAssigneeCorrect() {
+        if (driver.findElement(issueAssigneeField) == null) {return false;}
+        return true;
     }
 
 }
