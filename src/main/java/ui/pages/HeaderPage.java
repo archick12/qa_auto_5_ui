@@ -7,11 +7,6 @@ import ui.utils.RemoteDriverManager;
 
 public class HeaderPage extends BasePage {
 
-/* old locators
-    private By systemDashboardLocator = By.cssSelector("div.aui-page-header-main>h1");
-    private By createLocator = By.id("create_link");
-    private By searchLocator = By.id("quickSearchInput");
-*/
     //-- Logo
     private By jiraLogo = By.id("logo");
     //-- Dashboards section
@@ -106,12 +101,12 @@ public class HeaderPage extends BasePage {
 
 
 //____________________________________________________________________Logo
-    public HeaderPage clickjiraLogo(){
+    public HeaderPage clickJiraLogo(){
         waitToBePresentAndClick(jiraLogo);
         return this;
     }
     //_________________________________________________________________Dashboard section
-    public HeaderPage clickdashboard(){
+    public HeaderPage clickDashboard(){
         waitToBePresentAndClick(dashboardLocator);
         return this;
     }
@@ -126,52 +121,52 @@ public class HeaderPage extends BasePage {
         return this;
     }
     //____________________________________________________________________ Project section
-//    public HeaderPage projects(){
+//    public HeaderPage clickProjects(){
 //        waitToBePresentAndClick(projectsLocator);
 //        return this;
 //    }
 
-    public HeaderPage projectsCurrentProject(){
+    public HeaderPage selectProjectsCurrentProject(){
         SelectDropDownItem(projectsLocator,currentProjectLocator);
         return this;
     }
 
-    public HeaderPage projectsCurrent1Project() {
+    public HeaderPage selectProjectsCurrent1Project() {
         SelectDropDownItem(projectsLocator,recentProject1Locator);
         return this;
     }
 
-    public HeaderPage projectsCurrent2Project() {
+    public HeaderPage selectProjectsCurrent2Project() {
         SelectDropDownItem(projectsLocator,recentProject2Locator);
         return this;
     }
 
-    public HeaderPage projectsCurrent3Project() {
+    public HeaderPage selectProjectsCurrent3Project() {
         SelectDropDownItem(projectsLocator,recentProject3Locator);
         return this;
     }
 
-    public HeaderPage projectsSoftware() {
+    public HeaderPage selectProjectsSoftware() {
         SelectDropDownItem(projectsLocator,softwareLocator);
         return this;
     }
 
-    public HeaderPage projectsBusiness() {
+    public HeaderPage selectProjectsBusiness() {
         SelectDropDownItem(projectsLocator,businessLocator);
         return this;
     }
 
-    public HeaderPage projectsViewAllProjects() {
+    public HeaderPage selectProjectsViewAllProjects() {
         SelectDropDownItem(projectsLocator,viewAllProjectsLocator);
         return this;
     }
     //____________________________________________________________Issues section
-    public HeaderPage issues() {
+    public HeaderPage clickIssues() {
         waitToBePresentAndClick(issuesLocator);
         return this;
     }
 
-    public HeaderPage issuesCurentSearch() {
+    public HeaderPage issuesCurrentSearch() {
         SelectDropDownItem(issuesLocator,currentSearchLocator);
         return this;
     }
@@ -226,7 +221,7 @@ public class HeaderPage extends BasePage {
         return this;
     }
     //____________________________________________________________Boards section
-//    public HeaderPage boards() {
+//    public HeaderPage clickBoards() {
 //        waitToBePresentAndClick(boardsLocator);
 //        return this;
 //    }
@@ -257,7 +252,7 @@ public class HeaderPage extends BasePage {
     }
 //____________________________________________________________Tests section
 
-//    public HeaderPage tests() {
+//    public HeaderPage clickTests() {
 //        waitToBePresentAndClick(testsLocator);
 //        return this;
 //    }
@@ -329,24 +324,24 @@ public class HeaderPage extends BasePage {
         return this;
     }
     //____________________________________________________________Create button
-    public HeaderPage clickcreateButton() {
+    public HeaderPage clickCreateButton() {
         waitToBePresentAndClick(createLocator);
         return this;
     }
 //____________________________________________________________Improve Jira (Feedback) section
 
 
-    public HeaderPage clickfeedbackButton() {
+    public HeaderPage clickFeedbackButton() {
         waitToBePresentAndClick(feedbackButtonLocator);
         return this;
     }
 
-    public HeaderPage feelFeedbackSummary(String summary) {
+    public HeaderPage fillFeedbackSummary(String summary) {
         waitToBePresentAndSendKeys(feedbackSummaryLocator, summary);
         return this;
     }
 
-    public HeaderPage feelFeedbackDescription(String description) {
+    public HeaderPage fillFeedbackDescription(String description) {
         waitToBePresentAndSendKeys(feedbackDescriptionLocator, description);
         return this;
     }
@@ -357,28 +352,28 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
-    public HeaderPage feelFeedbackName(String name) {
+    public HeaderPage fillFeedbackName(String name) {
         waitToBePresentAndSendKeys(feedbackNameLocator, name);
         return this;
     }
 
-    public HeaderPage feelFeedbackEmail(String email) {
+    public HeaderPage fillFeedbackEmail(String email) {
         waitToBePresentAndSendKeys(feedbackEmailLocator, email);
         return this;
     }
 
-    public HeaderPage clicksubmitFeedback() {
+    public HeaderPage clickSubmitFeedback() {
         waitToBePresentAndClick(feedbackSubmitLocator);
         return this;
     }
 
-    public HeaderPage clickcloseFeedbackForm() {
+    public HeaderPage clickCloseFeedbackForm() {
         waitToBePresentAndClick(feedbackCloseLocator);
         return this;
     }
 
     //____________________________________________________________Help section
-//    public HeaderPage jiraInfo() {
+//    public HeaderPage clickJiraInfo() {
 //        waitToBePresentAndClick(jiraInfoLocator);
 //        return this;
 //    }
@@ -410,7 +405,7 @@ public class HeaderPage extends BasePage {
     }
 //____________________________________________________________User section
 
-//    public HeaderPage userOptions() {
+//    public HeaderPage clickUserOptions() {
 //        waitToBePresentAndClick(userOptionsLocator);
 //        return this;
 //    }
@@ -444,10 +439,4 @@ public class HeaderPage extends BasePage {
         SelectDropDownItem(userOptionsLocator,logOutLocator);
         return this;
     }
-  
-    public HeaderPage clickCreateButton() {
-        driver.findElement(createLocator).click();
-        return this;
-    }
-
 }
