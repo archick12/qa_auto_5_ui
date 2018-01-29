@@ -5,6 +5,11 @@
       "maxInstances": 5,
       "marionette": false,
       "seleniumProtocol": "WebDriver"
+    },
+    {
+      "browserName": "firefox",
+      "maxInstances": 5,
+      "seleniumProtocol": "WebDriver"
     }
   ],
   "port": 5555,
