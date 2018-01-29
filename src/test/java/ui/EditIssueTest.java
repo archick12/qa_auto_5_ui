@@ -23,18 +23,24 @@ public class  EditIssueTest {
     }
 
     @TestCase(id = "1")//--------------------------------------------------Алена
-    @Test(groups = {"UI, SKIPP"})
-     public void checkTestWork(){
+    @Test(groups = {"UI"})
+     public void addLabletoIssue(){
     NewIssuePage newIssuePage = new NewIssuePage();
     HeaderPage headerPage = new HeaderPage();
-    DashBoardPage dashBoardPage = new DashBoardPage();
     IssuePage issuePage = new IssuePage();
 
-    String parentIssueId = "Your Issue ID";
+    String parentIssueId = "QAAUT-4";
+    String label = "My_label";
 
-    // TO DO steps and asserts
+        headerPage.search(parentIssueId);
+        assertEquals(issuePage.isOnThePage(parentIssueId), true);
 
-         newIssuePage.clickCreateIssueButton();//////это я проверяла, запускается ли тест
+        newIssuePage.clickLabelField();
+        newIssuePage.addLabel(label);
+        newIssuePage.clickDescriptionField();
+        assertEquals(newIssuePage.isAddedLabelPresent(),true);
+
+
 
 
     }
@@ -328,7 +334,7 @@ public class  EditIssueTest {
 
     //    --------------------------------------------------Настя
     @TestCase(id = "4")
-    @Test(groups = {"UI"})
+    @Test(groups = {"UI,SKIPP"})
 
     public void AddComment() {
         NewIssuePage newIssuePage = new NewIssuePage();
@@ -469,7 +475,7 @@ public class  EditIssueTest {
             }
 
     @TestCase(id = "1")//--------------------------------------------------Julia
-    @Test(groups = {"UI"})
+    @Test(groups = {"UI,SKIPP"})
     public void checkButtonDoneWork() {
         NewIssuePage newIssuePage = new NewIssuePage();
         HeaderPage headerPage = new HeaderPage();
