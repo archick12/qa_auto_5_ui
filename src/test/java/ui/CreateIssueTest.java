@@ -19,13 +19,15 @@ public class CreateIssueTest {
     assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
     // otherwise we can click a wrong web element
 
-    loginPage.enterUsername();
-    loginPage.enterPassword();
-    loginPage.clickLogin();
+    loginPage
+            .enterUsername()
+            .enterPassword()
+            .clickLogin();
 
     NewIssuePage newIssuePage = new NewIssuePage();
-    newIssuePage.clickCreateIssueButton();
-    newIssuePage.waitForCreateIssueDialog();
+    newIssuePage
+            .clickCreateIssueButton()
+            .waitForCreateIssueDialog();
 
   }
 
@@ -52,14 +54,15 @@ public class CreateIssueTest {
     String issueLabel = "QAAuto5";
 
     // create new issue
-    newIssuePage.enterProject(projectId);
-    newIssuePage.enterIssueType(issueType);
-    newIssuePage.fillSummary(storySummary);
-    newIssuePage.fillDescription(storyDescription);
-    newIssuePage.selectPriority(issuePriority);
-    newIssuePage.addLabel(issueLabel);
-    newIssuePage.assignUser();
-    newIssuePage.clickSubmitButton();
+    newIssuePage
+            .enterProject(projectId)
+            .enterIssueType(issueType)
+            .fillSummary(storySummary)
+            .fillDescription(storyDescription)
+            .selectPriority(issuePriority)
+            .addLabel(issueLabel)
+            .assignUser()
+            .clickSubmitButton();
 
     // check that new issue is created successfully
     newIssuePage.clickNewIssueLinkOnSuccessPopup();
