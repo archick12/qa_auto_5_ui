@@ -6,7 +6,6 @@
       "marionette": false,
       "seleniumProtocol": "WebDriver"
     },
-
     {
       "browserName": "firefox",
       "maxInstances": 5,
