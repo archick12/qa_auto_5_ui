@@ -299,6 +299,13 @@ public class NewIssuePage extends BasePage {
     return this;
   }
 
+  public NewIssuePage assignUser(){
+    driver.findElement(assigneeFieldLocator).clear();
+    waitToBePresentAndSendKeys(assigneeFieldLocator, username);
+    driver.findElement(assigneeFieldLocator).sendKeys(Keys.TAB);
+    return this;
+  }
+
   //---Select Linked Issues
   public NewIssuePage selectLinkedIssuesLocator() {
     driver.findElement(linkedIssuesDefault).click();
