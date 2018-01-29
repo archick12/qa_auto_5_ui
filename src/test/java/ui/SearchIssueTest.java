@@ -71,22 +71,22 @@ public class SearchIssueTest {
     @TestCase(id = "С8")
     @Test(groups = {"UI"})
     public void searchByType() throws InterruptedException {
-    //    __________________________________check Bug type
-    searchPage.SearchBugs();
-    assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountBugsOnPage());
-    searchPage.SearchBugs();
-    //  __________________________________check Epic type
-    searchPage.SearchEpics();
-    assertEquals(searchPage.CountIssuesOnPage(),searchPage.CountEpicsOnPage());
-    searchPage.SearchEpics();
-   //    __________________________________ check Story type
-    searchPage.FindSeachType("Story");
-    assertEquals(searchPage.CountIssuesOnPage(),searchPage.CountStoriesOnPage());
-    searchPage.SearchStories();
-//_________________________________________ check Sub-task type
-    searchPage.SearchAllSubTasks();
-    assertEquals(searchPage.CountIssuesOnPage(),searchPage.CountSubTasksOnPage()+ searchPage.CountSubDefectsOnPage());
-    searchPage.SearchAllSubTasks();
+        //__________________________________check Bug type
+        searchPage.SearchBugs();
+        assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountBugsOnPage());
+        searchPage.SearchBugs();
+        //__________________________________check Epic type
+        searchPage.SearchEpics();
+        assertEquals(searchPage.CountIssuesOnPage(),searchPage.CountEpicsOnPage());
+        searchPage.SearchEpics();
+        //__________________________________ check Story type
+        searchPage.FindSeachType("Story");
+        assertEquals(searchPage.CountIssuesOnPage(),searchPage.CountStoriesOnPage());
+        searchPage.SearchStories();
+        //_________________________________________ check Sub-task type
+        searchPage.SearchAllSubTasks();
+        assertEquals(searchPage.CountIssuesOnPage(),searchPage.CountSubTasksOnPage()+ searchPage.CountSubDefectsOnPage());
+        searchPage.SearchAllSubTasks();
     }
 
     @TestCase(id = "4")
