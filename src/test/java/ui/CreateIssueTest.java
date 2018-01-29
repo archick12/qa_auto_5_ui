@@ -11,7 +11,7 @@ import static org.testng.Assert.assertEquals;
 public class CreateIssueTest {
 
   // code that will be invoked before each @Test
-  @BeforeGroups(groups = {"CreateIssue"})
+  @BeforeGroups(groups = {"UI","CreateIssue"})
   public void setUp() {
     LoginPage loginPage = new LoginPage();
 
@@ -38,7 +38,7 @@ public class CreateIssueTest {
 
 
   @TestCase(id = "C13") // annotation that holds number of test case in TestRail
-  @Test(groups = {"CreateIssue"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  @Test(groups = {"UI","CreateIssue"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void createNewStory() throws InterruptedException {
 
     NewIssuePage newIssuePage = new NewIssuePage();
