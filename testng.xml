@@ -18,11 +18,7 @@
             </run>
         </groups>
         <classes>
-            <class name="ui.SearchIssueTest">
-                <methods>
-                    <include name="searchByType"/>
-                </methods>
-            </class>
+            <class name="ui.SearchIssueTest"/>
         </classes>
     </test>
 
