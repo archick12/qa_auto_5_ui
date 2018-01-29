@@ -60,6 +60,7 @@ public class SearchIssueTest {
         searchPage.clickProjectButton();
         searchPage.searchByProjectNameAndSubmit(projectName);
         searchPage.clickProjectButton();
+        searchPage.waitForNotPending();
         //TODO Wait until all issue table is fully reloaded
         List<WebElement> issues = searchPage.getListOfIssues();
         for (WebElement issue : issues) {

@@ -22,6 +22,7 @@ public class SearchPage extends BasePage {
   private By findProjectsSearchFieldLocator = By
           .xpath("//form[@id='issue-filter'][contains(@class,'project-criteria')]/descendant::input[@id='searcher-pid-input']");
   private By issueRowsLocator = By.xpath("//table[@id='issuetable']/descendant::tr[contains(@class, 'issuerow')]");
+  private By pendingDivLocator = By.xpath("//div[@class='navigator-content']/child::div[@class='pending']");
 //  ____________________________________________________________________________
 
   private By typeButtonLocator = By.xpath("//button[@data-id='issuetype']");
@@ -63,6 +64,12 @@ public class SearchPage extends BasePage {
     waitToBePresentAndSendKeys(findProjectsSearchFieldLocator, projectName + Keys.ENTER);
     return this;
   }
+  public SearchPage waitForNotPending() {
+    waitToBePresent(pendingDivLocator);
+    waitToBeMissing(pendingDivLocator);
+    return this;
+  }
+
   public List<WebElement> getListOfIssues() {
     return driver.findElements(issueRowsLocator);
   }
