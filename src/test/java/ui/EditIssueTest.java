@@ -24,17 +24,24 @@ public class EditIssueTest {
 
     @TestCase(id = "1")//--------------------------------------------------Алена
     @Test(groups = {"UI"})
-     public void checkTestWork(){
+     public void addLabelToIssue(){
     NewIssuePage newIssuePage = new NewIssuePage();
     HeaderPage headerPage = new HeaderPage();
     DashBoardPage dashBoardPage = new DashBoardPage();
     IssuePage issuePage = new IssuePage();
 
-    String parentIssueId = "Your Issue ID";
+    String parentIssueId = "QAAUT-4";
 
-    // TO DO steps and asserts
 
-         newIssuePage.clickCreateIssueButton();//////это я проверяла, запускается ли тест
+
+        // TO DO steps and asserts
+        headerPage.search(parentIssueId);
+        assertEquals(issuePage.isOnThePage(parentIssueId), true);
+
+        newIssuePage.clickLabelField();
+        newIssuePage.addLabel();
+        newIssuePage.clickDropDownLabel();
+        assertEquals(newIssuePage.isAddedLabelPresent(),true);
     }
 
 
