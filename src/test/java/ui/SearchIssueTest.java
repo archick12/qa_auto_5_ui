@@ -29,7 +29,7 @@ public class SearchIssueTest {
         dashBoardPage = new DashBoardPage();
         searchPage = new SearchPage();
 
-        loginPage.open();
+        loginPage.open().enterUsername().enterPassword();
         assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
         // otherwise we can click a wrong web element
         loginPage.enterUsername();
@@ -39,8 +39,7 @@ public class SearchIssueTest {
         // Prepare for search tests:
         headerPage.issuesSearchForIssues();
         // TODO check that basic view is on
-        searchPage.clickOnLayoutSwitcherButton();
-        searchPage.clickListViewItem();
+        searchPage.clickOnLayoutSwitcherButton().clickListViewItem();
 
     }
 
