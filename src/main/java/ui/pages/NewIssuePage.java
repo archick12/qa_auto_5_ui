@@ -5,6 +5,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import ui.utils.RemoteDriverManager;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+
 import static org.openqa.selenium.Keys.ENTER;
 
 public class NewIssuePage extends BasePage {
@@ -463,8 +467,7 @@ public class NewIssuePage extends BasePage {
   private By labelsFieldLocator = By
       .xpath("//*[@class='labels-wrap value editable-field inactive']");
   private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");
-  private By addedLabelLocator = By.xpath(
-      "//*[contains(@class,'labels-wrap value editable-field inactive')]//*[@title='My_label']");
+  private String addedLabelLocator =("//*[contains(@class,'labels-wrap value editable-field inactive')]//*[contains(text(),'%s')]");
   private By selectForDevelopmentLocator = By.xpath(
       "//*[@id='action_id_21']//*[@class='toolbar-trigger issueaction-workflow-transition']");
 
@@ -478,13 +481,45 @@ public class NewIssuePage extends BasePage {
     return this;
   }
 
-  public boolean isAddedLabelPresent() {
-    waitToBePresent(addedLabelLocator);
-    return true;
+  public boolean isAddedLabelPresent(String label) {
+    String selector = String.format(addedLabelLocator, label);
+    return waitToBePresentAndContainsText(By.xpath(selector), label);
   }
 
-  public NewIssuePage clickSelectForDevelopment() {
-    waitToBePresentAndClick(selectForDevelopmentLocator);
+  private By browseButtonLocator = By.xpath("//*[@class='issue-drop-zone__button']");
+  public NewIssuePage clickBrowseButton() {
+    waitToBePresentAndClick(browseButtonLocator);
     return this;
   }
+  private String fileName = "//*[@class='attachment-content js-file-attachment']//*[contains(text(),'%s')]";
+
+  public boolean isAttachmentPresent(String file){
+    String selector = String.format(fileName, file);
+    return waitToBePresentAndContainsText(By.xpath(selector), file);
+  }
+  public NewIssuePage setClipboardData(String string) {
+    StringSelection stringSelection = new StringSelection(string);
+    Toolkit.getDefaultToolkit().getSystemClipboard()
+            .setContents(stringSelection, null);
+    return this;
+  }
+  public NewIssuePage robot() throws AWTException {
+
+  Robot rb = new Robot();
+  rb.delay(1000);
+  rb.keyPress(KeyEvent.VK_CONTROL);
+  rb.delay(300);
+  rb.keyPress(KeyEvent.VK_V);
+  rb.delay(300);
+  rb.keyRelease(KeyEvent.VK_V);
+  rb.delay(700);
+  rb.keyRelease(KeyEvent.VK_CONTROL);
+  rb.delay(300);
+  rb.keyPress(KeyEvent.VK_ENTER);
+  rb.delay(300);
+  rb.keyRelease(KeyEvent.VK_ENTER);
+  rb.delay(300);
+
+  return this;
+}
 }

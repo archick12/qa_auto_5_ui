@@ -5,6 +5,10 @@ import org.testng.annotations.Test;
 import ui.pages.*;
 import utils.TestCase;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.io.File;
+
 import static org.testng.Assert.assertEquals;
 
 public class  EditIssueTest {
@@ -24,24 +28,36 @@ public class  EditIssueTest {
 
     @TestCase(id = "1")//--------------------------------------------------Алена
     @Test(groups = {"UI"})
-     public void addLabletoIssue(){
-    NewIssuePage newIssuePage = new NewIssuePage();
-    HeaderPage headerPage = new HeaderPage();
-    IssuePage issuePage = new IssuePage();
-
-    String parentIssueId = "QAAUT-4";
-    String label = "My_label";
-
+    public void addLabletoIssue() {
+        NewIssuePage newIssuePage = new NewIssuePage();
+        HeaderPage headerPage = new HeaderPage();
+        IssuePage issuePage = new IssuePage();
+        String parentIssueId = "QAAUT-4";
+        String label = "My_label";
         headerPage.search(parentIssueId);
         assertEquals(issuePage.isOnThePage(parentIssueId), true);
-
         newIssuePage.clickLabelField();
         newIssuePage.addLabel(label);
         newIssuePage.clickDescriptionField();
-        assertEquals(newIssuePage.isAddedLabelPresent(),true);
+        assertEquals(newIssuePage.isAddedLabelPresent(label), true);
+    }
 
-
-
+    @TestCase(id = "2")//--------------------------------------------------Алена
+    @Test(groups = {"UI"})
+    public void addAttachmenttoIssue() throws AWTException {
+        NewIssuePage newIssuePage = new NewIssuePage();
+        HeaderPage headerPage = new HeaderPage();
+        IssuePage issuePage = new IssuePage();
+        String parentIssueId = "QAAUT-4";
+        String pathToFile = "/home/alena/Документы/Lightshot/Screenshot_21.jpg";
+        String fileName = "Screenshot_21.jpg";
+        File file = new File(pathToFile);
+        headerPage.search(parentIssueId);
+        assertEquals(issuePage.isOnThePage(parentIssueId), true);
+        newIssuePage.clickBrowseButton();
+        newIssuePage.setClipboardData(file.getAbsolutePath());
+        newIssuePage.robot();
+        assertEquals(newIssuePage.isAttachmentPresent(fileName),true);
 
     }
 
@@ -132,7 +148,13 @@ public class  EditIssueTest {
 
 
 
-    //    @TestCase(id = "1")--------------------------------------------------Марина
+
+
+
+
+
+
+        //    @TestCase(id = "1")--------------------------------------------------Марина
 //    @Test(groups = {"UI"})
 //    // public void .........(){
 //    NewIssuePage newIssuePage = new NewIssuePage();
