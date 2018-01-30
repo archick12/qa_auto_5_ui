@@ -28,11 +28,15 @@ public class HeaderTest {
     HeaderPage headerPage = new HeaderPage();
 
     headerPage.clickFeedbackButton()
+            // Alesya's test variant
+            .switchDriverToFrame()
             //TODO make form to be visible for selenium (maybe need to change focus somehow)
             .fillFeedbackSummary("Test Summary")
             .fillFeedbackDescription("Test description")
             .fillFeedbackName("NAME")
             .fillFeedbackEmail("yes@no.com")
-            .selectFeedbackAbout("Navigating JIRA");
+            .selectFeedbackAbout("Navigating JIRA")
+            // Alesya's test variant
+            .switchDriverToDefaultContent();
   }
 }

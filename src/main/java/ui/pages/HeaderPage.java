@@ -70,6 +70,9 @@ public class HeaderPage extends BasePage {
     private By feedbackEmailLocator = By.xpath("//*[@id='jic-collector-form']//child::input[@id='email']");
     private By feedbackSubmitLocator = By.xpath("//*[@id='jic-collector-form']//child::input[@type='submit']");
     private By feedbackCloseLocator = By.xpath("//*[@id='jic-collector-form']//child::a[@class='cancel']");
+    // Alesya's test variant
+    private By feedbackFrameLocator = By.id("atlwdg-frame");
+
     //-- Help section
     private By jiraInfoLocator = By.id("help_menu");
     private By jiraSoftwareHelpLocator = By.id("gh_view_help");
@@ -439,4 +442,17 @@ public class HeaderPage extends BasePage {
         SelectDropDownItem(userOptionsLocator,logOutLocator);
         return this;
     }
+
+    // Alesya's test variant starts
+    public HeaderPage switchDriverToFrame() {
+        WebElement frame = driver.findElement(feedbackFrameLocator);
+        driver.switchTo().frame(frame);
+        return this;
+    }
+
+    public HeaderPage switchDriverToDefaultContent() {
+        driver.switchTo().defaultContent();
+        return this;
+    }
+    // Alesya's test variant ends
 }
