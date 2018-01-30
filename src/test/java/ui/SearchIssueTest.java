@@ -29,17 +29,18 @@ public class SearchIssueTest {
         dashBoardPage = new DashBoardPage();
         searchPage = new SearchPage();
 
-        loginPage.open().enterUsername().enterPassword();
+        loginPage.open();
         assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
         // otherwise we can click a wrong web element
-        loginPage.enterUsername();
-        loginPage.enterPassword();
-        loginPage.clickLogin();
+        loginPage.enterUsername()
+                 .enterPassword()
+                 .clickLogin();
         //    assertEquals(true, dashBoardPage.isOnThePage()); //not really necessary because homepage can vary
         // Prepare for search tests:
         headerPage.issuesSearchForIssues();
         // TODO check that basic view is on
-        searchPage.clickOnLayoutSwitcherButton().clickListViewItem();
+        searchPage.clickOnLayoutSwitcherButton()
+                  .clickListViewItem();
 
     }
 
@@ -55,15 +56,15 @@ public class SearchIssueTest {
     @Test(groups = {"UI"})
     public void searchByProject() throws InterruptedException {
         String projectName = "qaauto5";
+        String issuePrefix = "QAAUT-";
 
-        searchPage.clickProjectButton();
-        searchPage.searchByProjectNameAndSubmit(projectName);
-        searchPage.clickProjectButton();
-        searchPage.waitForNotPending();
-        //TODO Wait until all issue table is fully reloaded
+        searchPage.clickProjectButton()
+                   .searchByProjectNameAndSubmit(projectName)
+                   .clickProjectButton()
+                   .waitForNotPending();
         List<WebElement> issues = searchPage.getListOfIssues();
         for (WebElement issue : issues) {
-            assertTrue(issue.getAttribute("data-issuekey").contains("QAAUT-"), "Assertion Failed");
+            assertTrue(issue.getAttribute("data-issuekey").contains(issuePrefix), "Assertion Failed");
             logger.info("Assertion passed: " + issue.getAttribute("data-issuekey"));
         }
     }
