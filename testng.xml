@@ -19,6 +19,9 @@
         </groups>
         <classes>
             <class name="ui.EditIssueTest"/>
+            <class name="ui.CreateIssueTest"/>
+            <class name="ui.SearchIssueTest"/>
+            <class name="ui.RefactoredIssueTest"/>
         </classes>
     </test>
 

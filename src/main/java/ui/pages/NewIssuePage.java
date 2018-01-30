@@ -185,8 +185,9 @@ public class NewIssuePage extends BasePage {
     return this;
   }
 
-  public void clickCustomLink() {
+  public NewIssuePage clickCustomLink() {
     waitToBePresentAndClick(showFieldsCustomLocator);
+    return this;
   }
 
   public NewIssuePage clickAllLink() {
@@ -258,38 +259,43 @@ public class NewIssuePage extends BasePage {
   }
 
   //---Select Project
-  public void enterProject(String projectId) {
+  public NewIssuePage enterProject(String projectId) {
     waitTillBeAbleToClick(fieldProjectLocator);
     driver.findElement(fieldProjectLocator).clear();
     waitToBePresentAndSendKeys(fieldProjectLocator, projectId);
     driver.findElement(fieldProjectLocator).sendKeys(Keys.TAB);
+    return this;
   }
 
   //---Select IssueType
-  public void enterIssueType(String issueType) {
+  public NewIssuePage enterIssueType(String issueType) {
     waitTillBeAbleToClick(issueTypeLocator);
     driver.findElement(issueTypeLocator).clear();
     waitToBePresentAndSendKeys(issueTypeLocator, issueType);
     driver.findElement(issueTypeLocator).sendKeys(Keys.TAB);
+    return this;
   }
 
   //---Fill Summary
-  public void fillSummary(String summary) {
+  public NewIssuePage fillSummary(String summary) {
     waitTillBeAbleToClick(summaryLocator);
     waitToBePresentAndSendKeys(summaryLocator, summary);
+    return this;
   }
 
   //---Add Description
-  public void fillDescription(String issueDescription) {
+  public NewIssuePage fillDescription(String issueDescription) {
     waitToBePresentAndSendKeys(descriptionFieldLocator, issueDescription);
+    return this;
   }
 
   //Select Priority
-  public void selectPriority(String priority) {
+  public NewIssuePage selectPriority(String priority) {
     waitTillBeAbleToClick(priorityFieldDefault);
     driver.findElement(priorityFieldDefault).clear();
     waitToBePresentAndSendKeys(priorityFieldDefault, priority);
     driver.findElement(priorityFieldDefault).sendKeys(Keys.TAB);
+    return this;
   }
 
   //---Add Labels
@@ -343,42 +349,51 @@ public class NewIssuePage extends BasePage {
   }
 
   //---Add Attachment
-  public void browseButton() {
+  public NewIssuePage browseButton() {
     driver.findElement(browseButton).click();
+    return this;
   }
 
   //---Add Issue (Pop up)
-  public void IssuePopup() {
+  public NewIssuePage IssuePopup() {
     driver.findElement(IssuePopup).click();
+    return this;
   }
 
-  public void pageHeader() {
+  public NewIssuePage pageHeader() {
     driver.findElement(pageHeader).click();
+    return this;
   }
 
-  public void selectButton() {
+  public NewIssuePage selectButton() {
     driver.findElement(selectButton).click();
+    return this;
   }
 
-  public void sourceRecent() {
+  public NewIssuePage sourceRecent() {
     driver.findElement(sourceRecent).click();
+    return this;
   }
 
-  public void sourceSearch() {
+  public NewIssuePage sourceSearch() {
     driver.findElement(sourceSearch).click();
+    return this;
   }
 
-  public void searchField() {
+  public NewIssuePage searchField() {
     driver.findElement(sourceSearch).click();
     driver.findElement(searchField).click();
+    return this;
   }
 
-  public void viewedIssues() {
+  public NewIssuePage viewedIssues() {
     driver.findElement(viewedIssues).click();
+    return this;
   }
 
-  public void first50Issues() {
+  public NewIssuePage first50Issues() {
     driver.findElement(first50Issues).click();
+    return this;
   }
 
   //---Assignee User
@@ -390,8 +405,9 @@ public class NewIssuePage extends BasePage {
   }
 
   //---Assign to me
-  public void clickAssignToMeButton() {
+  public NewIssuePage clickAssignToMeButton() {
     waitToBePresentAndClick(assignToMeButtonLocator);
+    return this;
   }
 
   //---Add Epic Link
@@ -403,19 +419,22 @@ public class NewIssuePage extends BasePage {
   }
 
   //---Create Issue
-  public void clickSubmitButton() {
+  public NewIssuePage clickSubmitButton() {
     waitToBePresentAndClick(submitButtonLocator);
+    return this;
   }
 
   //---Create another Issue
-  public void createAnotherIssue() {
+  public NewIssuePage createAnotherIssue() {
     driver.findElement(createAnotherButtonLocator).click();
     driver.findElement(submitButtonLocator).click();
+    return this;
   }
 
   //---Cancel creation
-  public void pressCancelButton() {
+  public NewIssuePage pressCancelButton() {
     driver.findElement(cancelButtonLocator).click();
+    return this;
   }
 
   private By workflowLocator = By.id("opsbar-transitions_more");
