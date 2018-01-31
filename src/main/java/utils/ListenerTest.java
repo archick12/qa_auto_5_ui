@@ -92,9 +92,10 @@ public class ListenerTest implements ITestListener {
     if (driver != null) {
       changeImplicitWaitValue(driver, BasePage.defaultImplicitWaitInSeconds);
       logger.info("Closing browser window");
-//            RemoteDriverManager.closeDriver();
+      RemoteDriverManager.closeDriver();
     }
   }
+
 
   private void changeImplicitWaitValue(WebDriver driver, int implicitWaitValueInSeconds) {
     driver.manage().timeouts().implicitlyWait(implicitWaitValueInSeconds, TimeUnit.SECONDS);
