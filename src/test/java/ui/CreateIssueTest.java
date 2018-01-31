@@ -1,5 +1,6 @@
 package ui;
 
+import com.sun.jna.platform.win32.Netapi32Util;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
@@ -14,6 +15,7 @@ public class CreateIssueTest {
   @BeforeGroups(groups = {"CreateIssue"})
   public void setUp() {
     LoginPage loginPage = new LoginPage();
+
 
     loginPage.open();
     assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
@@ -37,8 +39,9 @@ public class CreateIssueTest {
   }
 
 
-  @TestCase(id = "C13") // annotation that holds number of test case in TestRail
-  @Test(groups = {"CreateIssue"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  @TestCase(id = "1") // annotation that holds number of test case in TestRail
+  @Test(groups = {"CreateIssue, SKIPP"})
+  // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void createNewStory() throws InterruptedException {
 
     NewIssuePage newIssuePage = new NewIssuePage();
@@ -71,4 +74,33 @@ public class CreateIssueTest {
     assertEquals(true, issuePage.isIssueDescriptionCorrect(storyDescription));
     assertEquals(true, issuePage.isIssueAssigneeCorrect());
   }
-}
+
+
+    @TestCase(id = "2")
+    @Test(groups = {"CreateIssue"})
+    public void createNewBug () throws InterruptedException {
+      NewIssuePage newIssuePage = new NewIssuePage();
+      IssuePage issuePage = new IssuePage();
+
+      String projectId = "QAAuto5 (QAAUT)";
+      String issueType = "Bug";
+      String bugSummary = "Team 2 bug summary";
+      String bugDescription = "Team 2 bug description";
+      String issuePriority = "High";
+      String issueLabel = "QAAuto5";
+
+      newIssuePage.enterProject(projectId);
+      newIssuePage.enterIssueType(issueType);
+      newIssuePage.fillSummary(bugSummary);
+      newIssuePage.fillDescription(bugDescription);
+      newIssuePage.selectPriority(issuePriority);
+      newIssuePage.addLabel(issueLabel);
+      newIssuePage.assignUser();
+      newIssuePage.clickSubmitButton();
+
+     /* issuePage.shouldSeeSuccessPopUp();
+      newIssuePage.clickNewIssueLinkOnSuccessPopup(); */
+
+
+    }
+  }

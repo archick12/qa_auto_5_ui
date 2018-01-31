@@ -68,7 +68,7 @@ public class RefactoredIssueTest {
 
   }
 
-  @TestCase(id = "1") // TODO without this framework fails with NullPointer at String testCaseId = testerInfo.id();
+  @TestCase(id = "2") // TODO without this framework fails with NullPointer at String testCaseId = testerInfo.id();
   @Test(groups = {"UI"})
   public void subTaskCommentCRUD() throws InterruptedException {
 

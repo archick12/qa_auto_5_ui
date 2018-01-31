@@ -87,7 +87,7 @@ public class BasePage {
     protected void waitTillBeAbleToClick(By locator) {
         logger.info("WAIT ELEMENT TO BE CLICKABLE: " + locator);
 
-        WebElement element = null;
+        WebElement element;
 
         try {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).

@@ -8,7 +8,7 @@
     <parameter name="myParam" value="This is the value for a parameter"/>
     <parameter name="browserName" value="firefox"/>
     <parameter name="local" value="yes"/>
-    <parameter name="implicitWaitInSeconds" value="30"/>
+    <parameter name="implicitWaitInSeconds" value="1000"/>
 
     <test name="UI Tests">
         <groups>

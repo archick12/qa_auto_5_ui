@@ -13,12 +13,24 @@ public class IssuePage extends BasePage {
     private By editIssueButton = By.id("edit-issue");
     private By commentIssueButton = By.id("comment-issue");
     private By assignIssueButton = By.id("assign-issue");
-    private By moreButton = By.id("opsbar-operations_more");
     private By workflowButton = By.id("opsbar-transitions_more");
     private By backlogButton = By.xpath("//*[@id='action_id_11']/span[@class='trigger-label']");
     private By selectedForDevButton = By.xpath("//*[@id='action_id_21']/span[@class='trigger-label']");
     private By shareBtnLocator = By.id("jira-share-trigger");
     private By exportBtnLocator = By.id("viewissue-export");
+    // my selectors
+    private By viewWorkflow = By.id("opsbar-transitions_more");
+    private By logWorkButton = By.xpath("//*[@id=\"log-work\"]");
+    private By agileBoardButton = By.id("greenhopper-rapidboard-operation");
+    private By rankToTopButton = By.id("greenhopper-rank-top-operation");
+    private By rankToBottomButton = By.id("greenhopper-rank-bottom-operation");
+    private By createZephyrTestButton = By.id("zephyr-create-test");
+    private By attachFilesButton = By.id("attach-file");
+    private By linkMoreButton = By.id("linkMoreButton");
+    private By cloneMoreButton = By.id("clone-issue");
+    private By labelsMoreButton = By.id("edit-labels");
+    private By issueTypeButton = By.xpath("//*[@id=\"type-val\"]");
+
 
     // issue details
     private By projectIdLocator = By.id("project-name-val");
@@ -109,6 +121,128 @@ public class IssuePage extends BasePage {
 
     public void confirmDeletionOfComment() {
         waitToBePresentAndClick(commentDeletePopUpBtnLocator);
+    }
+
+    public IssuePage clickOnEditButton() {
+
+        waitToBePresentAndClick(editIssueButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnHeaderCommentButton() {
+
+        waitToBePresentAndClick(commentIssueButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnAssignButton() {
+
+        waitToBePresentAndClick(assignIssueButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnWorkflowButton() {
+
+        waitToBePresentAndClick(workflowButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnBacklogButton() {
+
+        waitToBePresentAndClick(backlogButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnSelectedForDevButton() {
+
+        waitToBePresentAndClick(selectedForDevButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnShareButton() {
+
+        waitToBePresentAndClick(shareBtnLocator);
+
+        return this;
+    }
+    public IssuePage findViewWorkflow() {
+
+       driver.findElement(viewWorkflow);
+
+        return this;
+    }
+    public IssuePage findLogWorkButton() {
+
+        driver.findElement(logWorkButton);
+
+        return this;
+    }
+    public IssuePage findAgileBoardButton() {
+
+        driver.findElement(agileBoardButton);
+
+        return this;
+    }
+    public IssuePage findRankToTopButton() {
+
+        driver.findElement(rankToTopButton);
+
+        return this;
+    }
+    public IssuePage findRankToBottomButton() {
+
+        driver.findElement(rankToBottomButton);
+
+        return this;
+    }
+    public IssuePage findCreateZephyrTestButton() {
+
+        driver.findElement(createZephyrTestButton);
+
+        return this;
+    }
+    public IssuePage findAttachFilesButton() {
+
+        driver.findElement(attachFilesButton);
+
+        return this;
+    }
+    public IssuePage findLinkMoreButton() {
+
+        driver.findElement(linkMoreButton);
+
+        return this;
+    }
+    public IssuePage findCloneMoreButton() {
+
+        driver.findElement(cloneMoreButton);
+
+        return this;
+    }
+    public IssuePage findLabelsMoreButton() {
+
+        driver.findElement(labelsMoreButton);
+
+        return this;
+    }
+    public IssuePage findIssueTypeButton() {
+
+        driver.findElement(issueTypeButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnExportButton() {
+
+        waitToBePresentAndClick(exportBtnLocator);
+
+        return this;
     }
 
     // Checks

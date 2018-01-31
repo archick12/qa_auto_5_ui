@@ -45,7 +45,7 @@ public class ListenerTest implements ITestListener {
     }
 
     public void onTestFailure(ITestResult iTestResult) {
-        logger.error("TEST: " + iTestResult.getName() + " FAILED");
+        logger.error("TEST: " + iTestResult.getName());
         logger.error(iTestResult.getThrowable().fillInStackTrace());
 
         // TODO add option to enable / disable post of results
