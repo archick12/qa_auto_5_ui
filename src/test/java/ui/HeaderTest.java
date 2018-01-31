@@ -27,10 +27,10 @@ public class HeaderTest {
   public void feedbackTest() throws InterruptedException {
     HeaderPage headerPage = new HeaderPage();
 
+    //TODO add waits! Works only in debug mode
     headerPage.clickFeedbackButton()
             // Alesya's test variant
-            .switchDriverToFrame()
-            //TODO make form to be visible for selenium (maybe need to change focus somehow)
+            .switchDriverToFeedbackFrame()
             .fillFeedbackSummary("Test Summary")
             .fillFeedbackDescription("Test description")
             .fillFeedbackName("NAME")

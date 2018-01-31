@@ -444,9 +444,8 @@ public class HeaderPage extends BasePage {
     }
 
     // Alesya's test variant starts
-    public HeaderPage switchDriverToFrame() {
-        WebElement frame = driver.findElement(feedbackFrameLocator);
-        driver.switchTo().frame(frame);
+    public HeaderPage switchDriverToFeedbackFrame() {
+        driver.switchTo().frame(driver.findElement(feedbackFrameLocator));
         return this;
     }
 
