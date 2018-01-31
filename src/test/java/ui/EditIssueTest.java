@@ -459,20 +459,16 @@ public class  EditIssueTest {
             issuePage.openExistingIssue(parentIssueId);
             assertEquals(issuePage.isOnThePage(parentIssueId), true);
 
-
-
             newIssuePage.clickWorkflowButton();
             newIssuePage.selectInProgressButton();
-//TO DO NEED HELP
+
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e){
                 e.printStackTrace();
             }
-            assertEquals(newIssuePage.isButtonWithTextPresent("In Progress"), true);
 
-
-            //assertTrue(newIssuePage.isButtonWithTextPresent("In Progress"));
+            assertTrue(newIssuePage.isButtonWithTextPresent("In Progress"));
 
             newIssuePage.clickWorkflowButton();
             newIssuePage.selectDoneButton();
@@ -480,29 +476,7 @@ public class  EditIssueTest {
 
             }
 
-    @TestCase(id = "1")//--------------------------------------------------Julia
-    @Test(groups = {"UI, SKIPP"})
-    public void checkButtonDoneWork() {
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        DashBoardPage dashBoardPage = new DashBoardPage();
-        IssuePage issuePage = new IssuePage();
-
-        String parentIssueId = "QAAUT-19";
-
-        // TO DO steps and asserts
-        assertEquals(dashBoardPage.isOnThePage(), true);
-
-        issuePage.openExistingIssue(parentIssueId);
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
-
-
-
-         newIssuePage.clickWorkflowButton();
-         newIssuePage.selectDoneButton();
-
-
     }
 
 
-        }
+

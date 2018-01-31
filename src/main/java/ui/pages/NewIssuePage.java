@@ -460,16 +460,14 @@ public class NewIssuePage extends BasePage {
         return this;
     }
     public boolean isButtonWithTextPresent(String buttonText){
-        //By buttonSelector = statusButtonInProgress;
-        By buttonSelector = By.xpath(String.format(statusButtonInProgress.toString(), inProgressLocator));
+        By buttonSelector = statusButtonInProgress;
         try{
             driver.findElement(buttonSelector);
             return true;
         } catch (NoSuchElementException e){
             return false;
         }
-        //By.xpath(String.format("In Progress",buttonText));
-                //return driver.findElement(buttonSelector).isDisplayed();
+
     }
 
 
@@ -478,14 +476,7 @@ public class NewIssuePage extends BasePage {
 
 
 
-    //public NewIssuePage enterWorkflowButton(String workflowButton){
-    //waitTillBeAbleToClick(workflowLocator);
-    //driver.findElement(workflowLocator).clear();
-    //waitToBePresentAndSendKeys(workflowLocator, workflowButton);
-    //driver.findElement(workflowLocator).sendKeys(Keys.TAB);
-    //return this;
 
-    //}
 
 
     private By labelsFieldLocator = By
