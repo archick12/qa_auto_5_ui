@@ -444,7 +444,7 @@ public class  EditIssueTest {
 
         @TestCase(id = "1")//--------------------------------------------------Julia
     @Test(groups = {"UI"})
-     public void checkButtonWork() {
+     public void checkButtonWork() throws InterruptedException {
             NewIssuePage newIssuePage = new NewIssuePage();
             HeaderPage headerPage = new HeaderPage();
             DashBoardPage dashBoardPage = new DashBoardPage();
@@ -464,6 +464,15 @@ public class  EditIssueTest {
             newIssuePage.clickWorkflowButton();
             newIssuePage.selectInProgressButton();
 //TO DO NEED HELP
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            assertEquals(newIssuePage.isButtonWithTextPresent("In Progress"), true);
+
+
+            //assertTrue(newIssuePage.isButtonWithTextPresent("In Progress"));
 
             newIssuePage.clickWorkflowButton();
             newIssuePage.selectDoneButton();
