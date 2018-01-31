@@ -13,13 +13,17 @@
     <test name="UI Tests">
         <groups>
             <run>
-                <include name="CreateIssue"/>
+                <include name="UI"/>
                 <exclude name="SKIP"/>
             </run>
         </groups>
         <classes>
+            <class name="ui.EditIssueTest"/>
             <class name="ui.CreateIssueTest"/>
+            <class name="ui.SearchIssueTest"/>
+            <class name="ui.RefactoredIssueTest"/>
         </classes>
     </test>
+
 
 </suite>

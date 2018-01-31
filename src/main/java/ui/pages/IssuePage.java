@@ -78,49 +78,60 @@ public class IssuePage extends BasePage {
         super.openExistingIssue(url);
     }
 
-    public void openNewSubTask() throws InterruptedException {
+    public IssuePage openNewSubTask() throws InterruptedException {
         waitToBePresentAndClick(newSubtaskButtonLocator);
+        return this;
     }
 
-    public void shouldSeeSuccessPopUp() {
+    public IssuePage shouldSeeSuccessPopUp() {
         waitToBePresent(successPopUp);
+        return this;
     }
 
-    public void openSubtask() throws InterruptedException {
+    public IssuePage openSubtask() throws InterruptedException {
         waitToBePresentAndClick(subtaskLocator);
+        return this;
     }
 
-    public void clickMoreButton() {
+    public IssuePage clickMoreButton() {
         waitToBePresentAndClick(moreButtonLocator);
+        return this;
     }
 
-    public void clickDeleteListItem() {
+    public IssuePage clickDeleteListItem() {
         waitToBePresentAndClick(deleteListItemLocator);
+        return this;
     }
 
-    public void deleteSubTask() {
+    public IssuePage deleteSubTask() {
         waitToBePresentAndClick(deleteButtonLocator);
+        return this;
     }
 
-    public void clickOnCommentBtn() {
+    public IssuePage clickOnCommentBtn() {
         waitToBePresentAndClick(commentBtnLocator);
+        return this;
     }
 
-    public void enterComment(String comment) {
+    public IssuePage enterComment(String comment) {
         waitToBePresentAndClick(commentTextType);
         waitToBePresentAndSendKeys(commentAreaLocator, comment);
+        return this;
     }
 
-    public void clickOnAddComment() {
+    public IssuePage clickOnAddComment() {
         waitToBePresentAndClick(commentAddBtnLocator);
+        return this;
     }
 
-    public void clickOnDeleteComment() {
+    public IssuePage clickOnDeleteComment() {
         waitToBePresentAndClick(commentDeleteBtnLocator);
+        return this;
     }
 
-    public void confirmDeletionOfComment() {
+    public IssuePage confirmDeletionOfComment() {
         waitToBePresentAndClick(commentDeletePopUpBtnLocator);
+        return this;
     }
 
     public IssuePage clickOnEditButton() {

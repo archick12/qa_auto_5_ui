@@ -68,7 +68,7 @@ public class BasePage {
     }
 
     protected void waitToBePresentAndSendKeys(By locator, String keys) {
-        logger.info("WAIT ELEMENT TO BE PRESENT AND SEND KEYS: " + locator);
+        logger.info("WAIT ELEMENT TO BE PRESENT AND SEND KEYS: SEND " + keys + " TO "+ locator);
 
         WebElement element = null;
 
@@ -108,11 +108,11 @@ public class BasePage {
         try {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
-            element.click();
+            element.submit();
         } catch (StaleElementReferenceException ignored) {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
-            element.click();
+            element.submit();
         }
 
     }
