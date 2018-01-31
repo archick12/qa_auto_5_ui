@@ -460,6 +460,20 @@ public class NewIssuePage extends BasePage {
     return this;
   }
 
+
+
+  //public NewIssuePage enterWorkflowButton(String workflowButton){
+    //waitTillBeAbleToClick(workflowLocator);
+    //driver.findElement(workflowLocator).clear();
+    //waitToBePresentAndSendKeys(workflowLocator, workflowButton);
+    //driver.findElement(workflowLocator).sendKeys(Keys.TAB);
+    //return this;
+
+  //}
+
+
+
+
   private By labelsFieldLocator = By
       .xpath("//*[@class='labels-wrap value editable-field inactive']");
   private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");

@@ -76,7 +76,7 @@ public class RefactoredIssueTest {
     IssuePage issuePage = new IssuePage();
 
     String subTaskId = "QAAUT-12";
-    String commentText = "The comment is added";
+    String commentText = "Туц";
 
     assertEquals(dashBoardPage.isOnThePage(), true);
 

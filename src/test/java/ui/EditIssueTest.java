@@ -1,11 +1,13 @@
 package ui;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 import ui.pages.*;
 import utils.TestCase;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class  EditIssueTest {
     @BeforeGroups(groups = {"UI"})
@@ -23,24 +25,18 @@ public class  EditIssueTest {
     }
 
     @TestCase(id = "1")//--------------------------------------------------Алена
-    @Test(groups = {"UI"})
-     public void addLabletoIssue(){
+    @Test(groups = {"UI, SKIPP"})
+     public void checkTestWork(){
     NewIssuePage newIssuePage = new NewIssuePage();
     HeaderPage headerPage = new HeaderPage();
+    DashBoardPage dashBoardPage = new DashBoardPage();
     IssuePage issuePage = new IssuePage();
 
-    String parentIssueId = "QAAUT-4";
-    String label = "My_label";
+    String parentIssueId = "Your Issue ID";
 
-        headerPage.search(parentIssueId);
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
+    // TO DO steps and asserts
 
-        newIssuePage.clickLabelField();
-        newIssuePage.addLabel(label);
-        newIssuePage.clickDescriptionField();
-        assertEquals(newIssuePage.isAddedLabelPresent(),true);
-
-
+         newIssuePage.clickCreateIssueButton();//////это я проверяла, запускается ли тест
 
 
     }
@@ -334,7 +330,7 @@ public class  EditIssueTest {
 
     //    --------------------------------------------------Настя
     @TestCase(id = "4")
-    @Test(groups = {"UI,SKIPP"})
+    @Test(groups = {"UI, SKIPP"})
 
     public void AddComment() {
         NewIssuePage newIssuePage = new NewIssuePage();
@@ -447,7 +443,7 @@ public class  EditIssueTest {
 
 
         @TestCase(id = "1")//--------------------------------------------------Julia
-    @Test(groups = {"UI, SKIPP"})
+    @Test(groups = {"UI"})
      public void checkButtonWork() {
             NewIssuePage newIssuePage = new NewIssuePage();
             HeaderPage headerPage = new HeaderPage();
@@ -455,6 +451,7 @@ public class  EditIssueTest {
             IssuePage issuePage = new IssuePage();
 
             String parentIssueId = "QAAUT-19";
+            String statusOfTheIssue = "In Progress";
 
             // TO DO steps and asserts
             assertEquals(dashBoardPage.isOnThePage(), true);
@@ -462,20 +459,20 @@ public class  EditIssueTest {
             issuePage.openExistingIssue(parentIssueId);
             assertEquals(issuePage.isOnThePage(parentIssueId), true);
 
+
+
             newIssuePage.clickWorkflowButton();
             newIssuePage.selectInProgressButton();
+//TO DO NEED HELP
 
-
-
-
-           // newIssuePage.clickWorkflowButton();
-          //  newIssuePage.selectDoneButton();
+            newIssuePage.clickWorkflowButton();
+            newIssuePage.selectDoneButton();
 
 
             }
 
     @TestCase(id = "1")//--------------------------------------------------Julia
-    @Test(groups = {"UI,SKIPP"})
+    @Test(groups = {"UI, SKIPP"})
     public void checkButtonDoneWork() {
         NewIssuePage newIssuePage = new NewIssuePage();
         HeaderPage headerPage = new HeaderPage();
