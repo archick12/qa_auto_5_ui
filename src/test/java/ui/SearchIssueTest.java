@@ -74,19 +74,27 @@ public class SearchIssueTest {
     public void searchByType() throws InterruptedException {
         //__________________________________check Bug type
         searchPage.SearchBugs();
+        searchPage.waitForNotPending();
         assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountBugsOnPage());
+        logger.info("ASSERTION PASSED: bugs");
         searchPage.SearchBugs();
         //__________________________________check Epic type
         searchPage.SearchEpics();
+        searchPage.waitForNotPending();
         assertEquals(searchPage.CountIssuesOnPage(),searchPage.CountEpicsOnPage());
+        logger.info("ASSERTION PASSED: epics");
         searchPage.SearchEpics();
         //__________________________________ check Story type
         searchPage.FindSeachType("Story");
+        searchPage.waitForNotPending();
         assertEquals(searchPage.CountIssuesOnPage(),searchPage.CountStoriesOnPage());
+        logger.info("ASSERTION PASSED: stories");
         searchPage.SearchStories();
         //_________________________________________ check Sub-task type
         searchPage.SearchAllSubTasks();
+        searchPage.waitForNotPending();
         assertEquals(searchPage.CountIssuesOnPage(),searchPage.CountSubTasksOnPage()+ searchPage.CountSubDefectsOnPage());
+        logger.info("ASSERTION PASSED: sub-tasks");
         searchPage.SearchAllSubTasks();
     }
 
