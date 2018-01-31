@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 import ui.pages.*;
+import utils.ListenerTest;
 import utils.TestCase;
 
 import java.util.List;
@@ -44,15 +45,18 @@ public class SearchIssueTest {
 
     }
 
-    @TestCase(id = "1")
+    @TestCase(id = "1") //Kate
     @Test(groups = {"UI"})
     public void searchByAssignee() throws InterruptedException {
+        String username = ListenerTest.properties.get("username");
 
         searchPage.clickAssigneeButton();
-        int a = 0;
-    }
+        Thread.sleep(1000);
+        searchPage.SearchAssigneeCurrentUserIssue();
+        searchPage.clickAssigneeButton();
+        }
 
-    @TestCase(id = "2")
+    @TestCase(id = "2") //Dima
     @Test(groups = {"UI"})
     public void searchByProject() throws InterruptedException {
         String projectName = "qaauto5";
@@ -69,7 +73,7 @@ public class SearchIssueTest {
         }
     }
 
-    @TestCase(id = "С8")
+    @TestCase(id = "3") //Artem
     @Test(groups = {"UI"})
     public void searchByType() throws InterruptedException {
         //__________________________________check Bug type
@@ -90,7 +94,7 @@ public class SearchIssueTest {
         searchPage.SearchAllSubTasks();
     }
 
-    @TestCase(id = "4")
+    @TestCase(id = "4") //Maxim
     @Test(groups = {"UI"})
     public void searchByStatus() throws InterruptedException {
 
