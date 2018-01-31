@@ -40,7 +40,7 @@ public class CreateIssueTest {
 
 
   @TestCase(id = "C13") // annotation that holds number of test case in TestRail
-  @Test(groups = {"UI","CreateIssue", "SKIP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  @Test(groups = {"UI","CreateIssue","SKIP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void createNewStory() throws InterruptedException {
 
     NewIssuePage newIssuePage = new NewIssuePage();
@@ -89,11 +89,11 @@ public class CreateIssueTest {
     String issuePriority = "High";
 
     newIssuePage
-            .enterProjectTest(projectId)
-            .enterIssueTypeTest(issueType)
+            .enterProject(projectId)
+            .enterIssueType(issueType)
             .fillSummary(taskSummary)
-            .fillDescriptionTest(taskDescription)
-            .selectPriorityTest(issuePriority)
+            .fillDescription(taskDescription)
+            .selectPriority(issuePriority)
             .clickSubmitButton()
             .clickNewIssueLinkOnSuccessPopup();
 
