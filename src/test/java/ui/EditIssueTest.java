@@ -10,6 +10,7 @@ import java.awt.datatransfer.StringSelection;
 import java.io.File;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class  EditIssueTest {
     @BeforeGroups(groups = {"UI"})
@@ -253,19 +254,39 @@ public class  EditIssueTest {
 
 
 
+    @TestCase(id = "1")//--------------------------------------------------Nata
+    @Test(groups = {"UI"})
+    public void checkAssignUser() {
+        NewIssuePage newIssuePage = new NewIssuePage();
+        HeaderPage headerPage = new HeaderPage();
+        DashBoardPage dashBoardPage = new DashBoardPage();
+        IssuePage issuePage = new IssuePage();
 
-    //    @TestCase(id = "1")--------------------------------------------------Наташа
-//    @Test(groups = {"UI"})
-//    // public void .........(){
-//    NewIssuePage newIssuePage = new NewIssuePage();
-//    HeaderPage headerPage = new HeaderPage();
-//    DashBoardPage dashBoardPage = new DashBoardPage();
-//    IssuePage issuePage = new IssuePage();
-//
-//    String parentIssueId = "Your Issue";
+        String parentIssueId = "QAAUT-19";
+        String addComment = "Great!";
 
-    // TO DO steps and asserts
-    //}
+        // TO DO steps and asserts
+        assertEquals(dashBoardPage.isOnThePage(), true);
+
+        issuePage.openExistingIssue(parentIssueId);
+        assertEquals(issuePage.isOnThePage(parentIssueId), true);
+
+        newIssuePage.selectAssignFieldButton();
+//        newIssuePage.selectTextButton();
+        newIssuePage.addComment();
+        newIssuePage.selectAssignPerson();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(newIssuePage.assignPersonIsPresent("bobulan.nataliya"));
+//        newIssuePage.selectAssignButton();
+
+    }
+
 
 
 

@@ -2,6 +2,7 @@ package ui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import ui.utils.RemoteDriverManager;
 
@@ -522,4 +523,70 @@ public class NewIssuePage extends BasePage {
 
   return this;
 }
+
+
+
+
+    private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
+    private By selectDropDownButton = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']//*[text()='More']");
+    private By selectAssignPerson = By.xpath("//*[@id='assignee-field']");
+    private By addComment = By.xpath("//*[@id='comment-wiki-edit']//*[@class='textarea long-field wiki-textfield mentionable wiki-editor-initialised wiki-edit-wrapped']");
+    private By selectAssignButton = By.xpath("//*[@class='buttons-container form-footer']//*[@class='aui-button']");
+    private By selectTextButton = By.xpath("//*[@id='aui-uid-5']");
+    private String assignedPersonLocator = "//*[@id='assignee-val']//*[contains(@id,'%s')]";
+
+
+    public NewIssuePage selectAssignFieldButton() {
+        driver.findElement(selectAssignFieldButton).click();
+        return this;
+    }
+
+    public NewIssuePage selectDropDownButton() {
+        driver.findElement(selectDropDownButton).click();
+        return this;
+    }
+
+    public NewIssuePage selectAssignPerson() {
+
+        driver.findElement(selectAssignPerson).clear();
+        driver.findElement(selectAssignPerson).sendKeys("bobulan.nataliya");
+        driver.findElement(selectAssignPerson).sendKeys(Keys.ENTER);
+        return this;
+    }
+
+    public NewIssuePage addComment() {
+        driver.findElement(addComment);
+        driver.findElement(addComment).sendKeys("Great");
+        return this;
+
+    }
+
+    public NewIssuePage selectAssignButton() {
+        driver.findElement(selectAssignButton).click();
+        return this;
+    }
+
+    public NewIssuePage checkThatDropdownListItemIsPresent(String itemText) {
+        driver.findElement(selectAssignButton).click();
+
+        String.format(itemText, selectAssignPerson); // %s
+        return this;
+    }
+
+    public NewIssuePage selectTextButton() {
+        driver.findElement(selectTextButton).click();
+        return this;
+    }
+
+
+    public Boolean assignPersonIsPresent(String assigneeName) {
+        By assignedPerson = By.xpath(String.format(assignedPersonLocator.toString(), assigneeName));
+        try {
+            driver.findElement(assignedPerson);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 }
+
