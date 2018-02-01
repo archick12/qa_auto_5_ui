@@ -48,12 +48,19 @@ public class SearchIssueTest {
     @TestCase(id = "1") //Kate
     @Test(groups = {"UI"})
     public void searchByAssignee() throws InterruptedException {
-        String username = ListenerTest.properties.get("username");
-
-        searchPage.clickAssigneeButton();
-        Thread.sleep(1000);
-        searchPage.SearchAssigneeCurrentUserIssue();
-        searchPage.clickAssigneeButton();
+       // String username = ListenerTest.properties.get("username");
+    
+        searchPage.clickAssigneeButton()             //кликаем, что бы развернуть список
+                  .SearchAssigneeCurrentUserIssue()  //устанавливаем галочку на 'Current User' чекбокс
+                  .clickAssigneeButton();            //кликаем, что бы свернуть список
+        //TO DO добавить проверку
+        
+        searchPage.clickAssigneeButton()             //кликаем, что бы развернуть список
+                  .SearchAssigneeCurrentUserIssue()  //снимаем галочку в 'Current User' чекбоксе
+                  .SearchUnassignedIssue()           //устанавливаем галочку на 'Unassigned' чекбокс
+                  .clickAssigneeButton();            //кликаем, что бы свернуть список
+        //TO DO добавить проверку
+        
         }
 
     @TestCase(id = "2") //Dima
