@@ -76,7 +76,7 @@ public class CreateIssueTest {
   }
 
   // Marina S test
-  @TestCase(id = "C1") // annotation that holds number of test case in TestRail
+  @TestCase(id = "C9") // annotation that holds number of test case in TestRail
   @Test(groups = {"UI","CreateIssue"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void createNewTask() throws InterruptedException {
 
