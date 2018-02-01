@@ -92,14 +92,14 @@ public class CreateIssueTest {
       String issuePriority = "High";
       String issueLabel = "QAAuto5";
 
-      newIssuePage.enterProject(projectId);
-      newIssuePage.enterIssueType(issueType);
-      newIssuePage.fillSummary(bugSummary);
-      newIssuePage.fillDescription(bugDescription);
-      newIssuePage.selectPriority(issuePriority);
-      newIssuePage.addLabel(issueLabel);
-      newIssuePage.assignUser();
-      newIssuePage.clickSubmitButton();
+      newIssuePage.enterProject(projectId)
+                  .enterIssueType(issueType)
+                  .fillSummary(bugSummary)
+                  .fillDescription(bugDescription)
+                  .selectPriority(issuePriority)
+                  .addLabel(issueLabel)
+                  .assignUser()
+                  .clickSubmitButton();
 
      /* issuePage.shouldSeeSuccessPopUp();
       newIssuePage.clickNewIssueLinkOnSuccessPopup(); */
