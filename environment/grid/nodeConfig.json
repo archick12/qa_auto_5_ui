@@ -1,21 +1,25 @@
 {
   "capabilities": [
     {
-      "browserName": "chrome",
+      "browserName": "firefox",
       "maxInstances": 5,
-      "marionette": false,
+      "marionette": true,
       "seleniumProtocol": "WebDriver"
     },
     {
-      "browserName": "firefox",
+      "browserName": "chrome",
       "maxInstances": 5,
       "marionette": false,
       "seleniumProtocol": "WebDriver"
     }
   ],
   "port": 5555,
+  "sessionTimeout": 60,
+  "cleanUpCycle": 3000,
   "hub": "http://localhost:4444",
   "hubHost": "localhost",
   "register": true,
-  "maxSession": 5
+  "maxSession": 5,
+  "Dwebdriver.gecko.driver=/Users/Julia/Desktop/PROJECT/qa_auto_5_initial/environment/grid": "",
+  "Dwebdriver.chrome.driver=/Users/Julia/Desktop/PROJECT/qa_auto_5_initial/environment/grid": ""
 }
