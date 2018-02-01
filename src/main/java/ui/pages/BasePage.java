@@ -43,7 +43,7 @@ public class BasePage {
      */
     protected void waitToBePresentIn(By locator, int timeOutInSeconds) {
         logger.info("WAIT ELEMENT TO BE PRESENT: " + locator + " in " + timeOutInSeconds + " seconds");
-        (new WebDriverWait(driver, timeOutInSeconds))
+        (new WebDriverWait(driver, timeOutInSeconds))    
                 .until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
