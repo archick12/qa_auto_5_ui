@@ -448,7 +448,6 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-
     public NewIssuePage selectInProgressButton() {
         waitToBePresentAndClick(inProgressLocator);
 
@@ -459,7 +458,7 @@ public class NewIssuePage extends BasePage {
         waitToBePresentAndClick(doneLocator);
         return this;
     }
-    public boolean isButtonWithTextPresent(String buttonText){
+    public boolean isButtonWithTextPresent(){
         By buttonSelector = statusButtonInProgress;
         try{
             driver.findElement(buttonSelector);
@@ -469,6 +468,8 @@ public class NewIssuePage extends BasePage {
         }
 
     }
+
+
 
 
 

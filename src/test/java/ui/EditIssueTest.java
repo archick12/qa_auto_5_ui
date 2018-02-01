@@ -459,8 +459,14 @@ public class  EditIssueTest {
             issuePage.openExistingIssue(parentIssueId);
             assertEquals(issuePage.isOnThePage(parentIssueId), true);
 
-            newIssuePage.clickWorkflowButton();
-            newIssuePage.selectInProgressButton();
+            if(newIssuePage.isButtonWithTextPresent()){
+                newIssuePage.clickWorkflowButton();
+                newIssuePage.selectDoneButton();
+                return;
+            }else{
+                newIssuePage.clickWorkflowButton();
+                newIssuePage.selectInProgressButton();
+            }
 
             try {
                 Thread.sleep(3000);
@@ -468,7 +474,7 @@ public class  EditIssueTest {
                 e.printStackTrace();
             }
 
-            assertTrue(newIssuePage.isButtonWithTextPresent("In Progress"));
+            assertTrue(newIssuePage.isButtonWithTextPresent());
 
             newIssuePage.clickWorkflowButton();
             newIssuePage.selectDoneButton();
