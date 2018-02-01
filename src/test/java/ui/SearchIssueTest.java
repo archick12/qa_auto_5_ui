@@ -50,15 +50,22 @@ public class SearchIssueTest {
     public void searchByAssignee() throws InterruptedException {
        // String username = ListenerTest.properties.get("username");
     
-        searchPage.clickAssigneeButton()             //кликаем, что бы развернуть список
-                  .SearchAssigneeCurrentUserIssue()  //устанавливаем галочку на 'Current User' чекбокс
-                  .clickAssigneeButton();            //кликаем, что бы свернуть список
+        searchPage.clickAssigneeButton()                //кликаем, что бы развернуть список
+                  .clickAssigneeCurrentUserCheckbox()  //устанавливаем галочку на 'Current User' чекбокс
+                  .clickAssigneeButton();              //кликаем, что бы свернуть список
+        //TO DO добавить проверку
+        
+        searchPage.clickAssigneeButton()               //кликаем, что бы развернуть список
+                  .clickAssigneeCurrentUserCheckbox()  //снимаем галочку в 'Current User' чекбоксе
+                  .clickAssigneeUnassignedCheckbox()   //устанавливаем галочку на 'Unassigned' чекбокс
+                  .clickAssigneeButton();              //кликаем, что бы свернуть список
         //TO DO добавить проверку
         
         searchPage.clickAssigneeButton()             //кликаем, что бы развернуть список
-                  .SearchAssigneeCurrentUserIssue()  //снимаем галочку в 'Current User' чекбоксе
-                  .SearchUnassignedIssue()           //устанавливаем галочку на 'Unassigned' чекбокс
-                  .clickAssigneeButton();            //кликаем, что бы свернуть список
+                  .clickAssigneeUnassignedCheckbox()  //снимаем галочку в 'Unassigned' чекбоксе
+                  .clickAssigneeFindUserField();     //устанавливаем курсов в поле поиска пользователей
+        //TO DO добавить ввод текста
+        searchPage.clickAssigneeButton()             //кликаем, что бы свернуть список        
         //TO DO добавить проверку
         
         }
