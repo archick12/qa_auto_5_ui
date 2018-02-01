@@ -29,7 +29,7 @@ public class  EditIssueTest {
 
     }
 
-    @TestCase(id = "1")//--------------------------------------------------Алена
+    @TestCase(id = "C7")//--------------------------------------------------Алена
 
     @Test(groups = {"UI"})
     public void addLabletoIssue() {
@@ -46,8 +46,8 @@ public class  EditIssueTest {
         assertEquals(newIssuePage.isAddedLabelPresent(label), true);
     }
 
-    @TestCase(id = "2")//--------------------------------------------------Алена
-    @Test(groups = {"UI"})
+    @TestCase(id = "C23")//--------------------------------------------------Алена
+    @Test(groups = {"UI", "SKIP"})
     public void addAttachmenttoIssue() throws AWTException {
         NewIssuePage newIssuePage = new NewIssuePage();
         HeaderPage headerPage = new HeaderPage();
@@ -66,47 +66,45 @@ public class  EditIssueTest {
     }
 
 
-        //    @TestCase(id = "1")--------------------------------------------------Марина
-//    @Test(groups = {"UI"})
-//    // public void .........(){
-//    NewIssuePage newIssuePage = new NewIssuePage();
-//    HeaderPage headerPage = new HeaderPage();
-//    DashBoardPage dashBoardPage = new DashBoardPage();
-//    IssuePage issuePage = new IssuePage();
-//
-//    String parentIssueId = "Your Issue";
+    @TestCase(id = "C24")//--------------------------------------------------Марина
+    @Test(groups = {"UI"})
+    public void selectPriority() {
+        NewIssuePage newIssuePage = new NewIssuePage();
+        HeaderPage headerPage = new HeaderPage();
+        IssuePage issuePage = new IssuePage();
+        String parentIssueId = "QAAUT-1";
+        String issuePriority = "High";
+        headerPage.search(parentIssueId);
+        assertEquals(issuePage.isOnThePage(parentIssueId), true);
+        issuePage.clickEditButton();
+        newIssuePage.selectPriority(issuePriority);
+        issuePage.clickUpdateButtonPopUp();
+        assertEquals(issuePage.isIssuePriorityCorrect(issuePriority), true);
+    }
 
-    // TO DO steps and asserts
-    //}
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    @TestCase(id = "C25")//--------------------------------------------------Марина
+    @Test(groups = {"UI"})
+    public void createSubTask() throws InterruptedException {
+        NewIssuePage newIssuePage = new NewIssuePage();
+        HeaderPage headerPage = new HeaderPage();
+        IssuePage issuePage = new IssuePage();
+        String parentIssueId = "QAAUT-1";
+        String subTaskSummary = "New sub-task created";
+        String addLabel = "olafff";
 
-    @TestCase(id = "1")//--------------------------------------------------Nata
+        headerPage.search(parentIssueId);
+        assertEquals(issuePage.isOnThePage(parentIssueId), true);
+        issuePage.openNewSubTask();
+        newIssuePage
+                .fillSummary(subTaskSummary)
+                .addLabel(addLabel)
+                .clickAssignToMeButton()
+                .clickSubmitButton();
+        assertEquals(issuePage.isSubTaskSummaryPresent(subTaskSummary), true);
+    }
+
+
+    @TestCase(id = "C5")//--------------------------------------------------Nata
     @Test(groups = {"UI"})
     public void checkAssignUser() {
         NewIssuePage newIssuePage = new NewIssuePage();
@@ -140,8 +138,8 @@ public class  EditIssueTest {
     }
 
     //    --------------------------------------------------Настя
-    @TestCase(id = "4")
-    @Test(groups = {"UI, SKIPP"})
+    @TestCase(id = "C3")
+    @Test(groups = {"UI"})
 
     public void AddComment() {
         NewIssuePage newIssuePage = new NewIssuePage();
@@ -166,41 +164,39 @@ public class  EditIssueTest {
 
     }
 
-    @TestCase(id = "1")//--------------------------------------------------Julia
+    @TestCase(id = "C6")//--------------------------------------------------Julia
     @Test(groups = {"UI"})
-     public void checkButtonWork() throws InterruptedException {
-            NewIssuePage newIssuePage = new NewIssuePage();
-            HeaderPage headerPage = new HeaderPage();
-            DashBoardPage dashBoardPage = new DashBoardPage();
-            IssuePage issuePage = new IssuePage();
+    public void checkButtonWork() throws InterruptedException {
+        NewIssuePage newIssuePage = new NewIssuePage();
+        HeaderPage headerPage = new HeaderPage();
+        DashBoardPage dashBoardPage = new DashBoardPage();
+        IssuePage issuePage = new IssuePage();
 
-            String parentIssueId = "QAAUT-19";
-            String statusOfTheIssue = "In Progress";
+        String parentIssueId = "QAAUT-19";
+        String statusOfTheIssue = "In Progress";
 
-            // TO DO steps and asserts
-            assertEquals(dashBoardPage.isOnThePage(), true);
+        // TO DO steps and asserts
+        assertEquals(dashBoardPage.isOnThePage(), true);
 
-            issuePage.openExistingIssue(parentIssueId);
-            assertEquals(issuePage.isOnThePage(parentIssueId), true);
+        issuePage.openExistingIssue(parentIssueId);
+        assertEquals(issuePage.isOnThePage(parentIssueId), true);
 
-            if(newIssuePage.isButtonWithTextPresent()){
-                newIssuePage.clickWorkflowButton();
-                newIssuePage.selectDoneButton();
-                return;
-            }else{
-                newIssuePage.clickWorkflowButton();
-                newIssuePage.selectInProgressButton();
-            }
-
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e){
-                e.printStackTrace();
-            }
-
-            assertTrue(newIssuePage.isButtonWithTextPresent());
-
+        if(newIssuePage.isButtonWithTextPresent()){
             newIssuePage.clickWorkflowButton();
             newIssuePage.selectDoneButton();
-            }
+                return;
+        }else{
+            newIssuePage.clickWorkflowButton();
+            newIssuePage.selectInProgressButton();
+        }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        assertTrue(newIssuePage.isButtonWithTextPresent());
+
+        newIssuePage.clickWorkflowButton();
+        newIssuePage.selectDoneButton();
+        }
     }

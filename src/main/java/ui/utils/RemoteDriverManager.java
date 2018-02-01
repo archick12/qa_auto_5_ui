@@ -13,7 +13,7 @@ public class RemoteDriverManager {
         webDriver.set(driver);
     }
 
-    static void closeDriver() {
+    public static void closeDriver() {
         webDriver.get().quit();
     }
 }
