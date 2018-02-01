@@ -19,6 +19,19 @@ public class IssuePage extends BasePage {
     private By selectedForDevButton = By.xpath("//*[@id='action_id_21']/span[@class='trigger-label']");
     private By shareBtnLocator = By.id("jira-share-trigger");
     private By exportBtnLocator = By.id("viewissue-export");
+    // my selectors
+    private By viewWorkflow = By.id("opsbar-transitions_more");
+    private By logWorkButton = By.xpath("//*[@id=\"log-work\"]");
+    private By agileBoardButton = By.id("greenhopper-rapidboard-operation");
+    private By rankToTopButton = By.id("greenhopper-rank-top-operation");
+    private By rankToBottomButton = By.id("greenhopper-rank-bottom-operation");
+    private By createZephyrTestButton = By.id("zephyr-create-test");
+    private By attachFilesButton = By.id("attach-file");
+    private By linkMoreButton = By.id("linkMoreButton");
+    private By cloneMoreButton = By.id("clone-issue");
+    private By labelsMoreButton = By.id("edit-labels");
+    private By issueTypeButton = By.xpath("//*[@id=\"type-val\"]");
+
 
     // issue details
     private By projectIdLocator = By.id("project-name-val");
@@ -66,49 +79,182 @@ public class IssuePage extends BasePage {
         super.openExistingIssue(url);
     }
 
-    public void openNewSubTask() throws InterruptedException {
+    public IssuePage openNewSubTask() throws InterruptedException {
         waitToBePresentAndClick(newSubtaskButtonLocator);
+        return this;
     }
 
-    public void shouldSeeSuccessPopUp() {
+    public IssuePage shouldSeeSuccessPopUp() {
         waitToBePresent(successPopUp);
+        return this;
     }
 
-    public void openSubtask() throws InterruptedException {
+    public IssuePage openSubtask() throws InterruptedException {
         waitToBePresentAndClick(subtaskLocator);
+        return this;
     }
 
-    public void clickMoreButton() {
+    public IssuePage clickMoreButton() {
         waitToBePresentAndClick(moreButtonLocator);
+        return this;
     }
 
-    public void clickDeleteListItem() {
+    public IssuePage clickDeleteListItem() {
         waitToBePresentAndClick(deleteListItemLocator);
+        return this;
     }
 
-    public void deleteSubTask() {
+    public IssuePage deleteSubTask() {
         waitToBePresentAndClick(deleteButtonLocator);
+        return this;
     }
 
-    public void clickOnCommentBtn() {
+    public IssuePage clickOnCommentBtn() {
         waitToBePresentAndClick(commentBtnLocator);
+        return this;
     }
 
-    public void enterComment(String comment) {
+    public IssuePage enterComment(String comment) {
         waitToBePresentAndClick(commentTextType);
         waitToBePresentAndSendKeys(commentAreaLocator, comment);
+        return this;
     }
 
-    public void clickOnAddComment() {
+    public IssuePage clickOnAddComment() {
         waitToBePresentAndClick(commentAddBtnLocator);
+        return this;
     }
 
-    public void clickOnDeleteComment() {
+    public IssuePage clickOnDeleteComment() {
         waitToBePresentAndClick(commentDeleteBtnLocator);
+        return this;
     }
 
-    public void confirmDeletionOfComment() {
+    public IssuePage confirmDeletionOfComment() {
         waitToBePresentAndClick(commentDeletePopUpBtnLocator);
+        return this;
+    }
+
+    public IssuePage clickOnEditButton() {
+
+        waitToBePresentAndClick(editIssueButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnHeaderCommentButton() {
+
+        waitToBePresentAndClick(commentIssueButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnAssignButton() {
+
+        waitToBePresentAndClick(assignIssueButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnWorkflowButton() {
+
+        waitToBePresentAndClick(workflowButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnBacklogButton() {
+
+        waitToBePresentAndClick(backlogButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnSelectedForDevButton() {
+
+        waitToBePresentAndClick(selectedForDevButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnShareButton() {
+
+        waitToBePresentAndClick(shareBtnLocator);
+
+        return this;
+    }
+    public IssuePage findViewWorkflow() {
+
+       driver.findElement(viewWorkflow);
+
+        return this;
+    }
+    public IssuePage findLogWorkButton() {
+
+        driver.findElement(logWorkButton);
+
+        return this;
+    }
+    public IssuePage findAgileBoardButton() {
+
+        driver.findElement(agileBoardButton);
+
+        return this;
+    }
+    public IssuePage findRankToTopButton() {
+
+        driver.findElement(rankToTopButton);
+
+        return this;
+    }
+    public IssuePage findRankToBottomButton() {
+
+        driver.findElement(rankToBottomButton);
+
+        return this;
+    }
+    public IssuePage findCreateZephyrTestButton() {
+
+        driver.findElement(createZephyrTestButton);
+
+        return this;
+    }
+    public IssuePage findAttachFilesButton() {
+
+        driver.findElement(attachFilesButton);
+
+        return this;
+    }
+    public IssuePage findLinkMoreButton() {
+
+        driver.findElement(linkMoreButton);
+
+        return this;
+    }
+    public IssuePage findCloneMoreButton() {
+
+        driver.findElement(cloneMoreButton);
+
+        return this;
+    }
+    public IssuePage findLabelsMoreButton() {
+
+        driver.findElement(labelsMoreButton);
+
+        return this;
+    }
+    public IssuePage findIssueTypeButton() {
+
+        driver.findElement(issueTypeButton);
+
+        return this;
+    }
+
+    public IssuePage clickOnExportButton() {
+
+        waitToBePresentAndClick(exportBtnLocator);
+
+        return this;
     }
 
     // Checks
