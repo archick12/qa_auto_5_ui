@@ -40,7 +40,7 @@ public class CreateIssueTest {
 
 
   @TestCase(id = "C13") // annotation that holds number of test case in TestRail
-  @Test(groups = {"UI","CreateIssue"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  @Test(groups = {"UI","CreateIssue","SKIP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void createNewStory() throws InterruptedException {
 
     NewIssuePage newIssuePage = new NewIssuePage();
@@ -74,4 +74,29 @@ public class CreateIssueTest {
     assertEquals(true, issuePage.isIssueDescriptionCorrect(storyDescription));
     assertEquals(true, issuePage.isIssueAssigneeCorrect());
   }
+
+  // Marina S test
+  @TestCase(id = "C9") // annotation that holds number of test case in TestRail
+  @Test(groups = {"UI","CreateIssue"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  public void createNewTask() throws InterruptedException {
+
+    NewIssuePage newIssuePage = new NewIssuePage();
+
+    String projectId = "QAAuto5";
+    String issueType = "Task";
+    String taskSummary = "Team 2 Task";
+    String taskDescription = "Team 2 description";
+    String issuePriority = "High";
+
+    newIssuePage
+            .enterProject(projectId)
+            .enterIssueType(issueType)
+            .fillSummary(taskSummary)
+            .fillDescription(taskDescription)
+            .selectPriority(issuePriority)
+            .clickSubmitButton()
+            .clickNewIssueLinkOnSuccessPopup();
+
+  }
+
 }
