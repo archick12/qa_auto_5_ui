@@ -1,5 +1,6 @@
 package ui;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 import ui.pages.*;
@@ -10,7 +11,8 @@ import java.awt.datatransfer.StringSelection;
 import java.io.File;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
+
+import static org.testng.Assert.assertTrue;
 
 public class  EditIssueTest {
     @BeforeGroups(groups = {"UI"})
@@ -28,6 +30,7 @@ public class  EditIssueTest {
     }
 
     @TestCase(id = "1")//--------------------------------------------------Алена
+
     @Test(groups = {"UI"})
     public void addLabletoIssue() {
         NewIssuePage newIssuePage = new NewIssuePage();
@@ -63,98 +66,6 @@ public class  EditIssueTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //    @TestCase(id = "1")--------------------------------------------------Марина
 //    @Test(groups = {"UI"})
 //    // public void .........(){
@@ -167,92 +78,33 @@ public class  EditIssueTest {
 
     // TO DO steps and asserts
     //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
     @TestCase(id = "1")//--------------------------------------------------Nata
     @Test(groups = {"UI"})
@@ -287,97 +139,9 @@ public class  EditIssueTest {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //    --------------------------------------------------Настя
     @TestCase(id = "4")
-    @Test(groups = {"UI,SKIPP"})
+    @Test(groups = {"UI, SKIPP"})
 
     public void AddComment() {
         NewIssuePage newIssuePage = new NewIssuePage();
@@ -402,102 +166,16 @@ public class  EditIssueTest {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        @TestCase(id = "1")//--------------------------------------------------Julia
-    @Test(groups = {"UI, SKIPP"})
-     public void checkButtonWork() {
+    @TestCase(id = "1")//--------------------------------------------------Julia
+    @Test(groups = {"UI"})
+     public void checkButtonWork() throws InterruptedException {
             NewIssuePage newIssuePage = new NewIssuePage();
             HeaderPage headerPage = new HeaderPage();
             DashBoardPage dashBoardPage = new DashBoardPage();
             IssuePage issuePage = new IssuePage();
 
             String parentIssueId = "QAAUT-19";
+            String statusOfTheIssue = "In Progress";
 
             // TO DO steps and asserts
             assertEquals(dashBoardPage.isOnThePage(), true);
@@ -505,41 +183,24 @@ public class  EditIssueTest {
             issuePage.openExistingIssue(parentIssueId);
             assertEquals(issuePage.isOnThePage(parentIssueId), true);
 
-            newIssuePage.clickWorkflowButton();
-            newIssuePage.selectInProgressButton();
-
-
-
-
-           // newIssuePage.clickWorkflowButton();
-          //  newIssuePage.selectDoneButton();
-
-
+            if(newIssuePage.isButtonWithTextPresent()){
+                newIssuePage.clickWorkflowButton();
+                newIssuePage.selectDoneButton();
+                return;
+            }else{
+                newIssuePage.clickWorkflowButton();
+                newIssuePage.selectInProgressButton();
             }
 
-    @TestCase(id = "1")//--------------------------------------------------Julia
-    @Test(groups = {"UI,SKIPP"})
-    public void checkButtonDoneWork() {
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        DashBoardPage dashBoardPage = new DashBoardPage();
-        IssuePage issuePage = new IssuePage();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
 
-        String parentIssueId = "QAAUT-19";
+            assertTrue(newIssuePage.isButtonWithTextPresent());
 
-        // TO DO steps and asserts
-        assertEquals(dashBoardPage.isOnThePage(), true);
-
-        issuePage.openExistingIssue(parentIssueId);
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
-
-
-
-         newIssuePage.clickWorkflowButton();
-         newIssuePage.selectDoneButton();
-
-
+            newIssuePage.clickWorkflowButton();
+            newIssuePage.selectDoneButton();
+            }
     }
-
-
-        }

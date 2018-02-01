@@ -5,11 +5,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import ui.utils.RemoteDriverManager;
-
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-
 import static org.openqa.selenium.Keys.ENTER;
 
 public class NewIssuePage extends BasePage {
@@ -25,24 +23,16 @@ public class NewIssuePage extends BasePage {
   private By configureFiedlsLocator = By.id("qf-field-picker-trigger");
   private By showFieldsAllLocator = By.xpath("//a[@class='qf-unconfigurable']");
   private By showFieldsCustomLocator = By.xpath("//a[@class='qf-configurable']");
-  private By selectAssigneeLocator = By
-      .xpath("//*[contains(@class,'qf-picker-button')]//a[.='Assignee']");
-  private By selectAttachmentLocator = By
-      .xpath("//*[contains(@class,'qf-picker-button')]//a[.='Attachment']");
-  private By selectComponentsLocator = By
-      .xpath("//*[contains(@class,'qf-picker-button')]//a[.='Component/s']");
-  private By selectDescriptionLocator = By
-      .xpath("//*[contains(@class,'qf-picker-button')]//a[.='Description']");
-  private By selectFixVersionsLocator = By
-      .xpath("//*[contains(@class,'qf-picker-button')]//a[.='Fix Version/s']");
-  private By selectLabelsLocator = By
-      .xpath("//*[contains(@class,'qf-picker-button')]//a[.='Labels']");
+  private By selectAssigneeLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Assignee']");
+  private By selectAttachmentLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Attachment']");
+  private By selectComponentsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Component/s']");
+  private By selectDescriptionLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Description']");
+  private By selectFixVersionsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Fix Version/s']");
+  private By selectLabelsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Labels']");
   private By selectLinkedIssueLocator = By.xpath("//*[@data-field-id='issuelinks']");
-  private By selectPriorityLocator = By
-      .xpath("//*[contains(@class,'qf-picker-button')]//a[.='Priority']");
-  private By selectLinkToEpicLocator = By
-      .xpath("//*[contains(@class,'qf-picker-button')]//a[.='Ссылка на эпик']");
-
+  private By selectPriorityLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Priority']");
+  private By selectLinkToEpicLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Ссылка на эпик']");
+  
   //---Project
   private By fieldProjectLocator = By.id("project-field");
   private By projectSelectLocator = By.id("project-suggestions");
@@ -61,66 +51,42 @@ public class NewIssuePage extends BasePage {
 
   //---Description
   private By menuStyle = By.xpath("//*[@field-id='description']//child::*[text()='Style']");
-  private By iconBold = By
-      .xpath("//*[@field-id='description']//ancestor::*[@data-operation='bold']");
-  private By iconItalic = By
-      .xpath("//*[@field-id='description']//following::*[@data-operation='italic']");
-  private By iconUnderline = By
-      .xpath("//*[@field-id='description']//child::*[@data-operation='underline']");
-  private By iconTextColor = By
-      .xpath("//*[@field-id='description']//*[@original-title='Text color']");
-  private By moreColors = By
-      .xpath("//*[@field-id='description']//descendant::*[@data-operation='color-parameter']");
-  private By menuMore = By
-      .xpath("//*[@field-id='description']//parent::*[@original-title='More' ]");
-  private By menuLink = By
-      .xpath("//*[@field-id='description']//following::*[@original-title='Link (Ctrl+K)']");
-  private By menuAttachment = By
-      .xpath("//*[@class='aui-buttons']//child::*[@original-title='Attachment']");
-  private By iconBulletList = By.xpath(
-      "//*[@field-id='description']//following::*[@original-title='Bullet list (Ctrl+Shift+B)']");
-  private By iconNumberedList = By.xpath(
-      "//*[@field-id='description']//following::*[@original-title='Numbered list (Ctrl+Shift+N)']");
-  private By menuIcons = By
-      .xpath("//*[@field-id='description']//following::*[@original-title='Icons']");
-  private By menuOther = By
-      .xpath("//*[@field-id='description']//following::*[@original-title='Other']");
-  private By iconCollapseExpand = By
-      .xpath("//*[@field-id='description']//following::*[@original-title='Toggle visibility']");
+  private By iconBold = By.xpath("//*[@field-id='description']//ancestor::*[@data-operation='bold']");
+  private By iconItalic = By.xpath("//*[@field-id='description']//following::*[@data-operation='italic']");
+  private By iconUnderline = By.xpath("//*[@field-id='description']//child::*[@data-operation='underline']");
+  private By iconTextColor = By.xpath("//*[@field-id='description']//*[@original-title='Text color']");
+  private By moreColors = By.xpath("//*[@field-id='description']//descendant::*[@data-operation='color-parameter']");
+  private By menuMore = By.xpath("//*[@field-id='description']//parent::*[@original-title='More' ]");
+  private By menuLink = By.xpath("//*[@field-id='description']//following::*[@original-title='Link (Ctrl+K)']");
+  private By menuAttachment = By.xpath("//*[@class='aui-buttons']//child::*[@original-title='Attachment']");
+  private By iconBulletList = By.xpath("//*[@field-id='description']//following::*[@original-title='Bullet list (Ctrl+Shift+B)']");
+  private By iconNumberedList = By.xpath("//*[@field-id='description']//following::*[@original-title='Numbered list (Ctrl+Shift+N)']");
+  private By menuIcons = By.xpath("//*[@field-id='description']//following::*[@original-title='Icons']");
+  private By menuOther = By.xpath("//*[@field-id='description']//following::*[@original-title='Other']");
+  private By iconCollapseExpand = By.xpath("//*[@field-id='description']//following::*[@original-title='Toggle visibility']");
   private By editDescription = By.id("description-wiki-edit");
   private By tabVisual = By.xpath("//*[@data-mode='wysiwyg']//child::*[@id='aui-uid-0']");
   private By tabText = By.xpath("//*[@data-mode='source']");
-  private By iconUndo = By
-      .xpath("//*[@title='Undo']//child::span[@class='aui-icon aui-icon-small aui-iconfont-undo']");
+  private By iconUndo = By.xpath("//*[@title='Undo']//child::span[@class='aui-icon aui-icon-small aui-iconfont-undo']");
   private By iconRedo = By.xpath("//*[@title='Redo']");
 
   //---Priority
-  private By localHelp = By.xpath(
-      "//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
+  private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
   private By priorityFieldDefault = By.id("priority-field");
   private By priorityFieldSelect = By.id("priority-suggestions");
-  private By prioritySelectHighest = By
-      .xpath("//*[@id='priority-single-select']//following::*[a[text()='Highest']]");
+  private By prioritySelectHighest = By.xpath("//*[@id='priority-single-select']//following::*[a[text()='Highest']]");
   private By prioritySelectHigh = By.xpath("//*[@id='priority-single-select']//a[text()='High']");
   private By prioritySelectLow = By.xpath("//*[@id='priority-single-select']//a[text()='Low']");
-  private By prioritySelectLowest = By
-      .xpath("//*[@id='priority-single-select']//a[text()='Lowest']");
+  private By prioritySelectLowest = By.xpath("//*[@id='priority-single-select']//a[text()='Lowest']");
 
   //---Linked Issue
-  private By linkedIssuesDefault = By
-      .xpath("//*[@id='issuelinks-linktype'] //child::*[@value='blocks']");
-  private By linkedIssuesIsBlockedBy = By
-      .xpath("/*[@id='issuelinks-linktype'] //child::*[@value='is blocked by']");
-  private By linkedIssuesIsClones = By
-      .xpath("//*[@id='issuelinks-linktype'] //child::*[@value='clones']");
-  private By linkedIssuesIsClonedBy = By
-      .xpath("//*[@id='issuelinks-linktype'] //descendant::*[@value='is cloned by']");
-  private By linkedIssuesDuplicates = By
-      .xpath("//*[@id='issuelinks-linktype'] //descendant-or-self::*[@value='duplicates']");
-  private By linkedIssuesIsDuplicatedBy = By
-      .xpath("//*[@id='issuelinks-linktype'] //child::*[@value='is duplicated by']");
-  private By linkedIssuesRelatesTo = By
-      .xpath("//*[@id='issuelinks-linktype'] //child::*[@value='relates to']");
+  private By linkedIssuesDefault = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='blocks']");
+  private By linkedIssuesIsBlockedBy = By.xpath("/*[@id='issuelinks-linktype'] //child::*[@value='is blocked by']");
+  private By linkedIssuesIsClones = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='clones']");
+  private By linkedIssuesIsClonedBy = By.xpath("//*[@id='issuelinks-linktype'] //descendant::*[@value='is cloned by']");
+  private By linkedIssuesDuplicates = By.xpath("//*[@id='issuelinks-linktype'] //descendant-or-self::*[@value='duplicates']");
+  private By linkedIssuesIsDuplicatedBy = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='is duplicated by']");
+  private By linkedIssuesRelatesTo = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='relates to']");
 
   //---Labels
   private By labelsSelect = By.id("labels-textarea");
@@ -129,8 +95,7 @@ public class NewIssuePage extends BasePage {
   private By IssuePopup = By.xpath("//a[@class='issue-picker-popup']");
 
   //---Attachment
-  private By browseButton = By
-      .xpath("//*[@class='form-body']//child::*[@class='issue-drop-zone__button']");
+  private By browseButton = By.xpath("//*[@class='form-body']//child::*[@class='issue-drop-zone__button']");
 
   //---Locators for IssueSelector Pop-up
   private By pageHeader = By.xpath("//*[@class='aui-page-header-main']");
@@ -161,6 +126,27 @@ public class NewIssuePage extends BasePage {
   //---Cancel
   private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
   private By descriptionFieldLocator = By.id("description");
+  
+  //---Additional Locators for tests
+  private By workflowLocator = By.id("opsbar-transitions_more");
+  private By inProgressLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='In Progress']");
+  private By doneLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='Done']");
+  private By labelsFieldLocator = By.xpath("//*[@class='labels-wrap value editable-field inactive']");
+  private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");
+  private String addedLabelLocator =("//*[contains(@class,'labels-wrap value editable-field inactive')]//*[contains(text(),'%s')]");
+  private By selectForDevelopmentLocator = By.xpath("//*[@id='action_id_21']//*[@class='toolbar-trigger issueaction-workflow-transition']");
+  private By browseButtonLocator = By.xpath("//*[@class='issue-drop-zone__button']");
+  private String fileName = "//*[@class='attachment-content js-file-attachment']//*[contains(text(),'%s')]";
+  private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
+  private By selectDropDownButton = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']//*[text()='More']");
+  private By selectAssignPerson = By.xpath("//*[@id='assignee-field']");
+  private By addComment = By.xpath("//*[@id='comment-wiki-edit']//*[@class='textarea long-field wiki-textfield mentionable wiki-editor-initialised wiki-edit-wrapped']");
+  private By selectAssignButton = By.xpath("//*[@class='buttons-container form-footer']//*[@class='aui-button']");
+  private By selectTextButton = By.xpath("//*[@id='aui-uid-5']");
+  private String assignedPersonLocator = "//*[@id='assignee-val']//*[contains(@id,'%s')]";
+  private By statusButtonInProgress = By.xpath("//*[@id='status-val']//*[text()='In Progress']");
+  private By statusButtonDone = By.xpath("//*[@id='status-val']//*[text()='Done']");
+
 
   //---Create New Issue
   public NewIssuePage() {
@@ -182,8 +168,7 @@ public class NewIssuePage extends BasePage {
     waitToBePresentAndClick(newIssueLinkOnSuccessPopup);
     return this;
   }
-
-
+  
   //---Configure Fields
   public NewIssuePage clickConfigureFieldsButton() {
     waitToBePresentAndClick(configureFiedlsLocator);
@@ -294,7 +279,7 @@ public class NewIssuePage extends BasePage {
     return this;
   }
 
-  //Select Priority
+  //---Select Priority
   public NewIssuePage selectPriority(String priority) {
     waitTillBeAbleToClick(priorityFieldDefault);
     driver.findElement(priorityFieldDefault).clear();
@@ -307,13 +292,6 @@ public class NewIssuePage extends BasePage {
   public NewIssuePage addLabel(String issueLabel) {
     waitToBePresentAndSendKeys(labelsSelect, issueLabel);
     driver.findElement(labelsSelect).sendKeys(Keys.TAB);
-    return this;
-  }
-
-  public NewIssuePage assignUser(){
-    driver.findElement(assigneeFieldLocator).clear();
-    waitToBePresentAndSendKeys(assigneeFieldLocator, username);
-    driver.findElement(assigneeFieldLocator).sendKeys(Keys.TAB);
     return this;
   }
 
@@ -401,8 +379,9 @@ public class NewIssuePage extends BasePage {
     return this;
   }
 
-  //---Assignee User
-  public NewIssuePage assigneeUser() {
+    
+ //---Assign User
+  public NewIssuePage assignUser() {
     driver.findElement(assigneeFieldLocator).clear();
     waitToBePresentAndSendKeys(assigneeFieldLocator, username);
     driver.findElement(assigneeFieldLocator).sendKeys(Keys.TAB);
@@ -441,18 +420,11 @@ public class NewIssuePage extends BasePage {
     driver.findElement(cancelButtonLocator).click();
     return this;
   }
-
-  private By workflowLocator = By.id("opsbar-transitions_more");
-  private By inProgressLocator = By
-      .xpath("//*[@class='issueaction-workflow-transition']//*[text()='In Progress']");
-  private By doneLocator = By
-      .xpath("//*[@class='issueaction-workflow-transition']//*[text()='Done']");
-
+ //
   public NewIssuePage clickWorkflowButton() {
     driver.findElement(workflowLocator).click();
     return this;
   }
-
 
   public NewIssuePage selectInProgressButton() {
     waitToBePresentAndClick(inProgressLocator);
@@ -464,13 +436,6 @@ public class NewIssuePage extends BasePage {
     waitToBePresentAndClick(doneLocator);
     return this;
   }
-
-  private By labelsFieldLocator = By
-      .xpath("//*[@class='labels-wrap value editable-field inactive']");
-  private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");
-  private String addedLabelLocator =("//*[contains(@class,'labels-wrap value editable-field inactive')]//*[contains(text(),'%s')]");
-  private By selectForDevelopmentLocator = By.xpath(
-      "//*[@id='action_id_21']//*[@class='toolbar-trigger issueaction-workflow-transition']");
 
   public NewIssuePage clickLabelField() {
     waitToBePresentAndClick(labelsFieldLocator);
@@ -487,13 +452,11 @@ public class NewIssuePage extends BasePage {
     return waitToBePresentAndContainsText(By.xpath(selector), label);
   }
 
-  private By browseButtonLocator = By.xpath("//*[@class='issue-drop-zone__button']");
   public NewIssuePage clickBrowseButton() {
     waitToBePresentAndClick(browseButtonLocator);
     return this;
   }
-  private String fileName = "//*[@class='attachment-content js-file-attachment']//*[contains(text(),'%s')]";
-
+  
   public boolean isAttachmentPresent(String file){
     String selector = String.format(fileName, file);
     return waitToBePresentAndContainsText(By.xpath(selector), file);
@@ -506,35 +469,23 @@ public class NewIssuePage extends BasePage {
   }
   public NewIssuePage robot() throws AWTException {
 
-  Robot rb = new Robot();
-  rb.delay(1000);
-  rb.keyPress(KeyEvent.VK_CONTROL);
-  rb.delay(300);
-  rb.keyPress(KeyEvent.VK_V);
-  rb.delay(300);
-  rb.keyRelease(KeyEvent.VK_V);
-  rb.delay(700);
-  rb.keyRelease(KeyEvent.VK_CONTROL);
-  rb.delay(300);
-  rb.keyPress(KeyEvent.VK_ENTER);
-  rb.delay(300);
-  rb.keyRelease(KeyEvent.VK_ENTER);
-  rb.delay(300);
+    Robot rb = new Robot();
+    rb.delay(1000);
+    rb.keyPress(KeyEvent.VK_CONTROL);
+    rb.delay(300);
+    rb.keyPress(KeyEvent.VK_V);
+    rb.delay(300);
+    rb.keyRelease(KeyEvent.VK_V);
+    rb.delay(700);
+    rb.keyRelease(KeyEvent.VK_CONTROL);
+    rb.delay(300);
+    rb.keyPress(KeyEvent.VK_ENTER);
+    rb.delay(300);
+    rb.keyRelease(KeyEvent.VK_ENTER);
+    rb.delay(300);
 
-  return this;
+    return this;
 }
-
-
-
-
-    private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
-    private By selectDropDownButton = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']//*[text()='More']");
-    private By selectAssignPerson = By.xpath("//*[@id='assignee-field']");
-    private By addComment = By.xpath("//*[@id='comment-wiki-edit']//*[@class='textarea long-field wiki-textfield mentionable wiki-editor-initialised wiki-edit-wrapped']");
-    private By selectAssignButton = By.xpath("//*[@class='buttons-container form-footer']//*[@class='aui-button']");
-    private By selectTextButton = By.xpath("//*[@id='aui-uid-5']");
-    private String assignedPersonLocator = "//*[@id='assignee-val']//*[contains(@id,'%s')]";
-
 
     public NewIssuePage selectAssignFieldButton() {
         driver.findElement(selectAssignFieldButton).click();
@@ -577,8 +528,7 @@ public class NewIssuePage extends BasePage {
         driver.findElement(selectTextButton).click();
         return this;
     }
-
-
+  
     public Boolean assignPersonIsPresent(String assigneeName) {
         By assignedPerson = By.xpath(String.format(assignedPersonLocator.toString(), assigneeName));
         try {
@@ -587,6 +537,50 @@ public class NewIssuePage extends BasePage {
         } catch (NoSuchElementException e) {
             return false;
         }
+
+    public NewIssuePage clickWorkflowButton() {
+        driver.findElement(workflowLocator).click();
+        return this;
+    }
+
+    public NewIssuePage selectInProgressButton() {
+        waitToBePresentAndClick(inProgressLocator);
+
+        return this;
+    }
+
+    public NewIssuePage selectDoneButton() {
+        waitToBePresentAndClick(doneLocator);
+        return this;
+    }
+    public boolean isButtonWithTextPresent(){
+        By buttonSelector = statusButtonInProgress;
+        try{
+            driver.findElement(buttonSelector);
+            return true;
+        } catch (NoSuchElementException e){
+            return false;
+        }
+    }
+      
+    public NewIssuePage clickLabelField() {
+        waitToBePresentAndClick(labelsFieldLocator);
+        return this;
+    }
+
+    public NewIssuePage clickDescriptionField() {
+        waitToBePresentAndClick(descriptionLocator);
+        return this;
+    }
+
+    public boolean isAddedLabelPresent() {
+        waitToBePresent(addedLabelLocator);
+        return true;
+    }
+
+    public NewIssuePage clickSelectForDevelopment() {
+        waitToBePresentAndClick(selectForDevelopmentLocator);
+        return this;
     }
 }
 
