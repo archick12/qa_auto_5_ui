@@ -23,6 +23,7 @@ public class SearchPage extends BasePage {
   private By projectButtonLocator = By.xpath("//button[@data-id='project']");
   private By findProjectsSearchFieldLocator = By
           .xpath("//form[@id='issue-filter'][contains(@class,'project-criteria')]/descendant::input[@id='searcher-pid-input']");
+  private By selectedProjectsLocator = By.xpath("//*[contains(@class, 'selected-group')]/descendant::input[@checked]");
   private By issueRowsLocator = By.xpath("//table[@id='issuetable']/descendant::tr[contains(@class, 'issuerow')]");
   private By pendingDivLocator = By.xpath("//div[@class='navigator-content']/child::div[@class='pending']");
 //  ____________________________________________________________________________
@@ -88,6 +89,12 @@ public class SearchPage extends BasePage {
     return this;
   }
 
+  public SearchPage deselectProjects() {
+    for (WebElement element : driver.findElements(selectedProjectsLocator) ){
+      element.click();
+    }
+    return this;
+  }
   public List<WebElement> getListOfIssues() {
     return driver.findElements(issueRowsLocator);
   }
@@ -153,7 +160,7 @@ public class SearchPage extends BasePage {
   }
 
   public SearchPage clickAssigneeFindUserField() throws InterruptedException {
-    waitToBePresentAndClick(assigneeInputFieldLocator);
+    waitToBePresentAndClick(assigneeFindUserFieldLocator);
     return this;
   }
 

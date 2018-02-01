@@ -65,7 +65,7 @@ public class SearchIssueTest {
                   .clickAssigneeUnassignedCheckbox()  //снимаем галочку в 'Unassigned' чекбоксе
                   .clickAssigneeFindUserField();     //устанавливаем курсов в поле поиска пользователей
         //TO DO добавить ввод текста
-        searchPage.clickAssigneeButton()             //кликаем, что бы свернуть список        
+        searchPage.clickAssigneeButton();             //кликаем, что бы свернуть список
         //TO DO добавить проверку
         
         }
@@ -85,6 +85,7 @@ public class SearchIssueTest {
             assertTrue(issue.getAttribute("data-issuekey").contains(issuePrefix), "Assertion Failed");
             logger.info("Assertion passed: " + issue.getAttribute("data-issuekey"));
         }
+        searchPage.clickProjectButton().deselectProjects().clickProjectButton();
     }
 
     @TestCase(id = "C8") //Artem
