@@ -283,6 +283,12 @@ public class NewIssuePage extends BasePage {
     return this;
   }
 
+  //---Fill nameEpic
+  public NewIssuePage fillNameEpic(String name) {
+        waitTillBeAbleToClick(nameEpicLocator);
+        waitToBePresentAndSendKeys(nameEpicLocator, name);
+        return this;
+  }
   //---Add Description
   public NewIssuePage fillDescription(String issueDescription) {
     waitToBePresentAndSendKeys(descriptionFieldLocator, issueDescription);
