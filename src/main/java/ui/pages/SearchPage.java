@@ -22,7 +22,6 @@ public class SearchPage extends BasePage {
   private By feedbackSubmitLocator = By
           .xpath("//*[@id='jic-collector-form']//child::input[@type='submit']");
   private By projectButtonLocator = By.xpath("//button[@data-id='project']");
-  private By assigneeButtonLocator = By.xpath("//button[@data-id='assignee']");
   private By findProjectsSearchFieldLocator = By
           .xpath("//form[@id='issue-filter'][contains(@class,'project-criteria')]/descendant::input[@id='searcher-pid-input']");
   private By issueRowsLocator = By.xpath("//table[@id='issuetable']/descendant::tr[contains(@class, 'issuerow')]");
@@ -42,6 +41,12 @@ public class SearchPage extends BasePage {
   private By issueTypeSubTask = By.xpath("//td[@class='issuetype']//img[@alt='Sub-task']");
   private By issueTypeSubDefect = By.xpath("//td[@class='issuetype']//img[@alt='Sub-Defect']");
   private By issueSearchTypeInput = By.id("searcher-type-input");
+//  ____________________________________________________________________________
+
+  private By assigneeButtonLocator = By.xpath("//button[@data-id='assignee']");
+  private By assigneeInputFieldLocator = By.id("assignee-input");
+  private By assigneeCurrentUserCheckboxLocator = By.xpath("//label[@title='Current User']");
+  private By assigneeUnassignedCheckboxLocator = By.xpath("//label[@title='Unassigned']");
 
   public SearchPage() {
     this.driver = RemoteDriverManager.getDriver();
@@ -114,6 +119,21 @@ public class SearchPage extends BasePage {
     driver.findElement(issueSearchTypeInput).sendKeys(issueType);
     waitToBePresentAndClick(issueTypeFirstCheckbox);
     waitToBePresentAndClick(typeButtonLocator);
+    return this;
+  }
+
+  public SearchPage SearchAssigneeCurrentUserIssue() throws InterruptedException {
+    waitToBePresentAndClick(assigneeCurrentUserCheckboxLocator);
+    return this;
+  }
+
+  public SearchPage SearchUnassignedIssue() throws InterruptedException {
+    waitToBePresentAndClick(assigneeUnassignedCheckboxLocator);
+    return this;
+  }
+
+  public SearchPage FindAssignee() throws InterruptedException {
+    waitToBePresentAndClick(assigneeInputFieldLocator);
     return this;
   }
 
