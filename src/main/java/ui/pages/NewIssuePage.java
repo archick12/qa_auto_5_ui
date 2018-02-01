@@ -33,12 +33,16 @@ public class NewIssuePage extends BasePage {
     private By selectPriorityLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Priority']");
     private By selectLinkToEpicLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Ссылка на эпик']");
 
-    //---Project
-    private By fieldProjectLocator = By.id("project-field");
-    private By projectSelectLocator = By.id("project-suggestions");
+  //---Project
+  private By fieldProjectLocator = By.id("project-field");
+  // Marina S test locator
+  private By fieldProjectLocatorTest = By.xpath("//div[@id='project-single-select']/span");
+  private By projectSelectLocator = By.id("project-suggestions");
 
     //---Issue Type
-    private By issueTypeLocator = By.id("issuetype-field");
+  private By issueTypeLocator = By.id("issuetype-field");
+  // Marina S test locator
+  private By issueTypeLocatorTest = By.xpath("//div[@id='issuetype-single-select']/span");
 
     //---Epic Name
     private By nameEpicLocator = By.xpath("//*[@id='customfield_10002']");
@@ -73,6 +77,8 @@ public class NewIssuePage extends BasePage {
     //---Priority
     private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
     private By priorityFieldDefault = By.id("priority-field");
+    // Marina S test locator
+    private By priorityFieldDefaultTest = By.xpath("//div[@id='priority-single-select']/span");
     private By priorityFieldSelect = By.id("priority-suggestions");
     private By prioritySelectHighest = By.xpath("//*[@id='priority-single-select']//following::*[a[text()='Highest']]");
     private By prioritySelectHigh = By.xpath("//*[@id='priority-single-select']//a[text()='High']");
@@ -123,29 +129,31 @@ public class NewIssuePage extends BasePage {
     private By linktoEpicFieldLocator = By.xpath("//*[@id='customfield_10000-field']");
     private By epicLinkSuggestions = By.xpath("//[@id='customfield_10000-suggestions']");
 
-    //---Cancel
-    private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
-    private By descriptionFieldLocator = By.id("description");
+  //---Cancel
+  private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
+  private By descriptionFieldLocator = By.id("description");
+  // Marina S test locator
+  private By descriptionFieldLocatorTest = By.xpath("//*[@id='description-wiki-edit']");
 
-    //---Additional Locators for tests
-    private By workflowLocator = By.id("opsbar-transitions_more");
-    private By inProgressLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='In Progress']");
-    private By doneLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='Done']");
-    private By labelsFieldLocator = By.xpath("//*[@class='labels-wrap value editable-field inactive']");
-    private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");
-    private String addedLabelLocator = "//*[contains(@class,'labels-wrap value editable-field inactive')]//*[contains(text(),'%s')]";
-    private By selectForDevelopmentLocator = By.xpath("//*[@id='action_id_21']//*[@class='toolbar-trigger issueaction-workflow-transition']");
-    private By browseButtonLocator = By.xpath("//*[@class='issue-drop-zone__button']");
-    private String fileName = "//*[@class='attachment-content js-file-attachment']//*[contains(text(),'%s')]";
-    private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
-    private By selectDropDownButton = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']//*[text()='More']");
-    private By selectAssignPerson = By.xpath("//*[@id='assignee-field']");
-    private By addComment = By.xpath("//*[@id='comment-wiki-edit']//*[@class='textarea long-field wiki-textfield mentionable wiki-editor-initialised wiki-edit-wrapped']");
-    private By selectAssignButton = By.xpath("//*[@class='buttons-container form-footer']//*[@class='aui-button']");
-    private By selectTextButton = By.xpath("//*[@id='aui-uid-5']");
-    private String assignedPersonLocator = "//*[@id='assignee-val']//*[contains(@id,'%s')]";
-    private By statusButtonInProgress = By.xpath("//*[@id='status-val']//*[text()='In Progress']");
-    private By statusButtonDone = By.xpath("//*[@id='status-val']//*[text()='Done']");
+  //---Additional Locators for tests
+  private By workflowLocator = By.id("opsbar-transitions_more");
+  private By inProgressLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='In Progress']");
+  private By doneLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='Done']");
+  private By labelsFieldLocator = By.xpath("//*[@class='labels-wrap value editable-field inactive']");
+  private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");
+  private String addedLabelLocator = "//*[contains(@class,'labels-wrap value editable-field inactive')]//*[contains(text(),'%s')]";
+  private By selectForDevelopmentLocator = By.xpath("//*[@id='action_id_21']//*[@class='toolbar-trigger issueaction-workflow-transition']");
+  private By browseButtonLocator = By.xpath("//*[@class='issue-drop-zone__button']");
+  private String fileName = "//*[@class='attachment-content js-file-attachment']//*[contains(text(),'%s')]";
+  private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
+  private By selectDropDownButton = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']//*[text()='More']");
+  private By selectAssignPerson = By.xpath("//*[@id='assignee-field']");
+  private By addComment = By.xpath("//*[@id='comment-wiki-edit']//*[@class='textarea long-field wiki-textfield mentionable wiki-editor-initialised wiki-edit-wrapped']");
+  private By selectAssignButton = By.xpath("//*[@class='buttons-container form-footer']//*[@class='aui-button']");
+  private By selectTextButton = By.xpath("//*[@id='aui-uid-5']");
+  private String assignedPersonLocator = "//*[@id='assignee-val']//*[contains(@id,'%s')]";
+  private By statusButtonInProgress = By.xpath("//*[@id='status-val']//*[text()='In Progress']");
+  private By statusButtonDone = By.xpath("//*[@id='status-val']//*[text()='Done']");
 
 
     //---Create New Issue
@@ -257,43 +265,82 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-    //---Select IssueType
-    public NewIssuePage enterIssueType(String issueType) {
-        waitTillBeAbleToClick(issueTypeLocator);
-        driver.findElement(issueTypeLocator).clear();
-        waitToBePresentAndSendKeys(issueTypeLocator, issueType);
-        driver.findElement(issueTypeLocator).sendKeys(Keys.TAB);
-        return this;
-    }
+  // Marina S test method
+  public NewIssuePage enterProjectTest(String projectId) {
+    waitTillBeAbleToClick(fieldProjectLocatorTest);
+    driver.findElement(fieldProjectLocatorTest).clear();
+    waitToBePresentAndSendKeys(fieldProjectLocatorTest, projectId);
+    driver.findElement(fieldProjectLocatorTest).sendKeys(Keys.TAB);
+    return this;
+  }
 
-    //---Fill Summary
-    public NewIssuePage fillSummary(String summary) {
-        waitTillBeAbleToClick(summaryLocator);
-        waitToBePresentAndSendKeys(summaryLocator, summary);
-        return this;
-    }
+  //---Select IssueType
+  public NewIssuePage enterIssueType(String issueType) {
+    waitTillBeAbleToClick(issueTypeLocator);
+    driver.findElement(issueTypeLocator).clear();
+    waitToBePresentAndSendKeys(issueTypeLocator, issueType);
+    driver.findElement(issueTypeLocator).sendKeys(Keys.TAB);
+    return this;
+  }
 
-    //---Add Description
-    public NewIssuePage fillDescription(String issueDescription) {
-        waitToBePresentAndSendKeys(descriptionFieldLocator, issueDescription);
-        return this;
-    }
+  // Marina S test method
+  public NewIssuePage enterIssueTypeTest(String issueType) {
+    waitTillBeAbleToClick(issueTypeLocatorTest);
+    driver.findElement(issueTypeLocatorTest).clear();
+    waitToBePresentAndSendKeys(issueTypeLocatorTest, issueType);
+    driver.findElement(issueTypeLocatorTest).sendKeys(Keys.TAB);
+    return this;
+  }
 
-    //---Select Priority
-    public NewIssuePage selectPriority(String priority) {
-        waitTillBeAbleToClick(priorityFieldDefault);
-        driver.findElement(priorityFieldDefault).clear();
-        waitToBePresentAndSendKeys(priorityFieldDefault, priority);
-        driver.findElement(priorityFieldDefault).sendKeys(Keys.TAB);
-        return this;
-    }
+  //---Fill Summary
+  public NewIssuePage fillSummary(String summary) {
+    waitTillBeAbleToClick(summaryLocator);
+    waitToBePresentAndSendKeys(summaryLocator, summary);
+    return this;
+  }
 
-    //---Add Labels
-    public NewIssuePage addLabel(String issueLabel) {
-        waitToBePresentAndSendKeys(labelsSelect, issueLabel);
-        driver.findElement(labelsSelect).sendKeys(Keys.TAB);
+  //---Fill nameEpic
+  public NewIssuePage fillNameEpic(String name) {
+        waitTillBeAbleToClick(nameEpicLocator);
+        waitToBePresentAndSendKeys(nameEpicLocator, name);
         return this;
-    }
+  }
+  //---Add Description
+  public NewIssuePage fillDescription(String issueDescription) {
+    waitToBePresentAndSendKeys(descriptionFieldLocator, issueDescription);
+    return this;
+  }
+
+  // Marina S test method
+  public NewIssuePage fillDescriptionTest(String issueDescription) {
+    waitTillBeAbleToClick(descriptionFieldLocatorTest);
+    waitToBePresentAndSendKeys(descriptionFieldLocatorTest, issueDescription);
+    return this;
+  }
+
+  //Select Priority
+  public NewIssuePage selectPriority(String priority) {
+    waitTillBeAbleToClick(priorityFieldDefault);
+    driver.findElement(priorityFieldDefault).clear();
+    waitToBePresentAndSendKeys(priorityFieldDefault, priority);
+    driver.findElement(priorityFieldDefault).sendKeys(Keys.TAB);
+    return this;
+  }
+
+  public NewIssuePage selectPriorityTest(String priority) {
+    waitTillBeAbleToClick(priorityFieldDefaultTest);
+    driver.findElement(priorityFieldDefaultTest).clear();
+    waitToBePresentAndSendKeys(priorityFieldDefaultTest, priority);
+    driver.findElement(priorityFieldDefaultTest).sendKeys(Keys.TAB);
+    return this;
+  }
+
+  //---Add Labels
+  public NewIssuePage addLabel(String issueLabel) {
+    waitToBePresentAndSendKeys(labelsSelect, issueLabel);
+    driver.findElement(labelsSelect).sendKeys(Keys.TAB);
+    return this;
+  }
 
     //---Select Linked Issues
     public NewIssuePage selectLinkedIssuesLocator() {
@@ -551,10 +598,13 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-    public NewIssuePage clickSelectForDevelopment () {
-        waitToBePresentAndClick(selectForDevelopmentLocator);
-        return this;
-    }
+  public boolean isAddedLabelPresent() {
+    waitToBePresent(addedLabelLocator);
+    return true;
+  }
+
+  public NewIssuePage clickSelectForDevelopment() {
+    waitToBePresentAndClick(selectForDevelopmentLocator);
+    return this;
+  }
 }
-
-
