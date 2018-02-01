@@ -14,7 +14,6 @@ package ui.pages;
 
 public class SearchPage extends BasePage {
 
-  // TODO add selectors and methods
   private By layoutSwitcherButton = By.id("layout-switcher-button");
   private By listViewItem = By.xpath("//*[contains(@id,'AJS_DROPDOWN_LISTITEM_')]//child::a[@data-layout-key='list-view']");
   private By recentProject1Locator = By
@@ -122,21 +121,6 @@ public class SearchPage extends BasePage {
     return this;
   }
 
-  public SearchPage SearchAssigneeCurrentUserIssue() throws InterruptedException {
-    waitToBePresentAndClick(assigneeCurrentUserCheckboxLocator);
-    return this;
-  }
-
-  public SearchPage SearchUnassignedIssue() throws InterruptedException {
-    waitToBePresentAndClick(assigneeUnassignedCheckboxLocator);
-    return this;
-  }
-
-  public SearchPage FindAssignee() throws InterruptedException {
-    waitToBePresentAndClick(assigneeInputFieldLocator);
-    return this;
-  }
-
   public int CountIssuesOnPage(){
     return driver.findElements(issueTypeTotal).size();
   }
@@ -154,6 +138,23 @@ public class SearchPage extends BasePage {
   }
   public int CountSubDefectsOnPage(){
     return driver.findElements(issueTypeSubDefect).size();
+  }
+        
+  //  ____________________________________________________________________________
+        
+    public SearchPage SearchAssigneeCurrentUserIssue() throws InterruptedException {
+    waitToBePresentAndClick(assigneeCurrentUserCheckboxLocator);
+    return this;
+  }
+
+  public SearchPage SearchUnassignedIssue() throws InterruptedException {
+    waitToBePresentAndClick(assigneeUnassignedCheckboxLocator);
+    return this;
+  }
+
+  public SearchPage FindAssignee() throws InterruptedException {
+    waitToBePresentAndClick(assigneeInputFieldLocator);
+    return this;
   }
 
 
