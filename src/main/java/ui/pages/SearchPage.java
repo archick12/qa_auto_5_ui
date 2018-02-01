@@ -43,7 +43,7 @@ public class SearchPage extends BasePage {
 //  ____________________________________________________________________________
 
   private By assigneeButtonLocator = By.xpath("//button[@data-id='assignee']");
-  private By assigneeInputFieldLocator = By.id("assignee-input");
+  private By assigneeFindUserFieldLocator = By.id("assignee-input");
   private By assigneeCurrentUserCheckboxLocator = By.xpath("//label[@title='Current User']");
   private By assigneeUnassignedCheckboxLocator = By.xpath("//label[@title='Unassigned']");
 
@@ -142,21 +142,20 @@ public class SearchPage extends BasePage {
         
   //  ____________________________________________________________________________
         
-    public SearchPage SearchAssigneeCurrentUserIssue() throws InterruptedException {
+    public SearchPage clickAssigneeCurrentUserCheckbox() throws InterruptedException {
     waitToBePresentAndClick(assigneeCurrentUserCheckboxLocator);
     return this;
   }
 
-  public SearchPage SearchUnassignedIssue() throws InterruptedException {
+  public SearchPage clickAssigneeUnassignedCheckbox() throws InterruptedException {
     waitToBePresentAndClick(assigneeUnassignedCheckboxLocator);
     return this;
   }
 
-  public SearchPage FindAssignee() throws InterruptedException {
+  public SearchPage clickAssigneeFindUserField() throws InterruptedException {
     waitToBePresentAndClick(assigneeInputFieldLocator);
     return this;
   }
-
 
 
 }
