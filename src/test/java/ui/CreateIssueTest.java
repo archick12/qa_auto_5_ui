@@ -78,7 +78,8 @@ public class CreateIssueTest {
   }
 
 
-    @TestCase(id = "2")
+    // Alex's test
+    @TestCase(id = "C11")
     @Test(groups = {"UI", "CreateIssue"})
     public void createNewBug () throws InterruptedException {
       NewIssuePage newIssuePage = new NewIssuePage();
@@ -105,4 +106,29 @@ public class CreateIssueTest {
 
 
     }
+
+  // Marina S test
+  @TestCase(id = "C9") // annotation that holds number of test case in TestRail
+  @Test(groups = {"UI","CreateIssue", "SKIP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  public void createNewTask() throws InterruptedException {
+
+    NewIssuePage newIssuePage = new NewIssuePage();
+
+    String projectId = "QAAuto5";
+    String issueType = "Task";
+    String taskSummary = "Team 2 Task";
+    String taskDescription = "Team 2 description";
+    String issuePriority = "High";
+
+    newIssuePage
+            .enterProject(projectId)
+            .enterIssueType(issueType)
+            .fillSummary(taskSummary)
+            .fillDescription(taskDescription)
+            .selectPriority(issuePriority)
+            .clickSubmitButton()
+            .clickNewIssueLinkOnSuccessPopup();
+
   }
+
+}
