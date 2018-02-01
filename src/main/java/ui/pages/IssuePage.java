@@ -1,6 +1,7 @@
 package ui.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import ui.utils.RemoteDriverManager;
 
 public class IssuePage extends BasePage {
@@ -42,6 +43,9 @@ public class IssuePage extends BasePage {
     private By commentAddBtnLocator = By.id("issue-comment-add-submit");
     private By commentDeleteBtnLocator = By.xpath("//*[contains(@id,'delete_comment')]");
     private By commentDeletePopUpBtnLocator = By.id("comment-delete-submit");
+
+    // Edit Issue Pop Up
+    private By updateIssueBtnPopUp = By.id("edit-issue-submit");
 
 
     private String subTaskSummary = "//*[@class='stsummary']//*[contains(text(),'%s')]";
@@ -111,6 +115,7 @@ public class IssuePage extends BasePage {
         waitToBePresentAndClick(commentAddBtnLocator);
         return this;
     }
+
 
     public IssuePage clickOnDeleteComment() {
         waitToBePresentAndClick(commentDeleteBtnLocator);
@@ -190,7 +195,14 @@ public class IssuePage extends BasePage {
         return true;
     }
 
+    public IssuePage clickEditButton() {
+        waitToBePresentAndClick(editIssueButton);
+        return this;
+    }
 
-
+    public IssuePage clickUpdateButtonPopUp() {
+        waitToBePresentAndClick(updateIssueBtnPopUp);
+        return this;
+    }
 }
 

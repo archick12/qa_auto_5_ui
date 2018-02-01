@@ -12,480 +12,457 @@ import static org.openqa.selenium.Keys.ENTER;
 
 public class NewIssuePage extends BasePage {
 
-  private HeaderPage headerPage;
+    private HeaderPage headerPage;
 
-  //---Create a New Issue Button and dialog
-  private By createLocator = By.id("create_link");
-  private By createIssueDialog = By.id("create-issue-dialog");
-  private By newIssueLinkOnSuccessPopup = By.xpath("//a[@class='issue-created-key issue-link']");
+    //---Create a New Issue Button and dialog
+    private By createLocator = By.id("create_link");
+    private By createIssueDialog = By.id("create-issue-dialog");
+    private By newIssueLinkOnSuccessPopup = By.xpath("//a[@class='issue-created-key issue-link']");
 
-  //---Configure Fields
-  private By configureFiedlsLocator = By.id("qf-field-picker-trigger");
-  private By showFieldsAllLocator = By.xpath("//a[@class='qf-unconfigurable']");
-  private By showFieldsCustomLocator = By.xpath("//a[@class='qf-configurable']");
-  private By selectAssigneeLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Assignee']");
-  private By selectAttachmentLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Attachment']");
-  private By selectComponentsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Component/s']");
-  private By selectDescriptionLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Description']");
-  private By selectFixVersionsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Fix Version/s']");
-  private By selectLabelsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Labels']");
-  private By selectLinkedIssueLocator = By.xpath("//*[@data-field-id='issuelinks']");
-  private By selectPriorityLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Priority']");
-  private By selectLinkToEpicLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Ссылка на эпик']");
-  
-  //---Project
-  private By fieldProjectLocator = By.id("project-field");
-  private By projectSelectLocator = By.id("project-suggestions");
+    //---Configure Fields
+    private By configureFiedlsLocator = By.id("qf-field-picker-trigger");
+    private By showFieldsAllLocator = By.xpath("//a[@class='qf-unconfigurable']");
+    private By showFieldsCustomLocator = By.xpath("//a[@class='qf-configurable']");
+    private By selectAssigneeLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Assignee']");
+    private By selectAttachmentLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Attachment']");
+    private By selectComponentsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Component/s']");
+    private By selectDescriptionLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Description']");
+    private By selectFixVersionsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Fix Version/s']");
+    private By selectLabelsLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Labels']");
+    private By selectLinkedIssueLocator = By.xpath("//*[@data-field-id='issuelinks']");
+    private By selectPriorityLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Priority']");
+    private By selectLinkToEpicLocator = By.xpath("//*[contains(@class,'qf-picker-button')]//a[.='Ссылка на эпик']");
 
-  //---Issue Type
-  private By issueTypeLocator = By.id("issuetype-field");
+    //---Project
+    private By fieldProjectLocator = By.id("project-field");
+    private By projectSelectLocator = By.id("project-suggestions");
 
-  //---Epic Name
-  private By nameEpicLocator = By.xpath("//*[@id='customfield_10002']");
+    //---Issue Type
+    private By issueTypeLocator = By.id("issuetype-field");
 
-  //---Issue Select
-  private By issueSelectLocator = By.xpath("//*[@id='issuetype-suggestions']");
+    //---Epic Name
+    private By nameEpicLocator = By.xpath("//*[@id='customfield_10002']");
 
-  //---Summary
-  private By summaryLocator = By.id("summary");
+    //---Issue Select
+    private By issueSelectLocator = By.xpath("//*[@id='issuetype-suggestions']");
 
-  //---Description
-  private By menuStyle = By.xpath("//*[@field-id='description']//child::*[text()='Style']");
-  private By iconBold = By.xpath("//*[@field-id='description']//ancestor::*[@data-operation='bold']");
-  private By iconItalic = By.xpath("//*[@field-id='description']//following::*[@data-operation='italic']");
-  private By iconUnderline = By.xpath("//*[@field-id='description']//child::*[@data-operation='underline']");
-  private By iconTextColor = By.xpath("//*[@field-id='description']//*[@original-title='Text color']");
-  private By moreColors = By.xpath("//*[@field-id='description']//descendant::*[@data-operation='color-parameter']");
-  private By menuMore = By.xpath("//*[@field-id='description']//parent::*[@original-title='More' ]");
-  private By menuLink = By.xpath("//*[@field-id='description']//following::*[@original-title='Link (Ctrl+K)']");
-  private By menuAttachment = By.xpath("//*[@class='aui-buttons']//child::*[@original-title='Attachment']");
-  private By iconBulletList = By.xpath("//*[@field-id='description']//following::*[@original-title='Bullet list (Ctrl+Shift+B)']");
-  private By iconNumberedList = By.xpath("//*[@field-id='description']//following::*[@original-title='Numbered list (Ctrl+Shift+N)']");
-  private By menuIcons = By.xpath("//*[@field-id='description']//following::*[@original-title='Icons']");
-  private By menuOther = By.xpath("//*[@field-id='description']//following::*[@original-title='Other']");
-  private By iconCollapseExpand = By.xpath("//*[@field-id='description']//following::*[@original-title='Toggle visibility']");
-  private By editDescription = By.id("description-wiki-edit");
-  private By tabVisual = By.xpath("//*[@data-mode='wysiwyg']//child::*[@id='aui-uid-0']");
-  private By tabText = By.xpath("//*[@data-mode='source']");
-  private By iconUndo = By.xpath("//*[@title='Undo']//child::span[@class='aui-icon aui-icon-small aui-iconfont-undo']");
-  private By iconRedo = By.xpath("//*[@title='Redo']");
+    //---Summary
+    private By summaryLocator = By.id("summary");
 
-  //---Priority
-  private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
-  private By priorityFieldDefault = By.id("priority-field");
-  private By priorityFieldSelect = By.id("priority-suggestions");
-  private By prioritySelectHighest = By.xpath("//*[@id='priority-single-select']//following::*[a[text()='Highest']]");
-  private By prioritySelectHigh = By.xpath("//*[@id='priority-single-select']//a[text()='High']");
-  private By prioritySelectLow = By.xpath("//*[@id='priority-single-select']//a[text()='Low']");
-  private By prioritySelectLowest = By.xpath("//*[@id='priority-single-select']//a[text()='Lowest']");
+    //---Description
+    private By menuStyle = By.xpath("//*[@field-id='description']//child::*[text()='Style']");
+    private By iconBold = By.xpath("//*[@field-id='description']//ancestor::*[@data-operation='bold']");
+    private By iconItalic = By.xpath("//*[@field-id='description']//following::*[@data-operation='italic']");
+    private By iconUnderline = By.xpath("//*[@field-id='description']//child::*[@data-operation='underline']");
+    private By iconTextColor = By.xpath("//*[@field-id='description']//*[@original-title='Text color']");
+    private By moreColors = By.xpath("//*[@field-id='description']//descendant::*[@data-operation='color-parameter']");
+    private By menuMore = By.xpath("//*[@field-id='description']//parent::*[@original-title='More' ]");
+    private By menuLink = By.xpath("//*[@field-id='description']//following::*[@original-title='Link (Ctrl+K)']");
+    private By menuAttachment = By.xpath("//*[@class='aui-buttons']//child::*[@original-title='Attachment']");
+    private By iconBulletList = By.xpath("//*[@field-id='description']//following::*[@original-title='Bullet list (Ctrl+Shift+B)']");
+    private By iconNumberedList = By.xpath("//*[@field-id='description']//following::*[@original-title='Numbered list (Ctrl+Shift+N)']");
+    private By menuIcons = By.xpath("//*[@field-id='description']//following::*[@original-title='Icons']");
+    private By menuOther = By.xpath("//*[@field-id='description']//following::*[@original-title='Other']");
+    private By iconCollapseExpand = By.xpath("//*[@field-id='description']//following::*[@original-title='Toggle visibility']");
+    private By editDescription = By.id("description-wiki-edit");
+    private By tabVisual = By.xpath("//*[@data-mode='wysiwyg']//child::*[@id='aui-uid-0']");
+    private By tabText = By.xpath("//*[@data-mode='source']");
+    private By iconUndo = By.xpath("//*[@title='Undo']//child::span[@class='aui-icon aui-icon-small aui-iconfont-undo']");
+    private By iconRedo = By.xpath("//*[@title='Redo']");
 
-  //---Linked Issue
-  private By linkedIssuesDefault = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='blocks']");
-  private By linkedIssuesIsBlockedBy = By.xpath("/*[@id='issuelinks-linktype'] //child::*[@value='is blocked by']");
-  private By linkedIssuesIsClones = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='clones']");
-  private By linkedIssuesIsClonedBy = By.xpath("//*[@id='issuelinks-linktype'] //descendant::*[@value='is cloned by']");
-  private By linkedIssuesDuplicates = By.xpath("//*[@id='issuelinks-linktype'] //descendant-or-self::*[@value='duplicates']");
-  private By linkedIssuesIsDuplicatedBy = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='is duplicated by']");
-  private By linkedIssuesRelatesTo = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='relates to']");
+    //---Priority
+    private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
+    private By priorityFieldDefault = By.id("priority-field");
+    private By priorityFieldSelect = By.id("priority-suggestions");
+    private By prioritySelectHighest = By.xpath("//*[@id='priority-single-select']//following::*[a[text()='Highest']]");
+    private By prioritySelectHigh = By.xpath("//*[@id='priority-single-select']//a[text()='High']");
+    private By prioritySelectLow = By.xpath("//*[@id='priority-single-select']//a[text()='Low']");
+    private By prioritySelectLowest = By.xpath("//*[@id='priority-single-select']//a[text()='Lowest']");
 
-  //---Labels
-  private By labelsSelect = By.id("labels-textarea");
-  //---Issue
-  private By IssuelinksSelect = By.xpath("//*[@id='issuelinks-issues-multi-select']");
-  private By IssuePopup = By.xpath("//a[@class='issue-picker-popup']");
+    //---Linked Issue
+    private By linkedIssuesDefault = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='blocks']");
+    private By linkedIssuesIsBlockedBy = By.xpath("/*[@id='issuelinks-linktype'] //child::*[@value='is blocked by']");
+    private By linkedIssuesIsClones = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='clones']");
+    private By linkedIssuesIsClonedBy = By.xpath("//*[@id='issuelinks-linktype'] //descendant::*[@value='is cloned by']");
+    private By linkedIssuesDuplicates = By.xpath("//*[@id='issuelinks-linktype'] //descendant-or-self::*[@value='duplicates']");
+    private By linkedIssuesIsDuplicatedBy = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='is duplicated by']");
+    private By linkedIssuesRelatesTo = By.xpath("//*[@id='issuelinks-linktype'] //child::*[@value='relates to']");
 
-  //---Attachment
-  private By browseButton = By.xpath("//*[@class='form-body']//child::*[@class='issue-drop-zone__button']");
+    //---Labels
+    private By labelsSelect = By.id("labels-textarea");
+    //---Issue
+    private By IssuelinksSelect = By.xpath("//*[@id='issuelinks-issues-multi-select']");
+    private By IssuePopup = By.xpath("//a[@class='issue-picker-popup']");
 
-  //---Locators for IssueSelector Pop-up
-  private By pageHeader = By.xpath("//*[@class='aui-page-header-main']");
-  private By selectButton = By.xpath("//*[@class='aui-button']");
-  private By sourceRecent = By.xpath("//*[@class='radio']//child::*[@id='issue-source-recent']");
-  private By sourceSearch = By.xpath("//*[@id='issue-source-search']");
-  private By searchField = By.xpath("//*[@id='searchRequestId']");
-  private By viewedIssues = By.xpath("//*[text()='Issues you have recently viewed']");
-  private By first50Issues = By.xpath("//*[text()='First 50 issues from your current search']");
+    //---Attachment
+    private By browseButton = By.xpath("//*[@class='form-body']//child::*[@class='issue-drop-zone__button']");
 
-  //---Assignee
-  private By assigneeFieldLocator = By.id("assignee-field");
-  private By assigneeSuggestions = By.xpath("//[@id='assignee-suggestions']");
+    //---Locators for IssueSelector Pop-up
+    private By pageHeader = By.xpath("//*[@class='aui-page-header-main']");
+    private By selectButton = By.xpath("//*[@class='aui-button']");
+    private By sourceRecent = By.xpath("//*[@class='radio']//child::*[@id='issue-source-recent']");
+    private By sourceSearch = By.xpath("//*[@id='issue-source-search']");
+    private By searchField = By.xpath("//*[@id='searchRequestId']");
+    private By viewedIssues = By.xpath("//*[text()='Issues you have recently viewed']");
+    private By first50Issues = By.xpath("//*[text()='First 50 issues from your current search']");
 
-  //---Assign to me
-  private By assignToMeButtonLocator = By.id("assign-to-me-trigger");
+    //---Assignee
+    private By assigneeFieldLocator = By.id("assignee-field");
+    private By assigneeSuggestions = By.xpath("//[@id='assignee-suggestions']");
 
-  //---Create
-  private By submitButtonLocator = By.id("create-issue-submit");
+    //---Assign to me
+    private By assignToMeButtonLocator = By.id("assign-to-me-trigger");
 
-  //---Create another
-  private By createAnotherButtonLocator = By.xpath("//*[@id='qf-create-another']");
+    //---Create
+    private By submitButtonLocator = By.id("create-issue-submit");
 
-  //---Epic Link
-  private By linktoEpicFieldLocator = By.xpath("//*[@id='customfield_10000-field']");
-  private By epicLinkSuggestions = By.xpath("//[@id='customfield_10000-suggestions']");
+    //---Create another
+    private By createAnotherButtonLocator = By.xpath("//*[@id='qf-create-another']");
 
-  //---Cancel
-  private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
-  private By descriptionFieldLocator = By.id("description");
-  
-  //---Additional Locators for tests
-  private By workflowLocator = By.id("opsbar-transitions_more");
-  private By inProgressLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='In Progress']");
-  private By doneLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='Done']");
-  private By labelsFieldLocator = By.xpath("//*[@class='labels-wrap value editable-field inactive']");
-  private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");
-  private String addedLabelLocator =("//*[contains(@class,'labels-wrap value editable-field inactive')]//*[contains(text(),'%s')]");
-  private By selectForDevelopmentLocator = By.xpath("//*[@id='action_id_21']//*[@class='toolbar-trigger issueaction-workflow-transition']");
-  private By browseButtonLocator = By.xpath("//*[@class='issue-drop-zone__button']");
-  private String fileName = "//*[@class='attachment-content js-file-attachment']//*[contains(text(),'%s')]";
-  private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
-  private By selectDropDownButton = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']//*[text()='More']");
-  private By selectAssignPerson = By.xpath("//*[@id='assignee-field']");
-  private By addComment = By.xpath("//*[@id='comment-wiki-edit']//*[@class='textarea long-field wiki-textfield mentionable wiki-editor-initialised wiki-edit-wrapped']");
-  private By selectAssignButton = By.xpath("//*[@class='buttons-container form-footer']//*[@class='aui-button']");
-  private By selectTextButton = By.xpath("//*[@id='aui-uid-5']");
-  private String assignedPersonLocator = "//*[@id='assignee-val']//*[contains(@id,'%s')]";
-  private By statusButtonInProgress = By.xpath("//*[@id='status-val']//*[text()='In Progress']");
-  private By statusButtonDone = By.xpath("//*[@id='status-val']//*[text()='Done']");
+    //---Epic Link
+    private By linktoEpicFieldLocator = By.xpath("//*[@id='customfield_10000-field']");
+    private By epicLinkSuggestions = By.xpath("//[@id='customfield_10000-suggestions']");
+
+    //---Cancel
+    private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
+    private By descriptionFieldLocator = By.id("description");
+
+    //---Additional Locators for tests
+    private By workflowLocator = By.id("opsbar-transitions_more");
+    private By inProgressLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='In Progress']");
+    private By doneLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='Done']");
+    private By labelsFieldLocator = By.xpath("//*[@class='labels-wrap value editable-field inactive']");
+    private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");
+    private String addedLabelLocator = "//*[contains(@class,'labels-wrap value editable-field inactive')]//*[contains(text(),'%s')]";
+    private By selectForDevelopmentLocator = By.xpath("//*[@id='action_id_21']//*[@class='toolbar-trigger issueaction-workflow-transition']");
+    private By browseButtonLocator = By.xpath("//*[@class='issue-drop-zone__button']");
+    private String fileName = "//*[@class='attachment-content js-file-attachment']//*[contains(text(),'%s')]";
+    private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
+    private By selectDropDownButton = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']//*[text()='More']");
+    private By selectAssignPerson = By.xpath("//*[@id='assignee-field']");
+    private By addComment = By.xpath("//*[@id='comment-wiki-edit']//*[@class='textarea long-field wiki-textfield mentionable wiki-editor-initialised wiki-edit-wrapped']");
+    private By selectAssignButton = By.xpath("//*[@class='buttons-container form-footer']//*[@class='aui-button']");
+    private By selectTextButton = By.xpath("//*[@id='aui-uid-5']");
+    private String assignedPersonLocator = "//*[@id='assignee-val']//*[contains(@id,'%s')]";
+    private By statusButtonInProgress = By.xpath("//*[@id='status-val']//*[text()='In Progress']");
+    private By statusButtonDone = By.xpath("//*[@id='status-val']//*[text()='Done']");
 
 
-  //---Create New Issue
-  public NewIssuePage() {
-    this.driver = RemoteDriverManager.getDriver();
-    headerPage = new HeaderPage();
-  }
-
-  public NewIssuePage clickCreateIssueButton() {
-    waitToBePresentAndClick(createLocator);
-    return this;
-  }
-
-  public NewIssuePage waitForCreateIssueDialog() {
-    waitToBePresent(createIssueDialog);
-    return this;
-  }
-
-  public NewIssuePage clickNewIssueLinkOnSuccessPopup() {
-    waitToBePresentAndClick(newIssueLinkOnSuccessPopup);
-    return this;
-  }
-  
-  //---Configure Fields
-  public NewIssuePage clickConfigureFieldsButton() {
-    waitToBePresentAndClick(configureFiedlsLocator);
-    return this;
-  }
-
-  public NewIssuePage clickCustomLink() {
-    waitToBePresentAndClick(showFieldsCustomLocator);
-    return this;
-  }
-
-  public NewIssuePage clickAllLink() {
-    waitToBePresentAndClick(showFieldsAllLocator);
-    return this;
-  }
-
-  public boolean isElementActive(By selector) {
-    try {
-      driver.findElement(selector);
-      return true;
-    } catch (Exception e) {
-      return false;
+    //---Create New Issue
+    public NewIssuePage() {
+        this.driver = RemoteDriverManager.getDriver();
+        headerPage = new HeaderPage();
     }
-  }
 
-  public NewIssuePage clickAllOrCustom() {
-    if (isElementActive(showFieldsCustomLocator) == true) {
-      driver.findElement(showFieldsCustomLocator).click();
-    } else {
-      driver.findElement(showFieldsAllLocator).click();
+    public NewIssuePage clickCreateIssueButton() {
+        waitToBePresentAndClick(createLocator);
+        return this;
     }
-    return this;
-  }
 
-  public NewIssuePage selectAssignee() {
-    driver.findElement(selectAssigneeLocator).click();
-    return this;
-  }
+    public NewIssuePage waitForCreateIssueDialog() {
+        waitToBePresent(createIssueDialog);
+        return this;
+    }
 
-  public NewIssuePage selectAttachment() {
-    driver.findElement(selectAttachmentLocator).click();
-    return this;
-  }
+    public NewIssuePage clickNewIssueLinkOnSuccessPopup() {
+        waitToBePresentAndClick(newIssueLinkOnSuccessPopup);
+        return this;
+    }
 
-  public NewIssuePage selectComponents() {
-    driver.findElement(selectComponentsLocator).click();
-    return this;
-  }
+    //---Configure Fields
+    public NewIssuePage clickConfigureFieldsButton() {
+        waitToBePresentAndClick(configureFiedlsLocator);
+        return this;
+    }
 
-  public NewIssuePage selectDescription() {
-    driver.findElement(selectDescriptionLocator).click();
-    return this;
-  }
+    public NewIssuePage clickCustomLink() {
+        waitToBePresentAndClick(showFieldsCustomLocator);
+        return this;
+    }
 
-  public NewIssuePage selectFixVersion() {
-    driver.findElement(selectFixVersionsLocator).click();
-    return this;
-  }
+    public NewIssuePage clickAllLink() {
+        waitToBePresentAndClick(showFieldsAllLocator);
+        return this;
+    }
 
-  public NewIssuePage selectLabels() {
-    driver.findElement(selectLabelsLocator).click();
-    return this;
-  }
+    public boolean isElementActive(By selector) {
+        try {
+            driver.findElement(selector);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-  public NewIssuePage selectLinkedIssue() {
-    driver.findElement(selectLinkedIssueLocator).click();
-    return this;
-  }
+    public NewIssuePage clickAllOrCustom() {
+        if (isElementActive(showFieldsCustomLocator) == true) {
+            driver.findElement(showFieldsCustomLocator).click();
+        } else {
+            driver.findElement(showFieldsAllLocator).click();
+        }
+        return this;
+    }
 
-  public NewIssuePage selectPriority() {
-    driver.findElement(selectPriorityLocator).click();
-    return this;
-  }
+    public NewIssuePage selectAssignee() {
+        driver.findElement(selectAssigneeLocator).click();
+        return this;
+    }
 
-  public NewIssuePage selectEpicLink() {
-    driver.findElement(selectLinkToEpicLocator).click();
-    return this;
-  }
+    public NewIssuePage selectAttachment() {
+        driver.findElement(selectAttachmentLocator).click();
+        return this;
+    }
 
-  //---Select Project
-  public NewIssuePage enterProject(String projectId) {
-    waitTillBeAbleToClick(fieldProjectLocator);
-    driver.findElement(fieldProjectLocator).clear();
-    waitToBePresentAndSendKeys(fieldProjectLocator, projectId);
-    driver.findElement(fieldProjectLocator).sendKeys(Keys.TAB);
-    return this;
-  }
+    public NewIssuePage selectComponents() {
+        driver.findElement(selectComponentsLocator).click();
+        return this;
+    }
 
-  //---Select IssueType
-  public NewIssuePage enterIssueType(String issueType) {
-    waitTillBeAbleToClick(issueTypeLocator);
-    driver.findElement(issueTypeLocator).clear();
-    waitToBePresentAndSendKeys(issueTypeLocator, issueType);
-    driver.findElement(issueTypeLocator).sendKeys(Keys.TAB);
-    return this;
-  }
+    public NewIssuePage selectDescription() {
+        driver.findElement(selectDescriptionLocator).click();
+        return this;
+    }
 
-  //---Fill Summary
-  public NewIssuePage fillSummary(String summary) {
-    waitTillBeAbleToClick(summaryLocator);
-    waitToBePresentAndSendKeys(summaryLocator, summary);
-    return this;
-  }
+    public NewIssuePage selectFixVersion() {
+        driver.findElement(selectFixVersionsLocator).click();
+        return this;
+    }
 
-  //---Add Description
-  public NewIssuePage fillDescription(String issueDescription) {
-    waitToBePresentAndSendKeys(descriptionFieldLocator, issueDescription);
-    return this;
-  }
+    public NewIssuePage selectLabels() {
+        driver.findElement(selectLabelsLocator).click();
+        return this;
+    }
 
-  //---Select Priority
-  public NewIssuePage selectPriority(String priority) {
-    waitTillBeAbleToClick(priorityFieldDefault);
-    driver.findElement(priorityFieldDefault).clear();
-    waitToBePresentAndSendKeys(priorityFieldDefault, priority);
-    driver.findElement(priorityFieldDefault).sendKeys(Keys.TAB);
-    return this;
-  }
+    public NewIssuePage selectLinkedIssue() {
+        driver.findElement(selectLinkedIssueLocator).click();
+        return this;
+    }
 
-  //---Add Labels
-  public NewIssuePage addLabel(String issueLabel) {
-    waitToBePresentAndSendKeys(labelsSelect, issueLabel);
-    driver.findElement(labelsSelect).sendKeys(Keys.TAB);
-    return this;
-  }
+    public NewIssuePage selectPriority() {
+        driver.findElement(selectPriorityLocator).click();
+        return this;
+    }
 
-  //---Select Linked Issues
-  public NewIssuePage selectLinkedIssuesLocator() {
-    driver.findElement(linkedIssuesDefault).click();
-    return this;
-  }
+    public NewIssuePage selectEpicLink() {
+        driver.findElement(selectLinkToEpicLocator).click();
+        return this;
+    }
 
-  public NewIssuePage selectLinkedIssueIsBlockedBy() {
-    driver.findElement(linkedIssuesIsBlockedBy).click();
-    return this;
-  }
+    //---Select Project
+    public NewIssuePage enterProject(String projectId) {
+        waitTillBeAbleToClick(fieldProjectLocator);
+        driver.findElement(fieldProjectLocator).clear();
+        waitToBePresentAndSendKeys(fieldProjectLocator, projectId);
+        driver.findElement(fieldProjectLocator).sendKeys(Keys.TAB);
+        return this;
+    }
 
-  public NewIssuePage selectLinkedIssuesClones() {
-    driver.findElement(linkedIssuesIsClones).click();
-    return this;
-  }
+    //---Select IssueType
+    public NewIssuePage enterIssueType(String issueType) {
+        waitTillBeAbleToClick(issueTypeLocator);
+        driver.findElement(issueTypeLocator).clear();
+        waitToBePresentAndSendKeys(issueTypeLocator, issueType);
+        driver.findElement(issueTypeLocator).sendKeys(Keys.TAB);
+        return this;
+    }
 
-  public NewIssuePage selectLinkedIssueIsClonedBy() {
-    driver.findElement(linkedIssuesIsClonedBy).click();
-    return this;
-  }
+    //---Fill Summary
+    public NewIssuePage fillSummary(String summary) {
+        waitTillBeAbleToClick(summaryLocator);
+        waitToBePresentAndSendKeys(summaryLocator, summary);
+        return this;
+    }
 
-  public NewIssuePage selectLinkedIssuesDuplicates() {
-    driver.findElement(linkedIssuesDuplicates).click();
-    return this;
-  }
+    //---Add Description
+    public NewIssuePage fillDescription(String issueDescription) {
+        waitToBePresentAndSendKeys(descriptionFieldLocator, issueDescription);
+        return this;
+    }
 
-  public NewIssuePage selectLinkedIssuesIsDuplicatedBy() {
-    driver.findElement(linkedIssuesIsDuplicatedBy).click();
-    return this;
-  }
+    //---Select Priority
+    public NewIssuePage selectPriority(String priority) {
+        waitTillBeAbleToClick(priorityFieldDefault);
+        driver.findElement(priorityFieldDefault).clear();
+        waitToBePresentAndSendKeys(priorityFieldDefault, priority);
+        driver.findElement(priorityFieldDefault).sendKeys(Keys.TAB);
+        return this;
+    }
 
-  public NewIssuePage selectLinkedIssuesRelatesTo() {
-    driver.findElement(linkedIssuesRelatesTo).click();
-    return this;
-  }
+    //---Add Labels
+    public NewIssuePage addLabel(String issueLabel) {
+        waitToBePresentAndSendKeys(labelsSelect, issueLabel);
+        driver.findElement(labelsSelect).sendKeys(Keys.TAB);
+        return this;
+    }
 
-  //---Add Attachment
-  public NewIssuePage browseButton() {
-    driver.findElement(browseButton).click();
-    return this;
-  }
+    //---Select Linked Issues
+    public NewIssuePage selectLinkedIssuesLocator() {
+        driver.findElement(linkedIssuesDefault).click();
+        return this;
+    }
 
-  //---Add Issue (Pop up)
-  public NewIssuePage IssuePopup() {
-    driver.findElement(IssuePopup).click();
-    return this;
-  }
+    public NewIssuePage selectLinkedIssueIsBlockedBy() {
+        driver.findElement(linkedIssuesIsBlockedBy).click();
+        return this;
+    }
 
-  public NewIssuePage pageHeader() {
-    driver.findElement(pageHeader).click();
-    return this;
-  }
+    public NewIssuePage selectLinkedIssuesClones() {
+        driver.findElement(linkedIssuesIsClones).click();
+        return this;
+    }
 
-  public NewIssuePage selectButton() {
-    driver.findElement(selectButton).click();
-    return this;
-  }
+    public NewIssuePage selectLinkedIssueIsClonedBy() {
+        driver.findElement(linkedIssuesIsClonedBy).click();
+        return this;
+    }
 
-  public NewIssuePage sourceRecent() {
-    driver.findElement(sourceRecent).click();
-    return this;
-  }
+    public NewIssuePage selectLinkedIssuesDuplicates() {
+        driver.findElement(linkedIssuesDuplicates).click();
+        return this;
+    }
 
-  public NewIssuePage sourceSearch() {
-    driver.findElement(sourceSearch).click();
-    return this;
-  }
+    public NewIssuePage selectLinkedIssuesIsDuplicatedBy() {
+        driver.findElement(linkedIssuesIsDuplicatedBy).click();
+        return this;
+    }
 
-  public NewIssuePage searchField() {
-    driver.findElement(sourceSearch).click();
-    driver.findElement(searchField).click();
-    return this;
-  }
+    public NewIssuePage selectLinkedIssuesRelatesTo() {
+        driver.findElement(linkedIssuesRelatesTo).click();
+        return this;
+    }
 
-  public NewIssuePage viewedIssues() {
-    driver.findElement(viewedIssues).click();
-    return this;
-  }
+    //---Add Attachment
+    public NewIssuePage browseButton() {
+        driver.findElement(browseButton).click();
+        return this;
+    }
 
-  public NewIssuePage first50Issues() {
-    driver.findElement(first50Issues).click();
-    return this;
-  }
+    //---Add Issue (Pop up)
+    public NewIssuePage IssuePopup() {
+        driver.findElement(IssuePopup).click();
+        return this;
+    }
 
-    
- //---Assign User
-  public NewIssuePage assignUser() {
-    driver.findElement(assigneeFieldLocator).clear();
-    waitToBePresentAndSendKeys(assigneeFieldLocator, username);
-    driver.findElement(assigneeFieldLocator).sendKeys(Keys.TAB);
-    return this;
-  }
+    public NewIssuePage pageHeader() {
+        driver.findElement(pageHeader).click();
+        return this;
+    }
 
-  //---Assign to me
-  public NewIssuePage clickAssignToMeButton() {
-    waitToBePresentAndClick(assignToMeButtonLocator);
-    return this;
-  }
+    public NewIssuePage selectButton() {
+        driver.findElement(selectButton).click();
+        return this;
+    }
 
-  //---Add Epic Link
-  public NewIssuePage addEpicLink() {
-    driver.findElement(linktoEpicFieldLocator).clear();
-    driver.findElement(linktoEpicFieldLocator).sendKeys("Epic_AQA_5_MMazur");
-    driver.findElement(epicLinkSuggestions).click();
-    return this;
-  }
+    public NewIssuePage sourceRecent() {
+        driver.findElement(sourceRecent).click();
+        return this;
+    }
 
-  //---Create Issue
-  public NewIssuePage clickSubmitButton() {
-    waitToBePresentAndClick(submitButtonLocator);
-    return this;
-  }
+    public NewIssuePage sourceSearch() {
+        driver.findElement(sourceSearch).click();
+        return this;
+    }
 
-  //---Create another Issue
-  public NewIssuePage createAnotherIssue() {
-    driver.findElement(createAnotherButtonLocator).click();
-    driver.findElement(submitButtonLocator).click();
-    return this;
-  }
+    public NewIssuePage searchField() {
+        driver.findElement(sourceSearch).click();
+        driver.findElement(searchField).click();
+        return this;
+    }
 
-  //---Cancel creation
-  public NewIssuePage pressCancelButton() {
-    driver.findElement(cancelButtonLocator).click();
-    return this;
-  }
- //
-  public NewIssuePage clickWorkflowButton() {
-    driver.findElement(workflowLocator).click();
-    return this;
-  }
+    public NewIssuePage viewedIssues() {
+        driver.findElement(viewedIssues).click();
+        return this;
+    }
 
-  public NewIssuePage selectInProgressButton() {
-    waitToBePresentAndClick(inProgressLocator);
+    public NewIssuePage first50Issues() {
+        driver.findElement(first50Issues).click();
+        return this;
+    }
 
-    return this;
-  }
 
-  public NewIssuePage selectDoneButton() {
-    waitToBePresentAndClick(doneLocator);
-    return this;
-  }
+    //---Assign User
+    public NewIssuePage assignUser() {
+        driver.findElement(assigneeFieldLocator).clear();
+        waitToBePresentAndSendKeys(assigneeFieldLocator, username);
+        driver.findElement(assigneeFieldLocator).sendKeys(Keys.TAB);
+        return this;
+    }
 
-  public NewIssuePage clickLabelField() {
-    waitToBePresentAndClick(labelsFieldLocator);
-    return this;
-  }
+    //---Assign to me
+    public NewIssuePage clickAssignToMeButton() {
+        waitToBePresentAndClick(assignToMeButtonLocator);
+        return this;
+    }
 
-  public NewIssuePage clickDescriptionField() {
-    waitToBePresentAndClick(descriptionLocator);
-    return this;
-  }
+    //---Add Epic Link
+    public NewIssuePage addEpicLink() {
+        driver.findElement(linktoEpicFieldLocator).clear();
+        driver.findElement(linktoEpicFieldLocator).sendKeys("Epic_AQA_5_MMazur");
+        driver.findElement(epicLinkSuggestions).click();
+        return this;
+    }
 
-  public boolean isAddedLabelPresent(String label) {
-    String selector = String.format(addedLabelLocator, label);
-    return waitToBePresentAndContainsText(By.xpath(selector), label);
-  }
+    //---Create Issue
+    public NewIssuePage clickSubmitButton() {
+        waitToBePresentAndClick(submitButtonLocator);
+        return this;
+    }
 
-  public NewIssuePage clickBrowseButton() {
-    waitToBePresentAndClick(browseButtonLocator);
-    return this;
-  }
-  
-  public boolean isAttachmentPresent(String file){
-    String selector = String.format(fileName, file);
-    return waitToBePresentAndContainsText(By.xpath(selector), file);
-  }
-  public NewIssuePage setClipboardData(String string) {
-    StringSelection stringSelection = new StringSelection(string);
-    Toolkit.getDefaultToolkit().getSystemClipboard()
-            .setContents(stringSelection, null);
-    return this;
-  }
-  public NewIssuePage robot() throws AWTException {
+    //---Create another Issue
+    public NewIssuePage createAnotherIssue() {
+        driver.findElement(createAnotherButtonLocator).click();
+        driver.findElement(submitButtonLocator).click();
+        return this;
+    }
 
-    Robot rb = new Robot();
-    rb.delay(1000);
-    rb.keyPress(KeyEvent.VK_CONTROL);
-    rb.delay(300);
-    rb.keyPress(KeyEvent.VK_V);
-    rb.delay(300);
-    rb.keyRelease(KeyEvent.VK_V);
-    rb.delay(700);
-    rb.keyRelease(KeyEvent.VK_CONTROL);
-    rb.delay(300);
-    rb.keyPress(KeyEvent.VK_ENTER);
-    rb.delay(300);
-    rb.keyRelease(KeyEvent.VK_ENTER);
-    rb.delay(300);
+    //---Cancel creation
+    public NewIssuePage pressCancelButton() {
+        driver.findElement(cancelButtonLocator).click();
+        return this;
+    }
 
-    return this;
-}
+
+    public boolean isAddedLabelPresent(String label) {
+        String selector = String.format(addedLabelLocator, label);
+        return waitToBePresentAndContainsText(By.xpath(selector), label);
+    }
+
+    public NewIssuePage clickBrowseButton() {
+        waitToBePresentAndClick(browseButtonLocator);
+        return this;
+    }
+
+    public boolean isAttachmentPresent(String file) {
+        String selector = String.format(fileName, file);
+        return waitToBePresentAndContainsText(By.xpath(selector), file);
+    }
+
+    public NewIssuePage setClipboardData(String string) {
+        StringSelection stringSelection = new StringSelection(string);
+        Toolkit.getDefaultToolkit().getSystemClipboard()
+                .setContents(stringSelection, null);
+        return this;
+    }
+
+    public NewIssuePage robot() throws AWTException {
+
+        Robot rb = new Robot();
+        rb.delay(1000);
+        rb.keyPress(KeyEvent.VK_CONTROL);
+        rb.delay(300);
+        rb.keyPress(KeyEvent.VK_V);
+        rb.delay(300);
+        rb.keyRelease(KeyEvent.VK_V);
+        rb.delay(700);
+        rb.keyRelease(KeyEvent.VK_CONTROL);
+        rb.delay(300);
+        rb.keyPress(KeyEvent.VK_ENTER);
+        rb.delay(300);
+        rb.keyRelease(KeyEvent.VK_ENTER);
+        rb.delay(300);
+
+        return this;
+    }
 
     public NewIssuePage selectAssignFieldButton() {
         driver.findElement(selectAssignFieldButton).click();
@@ -528,7 +505,7 @@ public class NewIssuePage extends BasePage {
         driver.findElement(selectTextButton).click();
         return this;
     }
-  
+
     public Boolean assignPersonIsPresent(String assigneeName) {
         By assignedPerson = By.xpath(String.format(assignedPersonLocator.toString(), assigneeName));
         try {
@@ -537,13 +514,13 @@ public class NewIssuePage extends BasePage {
         } catch (NoSuchElementException e) {
             return false;
         }
-
-    public NewIssuePage clickWorkflowButton() {
+    }
+    public NewIssuePage clickWorkflowButton () {
         driver.findElement(workflowLocator).click();
         return this;
     }
 
-    public NewIssuePage selectInProgressButton() {
+    public NewIssuePage selectInProgressButton () {
         waitToBePresentAndClick(inProgressLocator);
 
         return this;
@@ -553,34 +530,31 @@ public class NewIssuePage extends BasePage {
         waitToBePresentAndClick(doneLocator);
         return this;
     }
-    public boolean isButtonWithTextPresent(){
+
+    public boolean isButtonWithTextPresent() {
         By buttonSelector = statusButtonInProgress;
-        try{
+        try {
             driver.findElement(buttonSelector);
             return true;
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
     }
-      
-    public NewIssuePage clickLabelField() {
+
+    public NewIssuePage clickLabelField () {
         waitToBePresentAndClick(labelsFieldLocator);
         return this;
     }
 
-    public NewIssuePage clickDescriptionField() {
+    public NewIssuePage clickDescriptionField () {
         waitToBePresentAndClick(descriptionLocator);
         return this;
     }
 
-    public boolean isAddedLabelPresent() {
-        waitToBePresent(addedLabelLocator);
-        return true;
-    }
-
-    public NewIssuePage clickSelectForDevelopment() {
+    public NewIssuePage clickSelectForDevelopment () {
         waitToBePresentAndClick(selectForDevelopmentLocator);
         return this;
     }
 }
+
 
