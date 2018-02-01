@@ -14,22 +14,15 @@ public class CreateIssueTest {
   @BeforeGroups(groups = {"UI","CreateIssue"})
   public void setUp() {
     LoginPage loginPage = new LoginPage();
-
-
-    loginPage.open();
-    assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
+    loginPage
+            .open();
+    // confirm that we are on the right page
     // otherwise we can click a wrong web element
-
+    assertEquals(loginPage.isOnThePage(), true);
     loginPage
             .enterUsername()
             .enterPassword()
             .clickLogin();
-
-    NewIssuePage newIssuePage = new NewIssuePage();
-    newIssuePage
-            .clickCreateIssueButton()
-            .waitForCreateIssueDialog();
-
   }
 
   // code that will be invoked after each @Test
@@ -42,7 +35,7 @@ public class CreateIssueTest {
 
   // Alesya's test
   @TestCase(id = "C13") // annotation that holds number of test case in TestRail
-  @Test(groups = {"UI","CreateIssue", "SKIP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  @Test(groups = {"UI","CreateIssue"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void createNewStory() throws InterruptedException {
 
     NewIssuePage newIssuePage = new NewIssuePage();
@@ -57,6 +50,8 @@ public class CreateIssueTest {
 
     // create new issue
     newIssuePage
+            .clickCreateIssueButton()
+            .waitForCreateIssueDialog()
             .enterProject(projectId)
             .enterIssueType(issueType)
             .fillSummary(storySummary)
@@ -64,10 +59,10 @@ public class CreateIssueTest {
             .selectPriority(issuePriority)
             .addLabel(issueLabel)
             .assignUser()
-            .clickSubmitButton();
+            .clickSubmitButton()
+            .clickNewIssueLinkOnSuccessPopup();
 
     // check that new issue is created successfully
-    newIssuePage.clickNewIssueLinkOnSuccessPopup();
     assertEquals(true, issuePage.isProjectIdCorrect(projectId));
     assertEquals(true, issuePage.isIssueSummaryCorrect(storySummary));
     assertEquals(true, issuePage.isIssueTypeCorrect(issueType));
@@ -92,24 +87,26 @@ public class CreateIssueTest {
       String issuePriority = "High";
       String issueLabel = "QAAuto5";
 
-      newIssuePage.enterProject(projectId)
-                  .enterIssueType(issueType)
-                  .fillSummary(bugSummary)
-                  .fillDescription(bugDescription)
-                  .selectPriority(issuePriority)
-                  .addLabel(issueLabel)
-                  .assignUser()
-                  .clickSubmitButton();
+      newIssuePage
+                .clickCreateIssueButton()
+                .waitForCreateIssueDialog()
+                .enterProject(projectId)
+                .enterIssueType(issueType)
+                .fillSummary(bugSummary)
+                .fillDescription(bugDescription)
+                .selectPriority(issuePriority)
+                .addLabel(issueLabel)
+                .assignUser()
+                .clickSubmitButton()
+                .clickNewIssueLinkOnSuccessPopup();
 
      /* issuePage.shouldSeeSuccessPopUp();
       newIssuePage.clickNewIssueLinkOnSuccessPopup(); */
-
-
     }
 
   // Marina S test
   @TestCase(id = "C9") // annotation that holds number of test case in TestRail
-  @Test(groups = {"UI","CreateIssue", "SKIP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  @Test(groups = {"UI","CreateIssue"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void createNewTask() throws InterruptedException {
 
     NewIssuePage newIssuePage = new NewIssuePage();
@@ -119,16 +116,20 @@ public class CreateIssueTest {
     String taskSummary = "Team 2 Task";
     String taskDescription = "Team 2 description";
     String issuePriority = "High";
+    String issueLabel = "QAAuto5";
 
     newIssuePage
+            .clickCreateIssueButton()
+            .waitForCreateIssueDialog()
             .enterProject(projectId)
             .enterIssueType(issueType)
             .fillSummary(taskSummary)
             .fillDescription(taskDescription)
             .selectPriority(issuePriority)
+            .addLabel(issueLabel)
+            .assignUser()
             .clickSubmitButton()
             .clickNewIssueLinkOnSuccessPopup();
-
   }
 
   // Eugene's test
@@ -149,6 +150,8 @@ public class CreateIssueTest {
 
     // create new issue
     newIssuePage
+            .clickCreateIssueButton()
+            .waitForCreateIssueDialog()
             .enterProject(projectId)
             .enterIssueType(issueType)
             .fillNameEpic(epicName)
@@ -157,7 +160,8 @@ public class CreateIssueTest {
             .selectPriority(issuePriority)
             .addLabel(issueLabel)
             .assignUser()
-            .clickSubmitButton();
+            .clickSubmitButton()
+            .clickNewIssueLinkOnSuccessPopup();
 
   }
 
