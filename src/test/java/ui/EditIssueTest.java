@@ -1,5 +1,6 @@
 package ui;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
@@ -15,116 +16,125 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class  EditIssueTest {
+    LoginPage loginPage;
+    HeaderPage headerPage;
+    DashBoardPage dashBoardPage;
+    IssuePage issuePage;
+    NewIssuePage newIssuePage;
+
+    String parentIssueId = "QAAUT-1";
+
     @BeforeGroups(groups = {"UI"})
     public void setUp() {
-        LoginPage loginPage = new LoginPage();
+        loginPage = new LoginPage();
+        headerPage = new HeaderPage();
+        dashBoardPage = new DashBoardPage();
+        issuePage = new IssuePage();
+        newIssuePage = new NewIssuePage();
 
         loginPage.open();
         assertEquals(loginPage.isOnThePage(), true); // confirm that we are on the right page
         // otherwise we can click a wrong web element
 
-        loginPage.enterUsername();
-        loginPage.enterPassword();
-        loginPage.clickLogin();
+        loginPage
+                .enterUsername()
+                .enterPassword()
+                .clickLogin();
 
+        headerPage.search(parentIssueId);               //поиск тестируюемого Issue в Jira
+        assertEquals(issuePage.isOnThePage(parentIssueId), true); //проверка на ожидаемой ли мы странице "QAAUT-1"
     }
 
     @TestCase(id = "C7")//--------------------------------------------------Алена
 
-    @Test(groups = {"UI"})
+    @Test(priority = 5, groups = {"UI"})
     public void addLabletoIssue() {
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        IssuePage issuePage = new IssuePage();
-        String parentIssueId = "QAAUT-4";
         String label = "My_label";
-        headerPage.search(parentIssueId);
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
-        newIssuePage.clickLabelField();
-        newIssuePage.addLabel(label);
-        newIssuePage.clickDescriptionField();
+
+        newIssuePage
+                .clickLabelField()
+                .addLabel(label)
+                .clickDescriptionField();
         assertEquals(newIssuePage.isAddedLabelPresent(label), true);
+        //TODO delete label
+        //TODO assertEquals(IssuePage.isLabelAbsent(label), true);
     }
 
     @TestCase(id = "C23")//--------------------------------------------------Алена
-    @Test(groups = {"UI", "SKIP"})
+    @Test(priority = 6, groups = {"UI"})
     public void addAttachmenttoIssue() throws AWTException {
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        IssuePage issuePage = new IssuePage();
-        String parentIssueId = "QAAUT-4";
         String pathToFile = "/home/alena/Документы/Lightshot/Screenshot_21.jpg";
         String fileName = "Screenshot_21.jpg";
         File file = new File(pathToFile);
-        headerPage.search(parentIssueId);
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
-        newIssuePage.clickBrowseButton();
-        newIssuePage.setClipboardData(file.getAbsolutePath());
-        newIssuePage.robot();
+
+        newIssuePage
+                .clickBrowseButton()
+                .setClipboardData(file.getAbsolutePath())
+                .robot();
         assertEquals(newIssuePage.isAttachmentPresent(fileName),true);
+        //TODO delete attachment
+        //TODO assertEquals(IssuePage.isAttachmentAbsent(fileName), true)
 
     }
 
 
     @TestCase(id = "C24")//--------------------------------------------------Марина
-    @Test(groups = {"UI"})
-    public void selectPriority() {
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        IssuePage issuePage = new IssuePage();
-        String parentIssueId = "QAAUT-1";
-        String issuePriority = "High";
-        headerPage.search(parentIssueId);
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
+    @Test(priority = 2, groups = {"UI"})
+    public void changePriority() {
+        String issuePriorityHigher = "High";
+        //String issuePriorityLower = "Low";
         issuePage.clickEditButton();
-        newIssuePage.selectPriority(issuePriority);
+        newIssuePage.selectPriority(issuePriorityHigher);
         issuePage.clickUpdateButtonPopUp();
-        assertEquals(issuePage.isIssuePriorityCorrect(issuePriority), true);
+        assertEquals(issuePage.isIssuePriorityCorrect(issuePriorityHigher), true);
+
+       /* TODO issuePage.clickEditButton();
+        newIssuePage.selectPriority(issuePriorityLower);
+        issuePage.clickUpdateButtonPopUp();
+        assertEquals(issuePage.isIssuePriorityCorrect(issuePriorityLower), true);*/
     }
 
     @TestCase(id = "C25")//--------------------------------------------------Марина
-    @Test(groups = {"UI"})
+    @Test(priority = 1, groups = {"UI"})
     public void createSubTask() throws InterruptedException {
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        IssuePage issuePage = new IssuePage();
-        String parentIssueId = "QAAUT-1";
         String subTaskSummary = "New sub-task created";
         String addLabel = "olafff";
+        //String subTaskAssign = "username";
 
-        headerPage.search(parentIssueId);
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
-        issuePage.openNewSubTask();
+        issuePage
+                .clickMoreButton()                              //нажимаем 'More' кнопку в заголовке тикета на IssuePage
+                .clickCreateSubTask();                          //нажимаем на кнопку 'Create sub-task'
+        //------------------заполняем поля для создания sub-task и применяем изменения
         newIssuePage
                 .fillSummary(subTaskSummary)
                 .addLabel(addLabel)
                 .clickAssignToMeButton()
                 .clickSubmitButton();
+        //-------------------проверяем, что sub-task создался по полю sammary
         assertEquals(issuePage.isSubTaskSummaryPresent(subTaskSummary), true);
+        //assertEquals(issuePage.isSubTaskAssigneePresent(subTaskAssign), true);
+        //-------------------удаляем после себя sub-ticket со страници родителя IssuePage
+        issuePage
+                .clickMoreBtnSubtask()
+                .clickDeleteSubTaskOnIssuePage()
+                .clickDeleteSubTaskConfirmation();
+        //-------------------проверяем, что sub-task удален по полю sammary, которое должно отсутствовать
+        assertEquals(issuePage.isSubTaskSummaryMissing(subTaskSummary), true);
     }
 
 
-    @TestCase(id = "C5")//--------------------------------------------------Nata
-    @Test(groups = {"UI"})
-    public void checkAssignUser() {
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        DashBoardPage dashBoardPage = new DashBoardPage();
-        IssuePage issuePage = new IssuePage();
 
-        String parentIssueId = "QAAUT-19";
+    @TestCase(id = "C5")//--------------------------------------------------Nata
+    @Test(priority = 7, groups = {"UI"})
+    public void checkAssignUser() {
         String addComment = "Great!";
 
-        // TO DO steps and asserts
-        assertEquals(dashBoardPage.isOnThePage(), true);
 
-        issuePage.openExistingIssue(parentIssueId);
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
-
-        newIssuePage.selectAssignFieldButton();
-//        newIssuePage.selectTextButton();
-        newIssuePage.addComment();
-        newIssuePage.selectAssignPerson();
+        newIssuePage
+                .selectAssignFieldButton()
+//              .selectTextButton();
+                .addComment()
+                .selectAssignPerson();
 
         try {
             Thread.sleep(3000);
@@ -134,60 +144,43 @@ public class  EditIssueTest {
 
         assertTrue(newIssuePage.assignPersonIsPresent("bobulan.nataliya"));
 //        newIssuePage.selectAssignButton();
+        //TODO Unassign User
+        //TODO assertTrue(IssuePage.assignPersonIsPresent("Unassigned"));
 
     }
 
     //    --------------------------------------------------Настя
     @TestCase(id = "C3")
-    @Test(groups = {"UI"})
+    @Test(priority = 3, groups = {"UI"})
 
-    public void AddComment() {
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        DashBoardPage dashBoardPage = new DashBoardPage();
-        IssuePage issuePage = new IssuePage();
-        String parentIssueId = "QAAUT-10";
+    public void addComment() throws InterruptedException {
         String commentText = "Very useful comment";
-
-        // TO DO steps and asserts
-
-        issuePage.openExistingIssue(parentIssueId);
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
-        issuePage.clickOnCommentBtn();
-        issuePage.enterComment(commentText);
-        issuePage.clickOnAddComment();
-
+        issuePage
+                .clickOnCommentBtn()
+                .enterComment(commentText)
+                .clickOnAddComment();
         assertEquals(issuePage.isCommentTextPresent(commentText),true);
-        issuePage.clickOnDeleteComment();
-        issuePage.confirmDeletionOfComment();
-        assertEquals(issuePage.isCommentTextMissing(commentText), true);
 
+        issuePage
+                .clickOnDeleteComment()
+                .confirmDeletionOfComment();
+        assertEquals(issuePage.isCommentTextMissing(commentText), true);
     }
 
     @TestCase(id = "C6")//--------------------------------------------------Julia
-    @Test(groups = {"UI"})
+    @Test(priority = 4, groups = {"UI"})
     public void checkButtonWork() throws InterruptedException {
-        NewIssuePage newIssuePage = new NewIssuePage();
-        HeaderPage headerPage = new HeaderPage();
-        DashBoardPage dashBoardPage = new DashBoardPage();
-        IssuePage issuePage = new IssuePage();
-
-        String parentIssueId = "QAAUT-19";
         String statusOfTheIssue = "In Progress";
 
-        // TO DO steps and asserts
-        assertEquals(dashBoardPage.isOnThePage(), true);
-
-        issuePage.openExistingIssue(parentIssueId);
-        assertEquals(issuePage.isOnThePage(parentIssueId), true);
-
         if(newIssuePage.isButtonWithTextPresent()){
-            newIssuePage.clickWorkflowButton();
-            newIssuePage.selectDoneButton();
+            newIssuePage
+                    .clickWorkflowButton()
+                    .selectDoneButton();
                 return;
         }else{
-            newIssuePage.clickWorkflowButton();
-            newIssuePage.selectInProgressButton();
+            newIssuePage
+                    .clickWorkflowButton()
+                    .selectInProgressButton();
         }
         try {
             Thread.sleep(3000);
@@ -196,7 +189,10 @@ public class  EditIssueTest {
         }
         assertTrue(newIssuePage.isButtonWithTextPresent());
 
-        newIssuePage.clickWorkflowButton();
-        newIssuePage.selectDoneButton();
+        newIssuePage
+                .clickWorkflowButton()
+                .selectDoneButton();
         }
+        //TODO revert/change issue status in 'To Do=Backlog' or 'Selected for Development'
+        // TODO assers that status is correct
     }

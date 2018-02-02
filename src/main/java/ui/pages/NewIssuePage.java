@@ -150,7 +150,7 @@ public class NewIssuePage extends BasePage {
     private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
     private By selectDropDownButton = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']//*[text()='More']");
     private By selectAssignPerson = By.xpath("//*[@id='assignee-field']");
-    private By addComment = By.xpath("//*[@id='comment-wiki-edit']//*[@class='textarea long-field wiki-textfield mentionable wiki-editor-initialised wiki-edit-wrapped']");
+    private By addComment = By.xpath("//*[@id='assign-dialog']//*[@id='comment']");
     private By selectAssignButton = By.xpath("//*[@class='buttons-container form-footer']//*[@class='aui-button']");
     private By selectTextButton = By.xpath("//*[@id='aui-uid-5']");
     private String assignedPersonLocator = "//*[@id='assignee-val']//*[contains(@id,'%s')]";
