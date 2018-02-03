@@ -156,6 +156,10 @@ public class NewIssuePage extends BasePage {
     private String assignedPersonLocator = "//*[@id='assignee-val']//*[contains(@id,'%s')]";
     private By statusButtonInProgress = By.xpath("//*[@id='status-val']//*[text()='In Progress']");
     private By statusButtonDone = By.xpath("//*[@id='status-val']//*[text()='Done']");
+    private By backlogButton = By.xpath("//*[@class='toolbar-item']//*[@class='toolbar-trigger issueaction-workflow-transition']//*[text()='Backlog']");
+    private By statusButtonBacklog = By.xpath("//*[@id='status-val']//*[text()='Backlog']");
+    private By selectedForDevelopmentLocator = By.xpath("//*[@class='toolbar-item']//*[@class='toolbar-trigger issueaction-workflow-transition']//*[text()='Selected for Development']");
+    private By statusButtonSelectForDevelopment = By.xpath("//*[@id='status-val']//*[text()='Selected for Development']");
 
 
     //---Create New Issue
@@ -610,4 +614,38 @@ public class NewIssuePage extends BasePage {
         waitToBePresentAndClick(selectForDevelopmentLocator);
         return this;
     }
+
+    public NewIssuePage selectBacklogButton() {
+        waitToBePresentAndClick(backlogButton);
+        return this;
+    }
+
+    public boolean isButtonWithTextBacklogPresent() {
+        By buttonBacklogSelector = statusButtonBacklog;
+        try {
+            driver.findElement(buttonBacklogSelector);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+    public NewIssuePage clickSelectedForDevelopment(){
+        waitToBePresentAndClick(selectedForDevelopmentLocator);
+        return this;
+    }
+
+    public boolean isButtonWithTextSelectForDevelopment(){
+        By buttonSelectForDevelopment = statusButtonSelectForDevelopment;
+        try {
+            driver.findElement(buttonSelectForDevelopment);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+
+
+    }
+
+
+
 }

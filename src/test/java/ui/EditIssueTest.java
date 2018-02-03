@@ -47,6 +47,7 @@ public class  EditIssueTest {
 
     @TestCase(id = "C7")//--------------------------------------------------Алена
 
+
     @Test(priority = 6, groups = {"UI"})
     public void addLabletoIssue() {
         String label = "My_label";
@@ -79,7 +80,7 @@ public class  EditIssueTest {
 
 
     @TestCase(id = "C24")//--------------------------------------------------Марина
-    @Test(priority = 2, groups = {"UI"})
+    @Test(priority = 2, groups = {"UI, SKIPP"})
     public void changePriority() {
         String issuePriorityHigher = "High";
         //String issuePriorityLower = "Low";
@@ -95,7 +96,7 @@ public class  EditIssueTest {
     }
 
     @TestCase(id = "C25")//--------------------------------------------------Марина
-    @Test(priority = 1, groups = {"UI"})
+    @Test(priority = 1, groups = {"UI, SKIPP"})
     public void createSubTask() throws InterruptedException {
         String subTaskSummary = "New sub-task created";
         String addLabel = "olafff";
@@ -151,7 +152,7 @@ public class  EditIssueTest {
 
     //    --------------------------------------------------Настя
     @TestCase(id = "C3")
-    @Test(priority = 3, groups = {"UI"})
+    @Test(priority = 3, groups = {"UI, SKIPP"})
 
     public void addComment() throws InterruptedException {
         String commentText = "Very useful comment";
@@ -196,7 +197,29 @@ public class  EditIssueTest {
         newIssuePage
                 .clickWorkflowButton()
                 .selectDoneButton();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
         }
+
+        newIssuePage.selectBacklogButton();
+        assertTrue(newIssuePage.isButtonWithTextBacklogPresent());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        newIssuePage.clickSelectedForDevelopment();
+        assertTrue(newIssuePage.isButtonWithTextSelectForDevelopment());
+
+
+    }
+        }
+
         //TODO revert/change issue status in 'To Do=Backlog' or 'Selected for Development'
         // TODO assers that status is correct
-    }
+
+
+
