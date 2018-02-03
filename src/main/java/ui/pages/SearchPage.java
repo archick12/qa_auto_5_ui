@@ -1,16 +1,16 @@
 package ui.pages;
 
-        import org.openqa.selenium.By;
-        import org.openqa.selenium.TimeoutException;
-        import org.openqa.selenium.WebElement;
-        import org.openqa.selenium.Keys;
-        import org.openqa.selenium.support.ui.ExpectedConditions;
-        import org.openqa.selenium.support.ui.Select;
-        import org.openqa.selenium.support.ui.WebDriverWait;
-        import ui.utils.RemoteDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import ui.utils.RemoteDriverManager;
 
-        import java.util.List;
-        import java.util.concurrent.TimeUnit;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SearchPage extends BasePage {
 
@@ -35,6 +35,9 @@ public class SearchPage extends BasePage {
   private By issueTypeAllSubTaskCheckbox  = By.xpath("//label[@title='All Sub-Task Issue Types']");
   private By issueTypeFirstCheckbox = By.xpath("(//label[@class='item-label'])[1]");
   private By issueTypeTotal = By.xpath("//td[@class='issuetype']");
+
+  private String issueTypeCheckboxXpathString = "//label[@title='%s']";
+
   private By issueTypeBug = By.xpath("//td[@class='issuetype']//img[@alt='Bug']");
   private By issueTypeEpic = By.xpath("//td[@class='issuetype']//img[@alt='Epic']");
   private By issueTypeStory = By.xpath("//td[@class='issuetype']//img[@alt='Story']");
@@ -101,6 +104,13 @@ public class SearchPage extends BasePage {
 
   public SearchPage SearchBugs() throws InterruptedException {
     SelectDropDownItem(typeButtonLocator,issueTypeBugCheckbox );
+    waitToBePresentAndClick(typeButtonLocator);
+    return this;
+  }
+
+  public SearchPage searchIssueByType(String issueType) throws InterruptedException {
+//    issueType = issueTypeParam;
+    SelectDropDownItem(typeButtonLocator, By.xpath(String.format(issueTypeCheckboxXpathString,issueType)) );
     waitToBePresentAndClick(typeButtonLocator);
     return this;
   }
