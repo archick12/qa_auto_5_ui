@@ -47,7 +47,8 @@ public class  EditIssueTest {
 
     @TestCase(id = "C7")//--------------------------------------------------Алена
 
-    @Test(priority = 5, groups = {"UI, SKIPP"})
+
+    @Test(priority = 6, groups = {"UI"})
     public void addLabletoIssue() {
         String label = "My_label";
 
@@ -61,7 +62,7 @@ public class  EditIssueTest {
     }
 
     @TestCase(id = "C23")//--------------------------------------------------Алена
-    @Test(priority = 6, groups = {"UI, SKIPP"})
+    @Test(priority = 7, groups = {"UI"})
     public void addAttachmenttoIssue() throws AWTException {
         String pathToFile = "/home/alena/Документы/Lightshot/Screenshot_21.jpg";
         String fileName = "Screenshot_21.jpg";
@@ -125,7 +126,7 @@ public class  EditIssueTest {
 
 
     @TestCase(id = "C5")//--------------------------------------------------Nata
-    @Test(priority = 7, groups = {"UI, SKIPP"})
+    @Test(priority = 8, groups = {"UI"})
     public void checkAssignUser() {
         String addComment = "Great!";
 
@@ -159,7 +160,11 @@ public class  EditIssueTest {
                 .clickOnCommentBtn()
                 .enterComment(commentText)
                 .clickOnAddComment();
-        assertEquals(issuePage.isCommentTextPresent(commentText),true);
+        assertEquals(issuePage.isCommentTextPresent(commentText), true);
+    }
+    @Test(priority = 4, groups = {"UI"})
+    public void DeleteComment() throws InterruptedException {
+        String commentText = "Very useful comment";
 
         issuePage
                 .clickOnDeleteComment()
@@ -168,7 +173,7 @@ public class  EditIssueTest {
     }
 
     @TestCase(id = "C6")//--------------------------------------------------Julia
-    @Test(priority = 4, groups = {"UI"})
+    @Test(priority = 5, groups = {"UI"})
     public void checkButtonWork() throws InterruptedException {
         String statusOfTheIssue = "In Progress";
 
