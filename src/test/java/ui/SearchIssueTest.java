@@ -6,7 +6,6 @@ import static org.testng.Assert.assertTrue;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 import ui.pages.*;
@@ -41,6 +40,7 @@ public class SearchIssueTest {
     //    assertEquals(true, dashBoardPage.isOnThePage()); //not really necessary because homepage can vary
     // Prepare for search tests:
     headerPage.issuesSearchForIssues();
+    searchPage.waitForNotPending();
     // TODO check that basic view is on
     searchPage.clickOnLayoutSwitcherButton()
         .clickListViewItem();
@@ -108,33 +108,33 @@ public class SearchIssueTest {
   @Test(groups = {"UI"})
   public void searchByType() throws InterruptedException {
     //__________________________________check Bug type
-    searchPage.SearchBugs();
+    searchPage.SearchIssuesByBagsType();
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountBugsOnPage());
     logger.info("ASSERTION PASSED: bugs");
-    searchPage.SearchBugs();
+    searchPage.SearchIssuesByBagsType();
     //__________________________________check Epic type
     searchPage.waitForNotPending();
-    searchPage.SearchEpics();
+    searchPage.SearchIssuesByEpicType();
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountEpicsOnPage());
     logger.info("ASSERTION PASSED: epics");
-    searchPage.SearchEpics();
+    searchPage.SearchIssuesByEpicType();
     //__________________________________ check Story type
     searchPage.waitForNotPending();
     searchPage.FindSeachType("Story");
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountStoriesOnPage());
     logger.info("ASSERTION PASSED: stories");
-    searchPage.SearchStories();
+    searchPage.SearchIssuesByStoryType();
     //_________________________________________ check Sub-task type
     searchPage.waitForNotPending();
-    searchPage.SearchAllSubTasks();
+    searchPage.SearchIssuesBySubTasksType();
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(),
         searchPage.CountSubTasksOnPage() + searchPage.CountSubDefectsOnPage());
     logger.info("ASSERTION PASSED: sub-tasks");
-    searchPage.SearchAllSubTasks();
+    searchPage.SearchIssuesBySubTasksType();
   }
 
   @TestCase(id = "4") //Maxim

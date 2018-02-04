@@ -105,7 +105,7 @@ public class SearchPage extends BasePage {
     return driver.findElements(issueRowsLocator);
   }
 
-  public SearchPage SearchBugs() throws InterruptedException {
+  public SearchPage SearchIssuesByBagsType() throws InterruptedException {
     SelectDropDownItem(typeButtonLocator,issueTypeBugCheckbox );
     waitToBePresentAndClick(typeButtonLocator);
     return this;
@@ -117,17 +117,17 @@ public class SearchPage extends BasePage {
     waitToBePresentAndClick(typeButtonLocator);
     return this;
   }
-  public SearchPage SearchEpics() throws InterruptedException {
+  public SearchPage SearchIssuesByEpicType() throws InterruptedException {
     SelectDropDownItem(typeButtonLocator,issueTypeEpicCheckbox );
     waitToBePresentAndClick(typeButtonLocator);
     return this;
   }
-  public SearchPage SearchStories() throws InterruptedException {
+  public SearchPage SearchIssuesByStoryType() throws InterruptedException {
     SelectDropDownItem(typeButtonLocator,issueTypeStoryCheckbox );
     waitToBePresentAndClick(typeButtonLocator);
     return this;
   }
-  public SearchPage SearchAllSubTasks () throws InterruptedException {
+  public SearchPage SearchIssuesBySubTasksType() throws InterruptedException {
     SelectDropDownItem(typeButtonLocator, issueTypeAllSubTaskCheckbox);
     waitToBePresentAndClick(typeButtonLocator);
     return this;
