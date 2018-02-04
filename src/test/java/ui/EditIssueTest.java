@@ -1,5 +1,6 @@
 package ui;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 import ui.pages.*;
@@ -7,9 +8,11 @@ import utils.TestCase;
 
 import java.awt.*;
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class  EditIssueTest {
@@ -19,7 +22,7 @@ public class  EditIssueTest {
     IssuePage issuePage;
     NewIssuePage newIssuePage;
 
-    String parentIssueId = "QAAUT-1";
+    String parentIssueId = "QAAUT-228";
 
     @BeforeGroups(groups = {"UI"})
     public void setUp() {
@@ -45,7 +48,7 @@ public class  EditIssueTest {
     @TestCase(id = "C7")//--------------------------------------------------Алена
 
 
-    @Test(priority = 6, groups = {"UI"})
+    @Test(priority = 5, groups = {"UI"})
     public void addLabletoIssue() {
         String label = "My_label";
 
@@ -61,8 +64,8 @@ public class  EditIssueTest {
     @TestCase(id = "C23")//--------------------------------------------------Алена
     @Test(priority = 7, groups = {"UI"})
     public void addAttachmenttoIssue() throws AWTException {
-        String pathToFile = "/home/alena/Документы/Lightshot/Screenshot_21.jpg";
-        String fileName = "Screenshot_21.jpg";
+        String pathToFile = "/C:/Users/user/Desktop/Screenshot_21.png";
+        String fileName = "Screenshot_21.png";
         File file = new File(pathToFile);
 
         newIssuePage
@@ -72,28 +75,31 @@ public class  EditIssueTest {
         assertEquals(newIssuePage.isAttachmentPresent(fileName),true);
         //TODO delete attachment
         //TODO assertEquals(IssuePage.isAttachmentAbsent(fileName), true)
-
+        /*issuePage
+                .clickRemoveAttachment()
+                .clickDeleteAttachmentConfirmationPopUp();
+        assertFalse(newIssuePage.isAttachmentPresent(fileName));*/
     }
 
 
     @TestCase(id = "C24")//--------------------------------------------------Марина
-    @Test(priority = 2, groups = {"UI, SKIPP"})
+    @Test(priority = 8, groups = {"UI", "SKIP"})
     public void changePriority() {
         String issuePriorityHigher = "High";
-        //String issuePriorityLower = "Low";
+       // String issuePriorityLower = "Low";
         issuePage.clickEditButton();
         newIssuePage.selectPriority(issuePriorityHigher);
         issuePage.clickUpdateButtonPopUp();
         assertEquals(issuePage.isIssuePriorityCorrect(issuePriorityHigher), true);
 
-       /* TODO issuePage.clickEditButton();
+      /*  issuePage.clickEditButton();
         newIssuePage.selectPriority(issuePriorityLower);
         issuePage.clickUpdateButtonPopUp();
         assertEquals(issuePage.isIssuePriorityCorrect(issuePriorityLower), true);*/
     }
 
     @TestCase(id = "C25")//--------------------------------------------------Марина
-    @Test(priority = 1, groups = {"UI, SKIPP"})
+    @Test(priority = 6, groups = {"UI"})
     public void createSubTask() throws InterruptedException {
         String subTaskSummary = "New sub-task created";
         String addLabel = "olafff";
@@ -123,7 +129,7 @@ public class  EditIssueTest {
 
 
     @TestCase(id = "C5")//--------------------------------------------------Nata
-    @Test(priority = 8, groups = {"UI"})
+    @Test(priority = 2, groups = {"UI"})
     public void checkAssignUser() {
         String addComment = "Great!";
 
@@ -145,7 +151,7 @@ public class  EditIssueTest {
 
         newIssuePage
                 .selectAssignFieldButton()
-                .selectAssignField("Unassigned")
+                .selectAssignField("marina0937460675")
                 .selectAssignButton();
 
         try {
@@ -154,12 +160,16 @@ public class  EditIssueTest {
             e.printStackTrace();
         }
 
-        assertTrue(newIssuePage.selectUnassignIsPresent("Unassigned"));
+        assertTrue(newIssuePage.selectUnassignIsPresent("marina0937460675"));
+        issuePage
+                .clickOnDeleteComment()
+                .confirmDeletionOfComment();
+        assertEquals(issuePage.isCommentTextMissing(addComment), true);
     }
 
 //    //    --------------------------------------------------Настя
     @TestCase(id = "C3")
-    @Test(priority = 3, groups = {"UI, SKIPP"})
+    @Test(priority = 3, groups = {"UI"})
 
     public void addComment() throws InterruptedException {
         String commentText = "Very useful comment";
@@ -180,7 +190,7 @@ public class  EditIssueTest {
     }
 
     @TestCase(id = "C6")//--------------------------------------------------Julia
-    @Test(priority = 5, groups = {"UI"})
+    @Test(priority = 1, groups = {"UI"})
     public void checkButtonWork() throws InterruptedException {
         String statusOfTheIssue = "In Progress";
 
@@ -225,8 +235,7 @@ public class  EditIssueTest {
     }
         }
 
-        //TODO revert/change issue status in 'To Do=Backlog' or 'Selected for Development'
-        // TODO assers that status is correct
+
 
 
 

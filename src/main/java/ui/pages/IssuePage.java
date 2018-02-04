@@ -71,6 +71,8 @@ public class IssuePage extends BasePage {
     private String subTaskNumber = "//*[@class='stsequence']//*[contains(text(),'%s')]";
     private String subTaskAssignee = "//*[@class='assignee']//*[contains(text(),'%s')]";
     private String commentText = "//*[@id='issue_actions_container']//child::*[contains(text(),'%s')]";
+    private By removeAttachmentItemLocator = By.xpath("//*[@class='attachment-delete']//span[.='Delete this attachment']");
+    private By confirmationRemoveAttachment = By.xpath("//*[@id='delete-attachment-dialog']//*[@value='Delete']");
 
     // Comments sections
 
@@ -342,7 +344,7 @@ public class IssuePage extends BasePage {
     }
 
     public IssuePage clickEditButton() {
-        waitToBePresentAndClick(editIssueButton);
+        waitTillBeAbleToClick(editIssueButton);
         return this;
     }
 
@@ -370,5 +372,16 @@ public class IssuePage extends BasePage {
         waitToBePresent(createSubtastPopUpLocator);
         return this;
     }
+
+    public IssuePage clickRemoveAttachment() {
+        waitToBePresentAndClick(removeAttachmentItemLocator);
+        return this;
+    }
+
+    public IssuePage clickDeleteAttachmentConfirmationPopUp() {
+        waitToBePresentAndClick(confirmationRemoveAttachment);
+        return this;
+    }
 }
+
 
