@@ -1,14 +1,11 @@
 package ui;
 
-import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 import ui.pages.*;
 import utils.TestCase;
 
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.io.File;
 
 import static org.testng.Assert.assertEquals;
@@ -135,7 +132,8 @@ public class  EditIssueTest {
                 .selectAssignFieldButton()
 //              .selectTextButton();
                 .addComment()
-                .selectAssignPerson();
+                .selectAssignField("bobulan.nataliya")
+                .selectAssignButton();
 
         try {
             Thread.sleep(3000);
@@ -144,13 +142,22 @@ public class  EditIssueTest {
         }
 
         assertTrue(newIssuePage.assignPersonIsPresent("bobulan.nataliya"));
-//        newIssuePage.selectAssignButton();
-        //TODO Unassign User
-        //TODO assertTrue(IssuePage.assignPersonIsPresent("Unassigned"));
 
+        newIssuePage
+                .selectAssignFieldButton()
+                .selectAssignField("Unassigned")
+                .selectAssignButton();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(newIssuePage.selectUnassignIsPresent("Unassigned"));
     }
 
-    //    --------------------------------------------------Настя
+//    //    --------------------------------------------------Настя
     @TestCase(id = "C3")
     @Test(priority = 3, groups = {"UI, SKIPP"})
 
