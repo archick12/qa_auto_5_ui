@@ -47,6 +47,8 @@ public class SearchPage extends BasePage {
   private By assigneeFindUserFieldLocator = By.id("assignee-input");
   private By assigneeCurrentUserCheckboxLocator = By.xpath("//label[@title='Current User']");
   private By assigneeUnassignedCheckboxLocator = By.xpath("//label[@title='Unassigned']");
+  private By nameAssigneeUser = By.xpath("//td[@class='assignee']//a");
+  private By assigneeFirstCheckboxLocator = By.xpath("(//label[@class='item-label'])[1]");
 
   public SearchPage() {
     this.driver = RemoteDriverManager.getDriver();
@@ -159,8 +161,23 @@ public class SearchPage extends BasePage {
     return this;
   }
 
-  public SearchPage clickAssigneeFindUserField() throws InterruptedException {
-    waitToBePresentAndClick(assigneeFindUserFieldLocator);
+  public SearchPage sendAssigneeFindUserField(String name) throws InterruptedException {
+    waitToBePresentAndSendKeys(assigneeFindUserFieldLocator,name);
+    return this;
+  }
+
+
+  public Boolean IsIssuesAssigneeToCurentUser(){
+    waitForNotPending();
+    for (WebElement issue : driver.findElements(nameAssigneeUser)){
+      if(!issue.getAttribute("rel").equals(username))
+        return false;
+    }
+    return true;
+  }
+
+  public SearchPage clickAssigneeFirstCheckbox() throws InterruptedException {
+    waitToBePresentAndClick(assigneeFirstCheckboxLocator);
     return this;
   }
 

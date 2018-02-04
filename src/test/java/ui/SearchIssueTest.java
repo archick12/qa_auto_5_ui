@@ -1,10 +1,12 @@
 package ui;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 import ui.pages.*;
@@ -50,23 +52,32 @@ public class SearchIssueTest {
   public void searchByAssignee() throws InterruptedException {
     // String username = ListenerTest.properties.get("username");
 
+
+
+
+
     searchPage.clickAssigneeButton()                //кликаем, что бы развернуть список
         .clickAssigneeCurrentUserCheckbox()  //устанавливаем галочку на 'Current User' чекбокс
         .clickAssigneeButton();              //кликаем, что бы свернуть список
-    //TO DO добавить проверку
+    assertTrue(searchPage.IsIssuesAssigneeToCurentUser());
 
     searchPage.clickAssigneeButton()               //кликаем, что бы развернуть список
         .clickAssigneeCurrentUserCheckbox()  //снимаем галочку в 'Current User' чекбоксе
-        .clickAssigneeUnassignedCheckbox()   //устанавливаем галочку на 'Unassigned' чекбокс
         .clickAssigneeButton();              //кликаем, что бы свернуть список
-    //TO DO добавить проверку
+    assertFalse(searchPage.IsIssuesAssigneeToCurentUser());
+
 
     searchPage.clickAssigneeButton()             //кликаем, что бы развернуть список
-        .clickAssigneeUnassignedCheckbox()  //снимаем галочку в 'Unassigned' чекбоксе
-        .clickAssigneeFindUserField();     //устанавливаем курсов в поле поиска пользователей
-    //TO DO добавить ввод текста
-    searchPage.clickAssigneeButton();             //кликаем, что бы свернуть список
-    //TO DO добавить проверку
+            // .sendAssigneeFindUserField(loginPage.GetUserName())     // добавляем имя пользователя
+            .clickAssigneeFirstCheckbox().clickAssigneeButton();
+    assertTrue(searchPage.IsIssuesAssigneeToCurentUser());
+
+    searchPage.clickAssigneeButton()             //кликаем, что бы развернуть список
+            .clickAssigneeFirstCheckbox().clickAssigneeButton();
+    assertFalse(searchPage.IsIssuesAssigneeToCurentUser());
+
+
+
 
   }
 
