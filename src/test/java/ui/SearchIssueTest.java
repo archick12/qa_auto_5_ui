@@ -52,10 +52,6 @@ public class SearchIssueTest {
   public void searchByAssignee() throws InterruptedException {
     // String username = ListenerTest.properties.get("username");
 
-
-
-
-
     searchPage.clickAssigneeButton()                //кликаем, что бы развернуть список
         .clickAssigneeCurrentUserCheckbox()  //устанавливаем галочку на 'Current User' чекбокс
         .clickAssigneeButton();              //кликаем, что бы свернуть список
@@ -68,16 +64,25 @@ public class SearchIssueTest {
 
 
     searchPage.clickAssigneeButton()             //кликаем, что бы развернуть список
-            // .sendAssigneeFindUserField(loginPage.GetUserName())     // добавляем имя пользователя
-            .clickAssigneeFirstCheckbox().clickAssigneeButton();
+             .sendAssigneeFindUserField(ListenerTest.properties.get("username"))     // добавляем имя пользователя
+            .clickAssigneeFirstCheckbox()       //кликаем на первый item в меню
+            .clickAssigneeButton();             //кликаем, что бы свернуть список
     assertTrue(searchPage.IsIssuesAssigneeToCurentUser());
 
     searchPage.clickAssigneeButton()             //кликаем, что бы развернуть список
-            .clickAssigneeFirstCheckbox().clickAssigneeButton();
+            .clickAssigneeFirstCheckbox()       //кликаем на первый item в меню
+            .clickAssigneeButton();            //кликаем, что бы свернуть список
     assertFalse(searchPage.IsIssuesAssigneeToCurentUser());
 
+    searchPage.clickAssigneeButton()          //кликаем, что бы развернуть список
+            .clickAssigneeUnassignedCheckbox() //кликаем Unassigned чекбокс
+            .clickAssigneeButton();            //кликаем, что бы свернуть список
+    assertTrue(searchPage.IsIssuesUnassigned()); // проверка, что все отображённые issues именют Unassigned
 
-
+    searchPage.clickAssigneeButton()          //кликаем, что бы развернуть список
+            .clickAssigneeUnassignedCheckbox() //кликаем Unassigned чекбокс
+            .clickAssigneeButton();            //кликаем, что бы свернуть список
+    assertFalse(searchPage.IsIssuesUnassigned()); // проверка, что все отображённые issues именют не только Unassigned
 
   }
 
@@ -103,28 +108,27 @@ public class SearchIssueTest {
   @Test(groups = {"UI"})
   public void searchByType() throws InterruptedException {
     //__________________________________check Bug type
-    searchPage.SearchBugs(); // TODO - replace with next lines
-    // searchPage.clickOnIssueTypeButton();
-    //  searchPage.selectIssuTypeCheckBox("Bug");
-    //  searchPage.clickOnIssueTypeButton();
-
+    searchPage.SearchBugs();
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountBugsOnPage());
     logger.info("ASSERTION PASSED: bugs");
     searchPage.SearchBugs();
     //__________________________________check Epic type
+    searchPage.waitForNotPending();
     searchPage.SearchEpics();
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountEpicsOnPage());
     logger.info("ASSERTION PASSED: epics");
     searchPage.SearchEpics();
     //__________________________________ check Story type
+    searchPage.waitForNotPending();
     searchPage.FindSeachType("Story");
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountStoriesOnPage());
     logger.info("ASSERTION PASSED: stories");
     searchPage.SearchStories();
     //_________________________________________ check Sub-task type
+    searchPage.waitForNotPending();
     searchPage.SearchAllSubTasks();
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(),

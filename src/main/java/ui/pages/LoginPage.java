@@ -37,9 +37,6 @@ public class LoginPage extends BasePage {
         waitToBePresentAndSendSubmit(loginButtonLocator);
         return this;
     }
-    public String GetUserName(){
-        return username;
-    }
 
     public boolean isOnThePage() {
         return isOnThePage(pageURL);

@@ -49,6 +49,7 @@ public class SearchPage extends BasePage {
   private By assigneeUnassignedCheckboxLocator = By.xpath("//label[@title='Unassigned']");
   private By nameAssigneeUser = By.xpath("//td[@class='assignee']//a");
   private By assigneeFirstCheckboxLocator = By.xpath("(//label[@class='item-label'])[1]");
+  private By nameUnassignedLocator = By.xpath("//td[@class='assignee']");
 
   public SearchPage() {
     this.driver = RemoteDriverManager.getDriver();
@@ -171,6 +172,15 @@ public class SearchPage extends BasePage {
     waitForNotPending();
     for (WebElement issue : driver.findElements(nameAssigneeUser)){
       if(!issue.getAttribute("rel").equals(username))
+        return false;
+    }
+    return true;
+  }
+
+  public Boolean IsIssuesUnassigned(){
+    waitForNotPending();
+    for (WebElement issue : driver.findElements(nameUnassignedLocator)){
+      if(!issue.getText().equals("Unassigned"))
         return false;
     }
     return true;
