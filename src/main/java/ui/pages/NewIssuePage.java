@@ -528,11 +528,11 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-    public NewIssuePage selectAssignPerson() {
+    public NewIssuePage selectAssignField(String text) {
 
         driver.findElement(selectAssignPerson).clear();
-        driver.findElement(selectAssignPerson).sendKeys("bobulan.nataliya");
-        driver.findElement(selectAssignPerson).sendKeys(Keys.ENTER);
+        driver.findElement(selectAssignPerson).sendKeys(text);
+        driver.findElement(selectAssignPerson).sendKeys(Keys.TAB);
         return this;
     }
 
@@ -645,6 +645,17 @@ public class NewIssuePage extends BasePage {
 
 
     }
+
+    public Boolean selectUnassignIsPresent(String assigneeName) {
+        By assignedPerson = By.xpath(String.format(assignedPersonLocator.toString(), assigneeName));
+        try {
+            driver.findElement(assignedPerson);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
 
 
 
