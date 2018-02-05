@@ -13,11 +13,11 @@ public class BasePage {
 
     // protected String baseURL = "http://soft.it-hillel.com.ua:8080";
     protected String baseURL = "http://jira.hillel.it:8080";
-    protected String username = ListenerTest.properties.get("username");
-    protected String password = ListenerTest.properties.get("password");
     protected WebDriver driver;
     private int defaultExplicitWaitInSeconds = 10;
     public static int defaultImplicitWaitInSeconds = 10;
+    protected String username = ListenerTest.properties.get("username");
+    protected String password = ListenerTest.properties.get("password");
 
     protected BasePage() {
         this.driver = RemoteDriverManager.getDriver();
@@ -68,7 +68,7 @@ public class BasePage {
     }
 
     protected void waitToBePresentAndSendKeys(By locator, String keys) {
-        logger.info("WAIT ELEMENT TO BE PRESENT AND SEND KEYS: " + locator);
+        logger.info("WAIT ELEMENT TO BE PRESENT AND SEND KEYS: SEND " + keys + " TO "+ locator);
 
         WebElement element = null;
 
@@ -84,6 +84,23 @@ public class BasePage {
 
     }
 
+    protected void waitTillBeAbleToClick(By locator) {
+        logger.info("WAIT ELEMENT TO BE CLICKABLE: " + locator);
+
+        WebElement element = null;
+
+        try {
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
+                    until(ExpectedConditions.elementToBeClickable(locator));
+            element.click();
+        } catch (StaleElementReferenceException ignored) {
+            element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
+                    until(ExpectedConditions.elementToBeClickable(locator));
+            element.click();
+        }
+
+    }
+
     protected void waitToBePresentAndSendSubmit(By locator) {
         logger.info("WAIT ELEMENT TO BE PRESENT AND SUBMIT: " + locator);
         WebElement element = null;
@@ -91,11 +108,11 @@ public class BasePage {
         try {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
-            element.click();
+            element.submit();
         } catch (StaleElementReferenceException ignored) {
             element = (new WebDriverWait(driver, defaultExplicitWaitInSeconds)).
                     until(ExpectedConditions.presenceOfElementLocated(locator));
-            element.click();
+            element.submit();
         }
 
     }
@@ -115,6 +132,7 @@ public class BasePage {
             if (result.contains(text)) {
                 return true;
             } else {
+                logger.info("!---FAILED---! THE ELEMENT DOESN'T CONTAIN TEXT: " + locator);
                 return false;
             }
 
@@ -126,6 +144,7 @@ public class BasePage {
             if (result.contains(text)) {
                 return true;
             } else {
+                logger.info("!---FAILED---! THE ELEMENT DOESN'T CONTAIN TEXT: " + locator);
                 return false;
             }
         }
