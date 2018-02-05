@@ -62,7 +62,7 @@ public class  EditIssueTest {
     }
 
     @TestCase(id = "C23")//--------------------------------------------------Алена
-    @Test(priority = 7, groups = {"UI"})
+    @Test(priority = 6, groups = {"UI"})
     public void addAttachmenttoIssue() throws AWTException {
         String pathToFile = "/C:/Users/user/Desktop/Screenshot_21.png";
         String fileName = "Screenshot_21.png";
@@ -99,8 +99,8 @@ public class  EditIssueTest {
     }
 
     @TestCase(id = "C25")//--------------------------------------------------Марина
-    @Test(priority = 6, groups = {"UI"})
-    public void createSubTask() throws InterruptedException {
+    @Test(priority = 7, groups = {"UI"})
+    public void createAndDeleteSubTask() throws InterruptedException {
         String subTaskSummary = "New sub-task created";
         String addLabel = "olafff";
         //String subTaskAssign = "username";
