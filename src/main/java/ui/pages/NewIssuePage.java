@@ -19,6 +19,7 @@ public class NewIssuePage extends BasePage {
     //---Create a New Issue Button and dialog
     private By createLocator = By.id("create_link");
     private By createIssueDialog = By.id("create-issue-dialog");
+    private By successPopUp = By.xpath("//*[contains(@class,'aui-message-success')]");
     private By newIssueLinkOnSuccessPopup = By.xpath("//a[@class='issue-created-key issue-link']");
 
     //---Configure Fields
@@ -150,12 +151,16 @@ public class NewIssuePage extends BasePage {
     private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
     private By selectDropDownButton = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']//*[text()='More']");
     private By selectAssignPerson = By.xpath("//*[@id='assignee-field']");
-    private By addComment = By.xpath("//*[@id='comment-wiki-edit']//*[@class='textarea long-field wiki-textfield mentionable wiki-editor-initialised wiki-edit-wrapped']");
+    private By addComment = By.xpath("//*[@id='assign-dialog']//*[@id='comment']");
     private By selectAssignButton = By.xpath("//*[@class='buttons-container form-footer']//*[@class='aui-button']");
     private By selectTextButton = By.xpath("//*[@id='aui-uid-5']");
     private String assignedPersonLocator = "//*[@id='assignee-val']//*[contains(@id,'%s')]";
     private By statusButtonInProgress = By.xpath("//*[@id='status-val']//*[text()='In Progress']");
     private By statusButtonDone = By.xpath("//*[@id='status-val']//*[text()='Done']");
+    private By backlogButton = By.xpath("//*[@class='toolbar-item']//*[@class='toolbar-trigger issueaction-workflow-transition']//*[text()='Backlog']");
+    private By statusButtonBacklog = By.xpath("//*[@id='status-val']//*[text()='Backlog']");
+    private By selectedForDevelopmentLocator = By.xpath("//*[@class='toolbar-item']//*[@class='toolbar-trigger issueaction-workflow-transition']//*[text()='Selected for Development']");
+    private By statusButtonSelectForDevelopment = By.xpath("//*[@id='status-val']//*[text()='Selected for Development']");
 
 
     //---Create New Issue
@@ -164,17 +169,15 @@ public class NewIssuePage extends BasePage {
         headerPage = new HeaderPage();
     }
 
-    public NewIssuePage clickCreateIssueButton() {
+    public NewIssuePage clickCreateAndWaitForDialog() {
         waitToBePresentAndClick(createLocator);
-        return this;
-    }
-
-    public NewIssuePage waitForCreateIssueDialog() {
         waitToBePresent(createIssueDialog);
         return this;
     }
 
-    public NewIssuePage clickNewIssueLinkOnSuccessPopup() {
+    public NewIssuePage submitNewTicketAndOpenIt() {
+        waitToBePresentAndClick(submitButtonLocator);
+        waitToBePresent(successPopUp);
         waitToBePresentAndClick(newIssueLinkOnSuccessPopup);
         return this;
     }
@@ -524,11 +527,11 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-    public NewIssuePage selectAssignPerson() {
+    public NewIssuePage selectAssignField(String text) {
 
         driver.findElement(selectAssignPerson).clear();
-        driver.findElement(selectAssignPerson).sendKeys("bobulan.nataliya");
-        driver.findElement(selectAssignPerson).sendKeys(Keys.ENTER);
+        driver.findElement(selectAssignPerson).sendKeys(text);
+        driver.findElement(selectAssignPerson).sendKeys(Keys.TAB);
         return this;
     }
 
@@ -610,4 +613,49 @@ public class NewIssuePage extends BasePage {
         waitToBePresentAndClick(selectForDevelopmentLocator);
         return this;
     }
+
+    public NewIssuePage selectBacklogButton() {
+        waitToBePresentAndClick(backlogButton);
+        return this;
+    }
+
+    public boolean isButtonWithTextBacklogPresent() {
+        By buttonBacklogSelector = statusButtonBacklog;
+        try {
+            driver.findElement(buttonBacklogSelector);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+    public NewIssuePage clickSelectedForDevelopment(){
+        waitToBePresentAndClick(selectedForDevelopmentLocator);
+        return this;
+    }
+
+    public boolean isButtonWithTextSelectForDevelopment(){
+        By buttonSelectForDevelopment = statusButtonSelectForDevelopment;
+        try {
+            driver.findElement(buttonSelectForDevelopment);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+
+
+    }
+
+    public Boolean selectUnassignIsPresent(String assigneeName) {
+        By assignedPerson = By.xpath(String.format(assignedPersonLocator.toString(), assigneeName));
+        try {
+            driver.findElement(assignedPerson);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+
+
+
 }
