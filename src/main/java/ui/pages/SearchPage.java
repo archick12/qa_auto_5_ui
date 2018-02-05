@@ -1,16 +1,16 @@
 package ui.pages;
 
-        import org.openqa.selenium.By;
-        import org.openqa.selenium.TimeoutException;
-        import org.openqa.selenium.WebElement;
-        import org.openqa.selenium.Keys;
-        import org.openqa.selenium.support.ui.ExpectedConditions;
-        import org.openqa.selenium.support.ui.Select;
-        import org.openqa.selenium.support.ui.WebDriverWait;
-        import ui.utils.RemoteDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import ui.utils.RemoteDriverManager;
 
-        import java.util.List;
-        import java.util.concurrent.TimeUnit;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SearchPage extends BasePage {
 
@@ -35,6 +35,9 @@ public class SearchPage extends BasePage {
   private By issueTypeAllSubTaskCheckbox  = By.xpath("//label[@title='All Sub-Task Issue Types']");
   private By issueTypeFirstCheckbox = By.xpath("(//label[@class='item-label'])[1]");
   private By issueTypeTotal = By.xpath("//td[@class='issuetype']");
+
+  private String issueTypeCheckboxXpathString = "//label[@title='%s']";
+
   private By issueTypeBug = By.xpath("//td[@class='issuetype']//img[@alt='Bug']");
   private By issueTypeEpic = By.xpath("//td[@class='issuetype']//img[@alt='Epic']");
   private By issueTypeStory = By.xpath("//td[@class='issuetype']//img[@alt='Story']");
@@ -47,6 +50,9 @@ public class SearchPage extends BasePage {
   private By assigneeFindUserFieldLocator = By.id("assignee-input");
   private By assigneeCurrentUserCheckboxLocator = By.xpath("//label[@title='Current User']");
   private By assigneeUnassignedCheckboxLocator = By.xpath("//label[@title='Unassigned']");
+  private By nameAssigneeUser = By.xpath("//td[@class='assignee']//a");
+  private By assigneeFirstCheckboxLocator = By.xpath("(//label[@class='item-label'])[1]");
+  private By nameUnassignedLocator = By.xpath("//td[@class='assignee']");
 
   public SearchPage() {
     this.driver = RemoteDriverManager.getDriver();
@@ -99,22 +105,29 @@ public class SearchPage extends BasePage {
     return driver.findElements(issueRowsLocator);
   }
 
-  public SearchPage SearchBugs() throws InterruptedException {
+  public SearchPage SearchIssuesByBagsType() throws InterruptedException {
     SelectDropDownItem(typeButtonLocator,issueTypeBugCheckbox );
     waitToBePresentAndClick(typeButtonLocator);
     return this;
   }
-  public SearchPage SearchEpics() throws InterruptedException {
+
+  public SearchPage searchIssueByType(String issueType) throws InterruptedException {
+//    issueType = issueTypeParam;
+    SelectDropDownItem(typeButtonLocator, By.xpath(String.format(issueTypeCheckboxXpathString,issueType)) );
+    waitToBePresentAndClick(typeButtonLocator);
+    return this;
+  }
+  public SearchPage SearchIssuesByEpicType() throws InterruptedException {
     SelectDropDownItem(typeButtonLocator,issueTypeEpicCheckbox );
     waitToBePresentAndClick(typeButtonLocator);
     return this;
   }
-  public SearchPage SearchStories() throws InterruptedException {
+  public SearchPage SearchIssuesByStoryType() throws InterruptedException {
     SelectDropDownItem(typeButtonLocator,issueTypeStoryCheckbox );
     waitToBePresentAndClick(typeButtonLocator);
     return this;
   }
-  public SearchPage SearchAllSubTasks () throws InterruptedException {
+  public SearchPage SearchIssuesBySubTasksType() throws InterruptedException {
     SelectDropDownItem(typeButtonLocator, issueTypeAllSubTaskCheckbox);
     waitToBePresentAndClick(typeButtonLocator);
     return this;
@@ -159,8 +172,32 @@ public class SearchPage extends BasePage {
     return this;
   }
 
-  public SearchPage clickAssigneeFindUserField() throws InterruptedException {
-    waitToBePresentAndClick(assigneeFindUserFieldLocator);
+  public SearchPage sendAssigneeFindUserField(String name) throws InterruptedException {
+    waitToBePresentAndSendKeys(assigneeFindUserFieldLocator,name);
+    return this;
+  }
+
+
+  public Boolean IsIssuesAssigneeToCurentUser(){
+    waitForNotPending();
+    for (WebElement issue : driver.findElements(nameAssigneeUser)){
+      if(!issue.getAttribute("rel").equals(username))
+        return false;
+    }
+    return true;
+  }
+
+  public Boolean IsIssuesUnassigned(){
+    waitForNotPending();
+    for (WebElement issue : driver.findElements(nameUnassignedLocator)){
+      if(!issue.getText().equals("Unassigned"))
+        return false;
+    }
+    return true;
+  }
+
+  public SearchPage clickAssigneeFirstCheckbox() throws InterruptedException {
+    waitToBePresentAndClick(assigneeFirstCheckboxLocator);
     return this;
   }
 

@@ -19,6 +19,7 @@ public class NewIssuePage extends BasePage {
     //---Create a New Issue Button and dialog
     private By createLocator = By.id("create_link");
     private By createIssueDialog = By.id("create-issue-dialog");
+    private By successPopUp = By.xpath("//*[contains(@class,'aui-message-success')]");
     private By newIssueLinkOnSuccessPopup = By.xpath("//a[@class='issue-created-key issue-link']");
 
     //---Configure Fields
@@ -168,17 +169,15 @@ public class NewIssuePage extends BasePage {
         headerPage = new HeaderPage();
     }
 
-    public NewIssuePage clickCreateIssueButton() {
+    public NewIssuePage clickCreateAndWaitForDialog() {
         waitToBePresentAndClick(createLocator);
-        return this;
-    }
-
-    public NewIssuePage waitForCreateIssueDialog() {
         waitToBePresent(createIssueDialog);
         return this;
     }
 
-    public NewIssuePage clickNewIssueLinkOnSuccessPopup() {
+    public NewIssuePage submitNewTicketAndOpenIt() {
+        waitToBePresentAndClick(submitButtonLocator);
+        waitToBePresent(successPopUp);
         waitToBePresentAndClick(newIssueLinkOnSuccessPopup);
         return this;
     }
