@@ -12,31 +12,76 @@ import utils.ListenerTest;
 public class LocalWebDriverFactory {
 
     final static Logger logger = Logger.getLogger(ListenerTest.class);
+    private static String OS = System.getProperty("os.name").toLowerCase();
+    private static String arch = System.getProperty("os.arch").toLowerCase();
+    private static String chromeDriverPath = null;
+    private static String geckoDriverPath = null;
+    private static String ieDriverPath = null;
+
+
+    public static boolean isWindows() {
+        return OS.contains("win");
+    }
+    public static boolean isMac() {
+        return OS.contains("mac");
+    }
+    public static boolean isUnix() {
+        return OS.contains("nix") || OS.contains("nux") || OS.contains("aix");
+    }
+
+    public static void setOsSpecificPaths() {
+        logger.info(OS + " " + arch);
+
+        if (isWindows()) {
+            logger.info("This is Windows");
+            geckoDriverPath = ".\\environment\\grid\\drivers_win\\geckodriver_win64_v0180.exe";
+            chromeDriverPath = ".\\environment\\grid\\drivers_win\\chromedriver_win32_v235.exe";
+            ieDriverPath = ".\\environment\\grid\\drivers_win\\IEDriverServer_x64_3.4.0.exe";
+            if (arch.contains("86") && !(arch.contains("64"))) {
+                geckoDriverPath = ".\\environment\\grid\\drivers_win\\geckodriver_win32_v0180.exe";
+                ieDriverPath = ".\\environment\\grid\\drivers_win\\IEDriverServer_Win32_3.4.0.exe";
+            }
+        } else if (isUnix()) {
+            logger.info("This is Unix or Linux");
+            geckoDriverPath = "./environment/grid/drivers_nix/geckodriver_nix64_v0180";
+            chromeDriverPath = "./environment/grid/drivers_nix/chromedriver_nix64_v235";
+            if (arch.contains("86") && !(arch.contains("64"))) {
+                geckoDriverPath = "./environment/grid/drivers_nix/geckodriver_nix32_v0180";
+            }
+        } else if (isMac()) {
+            logger.info("This is Mac");
+            geckoDriverPath = "./environment/grid/drivers_mac/geckodriver_mac_v0180";
+            chromeDriverPath = "./environment/grid/drivers/chromedriver_mac64_v235";
+        } else {
+            logger.info("Your OS is not supported!!");
+        }
+    }
 
     public static WebDriver createInstance(String browserName) {
         logger.info("CREATING local browser instance - " + browserName);
         WebDriver driver = null;
-        DesiredCapabilities capability = null;
+        DesiredCapabilities capabilities;
+        setOsSpecificPaths();
 
         if (browserName.toLowerCase().contains("firefox")) {
-            capability = DesiredCapabilities.firefox();
-            capability.setCapability("marionette", true);
-            System.setProperty("webdriver.gecko.driver", ".\\environment\\grid\\drivers\\geckodriver-v0.18.0-win64.exe");
-            driver = new FirefoxDriver(capability);
+            capabilities = DesiredCapabilities.firefox();
+            capabilities.setCapability("marionette", true);
+            System.setProperty("webdriver.gecko.driver", geckoDriverPath);
+            driver = new FirefoxDriver(capabilities);
         }
         if (browserName.toLowerCase().contains("chrome")) {
-            capability = DesiredCapabilities.chrome();
-            System.setProperty("webdriver.chrome.driver", ".\\environment\\grid\\drivers\\chromedriver_win32_v2.34.exe");
-            driver = new ChromeDriver(capability);
+            capabilities = DesiredCapabilities.chrome();
+            System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+            driver = new ChromeDriver(capabilities);
         }
         if (browserName.toLowerCase().contains("safari")) {
-            capability = DesiredCapabilities.safari();
-            driver = new SafariDriver(capability);
+            capabilities = DesiredCapabilities.safari();
+            driver = new SafariDriver(capabilities);
         }
         if (browserName.toLowerCase().contains("internet")) {
-            capability = DesiredCapabilities.internetExplorer();
-            System.setProperty("webdriver.ie.driver", ".\\environment\\grid\\drivers\\IEDriverServer_x64_3.4.0.exe");
-            driver = new InternetExplorerDriver(capability);
+            capabilities = DesiredCapabilities.internetExplorer();
+            System.setProperty("webdriver.ie.driver", ieDriverPath);
+            driver = new InternetExplorerDriver(capabilities);
         }
         return driver;
     }
