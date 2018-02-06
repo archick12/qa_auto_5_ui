@@ -132,8 +132,6 @@ public class  EditIssueTest {
     @Test(priority = 2, groups = {"UI"})
     public void checkAssignUser() {
         String addComment = "Great!";
-
-
         newIssuePage
                 .selectAssignFieldButton()
 //              .selectTextButton();
@@ -147,11 +145,11 @@ public class  EditIssueTest {
             e.printStackTrace();
         }
 
-        assertTrue(newIssuePage.assignPersonIsPresent("bobulan.nataliya"));
+        assertTrue(newIssuePage.isSelectUnassignIsPresent("bobulan.nataliya"));
 
         newIssuePage
                 .selectAssignFieldButton()
-                .selectAssignField("marina0937460675")
+                .selectAssignField("Unassigned")
                 .selectAssignButton();
 
         try {
@@ -160,14 +158,15 @@ public class  EditIssueTest {
             e.printStackTrace();
         }
 
-        assertTrue(newIssuePage.selectUnassignIsPresent("marina0937460675"));
+        assertTrue(newIssuePage.isSelectUnassignButtonIsPresent());
         issuePage
                 .clickOnDeleteComment()
                 .confirmDeletionOfComment();
         assertEquals(issuePage.isCommentTextMissing(addComment), true);
     }
 
-//    //    --------------------------------------------------Настя
+
+    //    //    --------------------------------------------------Настя
     @TestCase(id = "C3")
     @Test(priority = 3, groups = {"UI"})
 
