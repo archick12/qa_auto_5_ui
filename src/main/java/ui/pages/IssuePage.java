@@ -14,7 +14,7 @@ public class IssuePage extends BasePage {
     private By editIssueButton = By.id("edit-issue");
     private By commentIssueButton = By.id("comment-issue");
     private By assignIssueButton = By.id("assign-issue");
-    private By moreButton = By.id("opsbar-operations_more");
+    private By moreButtonLocator = By.id("opsbar-operations_more");
     private By workflowButton = By.id("opsbar-transitions_more");
     private By backlogButton = By.xpath("//*[@id='action_id_11']/span[@class='trigger-label']");
     private By selectedForDevButton = By.xpath("//*[@id='action_id_21']/span[@class='trigger-label']");
@@ -47,8 +47,13 @@ public class IssuePage extends BasePage {
     private By summaryLocator = By.id("summary");
     private By submitButtonLocator = By.id("create-issue-submit");
     private By subtaskLocator = By.linkText("Snizhanna test");
-    private By moreButtonLocator = By.id("opsbar-operations_more");
+
+    // Menu More
+    private By createBtnSubtaskLocator = By.xpath("//*[@id='opsbar-operations_more_drop']//*[@id='create-subtask']");
+    private By createSubtastPopUpLocator = By.id("create-subtask-dialog");
+
     private By deleteListItemLocator = By.id("delete-issue");
+    private By deleteDialogLocator = By.id("delete-issue-dialog");
     private By deleteButtonLocator = By.id("delete-issue-submit");
     private By successPopUp = By.xpath("//*[contains(@class,'aui-message-success')]");
     private By commentBtnLocator = By.id("footer-comment-button");
@@ -56,7 +61,9 @@ public class IssuePage extends BasePage {
     private By commentAddBtnLocator = By.id("issue-comment-add-submit");
     private By commentDeleteBtnLocator = By.xpath("//*[contains(@id,'delete_comment')]");
     private By commentDeletePopUpBtnLocator = By.id("comment-delete-submit");
-
+    private By moreBtnSubtaskOnIssuePageLocator = By.xpath("//*[@id='view-subtasks']//*[@class='aui-icon aui-icon-small aui-iconfont-more']");
+    private By deleteBtnSubtaskOnIssuePageLocator = By.xpath("//*[contains(@class,'aui-list-section aui-last')]//a[.='Delete']");
+    private By deleteBtnSubtaskOnPopUpLocator = By.xpath("//*[@id='delete-issue-dialog']//*[@value='Delete']");
     // Edit Issue Pop Up
     private By updateIssueBtnPopUp = By.id("edit-issue-submit");
 
@@ -65,6 +72,8 @@ public class IssuePage extends BasePage {
     private String subTaskNumber = "//*[@class='stsequence']//*[contains(text(),'%s')]";
     private String subTaskAssignee = "//*[@class='assignee']//*[contains(text(),'%s')]";
     private String commentText = "//*[@id='issue_actions_container']//child::*[contains(text(),'%s')]";
+    private By removeAttachmentItemLocator = By.xpath("//*[@class='attachment-delete']//span[.='Delete this attachment']");
+    private By confirmationRemoveAttachment = By.xpath("//*[@id='delete-attachment-dialog']//*[@value='Delete']");
 
     // Comments sections
 
@@ -100,6 +109,11 @@ public class IssuePage extends BasePage {
 
     public IssuePage clickMoreButton() {
         waitToBePresentAndClick(moreButtonLocator);
+        return this;
+    }
+
+    public IssuePage clickCreateSubTask() {
+        waitToBePresentAndClick(createBtnSubtaskLocator);
         return this;
     }
 
@@ -331,7 +345,7 @@ public class IssuePage extends BasePage {
     }
 
     public IssuePage clickEditButton() {
-        waitToBePresentAndClick(editIssueButton);
+        waitTillBeAbleToClick(editIssueButton);
         return this;
     }
 
@@ -339,5 +353,46 @@ public class IssuePage extends BasePage {
         waitToBePresentAndClick(updateIssueBtnPopUp);
         return this;
     }
+
+    //---Sub-task Actions on Issue Page by mmazur
+    public IssuePage clickMoreBtnSubtask() {
+        waitToBePresentAndClick(moreBtnSubtaskOnIssuePageLocator);
+        return this;
+    }
+
+    public IssuePage clickDeleteSubTaskOnIssuePage() {
+        waitToBePresentAndClick(deleteBtnSubtaskOnIssuePageLocator);
+        return this;
+    }
+
+    public IssuePage clickDeleteSubTaskConfirmation() {
+        waitToBePresentAndClick(deleteBtnSubtaskOnPopUpLocator);
+        return this;
+    }
+
+    public IssuePage isCreatesubtaskPopUpPresent() {
+        waitToBePresent(createSubtastPopUpLocator);
+        return this;
+    }
+
+    public IssuePage clickRemoveAttachment() {
+        waitToBePresentAndClick(removeAttachmentItemLocator);
+        return this;
+    }
+
+    public IssuePage clickDeleteAttachmentConfirmationPopUp() {
+        waitToBePresentAndClick(confirmationRemoveAttachment);
+      return this;
+    }
+
+  public IssuePage deleteTicket() {
+        waitToBePresentAndClick(moreButtonLocator);
+        waitToBePresentAndClick(deleteListItemLocator);
+        waitToBePresent(deleteDialogLocator);
+        waitToBePresentAndClick(deleteButtonLocator);
+        waitToBePresent(successPopUp);
+        return this;
+    }
 }
+
 

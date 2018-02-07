@@ -1,16 +1,15 @@
 package ui;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeGroups;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import ui.pages.*;
 import utils.TestCase;
 
 import static org.testng.Assert.assertEquals;
+import static ui.SearchIssueTest.logger;
 
 public class CreateIssueTest {
 
-  // code that will be invoked before each @Test
+  // code that will be invoked before the first test method that belongs to any of these groups
   @BeforeGroups(groups = {"UI","CreateIssue"})
   public void setUp() {
     LoginPage loginPage = new LoginPage();
@@ -25,11 +24,20 @@ public class CreateIssueTest {
             .clickLogin();
   }
 
-  // code that will be invoked after each @Test
-  @AfterTest
+  // code that will be invoked before before each test method
+  @BeforeMethod(alwaysRun = true)
+  public void setUpTest() {
+    NewIssuePage newIssuePage = new NewIssuePage();
+    newIssuePage.clickCreateAndWaitForDialog();
+  }
+
+  // code that will be invoked after each test method
+  @AfterMethod(alwaysRun = true)
   public void cleanUp() {
     IssuePage issuePage = new IssuePage();
     // TODO need to delete each ticket after test
+    logger.info("!---Gonna delete a ticket---!");
+    issuePage.deleteTicket();
   }
 
 
@@ -50,8 +58,6 @@ public class CreateIssueTest {
 
     // create new issue
     newIssuePage
-            .clickCreateIssueButton()
-            .waitForCreateIssueDialog()
             .enterProject(projectId)
             .enterIssueType(issueType)
             .fillSummary(storySummary)
@@ -59,8 +65,7 @@ public class CreateIssueTest {
             .selectPriority(issuePriority)
             .addLabel(issueLabel)
             .assignUser()
-            .clickSubmitButton()
-            .clickNewIssueLinkOnSuccessPopup();
+            .submitNewTicketAndOpenIt();
 
     // check that new issue is created successfully
     assertEquals(true, issuePage.isProjectIdCorrect(projectId));
@@ -88,8 +93,6 @@ public class CreateIssueTest {
       String issueLabel = "QAAuto5";
 
       newIssuePage
-                .clickCreateIssueButton()
-                .waitForCreateIssueDialog()
                 .enterProject(projectId)
                 .enterIssueType(issueType)
                 .fillSummary(bugSummary)
@@ -97,8 +100,7 @@ public class CreateIssueTest {
                 .selectPriority(issuePriority)
                 .addLabel(issueLabel)
                 .assignUser()
-                .clickSubmitButton()
-                .clickNewIssueLinkOnSuccessPopup();
+                .submitNewTicketAndOpenIt();
 
      /* issuePage.shouldSeeSuccessPopUp();
       newIssuePage.clickNewIssueLinkOnSuccessPopup(); */
@@ -119,8 +121,6 @@ public class CreateIssueTest {
     String issueLabel = "QAAuto5";
 
     newIssuePage
-            .clickCreateIssueButton()
-            .waitForCreateIssueDialog()
             .enterProject(projectId)
             .enterIssueType(issueType)
             .fillSummary(taskSummary)
@@ -128,8 +128,7 @@ public class CreateIssueTest {
             .selectPriority(issuePriority)
             .addLabel(issueLabel)
             .assignUser()
-            .clickSubmitButton()
-            .clickNewIssueLinkOnSuccessPopup();
+            .submitNewTicketAndOpenIt();
   }
 
   // Eugene's test
@@ -150,8 +149,6 @@ public class CreateIssueTest {
 
     // create new issue
     newIssuePage
-            .clickCreateIssueButton()
-            .waitForCreateIssueDialog()
             .enterProject(projectId)
             .enterIssueType(issueType)
             .fillNameEpic(epicName)
@@ -160,8 +157,7 @@ public class CreateIssueTest {
             .selectPriority(issuePriority)
             .addLabel(issueLabel)
             .assignUser()
-            .clickSubmitButton()
-            .clickNewIssueLinkOnSuccessPopup();
+            .submitNewTicketAndOpenIt();
 
   }
 

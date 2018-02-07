@@ -1,6 +1,7 @@
 package ui;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import org.apache.log4j.Logger;
@@ -39,6 +40,7 @@ public class SearchIssueTest {
     //    assertEquals(true, dashBoardPage.isOnThePage()); //not really necessary because homepage can vary
     // Prepare for search tests:
     headerPage.issuesSearchForIssues();
+    searchPage.waitForNotPending();
     // TODO check that basic view is on
     searchPage.clickOnLayoutSwitcherButton()
         .clickListViewItem();
@@ -53,20 +55,34 @@ public class SearchIssueTest {
     searchPage.clickAssigneeButton()                //кликаем, что бы развернуть список
         .clickAssigneeCurrentUserCheckbox()  //устанавливаем галочку на 'Current User' чекбокс
         .clickAssigneeButton();              //кликаем, что бы свернуть список
-    //TO DO добавить проверку
+    assertTrue(searchPage.IsIssuesAssigneeToCurentUser());
 
     searchPage.clickAssigneeButton()               //кликаем, что бы развернуть список
         .clickAssigneeCurrentUserCheckbox()  //снимаем галочку в 'Current User' чекбоксе
-        .clickAssigneeUnassignedCheckbox()   //устанавливаем галочку на 'Unassigned' чекбокс
         .clickAssigneeButton();              //кликаем, что бы свернуть список
-    //TO DO добавить проверку
+    assertFalse(searchPage.IsIssuesAssigneeToCurentUser());
+
 
     searchPage.clickAssigneeButton()             //кликаем, что бы развернуть список
-        .clickAssigneeUnassignedCheckbox()  //снимаем галочку в 'Unassigned' чекбоксе
-        .clickAssigneeFindUserField();     //устанавливаем курсов в поле поиска пользователей
-    //TO DO добавить ввод текста
-    searchPage.clickAssigneeButton();             //кликаем, что бы свернуть список
-    //TO DO добавить проверку
+             .sendAssigneeFindUserField(ListenerTest.properties.get("username"))     // добавляем имя пользователя
+            .clickAssigneeFirstCheckbox()       //кликаем на первый item в меню
+            .clickAssigneeButton();             //кликаем, что бы свернуть список
+    assertTrue(searchPage.IsIssuesAssigneeToCurentUser());
+
+    searchPage.clickAssigneeButton()             //кликаем, что бы развернуть список
+            .clickAssigneeFirstCheckbox()       //кликаем на первый item в меню
+            .clickAssigneeButton();            //кликаем, что бы свернуть список
+    assertFalse(searchPage.IsIssuesAssigneeToCurentUser());
+
+    searchPage.clickAssigneeButton()          //кликаем, что бы развернуть список
+            .clickAssigneeUnassignedCheckbox() //кликаем Unassigned чекбокс
+            .clickAssigneeButton();            //кликаем, что бы свернуть список
+    assertTrue(searchPage.IsIssuesUnassigned()); // проверка, что все отображённые issues именют Unassigned
+
+    searchPage.clickAssigneeButton()          //кликаем, что бы развернуть список
+            .clickAssigneeUnassignedCheckbox() //кликаем Unassigned чекбокс
+            .clickAssigneeButton();            //кликаем, что бы свернуть список
+    assertFalse(searchPage.IsIssuesUnassigned()); // проверка, что все отображённые issues именют не только Unassigned
 
   }
 
@@ -92,34 +108,33 @@ public class SearchIssueTest {
   @Test(groups = {"UI"})
   public void searchByType() throws InterruptedException {
     //__________________________________check Bug type
-    searchPage.SearchBugs(); // TODO - replace with next lines
-    // searchPage.clickOnIssueTypeButton();
-    //  searchPage.selectIssuTypeCheckBox("Bug");
-    //  searchPage.clickOnIssueTypeButton();
-
+    searchPage.SearchIssuesByBagsType();
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountBugsOnPage());
     logger.info("ASSERTION PASSED: bugs");
-    searchPage.SearchBugs();
+    searchPage.SearchIssuesByBagsType();
     //__________________________________check Epic type
-    searchPage.SearchEpics();
+    searchPage.waitForNotPending();
+    searchPage.SearchIssuesByEpicType();
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountEpicsOnPage());
     logger.info("ASSERTION PASSED: epics");
-    searchPage.SearchEpics();
+    searchPage.SearchIssuesByEpicType();
     //__________________________________ check Story type
+    searchPage.waitForNotPending();
     searchPage.FindSeachType("Story");
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(), searchPage.CountStoriesOnPage());
     logger.info("ASSERTION PASSED: stories");
-    searchPage.SearchStories();
+    searchPage.SearchIssuesByStoryType();
     //_________________________________________ check Sub-task type
-    searchPage.SearchAllSubTasks();
+    searchPage.waitForNotPending();
+    searchPage.SearchIssuesBySubTasksType();
     searchPage.waitForNotPending();
     assertEquals(searchPage.CountIssuesOnPage(),
         searchPage.CountSubTasksOnPage() + searchPage.CountSubDefectsOnPage());
     logger.info("ASSERTION PASSED: sub-tasks");
-    searchPage.SearchAllSubTasks();
+    searchPage.SearchIssuesBySubTasksType();
   }
 
   @TestCase(id = "4") //Maxim

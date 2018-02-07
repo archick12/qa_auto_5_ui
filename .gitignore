@@ -4,5 +4,10 @@ target/
 environment/grid/**
 !/**/*.bat
 !/**/*.json
-testng.xml
 testrun.properties
+testng.xml
+pom.xml
+BasePage.java
+TestListener.java
+LoginPage.java
+/environment
