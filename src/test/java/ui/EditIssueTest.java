@@ -89,7 +89,7 @@ public class  EditIssueTest {
 
 
     @TestCase(id = "C24")//--------------------------------------------------Марина
-    @Test(priority = 8, groups = {"UI", "SKIP"})
+    @Test(priority = 8, groups = {"UI"})
     public void changePriority() {
         String issuePriorityHigher = "High";
        // String issuePriorityLower = "Low";
@@ -175,7 +175,7 @@ public class  EditIssueTest {
                 .clickOnAddComment();
         assertEquals(issuePage.isCommentTextPresent(commentText), true);
     }
-    @Test(priority = 4, groups = {"UI"})
+    @Test(priority = 4, groups = {"UI, SKIP"})
     public void DeleteComment() throws InterruptedException {
         String commentText = "Very useful comment";
 
@@ -200,31 +200,21 @@ public class  EditIssueTest {
                     .clickWorkflowButton()
                     .selectInProgressButton();
         }
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
         assertTrue(newIssuePage.isButtonWithTextPresent());
 
         newIssuePage
                 .clickWorkflowButton()
-                .selectDoneButton();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
+                .selectDoneButton()
+                .waitForUpdateStatusPopUp();
 
-        newIssuePage.selectBacklogButton();
+        newIssuePage
+                .selectBacklogButton();
+
         assertTrue(newIssuePage.isButtonWithTextBacklogPresent());
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
+        newIssuePage.waitForUpdateStatusPopUp();
 
-        newIssuePage.clickSelectedForDevelopment();
+        newIssuePage
+                .clickSelectedForDevelopment();
         assertTrue(newIssuePage.isButtonWithTextSelectForDevelopment());
 
 
