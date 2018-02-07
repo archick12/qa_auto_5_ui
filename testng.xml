@@ -8,7 +8,7 @@
     <parameter name="myParam" value="This is the value for a parameter"/>
     <parameter name="browserName" value="chrome"/>
     <parameter name="local" value="no"/>
-    <parameter name="implicitWaitInSeconds" value="10"/>
+    <parameter name="implicitWaitInSeconds" value="15"/>
 
     <test name="UI Tests">
         <!--Comment this section for "groups" to work (delete "-" in the end of this line and in the beginning of last line) -->
@@ -36,6 +36,5 @@
             <class name="ui.RefactoredIssueTest"/>
         </classes>
     </test>
-
 
 </suite>
