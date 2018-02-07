@@ -1,9 +1,15 @@
 package ui;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 import ui.pages.*;
+import ui.utils.RemoteDriverManager;
 import utils.TestCase;
 
 import java.awt.*;
@@ -22,7 +28,7 @@ public class  EditIssueTest {
     IssuePage issuePage;
     NewIssuePage newIssuePage;
 
-    String parentIssueId = "QAAUT-228";
+    String parentIssueId = "QAAUT-1";
 
     @BeforeGroups(groups = {"UI"})
     public void setUp() {
@@ -132,42 +138,32 @@ public class  EditIssueTest {
     @Test(priority = 2, groups = {"UI"})
     public void checkAssignUser() {
         String addComment = "Great!";
-
-
         newIssuePage
                 .selectAssignFieldButton()
 //              .selectTextButton();
                 .addComment()
                 .selectAssignField("bobulan.nataliya")
-                .selectAssignButton();
+                .selectAssignButton()
+                .waitForAssignPopUp();
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        assertTrue(newIssuePage.assignPersonIsPresent("bobulan.nataliya"));
+        assertTrue(newIssuePage.isSelectUnassignIsPresent("bobulan.nataliya"));
 
         newIssuePage
                 .selectAssignFieldButton()
-                .selectAssignField("marina0937460675")
-                .selectAssignButton();
+                .selectAssignField("Unassigned")
+                .selectAssignButton()
+                .waitForAssignPopUp();
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        assertTrue(newIssuePage.isSelectUnassignButtonIsPresent());
 
-        assertTrue(newIssuePage.selectUnassignIsPresent("marina0937460675"));
         issuePage
                 .clickOnDeleteComment()
                 .confirmDeletionOfComment();
         assertEquals(issuePage.isCommentTextMissing(addComment), true);
     }
 
-//    //    --------------------------------------------------Настя
+
+    //    //    --------------------------------------------------Настя
     @TestCase(id = "C3")
     @Test(priority = 3, groups = {"UI"})
 

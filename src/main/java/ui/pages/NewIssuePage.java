@@ -1,9 +1,10 @@
 package ui.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.utils.RemoteDriverManager;
 
 import java.awt.*;
@@ -162,6 +163,8 @@ public class NewIssuePage extends BasePage {
     private By selectedForDevelopmentLocator = By.xpath("//*[@class='toolbar-item']//*[@class='toolbar-trigger issueaction-workflow-transition']//*[text()='Selected for Development']");
     private By statusButtonSelectForDevelopment = By.xpath("//*[@id='status-val']//*[text()='Selected for Development']");
 
+    private By unassignedButton = By.xpath("//*[normalize-space() = 'Unassigned']");
+    private By assignPopUp = By.className("aui-flag");
 
     //---Create New Issue
     public NewIssuePage() {
@@ -642,10 +645,19 @@ public class NewIssuePage extends BasePage {
             return false;
         }
 
-
     }
 
-    public Boolean selectUnassignIsPresent(String assigneeName) {
+    public Boolean isSelectUnassignButtonIsPresent() {
+        By unassignedButton = By.xpath("//*[normalize-space() = 'Unassigned']");
+        try {
+            driver.findElement(unassignedButton);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public Boolean isSelectUnassignIsPresent(String assigneeName) {
         By assignedPerson = By.xpath(String.format(assignedPersonLocator.toString(), assigneeName));
         try {
             driver.findElement(assignedPerson);
@@ -655,6 +667,11 @@ public class NewIssuePage extends BasePage {
         }
     }
 
+    public NewIssuePage waitForAssignPopUp() {
+        new WebDriverWait(RemoteDriverManager.getDriver(), 10)
+                .until(ExpectedConditions.invisibilityOfElementLocated(assignPopUp));
+        return this;
+    }
 
 
 
