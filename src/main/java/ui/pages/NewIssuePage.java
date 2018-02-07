@@ -165,6 +165,7 @@ public class NewIssuePage extends BasePage {
 
     private By unassignedButton = By.xpath("//*[normalize-space() = 'Unassigned']");
     private By assignPopUp = By.className("aui-flag");
+    private By updateStatusPopUp = By.className("aui-flag");
 
     //---Create New Issue
     public NewIssuePage() {
@@ -670,6 +671,12 @@ public class NewIssuePage extends BasePage {
     public NewIssuePage waitForAssignPopUp() {
         new WebDriverWait(RemoteDriverManager.getDriver(), 10)
                 .until(ExpectedConditions.invisibilityOfElementLocated(assignPopUp));
+        return this;
+    }
+
+    public NewIssuePage waitForUpdateStatusPopUp(){
+        new WebDriverWait(RemoteDriverManager.getDriver(),10)
+                .until(ExpectedConditions.invisibilityOfElementLocated(updateStatusPopUp));
         return this;
     }
 
