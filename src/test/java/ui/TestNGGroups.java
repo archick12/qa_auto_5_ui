@@ -29,5 +29,4 @@ public class TestNGGroups
   {
     System.out.println("Regression-2");
   }
-  
 }
