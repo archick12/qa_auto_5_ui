@@ -7,7 +7,7 @@
 
     <parameter name="myParam" value="This is the value for a parameter"/>
     <parameter name="browserName" value="chrome"/>
-    <parameter name="local" value="yes"/>
+    <parameter name="local" value="no"/>
     <parameter name="implicitWaitInSeconds" value="10"/>
 
     <test name="UI Tests">
