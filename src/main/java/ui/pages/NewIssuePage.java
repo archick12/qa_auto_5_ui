@@ -102,6 +102,8 @@ public class NewIssuePage extends BasePage {
 
     //---Labels
     private By labelsSelect = By.id("labels-textarea");
+    private By editAddedlabelLocator = By.xpath("//*[@class='labels-wrap value editable-field inactive']//*[@class='labels']");
+
     //---Issue
     private By IssuelinksSelect = By.xpath("//*[@id='issuelinks-issues-multi-select']");
     private By IssuePopup = By.xpath("//a[@class='issue-picker-popup']");
@@ -367,7 +369,13 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-    //---Select Linked Issues
+    //---Edit/Delete Lable
+    public NewIssuePage clickEditLabel() {
+        waitToBePresentAndClick(editAddedlabelLocator);
+        return this;
+    }
+
+        //---Select Linked Issues
     public NewIssuePage selectLinkedIssuesLocator() {
         driver.findElement(linkedIssuesDefault).click();
         return this;

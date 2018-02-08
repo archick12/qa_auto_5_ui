@@ -61,7 +61,7 @@ public class  EditIssueTest {
     @TestCase(id = "C7")//--------------------------------------------------Алена
 
 
-    @Test(priority = 5, groups = {"UI"})
+    @Test(priority = 5, groups = {"UI","Stable"})
     public void addLabletoIssue() {
         String label = "My_label";
 
@@ -72,10 +72,13 @@ public class  EditIssueTest {
         assertEquals(newIssuePage.isAddedLabelPresent(label), true);
         //TODO delete label
         //TODO assertEquals(IssuePage.isLabelAbsent(label), true);
+        /*newIssuePage
+                .clickEditLabel(); <<----не получается кликнуть на элемент редактировния lable (т.к. он скрыт)
+        assertFalse(newIssuePage.isAddedLabelPresent(label));*/
     }
 
     @TestCase(id = "C23")//--------------------------------------------------Алена
-    @Test(priority = 6, groups = {"UI"})
+    @Test(priority = 6, groups = {"UI","Stable"})
     public void addAttachmenttoIssue() throws AWTException {
         String pathToFile = "/C:/Users/user/Desktop/Screenshot_21.png";
         String fileName = "Screenshot_21.png";
@@ -88,9 +91,8 @@ public class  EditIssueTest {
         assertEquals(newIssuePage.isAttachmentPresent(fileName),true);
         //TODO delete attachment
         //TODO assertEquals(IssuePage.isAttachmentAbsent(fileName), true)
-        /*issuePage
-                .clickRemoveAttachment()
-                .clickDeleteAttachmentConfirmationPopUp();
+        /*newIssuePage
+                .clickDeleteAttachment(); <<----не получается кликнуть на элемент удаления аттача, т.к он скрыт
         assertFalse(newIssuePage.isAttachmentPresent(fileName));*/
     }
 
