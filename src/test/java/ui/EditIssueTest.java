@@ -52,9 +52,9 @@ public class  EditIssueTest {
     }
 
 
-    @Test(groups={"Smoke Test"})
+    @Test(groups={"Smoke"})
     public void smokeTestForEditIssuePage(){
-        assertEquals(newIssuePage.checkAreElementsPresent(),true);
+        assertEquals(issuePage.checkAreElementsPresent(),true);
         System.out.println("Smoke");
     }
 
@@ -65,16 +65,16 @@ public class  EditIssueTest {
     public void addLabletoIssue() {
         String label = "My_label";
 
-        newIssuePage
+        issuePage
                 .clickLabelField()
                 .addLabel(label)
                 .clickDescriptionField();
-        assertEquals(newIssuePage.isAddedLabelPresent(label), true);
+        assertEquals(issuePage.isLabelPresent(label), true);
         //TODO delete label
-        //TODO assertEquals(IssuePage.isLabelAbsent(label), true);
-        /*newIssuePage
+        //TODO assertEquals(issuePage.isLabelAbsent(label), true);
+        /*issuePage
                 .clickEditLabel(); <<----не получается кликнуть на элемент редактировния lable (т.к. он скрыт)
-        assertFalse(newIssuePage.isAddedLabelPresent(label));*/
+        assertFalse(issuePage.isAddedLabelPresent(label));*/
     }
 
     @TestCase(id = "C23")//--------------------------------------------------Алена
@@ -84,14 +84,14 @@ public class  EditIssueTest {
         String fileName = "Screenshot_21.png";
         File file = new File(pathToFile);
 
-        newIssuePage
+        issuePage
                 .clickBrowseButton()
                 .setClipboardData(file.getAbsolutePath())
                 .robot();
-        assertEquals(newIssuePage.isAttachmentPresent(fileName),true);
+        assertEquals(issuePage.isAttachmentPresent(fileName),true);
         //TODO delete attachment
-        //TODO assertEquals(IssuePage.isAttachmentAbsent(fileName), true)
-        /*newIssuePage
+        //TODO assertEquals(issuePage.isAttachmentAbsent(fileName), true)
+        /*issuePage
                 .clickDeleteAttachment(); <<----не получается кликнуть на элемент удаления аттача, т.к он скрыт
         assertFalse(newIssuePage.isAttachmentPresent(fileName));*/
     }

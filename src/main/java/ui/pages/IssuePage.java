@@ -2,7 +2,13 @@ package ui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.utils.RemoteDriverManager;
+
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 
 public class IssuePage extends BasePage {
 
@@ -33,7 +39,10 @@ public class IssuePage extends BasePage {
     private By labelsMoreButton = By.id("edit-labels");
     private By issueTypeButton = By.xpath("//*[@id=\"type-val\"]");
 
-
+    //---Labels
+    private By labelsSelect = By.id("labels-textarea");
+    private By editAddedlabelLocator = By.xpath("//*[@class='labels-wrap value editable-field inactive']//*[@class='labels']");
+    private String addedLabelLocator = "//*[contains(@class,'labels-wrap value editable-field inactive')]//*[contains(text(),'%s')]";
     // issue details
     private By projectIdLocator = By.id("project-name-val");
     private By issueSummaryLocator = By.id("summary-val");
@@ -77,9 +86,28 @@ public class IssuePage extends BasePage {
 
     // Comments sections
 
-//    private By commentTextType = By.id("aui-uid-2");
+    //    private By commentTextType = By.id("aui-uid-2");
     private By commentTextType = By.id("comment");
 //    private By subTaskText = By.xpath("//*[contains(text(),'%s')]");
+
+
+    // Alena
+    private By createLocator = By.id("create_link");
+    private By editIssueButtonLocator = By.xpath("//*[@id='edit-issue']");
+    private By assignButtonLocator = By.xpath("//*[@id='assign-issue']");
+    private By addSubTaskButtonLocator = By.xpath("//*[@class='ops']//*[@id='stqc_show']");
+    private By addCommentButtonLocator = By.xpath("//*[@id='comment-issue']");
+    private By selectForDevelopmentLocator = By.xpath("//*[@class='toolbar-trigger issueaction-workflow-transition']//*[contains(text(),'Selected for Development')]");
+    private By moreDropDownLocator = By.xpath("//*[@id='opsbar-operations_more']");
+    private By workflowLocator = By.id("opsbar-transitions_more");
+    private By issueTypeLocator = By.xpath("//*[@class='wrap']//*[@id='type-val']");
+    private By priorityFieldDefault = By.xpath("//*[@class='wrap']//*[@id='priority-val']");
+    private By labelsFieldLocator = By.xpath("//*[@class='labels-wrap value editable-field inactive']");
+    private By assigneeFieldLocator = By.xpath("//*[@class='people-details']//*[@id='assignee-val']");
+    private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");
+    private By browseButton = By.xpath("//*[@duitype='dndattachment/dropzones/AttachmentsDropZone']//*[@class='issue-drop-zone__button']");
+    private By deleteAttachmentLocator = By.xpath("//*[@class='blender blender-delete']");
+    private String fileName = "//*[@class='attachment-content js-file-attachment']//*[contains(text(),'%s')]";
 
 
     public IssuePage() {
@@ -202,30 +230,35 @@ public class IssuePage extends BasePage {
 
         return this;
     }
+
     public IssuePage findViewWorkflow() {
 
-       driver.findElement(viewWorkflow);
+        driver.findElement(viewWorkflow);
 
         return this;
     }
+
     public IssuePage findLogWorkButton() {
 
         driver.findElement(logWorkButton);
 
         return this;
     }
+
     public IssuePage findAgileBoardButton() {
 
         driver.findElement(agileBoardButton);
 
         return this;
     }
+
     public IssuePage findRankToTopButton() {
 
         driver.findElement(rankToTopButton);
 
         return this;
     }
+
     public IssuePage findRankToBottomButton() {
 
         driver.findElement(rankToBottomButton);
@@ -340,7 +373,9 @@ public class IssuePage extends BasePage {
     }
 
     public boolean isIssueAssigneeCorrect() {
-        if (driver.findElement(issueAssigneeField) == null) {return false;}
+        if (driver.findElement(issueAssigneeField) == null) {
+            return false;
+        }
         return true;
     }
 
@@ -382,15 +417,119 @@ public class IssuePage extends BasePage {
 
     public IssuePage clickDeleteAttachmentConfirmationPopUp() {
         waitToBePresentAndClick(confirmationRemoveAttachment);
-      return this;
+        return this;
     }
 
-  public IssuePage deleteTicket() {
+    public IssuePage deleteTicket() {
         waitToBePresentAndClick(moreButtonLocator);
         waitToBePresentAndClick(deleteListItemLocator);
         waitToBePresent(deleteDialogLocator);
         waitToBePresentAndClick(deleteButtonLocator);
         waitToBePresent(successPopUp);
+        return this;
+    }
+
+    public IssuePage clickDeleteAttachment(){
+        waitToBePresentAndClick(deleteAttachmentLocator);
+        return this;
+    }
+    //---Add Labels
+    public IssuePage clickLabelField() {
+        waitToBePresentAndClick(labelsFieldLocator);
+        return this;
+    }
+    public IssuePage addLabel(String issueLabel) {
+        waitToBePresentAndSendKeys(labelsSelect, issueLabel);
+        driver.findElement(labelsSelect).sendKeys(Keys.TAB);
+        return this;
+    }
+
+    //---Edit/Delete Lable
+    public IssuePage clickEditLabel() {
+        waitToBePresentAndClick(editAddedlabelLocator);
+        return this;
+    }
+
+    public IssuePage clickDescriptionField() {
+        waitToBePresentAndClick(descriptionLocator);
+        return this;
+    }
+
+    public boolean isLabelPresent(String label) {
+        String selector = String.format(addedLabelLocator, label);
+        return waitToBePresentAndContainsText(By.xpath(selector), label);  }
+
+    //---Add Attachment
+
+    public IssuePage clickBrowseButton() {
+        waitToBePresentAndClick(browseButton);
+        return this;
+    }
+    public boolean isAttachmentPresent(String file) {
+        String selector = String.format(fileName, file);
+        return waitToBePresentAndContainsText(By.xpath(selector), file);
+    }
+
+    public IssuePage setClipboardData(String string) {
+        StringSelection stringSelection = new StringSelection(string);
+        Toolkit.getDefaultToolkit().getSystemClipboard()
+                .setContents(stringSelection, null);
+        return this;
+    }
+
+    public IssuePage robot() throws AWTException {
+
+        Robot rb = new Robot();
+        rb.delay(1000);
+        rb.keyPress(KeyEvent.VK_CONTROL);
+        rb.delay(300);
+        rb.keyPress(KeyEvent.VK_V);
+        rb.delay(300);
+        rb.keyRelease(KeyEvent.VK_V);
+        rb.delay(700);
+        rb.keyRelease(KeyEvent.VK_CONTROL);
+        rb.delay(300);
+        rb.keyPress(KeyEvent.VK_ENTER);
+        rb.delay(300);
+        rb.keyRelease(KeyEvent.VK_ENTER);
+        rb.delay(300);
+
+        return this;
+    }
+
+// Method for SMOKE Test
+
+    private int defaultExplicitWaitInSeconds = 10;
+
+    public boolean isElementPresent(By locator) {
+        logger.info("WAIT ELEMENT TO BE PRESENT: " + locator);
+        try {
+            (new WebDriverWait(driver, defaultExplicitWaitInSeconds))
+                    .until(ExpectedConditions.presenceOfElementLocated(locator));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public IssuePage checkAreElementsPresent() {
+        isElementPresent(createLocator);
+        isElementPresent(editIssueButtonLocator);
+        isElementPresent(addCommentButtonLocator);
+        isElementPresent(assignButtonLocator);
+        isElementPresent(moreDropDownLocator);
+        isElementPresent(backlogButton);
+        isElementPresent(selectForDevelopmentLocator);
+        isElementPresent(workflowLocator);
+        isElementPresent(shareBtnLocator);
+        isElementPresent(exportBtnLocator);
+        isElementPresent(issueTypeLocator);
+        isElementPresent(priorityFieldDefault);
+        isElementPresent(labelsFieldLocator);
+        isElementPresent(assigneeFieldLocator);
+        isElementPresent(descriptionLocator);
+        isElementPresent(browseButton);
+//        isElementPresent(addSubTaskButtonLocator);
         return this;
     }
 }
