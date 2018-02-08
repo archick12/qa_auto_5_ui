@@ -51,6 +51,13 @@ public class  EditIssueTest {
         assertEquals(issuePage.isOnThePage(parentIssueId), true); //проверка на ожидаемой ли мы странице "QAAUT-1"
     }
 
+
+    @Test(groups={"Smoke Test"})
+    public void smokeTestForEditIssuePage(){
+        assertEquals(newIssuePage.checkAreElementsPresent(),true);
+        System.out.println("Smoke");
+    }
+
     @TestCase(id = "C7")//--------------------------------------------------Алена
 
 

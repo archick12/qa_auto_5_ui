@@ -1,11 +1,13 @@
 package ui.pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.utils.RemoteDriverManager;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -44,7 +46,7 @@ public class NewIssuePage extends BasePage {
     private By projectSelectLocator = By.id("project-suggestions");
 
     //---Issue Type
-    private By issueTypeLocator = By.id("issuetype-field");
+    private By issueTypeLocator = By.xpath("//*[@class='wrap']//*[@id='type-val']");
     // Marina S test locator
     private By issueTypeLocatorTest = By.xpath("//div[@id='issuetype-single-select']/span");
 
@@ -80,7 +82,7 @@ public class NewIssuePage extends BasePage {
 
     //---Priority
     private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
-    private By priorityFieldDefault = By.id("priority-field");
+    private By priorityFieldDefault = By.xpath("//*[@class='wrap']//*[@id='priority-val']");
     // Marina S test locator
     private By priorityFieldDefaultTest = By.xpath("//div[@id='priority-single-select']/span");
     private By priorityFieldSelect = By.id("priority-suggestions");
@@ -105,8 +107,8 @@ public class NewIssuePage extends BasePage {
     private By IssuePopup = By.xpath("//a[@class='issue-picker-popup']");
 
     //---Attachment
-    private By browseButton = By.xpath("//*[@class='form-body']//child::*[@class='issue-drop-zone__button']");
-
+    private By browseButton = By.xpath("//*[@duitype='dndattachment/dropzones/AttachmentsDropZone']//*[@class='issue-drop-zone__button']");
+    private By deleteAttachmentLocator = By.xpath("//*[@class='blender blender-delete']");
     //---Locators for IssueSelector Pop-up
     private By pageHeader = By.xpath("//*[@class='aui-page-header-main']");
     private By selectButton = By.xpath("//*[@class='aui-button']");
@@ -117,7 +119,7 @@ public class NewIssuePage extends BasePage {
     private By first50Issues = By.xpath("//*[text()='First 50 issues from your current search']");
 
     //---Assignee
-    private By assigneeFieldLocator = By.id("assignee-field");
+    private By assigneeFieldLocator = By.xpath("//*[@class='people-details']//*[@id='assignee-val']");
     private By assigneeSuggestions = By.xpath("//[@id='assignee-suggestions']");
 
     //---Assign to me
@@ -146,7 +148,7 @@ public class NewIssuePage extends BasePage {
     private By labelsFieldLocator = By.xpath("//*[@class='labels-wrap value editable-field inactive']");
     private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");
     private String addedLabelLocator = "//*[contains(@class,'labels-wrap value editable-field inactive')]//*[contains(text(),'%s')]";
-    private By selectForDevelopmentLocator = By.xpath("//*[@id='action_id_21']//*[@class='toolbar-trigger issueaction-workflow-transition']");
+    private By selectForDevelopmentLocator = By.xpath("//*[@class='toolbar-trigger issueaction-workflow-transition']//*[contains(text(),'Selected for Development')]");
     private By browseButtonLocator = By.xpath("//*[@class='issue-drop-zone__button']");
     private String fileName = "//*[@class='attachment-content js-file-attachment']//*[contains(text(),'%s')]";
     private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
@@ -166,6 +168,19 @@ public class NewIssuePage extends BasePage {
     private By unassignedButton = By.xpath("//*[normalize-space() = 'Unassigned']");
     private By assignPopUp = By.className("aui-flag");
     private By updateStatusPopUp = By.className("aui-flag");
+
+    // Alena
+    private By editIssueButtonLocator = By.xpath("//*[@id='edit-issue']");
+    private By assignButtonLocator = By.xpath("//*[@id='assign-issue']");
+    private By addSubTaskButtonLocator = By.xpath("//*[@class='ops']//*[@id='stqc_show']");
+    private By addCommentButtonLocator = By.xpath("//*[@id='comment-issue']");
+    private By moreDropDownLocator = By.xpath("//*[@id='opsbar-operations_more']");
+    private By issueTypeFieldLocator = By.id("type-val");;
+    private By shareBtnLocator = By.id("jira-share-trigger");
+    private By exportBtnLocator = By.id("viewissue-export");
+
+
+
 
     //---Create New Issue
     public NewIssuePage() {
@@ -679,6 +694,54 @@ public class NewIssuePage extends BasePage {
                 .until(ExpectedConditions.invisibilityOfElementLocated(updateStatusPopUp));
         return this;
     }
+
+    public NewIssuePage clickDeleteAttachment(){
+        waitToBePresentAndClick(deleteAttachmentLocator);
+        return this;
+    }
+
+
+// Method for SMOKE Test
+
+    public static int defaultImplicitWaitInSeconds = 10;
+    private int defaultExplicitWaitInSeconds = 10;
+
+    public boolean isElementPresent(By locator) {
+        logger.info("WAIT ELEMENT TO BE PRESENT: " + locator);
+      try{
+        (new WebDriverWait(driver, defaultExplicitWaitInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(locator));
+        return true;
+    }
+    catch (Exception e) {
+        return false;
+    }
+}
+
+
+    public NewIssuePage checkAreElementsPresent(){
+        isElementPresent(createLocator);
+        isElementPresent(editIssueButtonLocator);
+        isElementPresent(addCommentButtonLocator);
+        isElementPresent(assignButtonLocator);
+        isElementPresent(moreDropDownLocator);
+        isElementPresent(backlogButton);
+        isElementPresent(selectForDevelopmentLocator);
+        isElementPresent(workflowLocator);
+        isElementPresent(shareBtnLocator);
+        isElementPresent(exportBtnLocator);
+        isElementPresent(issueTypeLocator);
+        isElementPresent(priorityFieldDefault);
+        isElementPresent(labelsFieldLocator);
+        isElementPresent(assigneeFieldLocator);
+        isElementPresent(descriptionLocator);
+        isElementPresent(browseButton);
+//        isElementPresent(addSubTaskButtonLocator);
+        return this;
+    }
+
+
+
 
 
 
