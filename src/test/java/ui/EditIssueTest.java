@@ -98,9 +98,11 @@ public class  EditIssueTest {
         issuePage.clickUpdateButtonPopUp();
         assertEquals(issuePage.isIssuePriorityCorrect(issuePriorityHigher), true);
 
-      /*  issuePage.clickEditButton();
+        /*issuePage.clickEditButton();
         newIssuePage.selectPriority(issuePriorityLower);
         issuePage.clickUpdateButtonPopUp();
+        //TODO Test is failed - java.lang.AssertionError: expected [true] but found [false]
+        //TODO need to add waiting before assert
         assertEquals(issuePage.isIssuePriorityCorrect(issuePriorityLower), true);*/
     }
 
