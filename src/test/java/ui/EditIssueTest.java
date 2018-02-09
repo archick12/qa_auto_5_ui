@@ -107,9 +107,11 @@ public class  EditIssueTest {
         issuePage.clickUpdateButtonPopUp();
         assertEquals(issuePage.isIssuePriorityCorrect(issuePriorityHigher), true);
 
-      /*  issuePage.clickEditButton();
+        /*issuePage.clickEditButton();
         newIssuePage.selectPriority(issuePriorityLower);
         issuePage.clickUpdateButtonPopUp();
+        //TODO Test is failed - java.lang.AssertionError: expected [true] but found [false]
+        //TODO need to add waiting before assert
         assertEquals(issuePage.isIssuePriorityCorrect(issuePriorityLower), true);*/
     }
 
@@ -183,10 +185,6 @@ public class  EditIssueTest {
                 .enterComment(commentText)
                 .clickOnAddComment();
         assertEquals(issuePage.isCommentTextPresent(commentText), true);
-    }
-    @Test(priority = 4, groups = {"UI, SKIP"})
-    public void DeleteComment() throws InterruptedException {
-        String commentText = "Very useful comment";
 
         issuePage
                 .clickOnDeleteComment()
