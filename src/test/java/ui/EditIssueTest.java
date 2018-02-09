@@ -64,12 +64,16 @@ public class  EditIssueTest {
     @Test(priority = 5, groups = {"UI","Stable"})
     public void addLabletoIssue() {
         String label = "My_label";
+        // if label is selected on the page, test fails with NoSuchElementException: no such element: Unable to locate element
+        // need to check that label is not selected
+        //TODO assertEquals(issuePage.isLabelAbsent(label), true);
 
         issuePage
                 .clickLabelField()
                 .addLabel(label)
                 .clickDescriptionField();
         assertEquals(issuePage.isLabelPresent(label), true);
+
         //TODO delete label
         //TODO assertEquals(issuePage.isLabelAbsent(label), true);
         /*issuePage
