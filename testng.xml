@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Sample test suite">
+<suite name="Sample test suite" parallel="tests" thread-count="3">
 
     <listeners>
         <listener class-name="utils.ListenerTest"/>
@@ -10,7 +10,19 @@
     <parameter name="local" value="yes"/>
     <parameter name="implicitWaitInSeconds" value="30"/>
 
-    <test name="UI Tests">
+    <test name="UI EditIssueTest">
+        <groups>
+            <run>
+                <include name="UI"/>
+                <exclude name="SKIP"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="ui.EditIssueTest"/>
+        </classes>
+    </test>
+
+    <test name="UI SearchIssueTest">
         <groups>
             <run>
                 <include name="UI"/>
@@ -21,5 +33,16 @@
             <class name="ui.SearchIssueTest"/>
         </classes>
     </test>
-
+    <test name="UI Create Issue">
+        <groups>
+            <run>
+                <include name="UI"/>
+                <exclude name="SKIP"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="ui.CreateIssueTest"/>
+        </classes>
+    </test>
 </suite>
+
