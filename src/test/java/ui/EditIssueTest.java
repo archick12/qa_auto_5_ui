@@ -176,10 +176,6 @@ public class  EditIssueTest {
                 .enterComment(commentText)
                 .clickOnAddComment();
         assertEquals(issuePage.isCommentTextPresent(commentText), true);
-    }
-    @Test(priority = 4, groups = {"UI, SKIP"})
-    public void DeleteComment() throws InterruptedException {
-        String commentText = "Very useful comment";
 
         issuePage
                 .clickOnDeleteComment()
