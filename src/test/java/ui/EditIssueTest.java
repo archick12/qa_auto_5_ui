@@ -144,7 +144,7 @@ public class  EditIssueTest {
             newIssuePage
                     .clickWorkflowButton()
                     .selectDoneButton();
-            return;
+                return;
         }else{
             newIssuePage
                     .clickWorkflowButton()
