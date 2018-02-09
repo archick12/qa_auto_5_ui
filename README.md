@@ -19,7 +19,7 @@ How to run tests -
 3. Run HUB "java -jar selenium-server-standalone-3.4.0.jar -role hub"
 4. Run NODE for your platform
     for example, "java -Dwebdriver.chrome.driver=/Users/nbobulan/Desktop/Hillel_QA_Auto/qa_auto_5_initial/environment/grid/drivers/chromedriver -jar selenium-server-standalone-3.4.0.jar -role node -port 8888*"
-           *8888 - as example, you can change the numbers 
+           *8888 - as example, it could be changed 
 Please notice one port = one test. 
 5. Press RUN
 6. Enjoy! :)
