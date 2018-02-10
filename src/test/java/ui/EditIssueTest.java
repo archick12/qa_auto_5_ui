@@ -22,7 +22,7 @@ public class  EditIssueTest {
     IssuePage issuePage;
     NewIssuePage newIssuePage;
 
-    String parentIssueId = "QAAUT-228";
+    String parentIssueId = "QAAUT-14";
 
     @BeforeGroups(groups = {"UI"})
     public void setUp() {
