@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class SearchPage extends BasePage {
 
   private By layoutSwitcherButton = By.id("layout-switcher-button");
-  private By listViewItem = By.xpath("//*[contains(@id,'AJS_DROPDOWN_LISTITEM_')]//child::a[@data-layout-key='list-view']");
+  private By listViewItemLocator = By.xpath("//*[contains(@id,'AJS_DROPDOWN_LISTITEM_')]//child::a[@data-layout-key='list-view']");
   private By recentProject1Locator = By
           .xpath("(//*[contains(@id,'proj_lnk_')][@class='aui-icon-container'])[1]");
   private By feedbackSubmitLocator = By
@@ -64,7 +64,7 @@ public class SearchPage extends BasePage {
   }
 
   public SearchPage clickListViewItem() {
-    waitToBePresentAndClick(listViewItem);
+    waitToBePresentAndClick(listViewItemLocator);
     return this;
   }
   public SearchPage clickProjectButton() {
@@ -199,6 +199,23 @@ public class SearchPage extends BasePage {
   public SearchPage clickAssigneeFirstCheckbox() throws InterruptedException {
     waitToBePresentAndClick(assigneeFirstCheckboxLocator);
     return this;
+  }
+
+
+  public boolean isElementPresentTypeButton(){
+    return isElementPresent(typeButtonLocator);
+  }
+
+  public boolean isElementPresentassigneeButton(){
+    return isElementPresent(assigneeButtonLocator);
+  }
+
+  public boolean isElementPresentprojectButton(){
+    return isElementPresent(projectButtonLocator);
+  }
+
+  public boolean isElementPresentlistViewItem(){
+    return isElementPresent(listViewItemLocator);
   }
 
 

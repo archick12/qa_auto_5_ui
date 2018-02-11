@@ -14,6 +14,7 @@
         <groups>
             <run>
                 <include name="UI"/>
+                <!--<include name="SMOKE"/>-->
                 <exclude name="SKIP"/>
             </run>
         </groups>
@@ -21,9 +22,10 @@
             <class name="ui.SearchIssueTest">
                 <methods>
                     <!--<include name="searchByProject"/>-->
-                    <include name="searchByType"/>
+                    <!--<include name="searchByType"/>-->
                     <!--<include name="searchByStatus"/>-->
                     <!--<include name="searchByAssignee"/>-->
+                    <include name="findElementsOnSearchPage"/>
                 </methods>
             </class>
             <!--<class name="ui.EditIssueTest">-->
