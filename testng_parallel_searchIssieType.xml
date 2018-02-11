@@ -42,35 +42,35 @@
         </classes>
     </test>
 
-    <!--<test name="UI SearchIssueTestByStatus">-->
-        <!--<groups>-->
-            <!--<run>-->
-                <!--<include name="UI"/>-->
-                <!--<exclude name="SKIP"/>-->
-            <!--</run>-->
-        <!--</groups>-->
-        <!--<classes>-->
-            <!--<class name="ui.SearchIssueTest">-->
-                <!--<methods>-->
-                    <!--<include name="searchByStatus"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="UI SearchIssueTestByStatus">
+        <groups>
+            <run>
+                <include name="UI"/>
+                <exclude name="SKIP"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="ui.SearchIssueTest">
+                <methods>
+                    <include name="searchByStatus"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="UI searchByAssigneeByAssignee">-->
-        <!--<groups>-->
-            <!--<run>-->
-                <!--<include name="UI"/>-->
-                <!--<exclude name="SKIP"/>-->
-            <!--</run>-->
-        <!--</groups>-->
-        <!--<classes>-->
-            <!--<class name="ui.SearchIssueTest">-->
-                <!--<methods>-->
-                    <!--<include name="searchByAssignee"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="UI searchByAssigneeByAssignee">
+        <groups>
+            <run>
+                <include name="UI"/>
+                <exclude name="SKIP"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="ui.SearchIssueTest">
+                <methods>
+                    <include name="searchByAssignee"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
