@@ -21,9 +21,9 @@
             <class name="ui.SearchIssueTest">
                 <methods>
                     <!--<include name="searchByProject"/>-->
-                    <!--<include name="searchByType"/>-->
+                    <include name="searchByType"/>
                     <!--<include name="searchByStatus"/>-->
-                    <include name="searchByAssignee"/>
+                    <!--<include name="searchByAssignee"/>-->
                 </methods>
             </class>
             <!--<class name="ui.EditIssueTest">-->

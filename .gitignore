@@ -5,7 +5,6 @@ environment/grid/**
 !/**/*.bat
 !/**/*.json
 testrun.properties
-testng.xml
 pom.xml
 BasePage.java
 TestListener.java
