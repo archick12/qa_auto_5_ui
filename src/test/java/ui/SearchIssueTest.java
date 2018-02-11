@@ -142,4 +142,11 @@ public class SearchIssueTest {
   public void searchByStatus() throws InterruptedException {
 
   }
+    @Test(groups =  {"UI", "SMOKE"})
+    public void findElementsOnSearchPage()  throws InterruptedException{
+    assertTrue(searchPage.isElementPresentTypeButton());
+    assertTrue(searchPage.isElementPresentassigneeButton());
+    assertTrue(searchPage.isElementPresentprojectButton());
+    assertTrue(searchPage.isElementPresentlistViewItem());
+  }
 }
