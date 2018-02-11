@@ -3,14 +3,11 @@ package ui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import ui.utils.RemoteDriverManager;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-
-import static org.openqa.selenium.Keys.ENTER;
 
 public class NewIssuePage extends BasePage {
 
@@ -655,7 +652,16 @@ public class NewIssuePage extends BasePage {
         }
     }
 
-
-
+    public NewIssuePage checkElementsPresent() {
+        waitToBePresent(fieldProjectLocatorTest);
+        waitToBePresent(issueTypeLocator);
+        waitToBePresent(summaryLocator);
+        waitToBePresent(descriptionFieldLocator);
+        waitToBePresent(priorityFieldDefault);
+        waitToBePresent(labelsFieldLocator);
+        waitToBePresent(assigneeFieldLocator);
+        waitToBePresent(submitButtonLocator);
+        return this;
+    }
 
 }

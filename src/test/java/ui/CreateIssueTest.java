@@ -10,7 +10,7 @@ import static ui.SearchIssueTest.logger;
 public class CreateIssueTest {
 
   // code that will be invoked before the first test method that belongs to any of these groups
-  @BeforeGroups(groups = {"UI","CreateIssue"})
+  @BeforeGroups(groups = {"UI","CreateIssue", "Smoke", "Stable"})
   public void setUp() {
     LoginPage loginPage = new LoginPage();
     loginPage
@@ -40,10 +40,17 @@ public class CreateIssueTest {
     issuePage.deleteTicket();
   }
 
+  @Test(groups = {"Smoke"})
+  public void smokeCreateIssueTest() {
+
+    NewIssuePage.checkElementsPresent();
+    System.out.println("Шалость удалась!");
+  }
+
 
   // Alesya's test
   @TestCase(id = "C13") // annotation that holds number of test case in TestRail
-  @Test(groups = {"UI","CreateIssue"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
+  @Test(groups = {"UI","CreateIssue", "SKIP"}) // annotation that helps to mark method as test and include pr exclude them by group name in testng.xml
   public void createNewStory() throws InterruptedException {
 
     NewIssuePage newIssuePage = new NewIssuePage();
@@ -80,7 +87,7 @@ public class CreateIssueTest {
 
     // Alex's test
     @TestCase(id = "C11")
-    @Test(groups = {"UI", "CreateIssue"})
+    @Test(groups = {"UI", "CreateIssue", "SKIP"})
     public void createNewBug () throws InterruptedException {
       NewIssuePage newIssuePage = new NewIssuePage();
       IssuePage issuePage = new IssuePage();
@@ -151,7 +158,6 @@ public class CreateIssueTest {
     newIssuePage
             .enterProject(projectId)
             .enterIssueType(issueType)
-            .fillNameEpic(epicName)
             .fillSummary(epicSummary)
             .fillDescription(epicDescription)
             .selectPriority(issuePriority)
