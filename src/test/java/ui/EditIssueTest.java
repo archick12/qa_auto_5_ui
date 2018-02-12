@@ -28,9 +28,9 @@ public class  EditIssueTest {
     IssuePage issuePage;
     NewIssuePage newIssuePage;
 
-    String parentIssueId = "QAAUT-374";
+    String parentIssueId = "QAAUT-5"; //Make sure that the test ticket is clean without any data (comment/subTask/label..)
 
-    @BeforeGroups("Smoke, UI, EditTest, Stable")
+    @BeforeGroups(groups={"UI", "SMOKE", "EditIssue", "Stable"})
     public void setUp() {
         loginPage = new LoginPage();
         headerPage = new HeaderPage();
@@ -48,11 +48,11 @@ public class  EditIssueTest {
                 .clickLogin();
 
         headerPage.search(parentIssueId);               //поиск тестируюемого Issue в Jira
-        assertEquals(issuePage.isOnThePage(parentIssueId), true); //проверка на ожидаемой ли мы странице "QAAUT-1"
+        assertEquals(issuePage.isOnThePage(parentIssueId), true); //проверка на ожидаемой ли мы странице "QAAUT-#"
     }
 
 
-    @Test(groups={"Smoke"})
+    @Test(priority = 1, groups={"UI", "SMOKE"})
     public void smokeTestForEditIssuePage(){
         assertTrue(issuePage.isEditIssueButtonPresent());
         assertTrue(issuePage.isAssignButtonPresent());
@@ -63,14 +63,14 @@ public class  EditIssueTest {
         assertTrue(issuePage.isWorkflowButtonPresent());
         assertTrue(issuePage.isTypeFieldPresent());
         assertTrue(issuePage.isPriorityFieldPresent());
-        assertTrue(issuePage.isLablesFieldPresent());
+        assertTrue(issuePage.isLabelsFieldPresent());
         assertTrue(issuePage.isDescriptionFieldPresent());
         assertTrue(issuePage.isBrowseButtonPresent());
         System.out.println("Smoke");
     }
 
     @TestCase(id = "C25")//--------------------------------------------------Марина
-    @Test(groups = {"UI", "Stable", "EditIssue"}, dependsOnGroups = {"Smoke"})
+    @Test(priority = 2, groups = {"UI", "Stable", "EditIssue"}, dependsOnGroups = {"SMOKE"})
     public void createAndDeleteSubTask() throws InterruptedException {
         String subTaskSummary = "New sub-task created";
         String addLabel = "olafff";
@@ -95,11 +95,10 @@ public class  EditIssueTest {
                 .clickDeleteSubTaskConfirmation();
         //-------------------проверяем, что sub-task удален по полю summary, которое должно отсутствовать
         assertEquals(issuePage.isSubTaskSummaryMissing(subTaskSummary), true);
-        System.out.println("EditIssue");
     }
 
     @TestCase(id = "C5")//--------------------------------------------------Nata
-    @Test(groups = {"UI", "Stable", "EditIssue"}, dependsOnGroups = {"Smoke"})
+    @Test(priority = 3, groups = {"UI", "Stable", "EditIssue"}, dependsOnGroups = {"SMOKE"})
     public void checkAssignUser() {
         String addComment = "Great!";
         newIssuePage
@@ -124,12 +123,11 @@ public class  EditIssueTest {
                 .clickOnDeleteComment()
                 .confirmDeletionOfComment();
         assertEquals(issuePage.isCommentTextMissing(addComment), true);
-        System.out.println("EditIssue");
     }
 
 
     @TestCase(id = "C3")//    --------------------------------------------------Настя
-    @Test(groups = {"UI", "Stable", "EditIssue"}, dependsOnGroups = {"Smoke"})
+    @Test(priority = 4, groups = {"UI", "Stable", "EditIssue"}, dependsOnGroups = {"SMOKE"})
 
     public void addComment() throws InterruptedException {
         String commentText = "Very useful comment";
@@ -143,11 +141,10 @@ public class  EditIssueTest {
                 .clickOnDeleteComment()
                 .confirmDeletionOfComment();
         assertEquals(issuePage.isCommentTextMissing(commentText), true);
-        System.out.println("EditIssue");
     }
 
     @TestCase(id = "C6")//--------------------------------------------------Julia
-    @Test(groups = {"UI", "Stable", "EditIssue"}, dependsOnGroups = {"Smoke"})
+    @Test(priority = 5, groups = {"UI", "Stable", "EditIssue"}, dependsOnGroups = {"SMOKE"})
     public void checkButtonWork() throws InterruptedException {
         String statusOfTheIssue = "In Progress";
 
@@ -177,11 +174,10 @@ public class  EditIssueTest {
         newIssuePage
                 .clickSelectedForDevelopment();
         assertTrue(newIssuePage.isButtonWithTextSelectForDevelopment());
-        System.out.println("EditIssue");
     }
 
     @TestCase(id = "C7")//--------------------------------------------------Алена
-    @Test(groups = {"UI", "EditIssue", "SKIP"}, dependsOnGroups = {"Smoke"}) //Skipped - because test does not return the ticket to its original state
+    @Test(groups = {"UI", "EditIssue", "SKIP"}, dependsOnGroups = {"SMOKE"}) //Skipped - because test does not return the ticket to its original state
     public void addLabletoIssue() {
         String label = "My_label";
 
@@ -195,11 +191,10 @@ public class  EditIssueTest {
         /*issuePage
                 .clickEditLabel(); <<----не получается кликнуть на элемент редактировния lable (т.к. он скрыт)
         assertFalse(issuePage.isAddedLabelPresent(label));*/
-        System.out.println("EditIssue");
     }
 
     @TestCase(id = "C23")//--------------------------------------------------Алена
-    @Test(groups = {"UI", "EditIssue", "SKIP"}, dependsOnGroups = {"Smoke"})//Skipped - because test does not return the ticket to its original state
+    @Test(groups = {"UI", "EditIssue", "SKIP"}, dependsOnGroups = {"SMOKE"})//Skipped - because test does not return the ticket to its original state
     public void addAttachmenttoIssue() throws AWTException {
         String pathToFile = "/C:/Users/user/Desktop/Screenshot_21.png";
         String fileName = "Screenshot_21.png";
@@ -215,11 +210,10 @@ public class  EditIssueTest {
         /*issuePage
                 .clickDeleteAttachment(); <<----не получается кликнуть на элемент удаления аттача, т.к он скрыт
         assertFalse(newIssuePage.isAttachmentPresent(fileName));*/
-        System.out.println("EditIssue");
     }
 
     @TestCase(id = "C24")//--------------------------------------------------Марина
-    @Test(groups = {"UI", "EditIssue", "SKIP"}, dependsOnGroups = {"Smoke"})//Skipped - because test is failed all time
+    @Test(groups = {"UI", "EditIssue", "SKIP"}, dependsOnGroups = {"SMOKE"})//Skipped - because test is failed all time
     public void changePriority() {
         String issuePriorityHigher = "High";
        // String issuePriorityLower = "Low";
@@ -234,7 +228,6 @@ public class  EditIssueTest {
         newIssuePage.selectPriority(issuePriorityLower);
         issuePage.clickUpdateButtonPopUp();
         assertEquals(issuePage.isIssuePriorityCorrect(issuePriorityLower), true);*/
-        System.out.println("EditIssue");
     }
 }
 

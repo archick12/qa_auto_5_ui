@@ -541,7 +541,7 @@ public class IssuePage extends BasePage {
     public boolean isPriorityFieldPresent() {
         return isElementPresent(priorityFieldDefault);
     }
-    public boolean isLablesFieldPresent() {
+    public boolean isLabelsFieldPresent() {
         return isElementPresent(labelsFieldLocator);
     }
     public boolean isDescriptionFieldPresent() {

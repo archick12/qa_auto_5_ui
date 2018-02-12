@@ -18,7 +18,7 @@
             </run>
         </groups>
         <classes>
-            <class name="ui.MyTest"/>
+            <class name="ui.SearchIssueTest"/>
         </classes>
     </test>
 
