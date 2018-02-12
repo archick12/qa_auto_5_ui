@@ -94,11 +94,11 @@ public class IssuePage extends BasePage {
 
 
     // Alena
-    public  By createLocator = By.xpath("//*[@id='create_link']");
-    public By editIssueButtonLocator = By.xpath("//*[@id='edit-issue']");
-    public By assignButtonLocator = By.xpath("//*[@id='assign-issue']");
-    public By addSubTaskButtonLocator = By.xpath("//*[@class='ops']//*[@id='stqc_show']");
-    public By addCommentButtonLocator = By.xpath("//*[@id='comment-issue']");
+    private By createLocator = By.xpath("//*[@id='create_link']");
+    private By editIssueButtonLocator = By.xpath("//*[@id='edit-issue']");
+    private By assignButtonLocator = By.xpath("//*[@id='assign-issue']");
+    private By addSubTaskButtonLocator = By.xpath("//*[@class='ops']//*[@id='stqc_show']");
+    private By addCommentButtonLocator = By.xpath("//*[@id='comment-issue']");
     private By selectForDevelopmentLocator = By.xpath("//*[@class='toolbar-trigger issueaction-workflow-transition']//*[contains(text(),'Selected for Development')]");
     private By moreDropDownLocator = By.xpath("//*[@id='opsbar-operations_more']");
     private By workflowLocator = By.id("opsbar-transitions_more");
@@ -508,32 +508,47 @@ public class IssuePage extends BasePage {
         try {
             (new WebDriverWait(driver, defaultExplicitWaitInSeconds))
                     .until(ExpectedConditions.presenceOfElementLocated(locator));
-//            driver.findElement(locator);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    public IssuePage checkAreElementsPresent() {
-        isElementPresent(createLocator);
-//        isElementPresent(editIssueButtonLocator);
-//        isElementPresent(addCommentButtonLocator);
-//        isElementPresent(assignButtonLocator);
-//        isElementPresent(moreDropDownLocator);
-//        isElementPresent(backlogButton);
-//        isElementPresent(selectForDevelopmentLocator);
-//        isElementPresent(workflowLocator);
-//        isElementPresent(shareBtnLocator);
-//        isElementPresent(exportBtnLocator);
-//        isElementPresent(issueTypeLocator);
-//        isElementPresent(priorityFieldDefault);
-//        isElementPresent(labelsFieldLocator);
-//        isElementPresent(assigneeFieldLocator);
-//        isElementPresent(descriptionLocator);
-//        isElementPresent(browseButton);
-        isElementPresent(addSubTaskButtonLocator);
-        return this;
+    public boolean isEditIssueButtonPresent(){
+        return   isElementPresent(editIssueButtonLocator);
+    }
+    public boolean isAssignButtonPresent(){
+        return   isElementPresent(assigneeFieldLocator);
+    }
+    public boolean isAddCommentButtonPresent(){
+        return   isElementPresent(addCommentButtonLocator);
+    }
+    public boolean isMoreButtonPresent(){
+        return   isElementPresent(moreDropDownLocator);
+    }
+    public boolean isBacklogButtonPresent() {
+        return isElementPresent(backlogButton);
+    }
+    public boolean isSelectForDevelopmentButtonPresent() {
+        return isElementPresent(selectForDevelopmentLocator);
+    }
+    public boolean isWorkflowButtonPresent() {
+        return isElementPresent(workflowLocator);
+    }
+    public boolean isTypeFieldPresent() {
+        return isElementPresent(issueTypeLocator);
+    }
+    public boolean isPriorityFieldPresent() {
+        return isElementPresent(priorityFieldDefault);
+    }
+    public boolean isLablesFieldPresent() {
+        return isElementPresent(labelsFieldLocator);
+    }
+    public boolean isDescriptionFieldPresent() {
+        return isElementPresent(descriptionLocator);
+    }
+    public boolean isBrowseButtonPresent() {
+        return isElementPresent(browseButton);
     }
 }
 
