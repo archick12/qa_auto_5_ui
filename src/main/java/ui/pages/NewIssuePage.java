@@ -1,9 +1,11 @@
+
 package ui.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.utils.RemoteDriverManager;
 
 import java.awt.*;
@@ -136,12 +138,6 @@ public class NewIssuePage extends BasePage {
     private By workflowLocator = By.id("opsbar-transitions_more");
     private By inProgressLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='In Progress']");
     private By doneLocator = By.xpath("//*[@class='issueaction-workflow-transition']//*[text()='Done']");
-    private By labelsFieldLocator = By.xpath("//*[@class='labels-wrap value editable-field inactive']");
-    private By descriptionLocator = By.xpath("//*[@id='descriptionmodule_heading']");
-    private String addedLabelLocator = "//*[contains(@class,'labels-wrap value editable-field inactive')]//*[contains(text(),'%s')]";
-    private By selectForDevelopmentLocator = By.xpath("//*[@id='action_id_21']//*[@class='toolbar-trigger issueaction-workflow-transition']");
-    private By browseButtonLocator = By.xpath("//*[@class='issue-drop-zone__button']");
-    private String fileName = "//*[@class='attachment-content js-file-attachment']//*[contains(text(),'%s')]";
     private By selectAssignFieldButton = By.xpath("//*[@id='assign-issue']//*[text()='Assign']");
     private By selectDropDownButton = By.xpath("//*[@class='icon aui-ss-icon noloading drop-menu']//*[text()='More']");
     private By selectAssignPerson = By.xpath("//*[@id='assignee-field']");
@@ -156,6 +152,9 @@ public class NewIssuePage extends BasePage {
     private By selectedForDevelopmentLocator = By.xpath("//*[@class='toolbar-item']//*[@class='toolbar-trigger issueaction-workflow-transition']//*[text()='Selected for Development']");
     private By statusButtonSelectForDevelopment = By.xpath("//*[@id='status-val']//*[text()='Selected for Development']");
 
+    private By unassignedButton = By.xpath("//*[normalize-space() = 'Unassigned']");
+    private By assignPopUp = By.className("aui-flag");
+    private By updateStatusPopUp = By.className("aui-flag");
 
     //---Create New Issue
     public NewIssuePage() {
@@ -435,49 +434,6 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-
-    public boolean isAddedLabelPresent(String label) {
-        String selector = String.format(addedLabelLocator, label);
-        return waitToBePresentAndContainsText(By.xpath(selector), label);
-    }
-
-    public NewIssuePage clickBrowseButton() {
-        waitToBePresentAndClick(browseButtonLocator);
-        return this;
-    }
-
-    public boolean isAttachmentPresent(String file) {
-        String selector = String.format(fileName, file);
-        return waitToBePresentAndContainsText(By.xpath(selector), file);
-    }
-
-    public NewIssuePage setClipboardData(String string) {
-        StringSelection stringSelection = new StringSelection(string);
-        Toolkit.getDefaultToolkit().getSystemClipboard()
-                .setContents(stringSelection, null);
-        return this;
-    }
-
-    public NewIssuePage robot() throws AWTException {
-
-        Robot rb = new Robot();
-        rb.delay(1000);
-        rb.keyPress(KeyEvent.VK_CONTROL);
-        rb.delay(300);
-        rb.keyPress(KeyEvent.VK_V);
-        rb.delay(300);
-        rb.keyRelease(KeyEvent.VK_V);
-        rb.delay(700);
-        rb.keyRelease(KeyEvent.VK_CONTROL);
-        rb.delay(300);
-        rb.keyPress(KeyEvent.VK_ENTER);
-        rb.delay(300);
-        rb.keyRelease(KeyEvent.VK_ENTER);
-        rb.delay(300);
-
-        return this;
-    }
-
     public NewIssuePage selectAssignFieldButton() {
         driver.findElement(selectAssignFieldButton).click();
         return this;
@@ -556,25 +512,6 @@ public class NewIssuePage extends BasePage {
         }
     }
 
-    public NewIssuePage clickLabelField() {
-        waitToBePresentAndClick(labelsFieldLocator);
-        return this;
-    }
-
-    public NewIssuePage clickDescriptionField() {
-        waitToBePresentAndClick(descriptionLocator);
-        return this;
-    }
-
-    public boolean isLabelPresent(String label) {
-        String selector = String.format(addedLabelLocator, label);
-        return waitToBePresentAndContainsText(By.xpath(selector), label);  }
-
-    public NewIssuePage clickSelectForDevelopment() {
-        waitToBePresentAndClick(selectForDevelopmentLocator);
-        return this;
-    }
-
     public NewIssuePage selectBacklogButton() {
         waitToBePresentAndClick(backlogButton);
         return this;
@@ -603,10 +540,19 @@ public class NewIssuePage extends BasePage {
             return false;
         }
 
-
     }
 
-    public Boolean selectUnassignIsPresent(String assigneeName) {
+    public Boolean isSelectUnassignButtonIsPresent() {
+        By unassignedButton = By.xpath("//*[normalize-space() = 'Unassigned']");
+        try {
+            driver.findElement(unassignedButton);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public Boolean isSelectUnassignIsPresent(String assigneeName) {
         By assignedPerson = By.xpath(String.format(assignedPersonLocator.toString(), assigneeName));
         try {
             driver.findElement(assignedPerson);
@@ -623,6 +569,18 @@ public class NewIssuePage extends BasePage {
 
     public NewIssuePage switchDescriptionToVisualMode(){
         waitToBePresentAndClick(descriptionVisualModeTab);
+        return this;
+    }
+
+    public NewIssuePage waitForAssignPopUp() {
+        new WebDriverWait(RemoteDriverManager.getDriver(), 10)
+                .until(ExpectedConditions.invisibilityOfElementLocated(assignPopUp));
+        return this;
+    }
+
+    public NewIssuePage waitForUpdateStatusPopUp(){
+        new WebDriverWait(RemoteDriverManager.getDriver(),10)
+                .until(ExpectedConditions.invisibilityOfElementLocated(updateStatusPopUp));
         return this;
     }
 }

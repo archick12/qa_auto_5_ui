@@ -201,4 +201,15 @@ public class BasePage {
         driver.get(url);
     }
 
+    protected boolean isElementPresent(By selector) {
+        try {
+            driver.findElement(selector);
+            return true;
+        }
+        catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+
 }
