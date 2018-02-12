@@ -54,7 +54,18 @@ public class  EditIssueTest {
 
     @Test(groups={"Smoke"})
     public void smokeTestForEditIssuePage(){
-        assertEquals(issuePage.checkAreElementsPresent(),true);
+        assertTrue(issuePage.isEditIssueButtonPresent());
+        assertTrue(issuePage.isAssignButtonPresent());
+        assertTrue(issuePage.isAddCommentButtonPresent());
+        assertTrue(issuePage.isMoreButtonPresent());
+        assertTrue(issuePage.isBacklogButtonPresent());
+        assertTrue(issuePage.isSelectForDevelopmentButtonPresent());
+        assertTrue(issuePage.isWorkflowButtonPresent());
+        assertTrue(issuePage.isTypeFieldPresent());
+        assertTrue(issuePage.isPriorityFieldPresent());
+        assertTrue(issuePage.isLablesFieldPresent());
+        assertTrue(issuePage.isDescriptionFieldPresent());
+        assertTrue(issuePage.isBrowseButtonPresent());
         System.out.println("Smoke");
     }
 
