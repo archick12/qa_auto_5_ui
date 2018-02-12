@@ -14,12 +14,12 @@ import java.util.concurrent.TimeUnit;
 
 public class SearchPage extends BasePage {
 
+  private String searchPageURL = baseURL + "/issues/?jql=";
   private By layoutSwitcherButton = By.id("layout-switcher-button");
-  private By listViewItem = By.xpath("//*[contains(@id,'AJS_DROPDOWN_LISTITEM_')]//child::a[@data-layout-key='list-view']");
-  private By recentProject1Locator = By
-          .xpath("(//*[contains(@id,'proj_lnk_')][@class='aui-icon-container'])[1]");
-  private By feedbackSubmitLocator = By
-          .xpath("//*[@id='jic-collector-form']//child::input[@type='submit']");
+  private By listViewItemLocator = By.xpath("//*[contains(@id,'AJS_DROPDOWN_LISTITEM_')]//child::a[@data-layout-key='list-view']");
+  private By currentModeLink = By.xpath("//*[@class='mode-switcher']/a[contains(@class,'active')]");
+
+//  Project locators
   private By projectButtonLocator = By.xpath("//button[@data-id='project']");
   private By findProjectsSearchFieldLocator = By
           .xpath("//form[@id='issue-filter'][contains(@class,'project-criteria')]/descendant::input[@id='searcher-pid-input']");
@@ -64,7 +64,7 @@ public class SearchPage extends BasePage {
   }
 
   public SearchPage clickListViewItem() {
-    waitToBePresentAndClick(listViewItem);
+    waitToBePresentAndClick(listViewItemLocator);
     return this;
   }
   public SearchPage clickProjectButton() {
@@ -199,6 +199,29 @@ public class SearchPage extends BasePage {
   public SearchPage clickAssigneeFirstCheckbox() throws InterruptedException {
     waitToBePresentAndClick(assigneeFirstCheckboxLocator);
     return this;
+  }
+
+  public boolean isOnThePage() {
+    return isOnThePage(searchPageURL);
+  }
+  public String currentlySelectedMode(){
+    return driver.findElement(currentModeLink).getAttribute("data-id");
+  }
+
+  public boolean isElementPresentTypeButton(){
+    return isElementPresent(typeButtonLocator);
+  }
+
+  public boolean isElementPresentAssigneeButton(){
+    return isElementPresent(assigneeButtonLocator);
+  }
+
+  public boolean isElementPresentProjectButton(){
+    return isElementPresent(projectButtonLocator);
+  }
+
+  public boolean isElementPresentListViewItem(){
+    return isElementPresent(listViewItemLocator);
   }
 
 

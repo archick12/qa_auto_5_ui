@@ -24,8 +24,9 @@ public class SearchIssueTest {
 
   String issueId = "QAAUT-18";
 
-  @BeforeGroups(groups = {"UI"})
+  @BeforeGroups(groups = {"UI","SMOKE"})
   public void setUp() {
+    logger.info("+++++++ setUp() started");
     loginPage = new LoginPage();
     headerPage = new HeaderPage();
     dashBoardPage = new DashBoardPage();
@@ -38,17 +39,31 @@ public class SearchIssueTest {
         .enterPassword()
         .clickLogin();
     //    assertEquals(true, dashBoardPage.isOnThePage()); //not really necessary because homepage can vary
+  }
+
+  @BeforeGroups(groups = {"UI", "SMOKE"}, dependsOnMethods = {"setUp"})
+  public void openSearchPage() {
+    logger.info("+++++++ openSearchPage() started");
     // Prepare for search tests:
     headerPage.issuesSearchForIssues();
-    searchPage.waitForNotPending();
-    // TODO check that basic view is on
+//    searchPage.waitForNotPending();
+    assertTrue(searchPage.isOnThePage());
+    assertEquals("basic", searchPage.currentlySelectedMode());
+    logger.info("Assertion passed: 'basic' mode is enabled");
     searchPage.clickOnLayoutSwitcherButton()
-        .clickListViewItem();
+            .clickListViewItem();
+  }
 
+  @Test(groups =  {"UI", "SMOKE"})
+  public void findElementsOnSearchPage()  throws InterruptedException{
+    assertTrue(searchPage.isElementPresentTypeButton());
+    assertTrue(searchPage.isElementPresentAssigneeButton());
+    assertTrue(searchPage.isElementPresentProjectButton());
+    assertTrue(searchPage.isElementPresentListViewItem());
   }
 
   @TestCase(id = "1") //Kate
-  @Test(groups = {"UI"})
+  @Test(groups = {"UI"}, dependsOnGroups = {"SMOKE"})
   public void searchByAssignee() throws InterruptedException {
     // String username = ListenerTest.properties.get("username");
 
@@ -87,7 +102,7 @@ public class SearchIssueTest {
   }
 
   @TestCase(id = "2") //Dima
-  @Test(groups = {"UI"})
+  @Test(groups = {"UI"}, dependsOnGroups = {"SMOKE"})
   public void searchByProject() throws InterruptedException {
     String projectName = "qaauto5";
     String issuePrefix = "QAAUT-";
@@ -105,7 +120,7 @@ public class SearchIssueTest {
   }
 
   @TestCase(id = "C8") //Artem
-  @Test(groups = {"UI"})
+  @Test(groups = {"UI"}, dependsOnGroups = {"SMOKE"})
   public void searchByType() throws InterruptedException {
     //__________________________________check Bug type
     searchPage.SearchIssuesByBagsType();
@@ -138,7 +153,7 @@ public class SearchIssueTest {
   }
 
   @TestCase(id = "4") //Maxim
-  @Test(groups = {"UI"})
+  @Test(groups = {"UI"}, dependsOnGroups = {"SMOKE"})
   public void searchByStatus() throws InterruptedException {
 
   }
