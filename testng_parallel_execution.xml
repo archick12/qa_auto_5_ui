@@ -1,0 +1,48 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Sample test suite" parallel="tests" thread-count="3">
+
+    <listeners>
+        <listener class-name="utils.ListenerTest"/>
+    </listeners>
+
+    <parameter name="myParam" value="This is the value for a parameter"/>
+    <parameter name="browserName" value="chrome"/>
+    <parameter name="local" value="yes"/>
+    <parameter name="implicitWaitInSeconds" value="30"/>
+
+    <test name="UI EditIssueTest">
+        <groups>
+            <run>
+                <include name="UI"/>
+                <exclude name="SKIP"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="ui.EditIssueTest"/>
+        </classes>
+    </test>
+
+    <test name="UI SearchIssueTest">
+        <groups>
+            <run>
+                <include name="UI"/>
+                <exclude name="SKIP"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="ui.SearchIssueTest"/>
+        </classes>
+    </test>
+    <test name="UI Create Issue">
+        <groups>
+            <run>
+                <include name="UI"/>
+                <exclude name="SKIP"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="ui.CreateIssueTest"/>
+        </classes>
+    </test>
+</suite>
+

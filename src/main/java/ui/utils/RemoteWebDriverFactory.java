@@ -44,6 +44,7 @@ public class RemoteWebDriverFactory {
         }
 
         WebDriver driver = new RemoteWebDriver(hostURL, capability);
+        driver.manage().window().maximize();
         return driver;
     }
 }
