@@ -1,4 +1,4 @@
-1. command to run GRID
+1. commands to run GRID
   1.1 For Windows - just run "Start_GRID_Windows.bat" from explorer or terminal. To exit close terminal window.
   1.2 For Linux - run "./Start_GRID_linux.sh" from console or using file explorer.
   1.3 For MAC -
