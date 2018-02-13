@@ -40,14 +40,10 @@ public class NewIssuePage extends BasePage {
 
     //---Project
     private By fieldProjectLocator = By.id("project-field");
-    // Marina S test locator
-    private By fieldProjectLocatorTest = By.xpath("//div[@id='project-single-select']/span");
     private By projectSelectLocator = By.id("project-suggestions");
 
     //---Issue Type
     private By issueTypeLocator = By.id("issuetype-field");
-    // Marina S test locator
-    private By issueTypeLocatorTest = By.xpath("//div[@id='issuetype-single-select']/span");
 
     //---Epic Name
     private By nameEpicLocator = By.xpath("//*[@id='customfield_10002']");
@@ -59,6 +55,8 @@ public class NewIssuePage extends BasePage {
     private By summaryLocator = By.id("summary");
 
     //---Description
+    private By descriptionTextModeTab = By.xpath("//ul[@class='tabs-menu']/li[@data-mode='source']");
+    private By descriptionVisualModeTab = By.xpath("//ul[@class='tabs-menu']/li[@data-mode='wysiwyg']");
     private By menuStyle = By.xpath("//*[@field-id='description']//child::*[text()='Style']");
     private By iconBold = By.xpath("//*[@field-id='description']//ancestor::*[@data-operation='bold']");
     private By iconItalic = By.xpath("//*[@field-id='description']//following::*[@data-operation='italic']");
@@ -82,8 +80,6 @@ public class NewIssuePage extends BasePage {
     //---Priority
     private By localHelp = By.xpath("//*[@id='priority-single-select']//following::span[contains(@class,'aui-iconfont-help')]");
     private By priorityFieldDefault = By.id("priority-field");
-    // Marina S test locator
-    private By priorityFieldDefaultTest = By.xpath("//div[@id='priority-single-select']/span");
     private By priorityFieldSelect = By.id("priority-suggestions");
     private By prioritySelectHighest = By.xpath("//*[@id='priority-single-select']//following::*[a[text()='Highest']]");
     private By prioritySelectHigh = By.xpath("//*[@id='priority-single-select']//a[text()='High']");
@@ -137,8 +133,6 @@ public class NewIssuePage extends BasePage {
     //---Cancel
     private By cancelButtonLocator = By.xpath("//*[@title='Press undefined+` to cancel']");
     private By descriptionFieldLocator = By.id("description");
-    // Marina S test locator
-    private By descriptionFieldLocatorTest = By.xpath("//*[@id='description-wiki-edit']");
 
     //---Additional Locators for tests
     private By workflowLocator = By.id("opsbar-transitions_more");
@@ -169,7 +163,7 @@ public class NewIssuePage extends BasePage {
     }
 
     public NewIssuePage clickCreateAndWaitForDialog() {
-        waitToBePresentAndClick(createLocator);
+        waitTillBeAbleToClick(createLocator);
         waitToBePresent(createIssueDialog);
         return this;
     }
@@ -269,30 +263,12 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-    // Marina S test method
-    public NewIssuePage enterProjectTest(String projectId) {
-        waitTillBeAbleToClick(fieldProjectLocatorTest);
-        driver.findElement(fieldProjectLocatorTest).clear();
-        waitToBePresentAndSendKeys(fieldProjectLocatorTest, projectId);
-        driver.findElement(fieldProjectLocatorTest).sendKeys(Keys.TAB);
-        return this;
-    }
-
     //---Select IssueType
     public NewIssuePage enterIssueType(String issueType) {
         waitTillBeAbleToClick(issueTypeLocator);
         driver.findElement(issueTypeLocator).clear();
         waitToBePresentAndSendKeys(issueTypeLocator, issueType);
         driver.findElement(issueTypeLocator).sendKeys(Keys.TAB);
-        return this;
-    }
-
-    // Marina S test method
-    public NewIssuePage enterIssueTypeTest(String issueType) {
-        waitTillBeAbleToClick(issueTypeLocatorTest);
-        driver.findElement(issueTypeLocatorTest).clear();
-        waitToBePresentAndSendKeys(issueTypeLocatorTest, issueType);
-        driver.findElement(issueTypeLocatorTest).sendKeys(Keys.TAB);
         return this;
     }
 
@@ -316,27 +292,12 @@ public class NewIssuePage extends BasePage {
         return this;
     }
 
-    // Marina S test method
-    public NewIssuePage fillDescriptionTest(String issueDescription) {
-        waitTillBeAbleToClick(descriptionFieldLocatorTest);
-        waitToBePresentAndSendKeys(descriptionFieldLocatorTest, issueDescription);
-        return this;
-    }
-
     //Select Priority
     public NewIssuePage selectPriority(String priority) {
         waitTillBeAbleToClick(priorityFieldDefault);
         driver.findElement(priorityFieldDefault).clear();
         waitToBePresentAndSendKeys(priorityFieldDefault, priority);
         driver.findElement(priorityFieldDefault).sendKeys(Keys.TAB);
-        return this;
-    }
-
-    public NewIssuePage selectPriorityTest(String priority) {
-        waitTillBeAbleToClick(priorityFieldDefaultTest);
-        driver.findElement(priorityFieldDefaultTest).clear();
-        waitToBePresentAndSendKeys(priorityFieldDefaultTest, priority);
-        driver.findElement(priorityFieldDefaultTest).sendKeys(Keys.TAB);
         return this;
     }
 
@@ -601,6 +562,16 @@ public class NewIssuePage extends BasePage {
         }
     }
 
+    public NewIssuePage switchDescriptionToTextMode(){
+        waitToBePresentAndClick(descriptionTextModeTab);
+        return this;
+    }
+
+    public NewIssuePage switchDescriptionToVisualMode(){
+        waitToBePresentAndClick(descriptionVisualModeTab);
+        return this;
+    }
+
     public NewIssuePage waitForAssignPopUp() {
         new WebDriverWait(RemoteDriverManager.getDriver(), 10)
                 .until(ExpectedConditions.invisibilityOfElementLocated(assignPopUp));
@@ -612,7 +583,4 @@ public class NewIssuePage extends BasePage {
                 .until(ExpectedConditions.invisibilityOfElementLocated(updateStatusPopUp));
         return this;
     }
-
-
-
 }
