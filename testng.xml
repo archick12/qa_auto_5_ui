@@ -15,7 +15,7 @@
         <method-selectors>
             <method-selector>
                 <script language="beanshell"><![CDATA[
-                    runFlag = groups.containsKey("wip"); // always run tests with "wip" group
+                    runFlag = groups.containsKey("SMOKE"); // always run tests with "SMOKE" group
                     if (groups.containsKey("UI") && testngMethod.isBeforeGroupsConfiguration()) runFlag = true; //run UI @beforeGroups
                     System.out.println("run '" + testngMethod.getRealClass().getName() + "." + testngMethod.getMethodName() + "'? -> " + runFlag);
                     return runFlag;
