@@ -200,13 +200,18 @@ public class BasePage {
     protected void openExistingIssue(String url){
         driver.get(url);
     }
+       
+    // Method for SMOKE Test
 
-    protected boolean isElementPresent(By selector) {
+    protected boolean isElementPresent(By locator) {
+        logger.info("WAIT ELEMENT TO BE PRESENT: " + locator);
         try {
-            driver.findElement(selector);
+            (new WebDriverWait(driver, defaultExplicitWaitInSeconds))
+                    .until(ExpectedConditions.presenceOfElementLocated(locator));
             return true;
-        }
-        catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
+            return false;
+        } catch (TimeoutException e) {
             return false;
         }
     }

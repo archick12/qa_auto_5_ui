@@ -1,9 +1,6 @@
 package ui.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.utils.RemoteDriverManager;
@@ -497,21 +494,6 @@ public class IssuePage extends BasePage {
         rb.delay(300);
 
         return this;
-    }
-
-// Method for SMOKE Test
-
-    private int defaultExplicitWaitInSeconds = 10;
-
-    public boolean isElementPresent(By locator) {
-        logger.info("WAIT ELEMENT TO BE PRESENT: " + locator);
-        try {
-            (new WebDriverWait(driver, defaultExplicitWaitInSeconds))
-                    .until(ExpectedConditions.presenceOfElementLocated(locator));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     public boolean isEditIssueButtonPresent(){
