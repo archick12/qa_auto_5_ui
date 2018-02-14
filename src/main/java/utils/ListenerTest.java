@@ -12,6 +12,7 @@ import org.testng.ITestResult;
 import ui.pages.BasePage;
 import ui.utils.RemoteDriverManager;
 import ui.utils.RemoteWebDriverFactory;
+import ui.utils.LocalWebDriverFactory;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -63,27 +64,33 @@ public class ListenerTest implements ITestListener {
 
   }
 
-  public void onStart(ITestContext iTestContext) {
+    public void onStart(ITestContext iTestContext) {
 
-    // Invoked after the test class is instantiated and before any configuration method is called.
-    String[] groups = iTestContext.getIncludedGroups();
-    for (String group : groups) {
-      if (group.contains("UI")) {
-        String browserName = iTestContext.getCurrentXmlTest().getParameter("browserName");
-        String implicitWaitInSeconds = iTestContext.getCurrentXmlTest()
-            .getParameter("implicitWaitInSeconds");
-        WebDriver driver = RemoteWebDriverFactory.createInstance(browserName);
-        RemoteDriverManager.setWebDriver(driver);
-        logger.info("STARTED on browserName=" + browserName);
-        changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds));
+        // Invoked after the test class is instantiated and before any configuration method is called.
+        String[] groups = iTestContext.getIncludedGroups();
+        for (String group : groups) {
+            if (group.contains("UI")) {
+                String browserName = iTestContext.getCurrentXmlTest().getParameter("browserName");
+                String implicitWaitInSeconds = iTestContext.getCurrentXmlTest().getParameter("implicitWaitInSeconds");
+                String local = iTestContext.getCurrentXmlTest().getParameter("local");
+                WebDriver driver = null;
+                if (local.contains("yes")){
+                    driver = LocalWebDriverFactory.createInstance(browserName);
+                }
+                else {
+                    driver = RemoteWebDriverFactory.createInstance(browserName);
+                }
+                RemoteDriverManager.setWebDriver(driver);
+                logger.info("STARTED on browserName=" + browserName);
+                changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds));
 
-        // For slow internet and slow test suite, slower than rest of the tests
-        if (group.contains("slow ")) {
-          changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds) + 50);
+                // For slow internet and slow test suite, slower than rest of the tests
+                 if (group.contains("slow ")) {
+                     changeImplicitWaitValue(driver, Integer.parseInt(implicitWaitInSeconds) + 50);
+                 }
+            }
         }
-      }
     }
-  }
 
   public void onFinish(ITestContext iTestContext) {
     // Invoked after all the tests have run and all their Configuration methods have been called.
